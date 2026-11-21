@@ -259,6 +259,64 @@
  ],
  "items": [
   {
+   "id": "onetake",
+   "t": "onetake",
+   "cats": [
+    "motion-gfx",
+    "agent"
+   ],
+   "st": "bench",
+   "repo": "feitangyuan/onetake",
+   "img": "img/lib/onetake.webp",
+   "lic": "PolyForm Noncommercial 1.0.0 (فقط غیرتجاری)",
+   "req": "Claude Code (یا هر Agent با SKILL.md) · رندر HTML محلی",
+   "s": "Agent Skill برای فیلم‌های لانچ، تیزر و دموی محصول ۱۵ تا ۳۰ ثانیه‌ای «یک‌برداشت»: هر بیت از دل بیت قبلی درمی‌آید و بین صحنه‌ها کات نیست. مرجع را به عدد تبدیل می‌کند (مکث، محل کات، easing)، سه کانسپت می‌دهد، UI را از اسکرین‌شات بازسازی می‌کند و یک اسکریپت oracle پیوستگی هر مرز را نمره می‌دهد و فیلم زیر آستانه را قبل از نمایش رد می‌کند.",
+   "v": "زبان «بدون کات» کنار Lemo-Opuscar و motionmaxxing؛ برای تیزر یک ابزار یا برند. مجوز غیرتجاری است: برای پروژه‌ی سفارشی پولی قابل استفاده نیست مگر اجازه بگیری. آخرین commit: ۱۸ نوامبر ۲۰۲۶.",
+   "reel": "https://www.instagram.com/reel/Df0tBwHAQF2/",
+   "added": "2026-11-22T03:20",
+   "chk": "2026-11-22",
+   "n": 103
+  },
+  {
+   "id": "gbro-collage",
+   "t": "gbro-collage-broll (Collage B-Roll)",
+   "cats": [
+    "motion",
+    "motion-gfx",
+    "agent"
+   ],
+   "st": "bench",
+   "repo": "pyang5166/gbro-collage-broll",
+   "img": "img/lib/gbro-collage.webp",
+   "lic": "MIT (کد) · تولید ویدیو پولی با Gemini API",
+   "req": "Claude Code یا Codex · ffmpeg · کلید GEMINI_API_KEY (Gemini Omni Flash، پرداخت به ازای مصرف)",
+   "s": "Skill که یک جمله‌ی ۵ ثانیه‌ای نریشن را به یک استعاره‌ی بصری و یک کلیپ B-roll کلاژ کاغذی هاف‌تون (سبک Vox) تبدیل می‌کند؛ با سه دروازه‌ی تأیید قبل از خرج: ۱) استعاره، ۲) فریم ثابت، ۳) تولید ویدیو با فریم اول و آخر در Gemini Omni Flash و QA فریم‌به‌فریم.",
+   "v": "برای ریلزهای گفتاری خودت: B-roll سریع و یکدست بدون فوتیج استوک. الگوی سه‌دروازه‌ی کنترل هزینه را در بقیه‌ی ورک‌فلوها هم به کار ببر. ریل قیمت را حدود ۱۰ سنت در ثانیه گفته؛ قیمت فعلی Gemini را قبل از اجرا چک کن. نسخه‌ی بدون مدل تصویر: gbro-collage-info همان سبک را با HTML/GSAP روی HyperFrames می‌سازد. آخرین commit: ۱۵ ژوئیه ۲۰۲۶.",
+   "reel": "https://www.instagram.com/reel/Df0tBwHAQF2/",
+   "added": "2026-11-22T03:20",
+   "chk": "2026-11-22",
+   "n": 104
+  },
+  {
+   "id": "claude-animation-base",
+   "t": "Claude Animation Base",
+   "cats": [
+    "motion",
+    "motion-gfx"
+   ],
+   "st": "ready",
+   "repo": "JohnHeibel/ClaudeAnimationBase",
+   "img": "img/lib/claude-animation-base.webp",
+   "lic": "MIT",
+   "req": "Node.js · Google Chrome · ffmpeg · GPU مستقل برای سرعت (بدون آن چند ثانیه برای هر فریم)",
+   "s": "کیت شروع کارتون دست‌نقاشی با p5.js و p5.brush: یک کاراکتر آماده با ۳۱ حالت احساسی و چند زاویه، و ANIMATION_GUIDE.md که قواعد ساخت را به Claude می‌دهد. مدل اول استوری‌بورد می‌کشد، شات‌به‌شات می‌سازد، با contact sheet کارش را چک می‌کند و out/video.mp4 می‌دهد.",
+   "v": "مستقیم مکمل Brush Lab خود سایت (p5.brush): همین راهنمای انیمیشن را برای کاراکتر خودت (مثلاً شخصیت میکرو دراما یا ماسکوت Behrang Lab) بازنویسی کن. روی سیستم بدون GPU از پرکردن آبرنگی پرهیز کن. آخرین commit: ۲۴ سپتامبر ۲۰۲۶.",
+   "reel": "https://www.instagram.com/reel/Df0tBwHAQF2/",
+   "added": "2026-11-22T03:20",
+   "chk": "2026-11-22",
+   "n": 105
+  },
+  {
    "id": "awesome-claude-videos",
    "t": "Awesome Claude Videos (راهنمای میدانی)",
    "cats": [
