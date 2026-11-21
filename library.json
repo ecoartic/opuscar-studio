@@ -259,6 +259,19 @@
  ],
  "items": [
   {
+   "id": "p5brush",
+   "t": "p5.js + p5.brush",
+   "cats": [
+    "motion-gfx",
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "acamposuribe/p5.brush",
+   "reel": "https://www.instagram.com/reel/DeHP8DPsimI/",
+   "s": "موشن generative با حس قلم‌مو و آبرنگ طبیعی در p5.js؛ در ریل با Claude: پالت hex، تایمینگ و حرکت با پرامپت.",
+   "v": "برای پس‌زمینه‌ی گرم و دست‌ساز، تیتراژ و آیتم‌های برنامه‌ی علمی؛ مکمل سبک Watercolor در Opuscar."
+  },
+  {
    "id": "stickman",
    "t": "Stickman Video Director",
    "cats": [
