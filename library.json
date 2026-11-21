@@ -259,6 +259,27 @@
  ],
  "items": [
   {
+   "id": "reanimate",
+   "t": "reanimate",
+   "cats": [
+    "motion-gfx",
+    "agent",
+    "interactive"
+   ],
+   "st": "ready",
+   "repo": "NiazMorshed2007/reanimate",
+   "site": "https://reanimate.niazmorshed.dev",
+   "reel": "https://www.instagram.com/reel/Df_aN9STjl7/",
+   "img": "img/lib/reanimate.webp",
+   "added": "2026-11-21T20:05",
+   "n": 82,
+   "chk": "2026-11-21",
+   "lic": "MIT",
+   "req": "Claude Code · Bun 1.1+ · macOS/Linux (Windows تست‌نشده؛ WSL) · ffmpeg و Chromium را خودش نصب می‌کند",
+   "s": "Skill برای Claude Code که انیمیشن را از سایت زنده، اسکرین‌رکورد، mp4، gif یا Lottie مهندسی معکوس می‌کند: اول اصل را با Playwright ضبط می‌کند، بعد در کد تو بازسازی‌اش می‌کند، کپی را هم همان‌طور ضبط و فریم‌به‌فریم مقایسه می‌کند تا timing، easing و layout یکی شوند. نمونه‌ها: ویجت‌های stripe.com، resend.com و clerk.com.",
+   "v": "برای تو: موشن‌هایی که در ریل‌ها/سایت‌ها می‌بینی را به کد قابل‌ویرایش تبدیل کن (برای Behrang Lab، Brand tool یا گرافیک پخش). روی ویندوز تست نشده؛ در WSL اجرا کن. خروجی را مرجع یادگیری بگیر، نه کپی تحویلی برای مشتری (کپی دقیق طراحی سایت دیگران مسئله‌ی حقوقی دارد). ‖ ریل اسم ابزار را نگفته بود (فقط «کامنت Animate»)؛ از روی فریم‌ها (Stripe original/copy، TIMING ✓ EASING ✓) با ریپو تطبیق داده شد. هم‌دسته‌ها: motiscope (تحلیل اسکرین‌رکورد)، mblode ui-animation، dididy transition-reverse-engineering."
+  },
+  {
    "id": "designer-hq",
    "t": "Designer HQ · Brand tools",
    "cats": [
