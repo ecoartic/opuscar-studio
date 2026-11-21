@@ -79,6 +79,7 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
 
   <h2>ابزارها</h2>
   <div class="log" id="log"></div>
+  <div class="wfs" id="kinds"></div>
   <div class="filter" id="filter"></div>
   <div class="items" id="items"></div>
 </main>
@@ -88,7 +89,8 @@ const ST={active:'در استفاده',bench:'پای سیستم تست شود',w
 const NEWDAYS=7;let LATEST='';function isNew(x){return !!x.added&&x.added===LATEST&&(Date.now()-new Date(x.added))/864e5<NEWDAYS;}
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let L,C={},sel={type:null,id:null};
+let L,C={},sel={type:null,id:null},kind='';
+function drawKinds(){const t=L.items.filter(x=>x.kind==='technique').length;$('kinds').innerHTML=[['','همه'],['tool','ابزارها ('+(L.items.length-t)+')'],['technique','تکنیک‌ها ('+t+')']].map(([k,l])=>`<button class="wf${kind===k?' on':''}" onclick="kind='${k}';drawKinds();apply()">${l}</button>`).join('');}
 const COLX=[820,565,310,55],NW=150,NH=30,COLH=['ورودی / ساخت دارایی','پردازش','موتور','خروجی'];
 function layout(){
   const cols=[[],[],[],[]];L.categories.filter(c=>c.col>=0).forEach(c=>cols[c.col].push(c));
@@ -119,19 +121,19 @@ function apply(){
   document.querySelectorAll('.node').forEach(n=>{n.classList.toggle('on',sel.type==='cat'&&n.dataset.id===sel.id);n.classList.toggle('dim',!!nodes&&!nodes.has(n.dataset.id));});
   document.querySelectorAll('.wf').forEach(b=>b.classList.toggle('on',sel.type==='wf'&&b.dataset.id===sel.id));
   document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('on',!!nodes&&nodes.has(t.dataset.id)&&(sel.type==='wf'||t.dataset.id===sel.id)));
-  let list=[...L.items].sort((a,b)=>(b.n||0)-(a.n||0)),label='همه‌ی ابزارها';
+  let list=[...L.items].filter(x=>!kind||(kind==='technique'?x.kind==='technique':x.kind!=='technique')).sort((a,b)=>(b.n||0)-(a.n||0)),label='همه‌ی ابزارها';
   if(sel.type==='cat'){list=list.filter(x=>x.cats.includes(sel.id));label='دسته‌ی '+C[sel.id].fa;}
   if(sel.type==='wf'){list=list.filter(x=>x.cats.some(c=>nodes.has(c)));label='ورک‌فلوی «'+L.workflows.find(x=>x.id===sel.id).fa+'»';}
   $('filter').innerHTML=`${esc(label)}: ${list.length} ابزار ${sel.type?'· <button onclick="pick(null,null)">نمایش همه</button>':''}`;
   $('items').innerHTML=list.map(x=>{const g=(C[x.cats[0]]||{}).g||'🧩';
     const img=x.img?`<img class="th" loading="lazy" src="${esc(x.img)}" alt="" onerror="this.outerHTML='<div class=ph>${g}</div>'">`:x.repo?`<img class="th" loading="lazy" src="https://opengraph.githubassets.com/1/${esc(x.repo)}" alt="" onerror="this.outerHTML='<div class=ph>${g}</div>'">`:`<div class="ph">${g}</div>`;
     return `<div class="it">${img}<div class="ib"><h3>${esc(x.t)}</h3>
-    <div>${isNew(x)?'<span class="newb">جدید</span>':''}<span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
+    <div>${isNew(x)?'<span class="newb">جدید</span>':''}${x.kind==='technique'?'<span class="st open">تکنیک</span> ':''}<span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
     <div class="cats">${x.cats.map(c=>`<span onclick="pick('cat','${c}')">${(C[c]||{}).g||''} ${esc((C[c]||{}).fa||c)}</span>`).join('')}</div>
     <p class="s">${esc(x.s)}</p>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}${x.src?`<a href="${esc(x.src)}" target="_blank" rel="noopener">منبع فید</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=21').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawMap();drawTiles();apply();});
+fetch('library.json?v=22').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawMap();drawTiles();drawKinds();apply();});
 </script>
 </body>
 </html>
