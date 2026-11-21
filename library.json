@@ -259,6 +259,47 @@
  ],
  "items": [
   {
+   "id": "trellis2",
+   "t": "TRELLIS.2 (Microsoft)",
+   "cats": [
+    "image-3d",
+    "blender",
+    "unreal"
+   ],
+   "st": "bench",
+   "repo": "microsoft/TRELLIS.2",
+   "reel": "https://www.instagram.com/reel/Dfht817u9yA/",
+   "s": "مدل ۴B: از یک تصویر به دارایی سه‌بعدی با متریال PBR (base color، roughness، metallic، opacity)؛ خروجی GLB.",
+   "v": "مهم‌ترین گزینه‌ی image-to-3D با PBR برای Unreal؛ ولی ۲۴GB VRAM و فقط Linux تست‌شده. دموی Hugging Face برای تست بدون GPU."
+  },
+  {
+   "id": "nerfstudio",
+   "t": "Nerfstudio",
+   "cats": [
+    "image-3d",
+    "gaussian",
+    "threejs"
+   ],
+   "st": "bench",
+   "repo": "nerfstudio-project/nerfstudio",
+   "reel": "https://www.instagram.com/reel/Dfht817u9yA/",
+   "s": "فریم‌ورک بازسازی صحنه از عکس/ویدیو: NeRF و Gaussian Splatting (splatfacto)، export به splat/mesh.",
+   "v": "برای benchmark محیط کنار OpenMVS و RealityScan؛ خروجی splat برای three.js."
+  },
+  {
+   "id": "blender-mcp",
+   "t": "Blender MCP",
+   "cats": [
+    "blender",
+    "agent"
+   ],
+   "st": "active",
+   "repo": "ahujasid/blender-mcp",
+   "reel": "https://www.instagram.com/reel/Dfht817u9yA/",
+   "s": "پلاگینی که Claude را به Blender وصل می‌کند: ساخت آبجکت، متریال و صحنه با متن.",
+   "v": "روی سیستمت دیده شده ولی در تست اکتبر فعال نبود؛ پایه‌ی Blender Skills."
+  },
+  {
    "id": "p5brush",
    "t": "p5.js + p5.brush",
    "cats": [
