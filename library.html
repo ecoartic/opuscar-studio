@@ -47,7 +47,7 @@ h2{font-size:20px;margin:28px 0 6px}
 .legend{font-size:12.5px;color:var(--mut);margin:4px 0 0;line-height:2.2}
 .meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--mut)}.meta span{white-space:nowrap}.meta b{color:#c9ced6;font-weight:600}
 .wflist{display:none}
-@media(max-width:700px){.map{display:none}.wflist{display:grid;gap:8px}.wfl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.wfl b{display:block;font-size:14px;margin-bottom:4px}.wfl a{display:inline-block;margin:2px;padding:2px 9px;border-radius:999px;background:#222630;color:var(--fg);font-size:12.5px;text-decoration:none;direction:ltr}.wfl i{color:var(--mut);font-style:normal;margin:0 2px}}
+@media(max-width:700px){.map{display:none}.wflist{display:grid;gap:8px}.wfl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.wfl b{display:block;font-size:14px;margin-bottom:4px}.wfl a{display:inline-block;margin:2px;padding:2px 9px;border-radius:999px;background:#222630;color:var(--fg);font-size:12.5px;text-decoration:none;direction:ltr}.wfl i{color:var(--mut);font-style:normal}.wfl .dn{display:block;text-align:center;font-size:13px;line-height:1.2}.wfl .stp small{display:block;color:var(--mut);font-size:11.5px}}
 .filter{margin:14px 0;color:var(--mut);font-size:14px}
 .filter button{background:none;border:0;color:var(--acc);font:inherit;cursor:pointer;text-decoration:underline}
 .items{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:14px}
@@ -117,7 +117,7 @@ function drawMap(){
     <text x="${c.x+NW-10}" y="${c.y+20}" text-anchor="end">${c.g} ${esc(c.fa)}</text>${n?`<text class="cnt" x="${c.x+10}" y="${c.y+20}">${n}</text>`:''}</g>`;});
   svg.innerHTML=h;
 }
-function drawWfList(){const col=id=>(C[id]||{}).col;$('wflist').innerHTML=L.workflows.map(w=>{const ns=[...new Set(w.edges.flat())].sort((a,b)=>col(a)-col(b));const g=[0,1,2,3].map(c=>ns.filter(n=>col(n)===c)).filter(a=>a.length);return `<div class="wfl" style="border-right:4px solid ${w.c}"><b>${esc(w.fa)}</b>${g.map(a=>a.map(n=>`<a href="#" onclick="pick('cat','${n}');return false">${C[n].g} ${esc(C[n].fa)}</a>`).join(' ')).join(' <i>←</i> ')}</div>`;}).join('');}
+function drawWfList(){const col=id=>(C[id]||{}).col;$('wflist').innerHTML=L.workflows.map(w=>{const ns=[...new Set(w.edges.flat())].sort((a,b)=>col(a)-col(b));const g=[0,1,2,3].map(c=>[c,ns.filter(n=>col(n)===c)]).filter(a=>a[1].length);return `<div class="wfl" style="border-right:4px solid ${w.c}"><b>${esc(w.fa)}</b>${g.map(([c,a])=>`<div class="stp"><small>${COLH[c]}</small>${a.map(n=>`<a href="#" onclick="pick('cat','${n}');return false">${C[n].g} ${esc(C[n].fa)}</a>`).join(' ')}</div>`).join('<i class="dn">↓</i>')}</div>`;}).join('');}
 function drawWfs(){$('wfs').innerHTML=L.workflows.map(w=>`<button class="wf" data-id="${w.id}" onclick="pick('wf','${w.id}')"><i style="background:${w.c}"></i>${esc(w.fa)}</button>`).join('');}
 function drawTiles(){$('tiles').innerHTML=L.categories.map(c=>{const n=count(c.id);return `<div class="tile${n?'':' empty'}" data-id="${c.id}" onclick="pick('cat','${c.id}')"><span class="n">${n||''}</span><span class="g">${c.g}</span><b>${esc(c.fa)}</b><small>${esc(c.d)}</small></div>`;}).join('');}
 function pick(type,id){if(sel.type===type&&sel.id===id){sel={type:null,id:null};}else sel={type,id};apply();if(type==='cat'&&sel.id)$('filter').scrollIntoView({behavior:'smooth',block:'start'});}
