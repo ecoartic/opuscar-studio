@@ -259,6 +259,164 @@
  ],
  "items": [
   {
+   "id": "rgbmocap",
+   "t": "RGB MoCap (toyxyz)",
+   "cats": [
+    "film-3d",
+    "blender",
+    "unreal"
+   ],
+   "st": "bench",
+   "repo": "toyxyz/toyxyz_RGBMocap",
+   "src": "https://gittrend.io/repo/toyxyz/toyxyz_RGBMocap",
+   "s": "اپ ویندوز: از ویدیوی معمولی به انیمیشن انسانی قابل ویرایش (ExMR/FlowHMR/GVHMR)، اصلاح تماس پا، retarget روی کاراکتر و خروجی FBX/VMD؛ پردازش محلی.",
+   "v": "mocap بدون لباس و سنسور برای کاراکترهای Blender/Unreal و previs Winter King؛ ویندوزی، پس روی سیستم خودت مستقیم قابل تست.",
+   "added": "2026-11-21T14:05",
+   "n": 73,
+   "img": "img/lib/rgbmocap.webp"
+  },
+  {
+   "id": "anyscene",
+   "t": "AnyScene",
+   "cats": [
+    "concept-3d",
+    "blender"
+   ],
+   "st": "bench",
+   "repo": "apekshik/anyscene",
+   "src": "https://gittrend.io/repo/apekshik/anyscene",
+   "s": "صحنه‌ی فوتورئال Blender از یک پاراگراف توضیح، با Agent: پراپ‌ها با image→3D روی fal، چیدمان اسکریپتی، نور و دوربین.",
+   "v": "عضو اصلی خانواده‌ی AnyMachine؛ مستقیم برای ست و محیط. هزینه‌ی fal را قبل از تست بسنج.",
+   "added": "2026-11-21T14:05",
+   "n": 72,
+   "img": "img/lib/anyscene.webp"
+  },
+  {
+   "id": "rea-video",
+   "t": "rea-video",
+   "cats": [
+    "film-3d",
+    "agent"
+   ],
+   "st": "bench",
+   "repo": "JuneYaooo/rea-video",
+   "src": "https://gittrend.io/repo/JuneYaooo/rea-video",
+   "s": "مهندسی معکوس هر ویدیو شات‌به‌شات: فیلم‌برداری شده، تولید AI یا کد؟ و چطور بازسازی‌اش کرد؛ خروجی در فرمت باز VIDEO.md.",
+   "v": "برای تحلیل ریل‌های مرجع و شات‌های الهام Winter King؛ ممکن است همان کاری را بکند که برای ریل‌ها دستی انجام می‌دهیم.",
+   "added": "2026-11-21T14:05",
+   "n": 71,
+   "img": "img/lib/rea-video.webp"
+  },
+  {
+   "id": "ink-studio",
+   "t": "Ink Studio (Shapeshift Labs)",
+   "cats": [
+    "gaussian",
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "siliconjungle/shapeshift-labs-ink-studio",
+   "src": "https://gittrend.io/repo/siliconjungle/shapeshift-labs-ink-studio",
+   "s": "ابزار مجسمه‌سازی، انیمیشن و شبیه‌سازی برای Gaussian splatهای pixel-art.",
+   "v": "مکمل نمایشگر Splat سایت؛ مرجع لوک.",
+   "added": "2026-11-21T14:05",
+   "n": 70,
+   "img": "img/lib/ink-studio.webp"
+  },
+  {
+   "id": "lingbot-map",
+   "t": "LingBot-Map",
+   "cats": [
+    "image-3d"
+   ],
+   "st": "watch",
+   "repo": "Robbyant/lingbot-map",
+   "src": "https://gittrend.io/repo/Robbyant/lingbot-map",
+   "s": "پژوهش (نامزد بهترین مقاله ECCV 2026): بازسازی سه‌بعدی streaming با Geometric Context Transformer.",
+   "v": "برای بازسازی زنده‌ی فضا از ویدیو؛ فعلاً پژوهشی، کنار benchmark محیط دنبال شود.",
+   "added": "2026-11-21T14:05",
+   "n": 69,
+   "img": "img/lib/lingbot-map.webp"
+  },
+  {
+   "id": "anatomy",
+   "t": "anatomy",
+   "cats": [
+    "motion-gfx",
+    "interactive"
+   ],
+   "st": "watch",
+   "repo": "wheresryan22/anatomy",
+   "src": "https://gittrend.io/repo/wheresryan22/anatomy",
+   "s": "skill برای تصویرسازی تعاملی ایزومتریک از ماشین‌ها و سیستم‌های پیچیده.",
+   "v": "برای آیتم‌های توضیحی برنامه‌ی علمی.",
+   "added": "2026-11-21T14:05",
+   "n": 68,
+   "img": "https://raw.githubusercontent.com/wheresryan22/anatomy/HEAD/github/assets/raptor-engine-firing.webp"
+  },
+  {
+   "id": "hyperframes",
+   "t": "HyperFrames (HeyGen)",
+   "cats": [
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "heygen-com/hyperframes",
+   "src": "https://gittrend.io/repo/heygen-com/hyperframes",
+   "s": "ویرایشگر ویدیوی AI متن‌باز که پروژه‌ی واقعی و قابل ویرایش می‌سازد؛ مرجع مقایسه‌ی Motlab.",
+   "v": "هم‌دسته‌ی Opuscar؛ زیر نظر.",
+   "added": "2026-11-21T14:05",
+   "n": 67,
+   "img": "https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/biennale-yellow.png"
+  },
+  {
+   "id": "open-ai-canvas",
+   "t": "影策 Open AI Canvas",
+   "cats": [
+    "film-3d"
+   ],
+   "st": "watch",
+   "repo": "ddcat-ai/open-ai-canvas",
+   "src": "https://gittrend.io/repo/ddcat-ai/open-ai-canvas",
+   "s": "کارگاه متن‌باز ساخت فیلم و short drama: از رمان به اقتباس، اپیزود، کاراکتر، استوری‌بورد و ویدیو؛ بوم بی‌نهایت با Agent.",
+   "v": "هم‌دسته‌ی Jellyfish. احتیاط: پلاگین‌های پرداخت آن فایل exe آماده دارند؛ فقط از سورس و در محیط جدا اجرا شود.",
+   "added": "2026-11-21T14:05",
+   "n": 66,
+   "img": "img/lib/open-ai-canvas.webp"
+  },
+  {
+   "id": "openmontage",
+   "t": "OpenMontage",
+   "cats": [
+    "motion",
+    "film-3d"
+   ],
+   "st": "watch",
+   "repo": "OpenMontageInc/OpenMontage",
+   "src": "https://gittrend.io/repo/OpenMontageInc/OpenMontage",
+   "s": "سیستم تولید ویدیوی Agent‌محور با ۱۲ pipeline و صدها skill؛ AGPL.",
+   "v": "بزرگ و جاه‌طلبانه؛ برای مقایسه با Jellyfish و Take One.",
+   "added": "2026-11-21T14:05",
+   "n": 65,
+   "img": "img/lib/openmontage.webp"
+  },
+  {
+   "id": "gem-x",
+   "t": "GEM-X (NVIDIA)",
+   "cats": [
+    "image-3d",
+    "film-3d"
+   ],
+   "st": "watch",
+   "repo": "NVlabs/GEM-X",
+   "src": "https://gittrend.io/repo/NVlabs/GEM-X",
+   "s": "تخمین ژست سه‌بعدی کامل بدن از ویدیوی تک‌دوربین با مدل بدن SOMA.",
+   "v": "پایه‌ی پژوهشی mocap؛ RGB MoCap نسخه‌ی کاربردی‌تر است.",
+   "added": "2026-11-21T14:05",
+   "n": 64,
+   "img": "img/lib/gem-x.webp"
+  },
+  {
    "id": "geometric",
    "t": "GEOMETRIC — Image + Motion Art Studio",
    "cats": [
@@ -1263,6 +1421,10 @@
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-21 14:05",
+   "t": "از gittrend.io (دسته‌های 3D Generation، AI Video، Computer Vision، Video Editing) غربال شد: ۱۰ ابزار اضافه شد (۳ پای سیستم: RGB MoCap، AnyScene، rea-video؛ ۷ زیر نظر). رد شد: ANR (فقط باینری)، Veyra، Deep-Live-Cam."
+  },
   {
    "d": "2026-11-21 13:55",
    "t": "وضعیت تازه «آماده، آنلاین»: ابزارهای تحت وب که بدون سیستم کار می‌کنند ولی داخل سایت قابل جاسازی نیستند (GEOMETRIC، ASCII Magic)."
