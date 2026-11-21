@@ -26,6 +26,10 @@ main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
 .count{color:var(--mut);margin:0 0 14px;font-size:14px}
 .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:14px}
 .item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.th{display:block;width:calc(100% + 28px);margin:-14px -14px 2px;aspect-ratio:16/9;object-fit:cover;background:#1d2026;border-radius:12px 12px 0 0}
+.sug{font-size:13px;color:var(--mut)}
+.sug a{display:inline-block;margin:2px 3px;padding:1px 9px;border-radius:999px;border:1px solid var(--line);direction:ltr;text-decoration:none;font-size:12px}
+.nofilm{font-size:12px;color:#d98b5f}
 .meta{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--mut);flex-wrap:wrap}
 .meta a{direction:ltr}
 .tg span{display:inline-block;margin:2px;padding:1px 8px;border-radius:6px;background:#222630;font-size:12px;direction:ltr}
@@ -61,15 +65,18 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
   <div class="list" id="list"></div>
   <button class="more" id="more" hidden>نمایش بیشتر</button>
   <section class="howto">
-    <b>چطور استفاده کنم؟</b> پرامپت را کپی کنید و در Claude Code بدهید، یا دکمه‌ی «استفاده در یک سبک» را بزنید تا متن پرامپت به‌عنوان داستان به سازنده‌ی پرامپت در گالری منتقل شود؛ آنجا یک سبک انتخاب کنید. برخی پرامپت‌ها ناقص‌اند (سازنده فقط بخشی را منتشر کرده) و با برچسب نارنجی مشخص شده‌اند. بازسازی یک نمونه ممکن است به asset، کتابخانه یا چند دور اصلاح نیاز داشته باشد.
+    <b>چطور استفاده کنم؟</b> تصویر هر کارت فریمی از ویدیوی اصلی است تا حس‌وحال پرامپت معلوم باشد. پرامپت را کپی کنید و در Claude Code بدهید، روی یکی از «سبک‌های پیشنهادی» بزنید تا مستقیم همان سبک با این پرامپت باز شود، یا دکمه‌ی «استفاده در یک سبک» را بزنید تا متن پرامپت به‌عنوان داستان به سازنده‌ی پرامپت در گالری منتقل شود؛ آنجا یک سبک انتخاب کنید. برخی پرامپت‌ها ناقص‌اند (سازنده فقط بخشی را منتشر کرده) و با برچسب نارنجی مشخص شده‌اند. بازسازی یک نمونه ممکن است به asset، کتابخانه یا چند دور اصلاح نیاز داشته باشد.
   </section>
 </main>
 <footer>
-  داده‌ها از <a href="https://github.com/yihui-dev/awesome-opus5-5-videos">awesome-opus5-5-videos</a> (yihui-dev، مجوز MIT)؛ حق هر پرامپت با سازنده‌ی آن است و به پست اصلی لینک شده. ریمیک‌ها روی <a href="https://skillry.dev/ai-videos/opus-5-5">Skillry</a>.
+  داده‌ها از <a href="https://github.com/yihui-dev/awesome-opus5-5-videos">awesome-opus5-5-videos</a> (yihui-dev، مجوز MIT)؛ حق هر پرامپت و تصویر با سازنده‌ی آن است و به پست اصلی لینک شده؛ تصاویر از Skillry بارگذاری می‌شوند. ریمیک‌ها روی <a href="https://skillry.dev/ai-videos/opus-5-5">Skillry</a>.
 </footer>
 <script>
 const CAT={motion:'موشن‌گرافیک','3d':'سه‌بعدی',explainer:'توضیحی',interactive:'تعاملی'};
 const PAGE=60;
+const SN={'whiteboard':'Whiteboard Explainer','blueprint':'Blueprint','iso-infographic':'Isometric Infographic','swiss-motion':'Swiss Motion','bauhaus-shapes':'Bauhaus Shapes','spy-titles':'60s Spy Titles','glass-product':'Glass Product','tilt-shift':'Tilt-Shift','lowpoly-island':'Low-poly Island','pixel-rpg':'16-bit Pixel RPG','firefly-pointillism':'Firefly Pointillism','flow-field':'Flow-field Lines','dataviz':'Data Viz','dark-keynote':'Dark Tech Keynote'};
+const SUG={explainer:['whiteboard','blueprint','iso-infographic'],motion:['swiss-motion','bauhaus-shapes','spy-titles'],'3d':['glass-product','tilt-shift','lowpoly-island']};
+function sug(x){let a=[];if(x.t.includes('pixel'))a.push('pixel-rpg');if(x.t.includes('particles'))a.push('firefly-pointillism','flow-field');a=a.concat(SUG[x.c]||[]);return [...new Set(a)].slice(0,3);}
 let D=[],cat='',tag='',shown=PAGE;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -88,9 +95,11 @@ function filtered(){
 function render(){
   const L=filtered();$('count').textContent=L.length+' پرامپت';
   $('list').innerHTML=L.slice(0,shown).map((x,i)=>`<div class="item">
+    <img class="th" loading="lazy" src="${esc(x.i)}" alt="" onerror="this.style.visibility='hidden'">
     <div class="meta"><a href="${esc(x.u)}" target="_blank" rel="noopener">@${esc(x.a)}</a><span>${esc(x.d)}</span></div>
     <div class="tg"><span class="c">${CAT[x.c]||esc(x.c)}</span>${x.t.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
     ${x.pp?'<div class="warn">پرامپت ناقص: سازنده فقط بخشی را منتشر کرده</div>':''}
+    ${x.c==='interactive'?'<div class="nofilm">تعاملی/بازی: خروجی‌اش صفحه‌ی تعاملی است و به سبک‌های فیلم نمی‌خورد، فقط برای ایده</div>':`<div class="sug">سبک‌های پیشنهادی: ${sug(x).map(k=>`<a href="#" onclick="use('${esc(x.s)}','${k}');return false">${SN[k]}</a>`).join('')}</div>`}
     <pre class="pr" data-i="${esc(x.s)}">${esc(x.p)}</pre>
     <div class="acts">
       <button onclick="tog(this)">نمایش کامل</button>
@@ -103,7 +112,7 @@ function render(){
 function tog(b){const p=b.closest('.item').querySelector('.pr');p.classList.toggle('open');b.textContent=p.classList.contains('open')?'جمع کردن':'نمایش کامل';}
 function byS(s){return D.find(x=>x.s===s);}
 function cp(s,b){const t=byS(s).p;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='کپی شد ✓';setTimeout(()=>b.textContent='کپی',1500);}).catch(()=>{const r=document.createRange();r.selectNodeContents(b.closest('.item').querySelector('.pr'));getSelection().removeAllRanges();getSelection().addRange(r);});}
-function use(s){const x=byS(s);try{sessionStorage.setItem('opuscar_story',JSON.stringify({text:x.p,author:x.a}));}catch(e){}location.href='./#from-prompts';}
+function use(s,style){const x=byS(s);try{sessionStorage.setItem('opuscar_story',JSON.stringify({text:x.p,author:x.a}));}catch(e){}location.href='./#'+(style?'style='+style:'from-prompts');}
 $('q').oninput=()=>{shown=PAGE;render();};$('fRemake').onchange=$('fFull').onchange=()=>{shown=PAGE;render();};
 $('more').onclick=()=>{shown+=PAGE;render();};
 fetch('prompts.json').then(r=>r.json()).then(j=>{D=j.sort((a,b)=>(b.r-a.r)||b.d.localeCompare(a.d));chips();render();}).catch(()=>{$('count').textContent='بارگذاری داده‌ها ناموفق بود.';});

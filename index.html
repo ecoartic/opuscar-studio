@@ -152,7 +152,10 @@ function build(){
   const len=document.getElementById('fLen').value||40, asp=document.getElementById('fAsp').value,
         vo=document.getElementById('fVo').value, lang=document.getElementById('fLang').value,
         sb=document.getElementById('fSb').checked;
-  let p=`Make a ${len}-second film in the ${cur.en} style (styles/${cur.slug}) with lemo-opuscar.\n\nStory: ${story}\n\nFormat: ${asp}.`;
+  const fromLib=HANDOFF&&document.getElementById('fStory').value.trim()===HANDOFF.text.trim();
+  let p=`Make a ${len}-second film in the ${cur.en} style (styles/${cur.slug}) with lemo-opuscar.\n\n`;
+  p+= fromLib?`Reference prompt (by @${HANDOFF.author}). Use it for content, structure and pacing only. Take the entire visual look solely from this style's STYLE.md and ignore any visual, colour, rendering or technology directions in it that conflict with the style. If it describes a game or interactive page, turn its idea into a linear film:\n<<<\n${story}\n>>>`:`Story: ${story}`;
+  p+=`\n\nFormat: ${asp}.`;
   p+= vo?`\nNarration: ${vo}, in ${lang}.`:`\nNo narration; any on-screen text in ${lang}.`;
   p+= sb?`\nShow me the storyboard (key shots in the real style) before rendering the full film.`:`\nGo straight to the finished film.`;
   const o=document.getElementById('out');o.textContent=p;o.hidden=false;document.getElementById('cp').hidden=false;
@@ -163,6 +166,7 @@ let HANDOFF=null;
 try{const h=sessionStorage.getItem('opuscar_story');if(h){HANDOFF=JSON.parse(h);}}catch(e){}
 if(HANDOFF){const n=document.getElementById('handoff');n.hidden=false;n.textContent='پرامپت @'+HANDOFF.author+' از کتابخانه آماده است؛ یک سبک انتخاب کنید تا به‌عنوان داستان در سازنده‌ی پرامپت قرار بگیرد. ';const x=document.createElement('button');x.className='lnk';x.textContent='لغو';x.onclick=()=>{HANDOFF=null;try{sessionStorage.removeItem('opuscar_story');}catch(e){}n.hidden=true;};n.appendChild(x);}
 renderChips();render();
+const m=location.hash.match(/^#style=([\w-]+)/);if(m&&S.find(x=>x.slug===m[1]))open_(m[1]);
 </script>
 </body>
 </html>
