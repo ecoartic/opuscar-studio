@@ -259,6 +259,25 @@
  ],
  "items": [
   {
+   "id": "kinocut",
+   "t": "Kinocut (mcp-video سابق)",
+   "cats": [
+    "motion",
+    "agent"
+   ],
+   "st": "bench",
+   "repo": "KyaniteLabs/kinocut",
+   "reel": "https://www.instagram.com/reel/Df5p3MbhOsH/",
+   "img": "img/lib/kinocut.webp",
+   "added": "2026-11-21T15:20",
+   "n": 77,
+   "chk": "2026-11-21",
+   "lic": "Apache-2.0",
+   "req": "FFmpeg · Python · MCP (Claude Code)",
+   "s": "سرور MCP، کتابخانه‌ی Python و CLI برای ویرایش ویدیوی محلی با Agent: برش، زیرنویس، reframe، تنظیم صدا، کنترل کیفیت و تبدیل یک ویدیو به Shorts/Reels/TikTok؛ ابزارهای تایپ‌شده به‌جای حدس زدن فلگ‌های FFmpeg.",
+   "v": "موتور «تولید محتوا» در سیستم تو: از یک فوتیج تست یا Case Study، نسخه‌های پلتفرم‌های مختلف بسازد. ریل ابزار هم‌دسته‌ای به اسم ghost-editor نشان داد که ریپویش پیدا نشد؛ جایگزین‌های هم‌دسته: synthcut (GPL)، OpenChatCut (AGPL)، MakeMyClip editor (MIT)."
+  },
+  {
    "id": "human-centric-ai",
    "t": "Human-Centric AI Resources",
    "kind": "technique",
