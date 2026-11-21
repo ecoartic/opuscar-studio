@@ -259,6 +259,19 @@
  ],
  "items": [
   {
+   "id": "stickman",
+   "t": "Stickman Video Director",
+   "cats": [
+    "motion",
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "repo": "kaomei/stickman-video-director",
+   "reel": "https://www.instagram.com/reel/Dfitz3dD5Sb/",
+   "s": "از متن/مقاله به ویدیوی explainer استیکمن با Agent: تصویر، صدا، زیرنویس و افکت؛ ۱۴ سبک، 16:9 و 9:16. دو موتور: Model (مدل ویدیو، اعتبار) و Code (تصویر AI + انیمیشن با کد، رندر محلی).",
+   "v": "برای آیتم‌های explainer برنامه‌ی علمی قابل تست؛ پشتیبانی صدای فارسی نامعلوم. موتور Code ارزان‌تر است."
+  },
+  {
    "id": "diorama",
    "t": "Diorama (pixel-art 3D)",
    "cats": [
