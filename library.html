@@ -127,7 +127,7 @@ function apply(){
     <p class="s">${esc(x.s)}</p><p class="v">${esc(x.v)}</p>
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=6').then(r=>r.json()).then(j=>{L=j;L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();apply();});
+fetch('library.json?v=7').then(r=>r.json()).then(j=>{L=j;L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();apply();});
 </script>
 </body>
 </html>

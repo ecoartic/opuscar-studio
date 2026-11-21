@@ -259,6 +259,18 @@
  ],
  "items": [
   {
+   "id": "ascii-magic",
+   "t": "ASCII Magic",
+   "cats": [
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "site": "https://www.ascii-magic.com",
+   "reel": "https://www.instagram.com/reel/Dfj6-Q0zGf3/",
+   "s": "استایلایزر تحت وب برای عکس و ویدیو: ASCII، dither، halftone، glitch، voxel، fluted؛ پیش‌نمایش زنده، پردازش محلی در مرورگر، خروجی MP4/GIF، سرور MCP برای Agent.",
+   "v": "نسخه‌ی رایگان بدون واترمارک؛ کتابخانه‌ی کامل شیدرها و 4K در Pro. برای لوک گرافیکی سریع روی فوتیج و LED wall."
+  },
+  {
    "id": "trellis2",
    "t": "TRELLIS.2 (Microsoft)",
    "cats": [
