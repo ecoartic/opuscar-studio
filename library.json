@@ -259,6 +259,27 @@
  ],
  "items": [
   {
+   "id": "fastframes",
+   "t": "FastFrames (Apple)",
+   "cats": [
+    "worldlabs",
+    "interactive",
+    "film-3d"
+   ],
+   "st": "watch",
+   "repo": "apple-aiml-research/ml-fastframes",
+   "site": "https://apple-aiml-research.github.io/ml-fastframes/",
+   "reel": "https://www.instagram.com/reel/Df-QB5zjumr/",
+   "img": "img/lib/fastframes.webp",
+   "added": "2026-11-22T03:00",
+   "n": 100,
+   "chk": "2026-11-22",
+   "lic": "کد: Apple Sample Code License · وزن‌ها (apple-amlr): فقط تحقیق غیرتجاری · دموی LingBot: CC BY-NC-SA 4.0",
+   "req": "Linux x86-64 · GPU NVIDIA با درایور CUDA 12.8 · FastFrames-S (1.3B) روی ۱ GPU، FastFrames-L (14B) در بنچمارک ۸ GPU",
+   "s": "مدل‌های ویدیوی diffusion خودبازگشتی دومرحله‌ای (Apple + Cornell، نوامبر ۲۰۲۶) که ویدیوی 480p را با تأخیر تعاملی می‌سازند: حدود ۳۶ میلی‌ثانیه برای هر فریم روی یک GPU. گلوگاه را در VAE decoder و به‌روزرسانی KV cache پیدا کرده و با یک pixel decoder کوچک و شبکه‌ی ترمیم حافظه جایگزین کرده است؛ در دموی جهان تعاملی LingBot پاسخ به کلید از ۸۱۸ به ۵۲ میلی‌ثانیه رسیده.",
+   "v": "جهت آینده‌ی «مدل جهان» قابل‌کنترل مثل بازی (هم‌خانواده‌ی Atlas/Genie). برای پخش زنده و ست مجازی هنوز تحقیقاتی است: 480p، وزن‌ها فقط غیرتجاری، و Linux + NVIDIA. زیر نظر بماند تا نسخه‌ی تجاری یا ادغام در ابزارهای real-time بیاید. ریپو فعال: commit ۱۸ نوامبر ۲۰۲۶."
+  },
+  {
    "id": "openjutsu",
    "t": "Openjutsu",
    "cats": [
