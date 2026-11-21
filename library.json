@@ -259,6 +259,28 @@
  ],
  "items": [
   {
+   "id": "pascal-editor",
+   "t": "Pascal Editor",
+   "cats": [
+    "concept-3d",
+    "web-3d",
+    "threejs",
+    "agent"
+   ],
+   "st": "ready",
+   "repo": "pascalorg/editor",
+   "site": "https://editor.pascal.app",
+   "reel": "https://www.instagram.com/reel/DfhXv2LA5MM/",
+   "img": "img/lib/pascal-editor.webp",
+   "added": "2026-11-21T19:05",
+   "n": 78,
+   "chk": "2026-11-21",
+   "lic": "MIT",
+   "req": "مرورگر (WebGPU) · CLI محلی با npx · MCP برای Claude",
+   "s": "ویرایشگر سه‌بعدی ساختمان در مرورگر (React Three Fiber + WebGPU): دیوار، کف، سقف، بام، در و مبلمان؛ local-first، با CLI و سرور MCP تا Agent مستقیم صحنه را بسازد و ویرایش کند. ریپو فعال است (آخرین commit همین امروز).",
+   "v": "قطعه‌ی «پوسته‌ی معماری» برای ایده‌ی Set Builder: Claude از طریق MCP اتاق/پلان را می‌سازد و بعد props از آرشیو Polyfork داخلش چیده می‌شوند و دوربین و پاس‌های depth برای ویدیوی AI از آن گرفته می‌شود. قبل از اتکا: فرمت خروجی (glTF؟) و اینکه کدام عملیات MCP روی نسخه‌ی hosted کردیت Pascal می‌خورد را تست کن. ‖ چهار ابزار دیگر همان ریل (Revit MCP، BIMwright، OpenConstructionERP، Architectural Concept Design) وابسته به Revit/BIM هستند و به ورک‌فلوهای تو ربط مستقیم ندارند؛ اضافه نشدند."
+  },
+  {
    "id": "kinocut",
    "t": "Kinocut (mcp-video سابق)",
    "cats": [
