@@ -259,6 +259,25 @@
  ],
  "items": [
   {
+   "id": "ue-debug-commands",
+   "t": "دستورهای عیب‌یابی کارایی Unreal",
+   "cats": [
+    "unreal",
+    "aximmetry"
+   ],
+   "st": "ready",
+   "kind": "technique",
+   "reel": "https://www.instagram.com/reel/DgA4pvPz740/",
+   "img": "img/lib/ue-debug-commands.webp",
+   "added": "2026-11-22T03:05",
+   "n": 101,
+   "chk": "2026-11-22",
+   "lic": "دستورهای داخلی Unreal Engine",
+   "req": "Unreal Editor یا AX Scene Editor · کنسول با کلید ` (backtick)",
+   "s": "پنج دستور کنسول از ریل: stat gpu (زمان هر پاس GPU: سایه، نور، post-process)، viewmode shadercomplexity (سبز ارزان، قرمز گران، سفید فاجعه)، r.ScreenPercentage 50 (اگر FPS پرید، گلوگاه GPU است؛ اگر نه، مشکل جای دیگر است)، show collision، HighResShot 4 (اسکرین‌شات با ۴ برابر رزولوشن). مکمل‌های استاندارد: stat unit (Game/Draw/GPU)، stat fps، ProfileGPU (Ctrl+Shift+,).",
+   "v": "برای ست‌های Unreal در Aximmetry که باید FPS ثابت (مثلاً 50 برای پخش PAL) نگه دارند: اول stat unit تا بفهمی گلوگاه Game، Draw یا GPU است، بعد stat gpu و shadercomplexity برای پیدا کردن متریال/نور گران. HighResShot برای پوستر و بک‌دراپ چاپی. در AX Scene Editor هم کنسول Unreal کار می‌کند؛ رفتار در رندر زنده‌ی Aximmetry Composer را روی سیستم استودیو تست کن."
+  },
+  {
    "id": "fastframes",
    "t": "FastFrames (Apple)",
    "cats": [
