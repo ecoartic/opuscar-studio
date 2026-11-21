@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>کتابخانه‌ی پرامپت — Opuscar Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}
+a{color:var(--acc)}
+header{padding:48px 20px 24px;text-align:center;background:radial-gradient(ellipse at top,#2a2214 0%,var(--bg) 70%)}
+header h1{margin:0 0 8px;font-size:clamp(24px,4.5vw,40px);font-weight:800}
+header p{margin:0 auto;max-width:700px;color:var(--mut)}
+.nav{margin-top:14px;font-size:14px}
+.bar{position:sticky;top:0;z-index:5;background:rgba(14,15,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 16px}
+.bar input{width:100%;max-width:520px;display:block;margin:0 auto 10px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.chip{flex:0 0 auto;padding:4px 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--mut);cursor:pointer;font:inherit;font-size:13px}
+.chip.on{background:var(--acc);color:#1a1300;border-color:var(--acc)}
+.chips.tags .chip{direction:ltr}
+.opts{display:flex;gap:14px;justify-content:center;font-size:13px;color:var(--mut);margin-top:6px;flex-wrap:wrap}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
+.count{color:var(--mut);margin:0 0 14px;font-size:14px}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:14px}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--mut);flex-wrap:wrap}
+.meta a{direction:ltr}
+.tg span{display:inline-block;margin:2px;padding:1px 8px;border-radius:6px;background:#222630;font-size:12px;direction:ltr}
+.tg .c{background:#3a2a10;color:var(--acc)}
+.pr{direction:ltr;text-align:left;white-space:pre-wrap;font-size:13px;background:#0b0c0f;border:1px solid var(--line);border-radius:9px;padding:10px;margin:0;max-height:9.5em;overflow:hidden;position:relative}
+.pr.open{max-height:none}
+.warn{font-size:12px;color:#d98b5f}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.acts button,.acts a{flex:1 1 auto;text-align:center;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:#101216;color:var(--fg);font:inherit;font-size:13px;cursor:pointer;text-decoration:none}
+.acts .pri{background:var(--acc);color:#1a1300;border-color:var(--acc);font-weight:700}
+.more{display:block;margin:22px auto 0;padding:10px 22px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit;cursor:pointer}
+.howto{max-width:900px;margin:36px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;font-size:14px;color:var(--mut)}
+footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>کتابخانه‌ی پرامپت‌های واقعی</h1>
+  <p>۷۰۳ پرامپت که سازنده‌ها برای ساخت ویدیو با Claude Opus 5.5 منتشر کرده‌اند، هر کدام با لینک پست اصلی. نقطه‌ی شروع برای نوشتن پرامپت خودتان، یا ایده برای داستان یک سبک.</p>
+  <div class="nav"><a href="./">← بازگشت به گالری سبک‌ها</a></div>
+</header>
+<div class="bar">
+  <input id="q" type="search" placeholder="جستجو در پرامپت‌ها… (مثلاً product launch، explainer، particles)">
+  <div class="chips" id="cats"></div>
+  <div class="chips tags" id="tags" style="margin-top:6px"></div>
+  <div class="opts">
+    <label><input type="checkbox" id="fRemake"> فقط آن‌هایی که ریمیک دارند</label>
+    <label><input type="checkbox" id="fFull"> فقط پرامپت‌های کامل</label>
+  </div>
+</div>
+<main>
+  <p class="count" id="count">در حال بارگذاری…</p>
+  <div class="list" id="list"></div>
+  <button class="more" id="more" hidden>نمایش بیشتر</button>
+  <section class="howto">
+    <b>چطور استفاده کنم؟</b> پرامپت را کپی کنید و در Claude Code بدهید، یا دکمه‌ی «استفاده در یک سبک» را بزنید تا متن پرامپت به‌عنوان داستان به سازنده‌ی پرامپت در گالری منتقل شود؛ آنجا یک سبک انتخاب کنید. برخی پرامپت‌ها ناقص‌اند (سازنده فقط بخشی را منتشر کرده) و با برچسب نارنجی مشخص شده‌اند. بازسازی یک نمونه ممکن است به asset، کتابخانه یا چند دور اصلاح نیاز داشته باشد.
+  </section>
+</main>
+<footer>
+  داده‌ها از <a href="https://github.com/yihui-dev/awesome-opus5-5-videos">awesome-opus5-5-videos</a> (yihui-dev، مجوز MIT)؛ حق هر پرامپت با سازنده‌ی آن است و به پست اصلی لینک شده. ریمیک‌ها روی <a href="https://skillry.dev/ai-videos/opus-5-5">Skillry</a>.
+</footer>
+<script>
+const CAT={motion:'موشن‌گرافیک','3d':'سه‌بعدی',explainer:'توضیحی',interactive:'تعاملی'};
+const PAGE=60;
+let D=[],cat='',tag='',shown=PAGE;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function chip(box,label,val,get,set){const b=document.createElement('button');b.className='chip'+(val===get()?' on':'');b.textContent=label;b.onclick=()=>{set(val);shown=PAGE;chips();render();};box.appendChild(b);}
+function chips(){
+  $('cats').innerHTML='';chip($('cats'),'همه','',()=>cat,v=>cat=v);
+  Object.keys(CAT).forEach(c=>chip($('cats'),CAT[c],c,()=>cat,v=>cat=v));
+  const cnt={};D.forEach(x=>x.t.forEach(t=>cnt[t]=(cnt[t]||0)+1));
+  $('tags').innerHTML='';chip($('tags'),'all tech','',()=>tag,v=>tag=v);
+  Object.entries(cnt).sort((a,b)=>b[1]-a[1]).forEach(([t,n])=>chip($('tags'),t+' ('+n+')',t,()=>tag,v=>tag=v));
+}
+function filtered(){
+  const t=$('q').value.trim().toLowerCase(),rm=$('fRemake').checked,fu=$('fFull').checked;
+  return D.filter(x=>(!cat||x.c===cat)&&(!tag||x.t.includes(tag))&&(!rm||x.r)&&(!fu||!x.pp)&&(!t||(x.p+' '+x.a+' '+x.t.join(' ')).toLowerCase().includes(t)));
+}
+function render(){
+  const L=filtered();$('count').textContent=L.length+' پرامپت';
+  $('list').innerHTML=L.slice(0,shown).map((x,i)=>`<div class="item">
+    <div class="meta"><a href="${esc(x.u)}" target="_blank" rel="noopener">@${esc(x.a)}</a><span>${esc(x.d)}</span></div>
+    <div class="tg"><span class="c">${CAT[x.c]||esc(x.c)}</span>${x.t.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+    ${x.pp?'<div class="warn">پرامپت ناقص: سازنده فقط بخشی را منتشر کرده</div>':''}
+    <pre class="pr" data-i="${esc(x.s)}">${esc(x.p)}</pre>
+    <div class="acts">
+      <button onclick="tog(this)">نمایش کامل</button>
+      <button onclick="cp('${esc(x.s)}',this)">کپی</button>
+      <button class="pri" onclick="use('${esc(x.s)}')">استفاده در یک سبک</button>
+      ${x.r?`<a href="${esc(x.k)}" target="_blank" rel="noopener">ریمیک ▶</a>`:''}
+    </div></div>`).join('');
+  $('more').hidden=L.length<=shown;
+}
+function tog(b){const p=b.closest('.item').querySelector('.pr');p.classList.toggle('open');b.textContent=p.classList.contains('open')?'جمع کردن':'نمایش کامل';}
+function byS(s){return D.find(x=>x.s===s);}
+function cp(s,b){const t=byS(s).p;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='کپی شد ✓';setTimeout(()=>b.textContent='کپی',1500);}).catch(()=>{const r=document.createRange();r.selectNodeContents(b.closest('.item').querySelector('.pr'));getSelection().removeAllRanges();getSelection().addRange(r);});}
+function use(s){const x=byS(s);try{sessionStorage.setItem('opuscar_story',JSON.stringify({text:x.p,author:x.a}));}catch(e){}location.href='./#from-prompts';}
+$('q').oninput=()=>{shown=PAGE;render();};$('fRemake').onchange=$('fFull').onchange=()=>{shown=PAGE;render();};
+$('more').onclick=()=>{shown+=PAGE;render();};
+fetch('prompts.json').then(r=>r.json()).then(j=>{D=j.sort((a,b)=>(b.r-a.r)||b.d.localeCompare(a.d));chips();render();}).catch(()=>{$('count').textContent='بارگذاری داده‌ها ناموفق بود.';});
+</script>
+</body>
+</html>

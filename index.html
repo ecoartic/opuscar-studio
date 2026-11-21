@@ -56,12 +56,14 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
 <header>
   <h1>استودیو سبک‌های فیلم</h1>
   <p>۹۸ سبک فیلم کوتاه که با کد ساخته می‌شوند، بدون مدل ویدیویی (۳ سبک برای تصاویرشان یک image generator هم لازم دارند). سبک را انتخاب کنید، داستانتان را بنویسید و پرامپت آماده‌ی ساخت را بگیرید.</p>
+  <p style="margin-top:12px"><a href="prompts.html">کتابخانه‌ی ۷۰۳ پرامپت واقعی →</a></p>
 </header>
 <div class="bar">
   <input id="q" type="search" placeholder="جستجوی سبک… (مثلاً watercolor، anime، 3D)">
   <div class="chips" id="chips"></div>
 </div>
 <main>
+  <p class="note" id="handoff" hidden></p>
   <p class="count" id="count"></p>
   <div class="grid" id="grid"></div>
 
@@ -71,6 +73,7 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
 <pre>claude plugin marketplace add lemomo-ai/lemo-opuscar
 claude plugin install lemo-opuscar@lemolab</pre>
     <p>بعد Claude Code را باز کنید (<code>/effort high</code>) و پرامپت کپی‌شده را بدهید. پیش‌نیازها: Node 20+، ffmpeg 7+، Python 3.11+.</p>
+    <p>برای ایده و نقطه‌ی شروع، <a href="prompts.html">کتابخانه‌ی پرامپت‌های واقعی</a> را ببینید: ۷۰۳ پرامپت منتشرشده از سازنده‌ها با لینک پست اصلی و ریمیک.</p>
     <p><b>شفافیت ساخت:</b> فیلم‌ها از صفحه‌های canvas و WebGL فریم‌به‌فریم رندر می‌شوند؛ نه مدل ویدیویی، نه فوتیج آماده. موسیقی از کتابخانه‌های sample رایگان و راوی با TTS است. سورس کامل هر فیلم در پوشه‌ی <code>films/&lt;name&gt;/</code> می‌ماند و قابل بررسی است.</p>
     <p>استثنا: سبک‌های Manga Panels، Text Flash Cuts و Comic History Cartoon برای تصاویرشان یک image generator لازم دارند (مثلاً Codex CLI)؛ این سبک‌ها در گالری برچسب «نیاز به image generator» دارند.</p>
   </section>
@@ -138,7 +141,7 @@ function open_(slug){
   document.getElementById('dd').textContent=(cur.film?'Demo: “'+cur.film+'” — ':'')+cur.line;
   document.getElementById('dn').hidden=!NEEDS_IMG.has(slug);
   document.getElementById('du').innerHTML=(cur.uses||[]).map(u=>`<span>${u}</span>`).join('');
-  const e=EX[slug]||'';document.getElementById('fStory').placeholder='داستانتان را بنویسید…';document.getElementById('exT').textContent=e?'مثال برای این سبک: '+e:'';
+  const e=EX[slug]||'';document.getElementById('fStory').placeholder='داستانتان را بنویسید…';if(HANDOFF)document.getElementById('fStory').value=HANDOFF.text;document.getElementById('exT').textContent=e?'مثال برای این سبک: '+e:'';
   document.getElementById('out').hidden=true;document.getElementById('cp').hidden=true;
   dlg.showModal();
 }
@@ -156,6 +159,9 @@ function build(){
 }
 function copyOut(){const t=document.getElementById('out').textContent;const b=document.getElementById('cp');
   (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='کپی شد ✓';setTimeout(()=>b.textContent='کپی پرامپت',1500);}).catch(()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('out'));getSelection().removeAllRanges();getSelection().addRange(r);});}
+let HANDOFF=null;
+try{const h=sessionStorage.getItem('opuscar_story');if(h){HANDOFF=JSON.parse(h);}}catch(e){}
+if(HANDOFF){const n=document.getElementById('handoff');n.hidden=false;n.textContent='پرامپت @'+HANDOFF.author+' از کتابخانه آماده است؛ یک سبک انتخاب کنید تا به‌عنوان داستان در سازنده‌ی پرامپت قرار بگیرد. ';const x=document.createElement('button');x.className='lnk';x.textContent='لغو';x.onclick=()=>{HANDOFF=null;try{sessionStorage.removeItem('opuscar_story');}catch(e){}n.hidden=true;};n.appendChild(x);}
 renderChips();render();
 </script>
 </body>
