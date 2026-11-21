@@ -259,288 +259,6 @@
  ],
  "items": [
   {
-   "id": "inkline-town",
-   "t": "Inkline Town",
-   "cats": [
-    "interactive",
-    "threejs"
-   ],
-   "st": "watch",
-   "repo": "sandromaglione/inkline-town",
-   "reel": "https://www.instagram.com/reel/Df11fsBFPzz/",
-   "s": "بازی شهرسازی که همه‌ی ساختمان‌ها، گاری‌ها و آدم‌ها را به‌صورت line art سه‌بعدی زنده با کد رسم می‌کند؛ بدون هیچ فایل تصویر.",
-   "v": "مرجع لوک: سه‌بعدی خطی روی زمینه‌ی روشن برای سایت/فضای تعاملی؛ اسکافولد در حین ارتقا ایده‌ی خوبی برای transition است."
-  },
-  {
-   "id": "ascii-magic",
-   "t": "ASCII Magic",
-   "cats": [
-    "motion-gfx"
-   ],
-   "st": "watch",
-   "site": "https://www.ascii-magic.com",
-   "reel": "https://www.instagram.com/reel/Dfj6-Q0zGf3/",
-   "s": "استایلایزر تحت وب برای عکس و ویدیو: ASCII، dither، halftone، glitch، voxel، fluted؛ پیش‌نمایش زنده، پردازش محلی در مرورگر، خروجی MP4/GIF، سرور MCP برای Agent.",
-   "v": "نسخه‌ی رایگان بدون واترمارک؛ کتابخانه‌ی کامل شیدرها و 4K در Pro. برای لوک گرافیکی سریع روی فوتیج و LED wall."
-  },
-  {
-   "id": "trellis2",
-   "t": "TRELLIS.2 (Microsoft)",
-   "cats": [
-    "image-3d",
-    "blender",
-    "unreal"
-   ],
-   "st": "bench",
-   "repo": "microsoft/TRELLIS.2",
-   "reel": "https://www.instagram.com/reel/Dfht817u9yA/",
-   "s": "مدل ۴B: از یک تصویر به دارایی سه‌بعدی با متریال PBR (base color، roughness، metallic، opacity)؛ خروجی GLB.",
-   "v": "مهم‌ترین گزینه‌ی image-to-3D با PBR برای Unreal؛ ولی ۲۴GB VRAM و فقط Linux تست‌شده. دموی Hugging Face برای تست بدون GPU."
-  },
-  {
-   "id": "nerfstudio",
-   "t": "Nerfstudio",
-   "cats": [
-    "image-3d",
-    "gaussian",
-    "threejs"
-   ],
-   "st": "bench",
-   "repo": "nerfstudio-project/nerfstudio",
-   "reel": "https://www.instagram.com/reel/Dfht817u9yA/",
-   "s": "فریم‌ورک بازسازی صحنه از عکس/ویدیو: NeRF و Gaussian Splatting (splatfacto)، export به splat/mesh.",
-   "v": "برای benchmark محیط کنار OpenMVS و RealityScan؛ خروجی splat برای three.js."
-  },
-  {
-   "id": "blender-mcp",
-   "t": "Blender MCP",
-   "cats": [
-    "blender",
-    "agent"
-   ],
-   "st": "active",
-   "repo": "ahujasid/blender-mcp",
-   "reel": "https://www.instagram.com/reel/Dfht817u9yA/",
-   "s": "پلاگینی که Claude را به Blender وصل می‌کند: ساخت آبجکت، متریال و صحنه با متن.",
-   "v": "روی سیستمت دیده شده ولی در تست اکتبر فعال نبود؛ پایه‌ی Blender Skills."
-  },
-  {
-   "id": "p5brush",
-   "t": "p5.js + p5.brush",
-   "cats": [
-    "motion-gfx",
-    "motion"
-   ],
-   "st": "watch",
-   "repo": "acamposuribe/p5.brush",
-   "reel": "https://www.instagram.com/reel/DeHP8DPsimI/",
-   "s": "موشن generative با حس قلم‌مو و آبرنگ طبیعی در p5.js؛ در ریل با Claude: پالت hex، تایمینگ و حرکت با پرامپت.",
-   "v": "برای پس‌زمینه‌ی گرم و دست‌ساز، تیتراژ و آیتم‌های برنامه‌ی علمی؛ مکمل سبک Watercolor در Opuscar."
-  },
-  {
-   "id": "stickman",
-   "t": "Stickman Video Director",
-   "cats": [
-    "motion",
-    "motion-gfx"
-   ],
-   "st": "watch",
-   "repo": "kaomei/stickman-video-director",
-   "reel": "https://www.instagram.com/reel/Dfitz3dD5Sb/",
-   "s": "از متن/مقاله به ویدیوی explainer استیکمن با Agent: تصویر، صدا، زیرنویس و افکت؛ ۱۴ سبک، 16:9 و 9:16. دو موتور: Model (مدل ویدیو، اعتبار) و Code (تصویر AI + انیمیشن با کد، رندر محلی).",
-   "v": "برای آیتم‌های explainer برنامه‌ی علمی قابل تست؛ پشتیبانی صدای فارسی نامعلوم. موتور Code ارزان‌تر است."
-  },
-  {
-   "id": "diorama",
-   "t": "Diorama (pixel-art 3D)",
-   "cats": [
-    "threejs",
-    "motion"
-   ],
-   "st": "watch",
-   "repo": "sloemo01/diorama",
-   "reel": "https://www.instagram.com/reel/DfpYr2ojLDy/",
-   "s": "skill برای Agent: دیوراماهای کوچک سه‌بعدی pixel-art با three.js، loop دقیق؛ DESIGN.md، blockout خاکستری با دوربین قفل، QA با فریم‌های ثابت.",
-   "v": "روش کارش (blockout خاکستری و QA فریم‌به‌فریم) الگوی خوبی برای Winter King و Opuscar است؛ خود سبک pixel در Opuscar هست."
-  },
-  {
-   "id": "lemo-opuscar",
-   "t": "Lemo-Opuscar",
-   "cats": [
-    "motion"
-   ],
-   "st": "active",
-   "repo": "lemomo-ai/lemo-opuscar",
-   "in": "./",
-   "s": "۹۸ سبک فیلم کوتاه که با کد ساخته می‌شوند؛ پایه‌ی همین سایت.",
-   "v": "ابزار اصلی فیلم کوتاه با کد."
-  },
-  {
-   "id": "opus-prompts",
-   "t": "awesome-opus5-5-videos",
-   "cats": [
-    "motion",
-    "motion-gfx"
-   ],
-   "st": "active",
-   "repo": "yihui-dev/awesome-opus5-5-videos",
-   "in": "prompts.html",
-   "reel": "https://www.instagram.com/reel/DeQWqNXOa72/",
-   "s": "۷۰۳ پرامپت واقعی ویدیو با Opus 5.5 با تصویر و لینک پست اصلی.",
-   "v": "در کتابخانه‌ی پرامپت همین سایت اضافه شد."
-  },
-  {
-   "id": "manimgx",
-   "t": "ManimGX",
-   "cats": [
-    "motion-gfx"
-   ],
-   "st": "bench",
-   "repo": "academa-labs/manimgx",
-   "reel": "https://www.instagram.com/reel/DefTOG7se5T/",
-   "s": "موتور انیمیشن ریاضی سریع (Rust + wgpu) سازگار با Manim CE؛ 2D و 3D، Typst برای متن.",
-   "v": "برای برنامه‌ی علمی؛ تست: متن فارسی RTL و صحنه‌ی 3D. خروجی alpha ندارد."
-  },
-  {
-   "id": "motlab",
-   "t": "Motlab",
-   "cats": [
-    "motion"
-   ],
-   "st": "watch",
-   "repo": "staryone/motlab",
-   "reel": "https://www.instagram.com/reel/Df-LYwzlaF5/",
-   "s": "ویدیو با کد: هر صحنه یک canvas با renderAt(t)؛ انکود با WebCodecs داخل صفحه.",
-   "v": "خیلی خام (۵ ستاره). ایده‌ی WebCodecs ارزش برداشتن دارد."
-  },
-  {
-   "id": "raea",
-   "t": "Raea",
-   "cats": [
-    "motion",
-    "motion-gfx"
-   ],
-   "st": "watch",
-   "repo": "shinyobjectz/raea",
-   "site": "https://raea.io",
-   "reel": "https://www.instagram.com/reel/DfvLYbgqpb2/",
-   "s": "موتور ویرایش/رندر ویدیو با کد برای Agent؛ اپ دسکتاپ، رندر محلی روی GPU رایگان.",
-   "v": "بالغ‌تر از Motlab؛ alpha و جزئیات 3D نامشخص."
-  },
-  {
-   "id": "freevideo",
-   "t": "FreeVideo (MiniMax H3)",
-   "cats": [
-    "film-3d"
-   ],
-   "st": "bench",
-   "repo": "FlashML-org/FreeVideo",
-   "reel": "https://www.instagram.com/reel/Df9cMI4Py9_/",
-   "s": "اجرای محلی MiniMax H3 روی GPU از ۸GB VRAM؛ پلاگین ComfyUI، first/last frame، LoRA.",
-   "v": "برای draft رایگان Winter King؛ پای سیستم تست شود."
-  },
-  {
-   "id": "vcam",
-   "t": "دوربین مجازی با گوشی (Filmspace و جایگزین‌ها)",
-   "cats": [
-    "film-3d",
-    "blender",
-    "unreal"
-   ],
-   "st": "bench",
-   "site": "https://digitalproduction.com/2026/11/06/omniscient-blender-gets-a-handheld-camera/",
-   "reel": "https://www.instagram.com/reel/DfKQb7fAl09/",
-   "s": "حرکت دوربین را با گوشی در صحنه‌ی سه‌بعدی ضبط کن؛ گزینه‌ها: Higgsfield phone cam، Omniscient، Live Link VCAM.",
-   "v": "مستقیم برای previs و handheld میکرو دراما و VP."
-  },
-  {
-   "id": "openmvs",
-   "t": "OpenMVS",
-   "cats": [
-    "image-3d",
-    "blender",
-    "unreal"
-   ],
-   "st": "bench",
-   "repo": "cdcseacave/openMVS",
-   "reel": "https://www.instagram.com/reel/Df9waEzPShO/",
-   "s": "photogrammetry متن‌باز: از دوربین‌های align‌شده (COLMAP) به dense cloud، mesh و texture.",
-   "v": "در benchmark محیط کنار RealityScan و 3DGS."
-  },
-  {
-   "id": "blender-skills",
-   "t": "Blender Skills (۹۴ skill)",
-   "cats": [
-    "blender",
-    "agent"
-   ],
-   "st": "bench",
-   "repo": "arjun988/blender-skills",
-   "reel": "https://www.instagram.com/reel/DfywFF4S7IH/",
-   "s": "skillهای Agent برای Blender از طریق MCP؛ از blockout تا export.",
-   "v": "برای cleanup/export مفید؛ کیفیت مدل‌سازی را حل نمی‌کند."
-  },
-  {
-   "id": "lazy-motion",
-   "t": "Lazy Motion (Cloth reveal)",
-   "cats": [
-    "blender",
-    "motion-gfx"
-   ],
-   "st": "open",
-   "site": "https://cleverpoly.store",
-   "reel": "https://www.instagram.com/reel/DfuwHlXt6V_/",
-   "s": "پریست‌های انیمیشن Blender مثل پاره شدن پارچه و reveal.",
-   "v": "باز؛ ایده‌ی Reveal & Transition Lab."
-  },
-  {
-   "id": "code-mode",
-   "t": "Cloudflare Code Mode",
-   "cats": [
-    "agent"
-   ],
-   "st": "watch",
-   "reel": "https://www.instagram.com/reel/Df9VMkRiml0/",
-   "s": "Agent به‌جای صدا زدن تک‌تک toolها کد می‌نویسد؛ context بسیار کمتر.",
-   "v": "الگوی خوب برای MCP روی Aximmetry."
-  },
-  {
-   "id": "ig-agent",
-   "t": "Instagram Agent Skill",
-   "cats": [
-    "agent"
-   ],
-   "st": "watch",
-   "repo": "Jakeschincariol/instagram-agent-skill",
-   "reel": "https://www.instagram.com/reel/Df90gkjNYev/",
-   "s": "۱۳ skill برای نوشتن Reel، کپشن، هوک و برنامه‌ی هفتگی.",
-   "v": "برای معرفی Case Studyها، بعداً."
-  },
-  {
-   "id": "gfx-toys",
-   "t": "سه ابزار گرافیک (Waygilm و…)",
-   "cats": [
-    "motion-gfx"
-   ],
-   "st": "archive",
-   "reel": "https://www.instagram.com/reel/DfukwRKTm1e/",
-   "s": "تبدیل عکس به line art، برش تصویر (fluted glass)، ژنراتور نوار نور.",
-   "v": "آرشیو؛ با shader ساده قابل ساخت."
-  },
-  {
-   "id": "scenemosaic",
-   "t": "SceneMosaic",
-   "cats": [
-    "image-3d",
-    "unreal"
-   ],
-   "st": "watch",
-   "repo": "rxjfighting/scenemosaic",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "از یک عکس داخلی، صحنه‌ی سه‌بعدی کاملاً قابل ویرایش می‌سازد؛ Agentها چیدمان را فعالانه بررسی می‌کنند (برای شبیه‌سازی رباتیک).",
-   "v": "کد پژوهشی دانشگاه هنگ‌کنگ برای صحنه‌ی شبیه‌سازی رباتیک؛ ایده‌ی چیدمان خوب است ولی ابزار تولید محیط سینمایی نیست."
-  },
-  {
    "id": "instanthmr",
    "t": "InstantHMR",
    "cats": [
@@ -550,7 +268,9 @@
    "repo": "naturalpad-studio/instanthmr",
    "src": "https://githubsignals.io/instagram/",
    "s": "mesh کامل سه‌بعدی بدن از یک عکس در کمتر از ۵ میلی‌ثانیه، روی پردازنده‌ی گوشی.",
-   "v": "mesh بدن از یک عکس روی گوشی؛ مدل در Hugging Face. برای mocap سبک و قرار دادن بازیگر در صحنه."
+   "v": "mesh بدن از یک عکس روی گوشی؛ مدل در Hugging Face. برای mocap سبک و قرار دادن بازیگر در صحنه.",
+   "n": 44,
+   "new": true
   },
   {
    "id": "anymachine",
@@ -563,48 +283,9 @@
    "repo": "apekshik/anymachine",
    "src": "https://githubsignals.io/instagram/",
    "s": "از اسکچ/تصویر کانسپت، ماشین سه‌بعدی کارا و انیمیشنی با Agent.",
-   "v": "خانواده‌ی چهارتایی Agent در Blender: AnyScene (کل ست)، AnyKit (پراپ)، AnyMachine (ماشین متحرک)، AnyShot (فیلم‌برداری). برای ساخت ست و previs."
-  },
-  {
-   "id": "spritecast",
-   "t": "Spritecast",
-   "cats": [
-    "concept-3d",
-    "motion"
-   ],
-   "st": "watch",
-   "repo": "sunghwan0112/spritecast",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "از یک طراحی، کاراکتر بازی کاملاً انیمیشنی با ثبات فریم‌ها.",
-   "v": "sprite ایزومتریک برای بازی؛ فقط اگر بازی/تعاملی pixel ساختی."
-  },
-  {
-   "id": "viz3d",
-   "t": "Viz3D",
-   "cats": [
-    "concept-3d",
-    "threejs",
-    "interactive"
-   ],
-   "st": "watch",
-   "repo": "codepawl/viz3d",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "Agent از هر موضوعی (رویداد تاریخی تا یک قطعه) جهان سه‌بعدی تعاملی، بازی یا اپ می‌سازد.",
-   "v": "Agent از موضوع، صحنه‌ی تعاملی سه‌بعدی می‌سازد؛ برای ایده‌ی آیتم تعاملی برنامه‌ی علمی."
-  },
-  {
-   "id": "3dviz",
-   "t": "3Dviz Pro Max",
-   "cats": [
-    "concept-3d",
-    "threejs",
-    "blender"
-   ],
-   "st": "watch",
-   "repo": "viettranx/3dviz-pro-max",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "skill: از یک جمله به صحنه‌ی تعاملی سه‌بعدی با کتابخانه‌ی دستورالعمل‌های Three.js و Blender.",
-   "v": "کتابخانه‌ی دستورالعمل three.js و Blender برای Agent؛ هم‌خانواده‌ی viz3d."
+   "v": "خانواده‌ی چهارتایی Agent در Blender: AnyScene (کل ست)، AnyKit (پراپ)، AnyMachine (ماشین متحرک)، AnyShot (فیلم‌برداری). برای ساخت ست و previs.",
+   "n": 43,
+   "new": true
   },
   {
    "id": "sand3d",
@@ -617,60 +298,9 @@
    "repo": "sandflow-ai/sand3d",
    "src": "https://githubsignals.io/instagram/",
    "s": "کتابخانه‌ی مدل‌سازی Python برای AI: Blender به ابزار متنی تبدیل می‌شود تا مدل با کد کوتاه آبجکت پیچیده بسازد.",
-   "v": "مدل‌سازی Python برای LLM روی Blender؛ امتحان اینکه کیفیت procedural از Blender MCP خام بهتر است یا نه."
-  },
-  {
-   "id": "pixelart-gs",
-   "t": "pixelart-gaussiansplat",
-   "cats": [
-    "gaussian",
-    "threejs"
-   ],
-   "st": "watch",
-   "repo": "cobanov/pixelart-gaussiansplat",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "رندر صحنه‌ی سه‌بعدی به‌صورت pixel art با splatهای تخت، outline و پالت محدود در مرورگر.",
-   "v": "رندر Gaussian splat به‌صورت pixel art در مرورگر؛ مرجع لوک، نه ابزار تولید."
-  },
-  {
-   "id": "codevember",
-   "t": "Codevember 2026",
-   "cats": [
-    "threejs",
-    "interactive"
-   ],
-   "st": "watch",
-   "repo": "acher249/codevember-2026",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "هر روز یک کلمه به یک جهان سه‌بعدی تعاملی و قابل گرفتن در مرورگر.",
-   "v": "۳۰ صحنه‌ی three.js روی WebGPU با کد؛ مرجع تکنیک و ایده برای فضای تعاملی."
-  },
-  {
-   "id": "crucible",
-   "t": "Crucible",
-   "cats": [
-    "threejs",
-    "interactive",
-    "agent"
-   ],
-   "st": "watch",
-   "repo": "codepawl/crucible",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "موتور سه‌بعدی JavaScript مخصوص Agent: ساخت، نورپردازی و رندر صحنه در مرورگر.",
-   "v": "موتور سه‌بعدی وب برای Agent و طراح؛ پروژه‌ی فعال و بزرگ. مرجع برای سایت سه‌بعدی."
-  },
-  {
-   "id": "3dnewera",
-   "t": "3D New Era AI",
-   "cats": [
-    "web-3d",
-    "concept-3d"
-   ],
-   "st": "watch",
-   "repo": "leandrodaf/3d-new-era-ai",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "ویرایشگر طراحی خانه که Agent دیوارها را می‌کشد؛ متن‌باز.",
-   "v": "ویرایشگر طراحی خانه با Agent در مرورگر؛ مرجع UI برای ویرایشگر سه‌بعدی."
+   "v": "مدل‌سازی Python برای LLM روی Blender؛ امتحان اینکه کیفیت procedural از Blender MCP خام بهتر است یا نه.",
+   "n": 42,
+   "new": true
   },
   {
    "id": "claude-blender-skills",
@@ -684,7 +314,9 @@
    "repo": "mromidev/claude-blender-skills",
    "src": "https://githubsignals.io/instagram/",
    "s": "skillهای رایگان برای انیمیشن سینمایی سه‌بعدی: مدل برنامه‌ریزی، ساخت، نور و رندر را در Blender انجام می‌دهد.",
-   "v": "هر skill ورک‌فلوی کامل یک شات واقعی با اسکریپت‌هایش: برنامه، ساخت، نور، انیمیشن و رندر در Blender خودت. برای شات‌های سینمایی."
+   "v": "هر skill ورک‌فلوی کامل یک شات واقعی با اسکریپت‌هایش: برنامه، ساخت، نور، انیمیشن و رندر در Blender خودت. برای شات‌های سینمایی.",
+   "n": 41,
+   "new": true
   },
   {
    "id": "polyfork",
@@ -697,7 +329,9 @@
    "repo": "lucas-martinic/polyfork-catalog",
    "src": "https://githubsignals.io/instagram/",
    "s": "۲۷۰۰ مدل سه‌بعدی رایگان (blocky) برای بازی و سایت.",
-   "v": "۳۴۸۹ مدل low-poly رایگان GLB در ۳۷ کیت، بدون حساب و کلید. دارایی آماده برای three.js و blockout."
+   "v": "۳۴۸۹ مدل low-poly رایگان GLB در ۳۷ کیت، بدون حساب و کلید. دارایی آماده برای three.js و blockout.",
+   "n": 40,
+   "new": true
   },
   {
    "id": "reshot",
@@ -710,20 +344,9 @@
    "repo": "maosika-ai/reshot",
    "src": "https://githubsignals.io/instagram/",
    "s": "از یک کلیپ، کوریوگرافی و حرکت دوربین را بدون بازیگرها استخراج می‌کند.",
-   "v": "از ویدیوی مرجع، depth map، اسکلت یا line video می‌سازد تا Seedance یا MiniMax H3 کوریوگرافی و حرکت دوربین را با کاراکتر خودت تکرار کنند. مستقیم برای Winter King."
-  },
-  {
-   "id": "take-one",
-   "t": "Take One",
-   "cats": [
-    "motion",
-    "film-3d"
-   ],
-   "st": "watch",
-   "repo": "talsiach/take-one",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "از یک جمله فیلم کوتاه کامل روی سیستم خودت: فیلمنامه، طراحی، موسیقی.",
-   "v": "skill یک‌خطی تا فیلم کوتاه؛ هم‌دسته‌ی Opuscar، زیر نظر."
+   "v": "از ویدیوی مرجع، depth map، اسکلت یا line video می‌سازد تا Seedance یا MiniMax H3 کوریوگرافی و حرکت دوربین را با کاراکتر خودت تکرار کنند. مستقیم برای Winter King.",
+   "n": 39,
+   "new": true
   },
   {
    "id": "henge",
@@ -736,19 +359,9 @@
    "repo": "alisson-anjos/henge",
    "src": "https://githubsignals.io/instagram/",
    "s": "تعویض کاراکتر و انتقال حرکت در ویدیو با ویدیوی مرجع و چند عکس.",
-   "v": "استودیوی ویدیو روی ComfyUI و MiniMax H3: تعویض کاراکتر، انتقال حرکت، تعویض سر؛ محلی یا RunPod. کنار FreeVideo تست شود."
-  },
-  {
-   "id": "openfilm",
-   "t": "OpenFilm",
-   "cats": [
-    "motion"
-   ],
-   "st": "watch",
-   "repo": "openfilm/openfilm",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "Agent فیلم را به‌شکل صفحه‌ی وب قابل ویرایش در مرورگر می‌نویسد.",
-   "v": "Agent ویدیو با کد (هم‌دسته‌ی Opuscar/Raea)؛ فقط زیر نظر."
+   "v": "استودیوی ویدیو روی ComfyUI و MiniMax H3: تعویض کاراکتر، انتقال حرکت، تعویض سر؛ محلی یا RunPod. کنار FreeVideo تست شود.",
+   "n": 38,
+   "new": true
   },
   {
    "id": "motion-educator",
@@ -761,43 +374,9 @@
    "repo": "zeative/motion-educator",
    "src": "https://githubsignals.io/instagram/",
    "s": "هر موضوع به مستند با کپی سه‌بعدی اشیای واقعی و حرکت دوربین کارگردانی‌شده.",
-   "v": "skill و موتور فیلم: اول استوری‌بورد و تأیید، بعد رندر 1080p60 فریم‌به‌فریم با کپی سه‌بعدی اشیا. خیلی نزدیک به برنامه‌ی علمی."
-  },
-  {
-   "id": "papercut",
-   "t": "Papercut Explainer",
-   "cats": [
-    "motion-gfx"
-   ],
-   "st": "watch",
-   "repo": "0xs4n4tg/papercut-explainer",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "ویدیوی عمودی explainer با لوک دیورامای کاغذی سه‌بعدی، کامل با Claude Code.",
-   "v": "skill برای reel عمودی با لوک کاغذ لایه‌ای؛ مکمل سبک‌های Opuscar."
-  },
-  {
-   "id": "line-art-anim",
-   "t": "line-art-animation",
-   "cats": [
-    "motion-gfx"
-   ],
-   "st": "watch",
-   "repo": "jdhruv14/line-art-animation",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "خیابان زنده با خطوط جوهری؛ حرکت طبیعی کاراکترهای دوبعدی.",
-   "v": "skill و کتابخانه‌ی SVG برای کاراکترهای line art متحرک؛ مرجع لوک."
-  },
-  {
-   "id": "design-agent",
-   "t": "design-agent (LangChain)",
-   "cats": [
-    "motion-gfx"
-   ],
-   "st": "watch",
-   "repo": "langchain-ai/design-agent",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "از پیام چت به ویدیو و گرافیک هماهنگ با برند.",
-   "v": "LangChain: ویدیو و گرافیک هماهنگ با برند از چت؛ زیر نظر."
+   "v": "skill و موتور فیلم: اول استوری‌بورد و تأیید، بعد رندر 1080p60 فریم‌به‌فریم با کپی سه‌بعدی اشیا. خیلی نزدیک به برنامه‌ی علمی.",
+   "n": 37,
+   "new": true
   },
   {
    "id": "fuobe",
@@ -810,7 +389,203 @@
    "repo": "workingprototype/fuobe",
    "src": "https://githubsignals.io/instagram/",
    "s": "استودیوی تولید روی GPU خودت با مدل‌های open-weight از طریق ComfyUI.",
-   "v": "استودیوی خلاق روی ComfyUI: تصویر، ویدیو، سه‌بعدی و صدا با مدل‌های open-weight روی GPU خودت."
+   "v": "استودیوی خلاق روی ComfyUI: تصویر، ویدیو، سه‌بعدی و صدا با مدل‌های open-weight روی GPU خودت.",
+   "n": 36,
+   "new": true
+  },
+  {
+   "id": "scenemosaic",
+   "t": "SceneMosaic",
+   "cats": [
+    "image-3d",
+    "unreal"
+   ],
+   "st": "watch",
+   "repo": "rxjfighting/scenemosaic",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "از یک عکس داخلی، صحنه‌ی سه‌بعدی کاملاً قابل ویرایش می‌سازد؛ Agentها چیدمان را فعالانه بررسی می‌کنند (برای شبیه‌سازی رباتیک).",
+   "v": "کد پژوهشی دانشگاه هنگ‌کنگ برای صحنه‌ی شبیه‌سازی رباتیک؛ ایده‌ی چیدمان خوب است ولی ابزار تولید محیط سینمایی نیست.",
+   "n": 35,
+   "new": true
+  },
+  {
+   "id": "spritecast",
+   "t": "Spritecast",
+   "cats": [
+    "concept-3d",
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "sunghwan0112/spritecast",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "از یک طراحی، کاراکتر بازی کاملاً انیمیشنی با ثبات فریم‌ها.",
+   "v": "sprite ایزومتریک برای بازی؛ فقط اگر بازی/تعاملی pixel ساختی.",
+   "n": 34,
+   "new": true
+  },
+  {
+   "id": "viz3d",
+   "t": "Viz3D",
+   "cats": [
+    "concept-3d",
+    "threejs",
+    "interactive"
+   ],
+   "st": "watch",
+   "repo": "codepawl/viz3d",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "Agent از هر موضوعی (رویداد تاریخی تا یک قطعه) جهان سه‌بعدی تعاملی، بازی یا اپ می‌سازد.",
+   "v": "Agent از موضوع، صحنه‌ی تعاملی سه‌بعدی می‌سازد؛ برای ایده‌ی آیتم تعاملی برنامه‌ی علمی.",
+   "n": 33,
+   "new": true
+  },
+  {
+   "id": "3dviz",
+   "t": "3Dviz Pro Max",
+   "cats": [
+    "concept-3d",
+    "threejs",
+    "blender"
+   ],
+   "st": "watch",
+   "repo": "viettranx/3dviz-pro-max",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "skill: از یک جمله به صحنه‌ی تعاملی سه‌بعدی با کتابخانه‌ی دستورالعمل‌های Three.js و Blender.",
+   "v": "کتابخانه‌ی دستورالعمل three.js و Blender برای Agent؛ هم‌خانواده‌ی viz3d.",
+   "n": 32,
+   "new": true
+  },
+  {
+   "id": "pixelart-gs",
+   "t": "pixelart-gaussiansplat",
+   "cats": [
+    "gaussian",
+    "threejs"
+   ],
+   "st": "watch",
+   "repo": "cobanov/pixelart-gaussiansplat",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "رندر صحنه‌ی سه‌بعدی به‌صورت pixel art با splatهای تخت، outline و پالت محدود در مرورگر.",
+   "v": "رندر Gaussian splat به‌صورت pixel art در مرورگر؛ مرجع لوک، نه ابزار تولید.",
+   "n": 31,
+   "new": true
+  },
+  {
+   "id": "codevember",
+   "t": "Codevember 2026",
+   "cats": [
+    "threejs",
+    "interactive"
+   ],
+   "st": "watch",
+   "repo": "acher249/codevember-2026",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "هر روز یک کلمه به یک جهان سه‌بعدی تعاملی و قابل گرفتن در مرورگر.",
+   "v": "۳۰ صحنه‌ی three.js روی WebGPU با کد؛ مرجع تکنیک و ایده برای فضای تعاملی.",
+   "n": 30,
+   "new": true
+  },
+  {
+   "id": "crucible",
+   "t": "Crucible",
+   "cats": [
+    "threejs",
+    "interactive",
+    "agent"
+   ],
+   "st": "watch",
+   "repo": "codepawl/crucible",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "موتور سه‌بعدی JavaScript مخصوص Agent: ساخت، نورپردازی و رندر صحنه در مرورگر.",
+   "v": "موتور سه‌بعدی وب برای Agent و طراح؛ پروژه‌ی فعال و بزرگ. مرجع برای سایت سه‌بعدی.",
+   "n": 29,
+   "new": true
+  },
+  {
+   "id": "3dnewera",
+   "t": "3D New Era AI",
+   "cats": [
+    "web-3d",
+    "concept-3d"
+   ],
+   "st": "watch",
+   "repo": "leandrodaf/3d-new-era-ai",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "ویرایشگر طراحی خانه که Agent دیوارها را می‌کشد؛ متن‌باز.",
+   "v": "ویرایشگر طراحی خانه با Agent در مرورگر؛ مرجع UI برای ویرایشگر سه‌بعدی.",
+   "n": 28,
+   "new": true
+  },
+  {
+   "id": "take-one",
+   "t": "Take One",
+   "cats": [
+    "motion",
+    "film-3d"
+   ],
+   "st": "watch",
+   "repo": "talsiach/take-one",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "از یک جمله فیلم کوتاه کامل روی سیستم خودت: فیلمنامه، طراحی، موسیقی.",
+   "v": "skill یک‌خطی تا فیلم کوتاه؛ هم‌دسته‌ی Opuscar، زیر نظر.",
+   "n": 27,
+   "new": true
+  },
+  {
+   "id": "openfilm",
+   "t": "OpenFilm",
+   "cats": [
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "openfilm/openfilm",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "Agent فیلم را به‌شکل صفحه‌ی وب قابل ویرایش در مرورگر می‌نویسد.",
+   "v": "Agent ویدیو با کد (هم‌دسته‌ی Opuscar/Raea)؛ فقط زیر نظر.",
+   "n": 26,
+   "new": true
+  },
+  {
+   "id": "papercut",
+   "t": "Papercut Explainer",
+   "cats": [
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "repo": "0xs4n4tg/papercut-explainer",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "ویدیوی عمودی explainer با لوک دیورامای کاغذی سه‌بعدی، کامل با Claude Code.",
+   "v": "skill برای reel عمودی با لوک کاغذ لایه‌ای؛ مکمل سبک‌های Opuscar.",
+   "n": 25,
+   "new": true
+  },
+  {
+   "id": "line-art-anim",
+   "t": "line-art-animation",
+   "cats": [
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "repo": "jdhruv14/line-art-animation",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "خیابان زنده با خطوط جوهری؛ حرکت طبیعی کاراکترهای دوبعدی.",
+   "v": "skill و کتابخانه‌ی SVG برای کاراکترهای line art متحرک؛ مرجع لوک.",
+   "n": 24,
+   "new": true
+  },
+  {
+   "id": "design-agent",
+   "t": "design-agent (LangChain)",
+   "cats": [
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "repo": "langchain-ai/design-agent",
+   "src": "https://githubsignals.io/instagram/",
+   "s": "از پیام چت به ویدیو و گرافیک هماهنگ با برند.",
+   "v": "LangChain: ویدیو و گرافیک هماهنگ با برند از چت؛ زیر نظر.",
+   "n": 23,
+   "new": true
   },
   {
    "id": "klad",
@@ -823,7 +598,309 @@
    "repo": "klad-app/klad",
    "src": "https://githubsignals.io/instagram/",
    "s": "بوم مشترک نقاشی با Agent که با قلم‌مو و لایه از ترمینال نقاشی می‌کند.",
-   "v": "نقاشی مشترک با Agent و انیمیشن ساده؛ جالب ولی حاشیه‌ای."
+   "v": "نقاشی مشترک با Agent و انیمیشن ساده؛ جالب ولی حاشیه‌ای.",
+   "n": 22,
+   "new": true
+  },
+  {
+   "id": "inkline-town",
+   "t": "Inkline Town",
+   "cats": [
+    "interactive",
+    "threejs"
+   ],
+   "st": "watch",
+   "repo": "sandromaglione/inkline-town",
+   "reel": "https://www.instagram.com/reel/Df11fsBFPzz/",
+   "s": "بازی شهرسازی که همه‌ی ساختمان‌ها، گاری‌ها و آدم‌ها را به‌صورت line art سه‌بعدی زنده با کد رسم می‌کند؛ بدون هیچ فایل تصویر.",
+   "v": "مرجع لوک: سه‌بعدی خطی روی زمینه‌ی روشن برای سایت/فضای تعاملی؛ اسکافولد در حین ارتقا ایده‌ی خوبی برای transition است.",
+   "n": 21
+  },
+  {
+   "id": "ascii-magic",
+   "t": "ASCII Magic",
+   "cats": [
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "site": "https://www.ascii-magic.com",
+   "reel": "https://www.instagram.com/reel/Dfj6-Q0zGf3/",
+   "s": "استایلایزر تحت وب برای عکس و ویدیو: ASCII، dither، halftone، glitch، voxel، fluted؛ پیش‌نمایش زنده، پردازش محلی در مرورگر، خروجی MP4/GIF، سرور MCP برای Agent.",
+   "v": "نسخه‌ی رایگان بدون واترمارک؛ کتابخانه‌ی کامل شیدرها و 4K در Pro. برای لوک گرافیکی سریع روی فوتیج و LED wall.",
+   "n": 20
+  },
+  {
+   "id": "trellis2",
+   "t": "TRELLIS.2 (Microsoft)",
+   "cats": [
+    "image-3d",
+    "blender",
+    "unreal"
+   ],
+   "st": "bench",
+   "repo": "microsoft/TRELLIS.2",
+   "reel": "https://www.instagram.com/reel/Dfht817u9yA/",
+   "s": "مدل ۴B: از یک تصویر به دارایی سه‌بعدی با متریال PBR (base color، roughness، metallic، opacity)؛ خروجی GLB.",
+   "v": "مهم‌ترین گزینه‌ی image-to-3D با PBR برای Unreal؛ ولی ۲۴GB VRAM و فقط Linux تست‌شده. دموی Hugging Face برای تست بدون GPU.",
+   "n": 19
+  },
+  {
+   "id": "nerfstudio",
+   "t": "Nerfstudio",
+   "cats": [
+    "image-3d",
+    "gaussian",
+    "threejs"
+   ],
+   "st": "bench",
+   "repo": "nerfstudio-project/nerfstudio",
+   "reel": "https://www.instagram.com/reel/Dfht817u9yA/",
+   "s": "فریم‌ورک بازسازی صحنه از عکس/ویدیو: NeRF و Gaussian Splatting (splatfacto)، export به splat/mesh.",
+   "v": "برای benchmark محیط کنار OpenMVS و RealityScan؛ خروجی splat برای three.js.",
+   "n": 18
+  },
+  {
+   "id": "blender-mcp",
+   "t": "Blender MCP",
+   "cats": [
+    "blender",
+    "agent"
+   ],
+   "st": "active",
+   "repo": "ahujasid/blender-mcp",
+   "reel": "https://www.instagram.com/reel/Dfht817u9yA/",
+   "s": "پلاگینی که Claude را به Blender وصل می‌کند: ساخت آبجکت، متریال و صحنه با متن.",
+   "v": "روی سیستمت دیده شده ولی در تست اکتبر فعال نبود؛ پایه‌ی Blender Skills.",
+   "n": 17
+  },
+  {
+   "id": "p5brush",
+   "t": "p5.js + p5.brush",
+   "cats": [
+    "motion-gfx",
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "acamposuribe/p5.brush",
+   "reel": "https://www.instagram.com/reel/DeHP8DPsimI/",
+   "s": "موشن generative با حس قلم‌مو و آبرنگ طبیعی در p5.js؛ در ریل با Claude: پالت hex، تایمینگ و حرکت با پرامپت.",
+   "v": "برای پس‌زمینه‌ی گرم و دست‌ساز، تیتراژ و آیتم‌های برنامه‌ی علمی؛ مکمل سبک Watercolor در Opuscar.",
+   "n": 16
+  },
+  {
+   "id": "stickman",
+   "t": "Stickman Video Director",
+   "cats": [
+    "motion",
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "repo": "kaomei/stickman-video-director",
+   "reel": "https://www.instagram.com/reel/Dfitz3dD5Sb/",
+   "s": "از متن/مقاله به ویدیوی explainer استیکمن با Agent: تصویر، صدا، زیرنویس و افکت؛ ۱۴ سبک، 16:9 و 9:16. دو موتور: Model (مدل ویدیو، اعتبار) و Code (تصویر AI + انیمیشن با کد، رندر محلی).",
+   "v": "برای آیتم‌های explainer برنامه‌ی علمی قابل تست؛ پشتیبانی صدای فارسی نامعلوم. موتور Code ارزان‌تر است.",
+   "n": 15
+  },
+  {
+   "id": "diorama",
+   "t": "Diorama (pixel-art 3D)",
+   "cats": [
+    "threejs",
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "sloemo01/diorama",
+   "reel": "https://www.instagram.com/reel/DfpYr2ojLDy/",
+   "s": "skill برای Agent: دیوراماهای کوچک سه‌بعدی pixel-art با three.js، loop دقیق؛ DESIGN.md، blockout خاکستری با دوربین قفل، QA با فریم‌های ثابت.",
+   "v": "روش کارش (blockout خاکستری و QA فریم‌به‌فریم) الگوی خوبی برای Winter King و Opuscar است؛ خود سبک pixel در Opuscar هست.",
+   "n": 14
+  },
+  {
+   "id": "lemo-opuscar",
+   "t": "Lemo-Opuscar",
+   "cats": [
+    "motion"
+   ],
+   "st": "active",
+   "repo": "lemomo-ai/lemo-opuscar",
+   "in": "./",
+   "s": "۹۸ سبک فیلم کوتاه که با کد ساخته می‌شوند؛ پایه‌ی همین سایت.",
+   "v": "ابزار اصلی فیلم کوتاه با کد.",
+   "n": 13
+  },
+  {
+   "id": "opus-prompts",
+   "t": "awesome-opus5-5-videos",
+   "cats": [
+    "motion",
+    "motion-gfx"
+   ],
+   "st": "active",
+   "repo": "yihui-dev/awesome-opus5-5-videos",
+   "in": "prompts.html",
+   "reel": "https://www.instagram.com/reel/DeQWqNXOa72/",
+   "s": "۷۰۳ پرامپت واقعی ویدیو با Opus 5.5 با تصویر و لینک پست اصلی.",
+   "v": "در کتابخانه‌ی پرامپت همین سایت اضافه شد.",
+   "n": 12
+  },
+  {
+   "id": "manimgx",
+   "t": "ManimGX",
+   "cats": [
+    "motion-gfx"
+   ],
+   "st": "bench",
+   "repo": "academa-labs/manimgx",
+   "reel": "https://www.instagram.com/reel/DefTOG7se5T/",
+   "s": "موتور انیمیشن ریاضی سریع (Rust + wgpu) سازگار با Manim CE؛ 2D و 3D، Typst برای متن.",
+   "v": "برای برنامه‌ی علمی؛ تست: متن فارسی RTL و صحنه‌ی 3D. خروجی alpha ندارد.",
+   "n": 11
+  },
+  {
+   "id": "motlab",
+   "t": "Motlab",
+   "cats": [
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "staryone/motlab",
+   "reel": "https://www.instagram.com/reel/Df-LYwzlaF5/",
+   "s": "ویدیو با کد: هر صحنه یک canvas با renderAt(t)؛ انکود با WebCodecs داخل صفحه.",
+   "v": "خیلی خام (۵ ستاره). ایده‌ی WebCodecs ارزش برداشتن دارد.",
+   "n": 10
+  },
+  {
+   "id": "raea",
+   "t": "Raea",
+   "cats": [
+    "motion",
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "repo": "shinyobjectz/raea",
+   "site": "https://raea.io",
+   "reel": "https://www.instagram.com/reel/DfvLYbgqpb2/",
+   "s": "موتور ویرایش/رندر ویدیو با کد برای Agent؛ اپ دسکتاپ، رندر محلی روی GPU رایگان.",
+   "v": "بالغ‌تر از Motlab؛ alpha و جزئیات 3D نامشخص.",
+   "n": 9
+  },
+  {
+   "id": "freevideo",
+   "t": "FreeVideo (MiniMax H3)",
+   "cats": [
+    "film-3d"
+   ],
+   "st": "bench",
+   "repo": "FlashML-org/FreeVideo",
+   "reel": "https://www.instagram.com/reel/Df9cMI4Py9_/",
+   "s": "اجرای محلی MiniMax H3 روی GPU از ۸GB VRAM؛ پلاگین ComfyUI، first/last frame، LoRA.",
+   "v": "برای draft رایگان Winter King؛ پای سیستم تست شود.",
+   "n": 8
+  },
+  {
+   "id": "vcam",
+   "t": "دوربین مجازی با گوشی (Filmspace و جایگزین‌ها)",
+   "cats": [
+    "film-3d",
+    "blender",
+    "unreal"
+   ],
+   "st": "bench",
+   "site": "https://digitalproduction.com/2026/11/06/omniscient-blender-gets-a-handheld-camera/",
+   "reel": "https://www.instagram.com/reel/DfKQb7fAl09/",
+   "s": "حرکت دوربین را با گوشی در صحنه‌ی سه‌بعدی ضبط کن؛ گزینه‌ها: Higgsfield phone cam، Omniscient، Live Link VCAM.",
+   "v": "مستقیم برای previs و handheld میکرو دراما و VP.",
+   "n": 7
+  },
+  {
+   "id": "openmvs",
+   "t": "OpenMVS",
+   "cats": [
+    "image-3d",
+    "blender",
+    "unreal"
+   ],
+   "st": "bench",
+   "repo": "cdcseacave/openMVS",
+   "reel": "https://www.instagram.com/reel/Df9waEzPShO/",
+   "s": "photogrammetry متن‌باز: از دوربین‌های align‌شده (COLMAP) به dense cloud، mesh و texture.",
+   "v": "در benchmark محیط کنار RealityScan و 3DGS.",
+   "n": 6
+  },
+  {
+   "id": "blender-skills",
+   "t": "Blender Skills (۹۴ skill)",
+   "cats": [
+    "blender",
+    "agent"
+   ],
+   "st": "bench",
+   "repo": "arjun988/blender-skills",
+   "reel": "https://www.instagram.com/reel/DfywFF4S7IH/",
+   "s": "skillهای Agent برای Blender از طریق MCP؛ از blockout تا export.",
+   "v": "برای cleanup/export مفید؛ کیفیت مدل‌سازی را حل نمی‌کند.",
+   "n": 5
+  },
+  {
+   "id": "lazy-motion",
+   "t": "Lazy Motion (Cloth reveal)",
+   "cats": [
+    "blender",
+    "motion-gfx"
+   ],
+   "st": "open",
+   "site": "https://cleverpoly.store",
+   "reel": "https://www.instagram.com/reel/DfuwHlXt6V_/",
+   "s": "پریست‌های انیمیشن Blender مثل پاره شدن پارچه و reveal.",
+   "v": "باز؛ ایده‌ی Reveal & Transition Lab.",
+   "n": 4
+  },
+  {
+   "id": "code-mode",
+   "t": "Cloudflare Code Mode",
+   "cats": [
+    "agent"
+   ],
+   "st": "watch",
+   "reel": "https://www.instagram.com/reel/Df9VMkRiml0/",
+   "s": "Agent به‌جای صدا زدن تک‌تک toolها کد می‌نویسد؛ context بسیار کمتر.",
+   "v": "الگوی خوب برای MCP روی Aximmetry.",
+   "n": 3
+  },
+  {
+   "id": "ig-agent",
+   "t": "Instagram Agent Skill",
+   "cats": [
+    "agent"
+   ],
+   "st": "watch",
+   "repo": "Jakeschincariol/instagram-agent-skill",
+   "reel": "https://www.instagram.com/reel/Df90gkjNYev/",
+   "s": "۱۳ skill برای نوشتن Reel، کپشن، هوک و برنامه‌ی هفتگی.",
+   "v": "برای معرفی Case Studyها، بعداً.",
+   "n": 2
+  },
+  {
+   "id": "gfx-toys",
+   "t": "سه ابزار گرافیک (Waygilm و…)",
+   "cats": [
+    "motion-gfx"
+   ],
+   "st": "archive",
+   "reel": "https://www.instagram.com/reel/DfukwRKTm1e/",
+   "s": "تبدیل عکس به line art، برش تصویر (fluted glass)، ژنراتور نوار نور.",
+   "v": "آرشیو؛ با shader ساده قابل ساخت.",
+   "n": 1
+  }
+ ],
+ "changelog": [
+  {
+   "d": "2026-11-21 13:00",
+   "t": "۳۰ ابزار فید githubsignals غربال شد: ۹ «پای سیستم تست شود»، ۱۴ «زیر نظر»، ۷ حذف (Homescape، Knots، WaveDude، Mario 64 MR، LivLiv، Looking Ahead، Slopus)."
+  },
+  {
+   "d": "2026-11-21 12:45",
+   "t": "اضافه شد: TRELLIS.2، Nerfstudio، Blender MCP، ASCII Magic، Inkline Town، p5.brush، Stickman، Diorama."
   }
  ]
 }

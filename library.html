@@ -42,6 +42,7 @@ h2{font-size:20px;margin:28px 0 6px}
 .tile small{color:var(--mut);display:block;font-size:12px;line-height:1.6}
 .tile .n{float:left;color:var(--acc);font-size:12px}
 .tile.empty{opacity:.55}
+.log{background:#1d2a2a;border:1px solid #2f4a48;border-radius:12px;padding:10px 14px;font-size:13px;color:#cfe9e6;margin:8px 0}.log b{color:#8fd6cf}.log div{margin:3px 0}.newb{display:inline-block;padding:1px 8px;border-radius:6px;font-size:12px;background:var(--acc);color:#1a1300;font-weight:700;margin-left:6px}
 .filter{margin:14px 0;color:var(--mut);font-size:14px}
 .filter button{background:none;border:0;color:var(--acc);font:inherit;cursor:pointer;text-decoration:underline}
 .items{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:14px}
@@ -76,6 +77,7 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
   <div class="tiles" id="tiles"></div>
 
   <h2>ابزارها</h2>
+  <div class="log" id="log"></div>
   <div class="filter" id="filter"></div>
   <div class="items" id="items"></div>
 </main>
@@ -115,19 +117,19 @@ function apply(){
   document.querySelectorAll('.node').forEach(n=>{n.classList.toggle('on',sel.type==='cat'&&n.dataset.id===sel.id);n.classList.toggle('dim',!!nodes&&!nodes.has(n.dataset.id));});
   document.querySelectorAll('.wf').forEach(b=>b.classList.toggle('on',sel.type==='wf'&&b.dataset.id===sel.id));
   document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('on',!!nodes&&nodes.has(t.dataset.id)&&(sel.type==='wf'||t.dataset.id===sel.id)));
-  let list=L.items,label='همه‌ی ابزارها';
+  let list=[...L.items].sort((a,b)=>(b.n||0)-(a.n||0)),label='همه‌ی ابزارها';
   if(sel.type==='cat'){list=list.filter(x=>x.cats.includes(sel.id));label='دسته‌ی '+C[sel.id].fa;}
   if(sel.type==='wf'){list=list.filter(x=>x.cats.some(c=>nodes.has(c)));label='ورک‌فلوی «'+L.workflows.find(x=>x.id===sel.id).fa+'»';}
   $('filter').innerHTML=`${esc(label)}: ${list.length} ابزار ${sel.type?'· <button onclick="pick(null,null)">نمایش همه</button>':''}`;
   $('items').innerHTML=list.map(x=>{const g=(C[x.cats[0]]||{}).g||'🧩';
     const img=x.repo?`<img class="th" loading="lazy" src="https://opengraph.githubassets.com/1/${esc(x.repo)}" alt="" onerror="this.outerHTML='<div class=ph>${g}</div>'">`:`<div class="ph">${g}</div>`;
     return `<div class="it">${img}<div class="ib"><h3>${esc(x.t)}</h3>
-    <div><span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
+    <div>${x.new?'<span class="newb">جدید</span>':''}<span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
     <div class="cats">${x.cats.map(c=>`<span onclick="pick('cat','${c}')">${(C[c]||{}).g||''} ${esc((C[c]||{}).fa||c)}</span>`).join('')}</div>
     <p class="s">${esc(x.s)}</p>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}${x.src?`<a href="${esc(x.src)}" target="_blank" rel="noopener">منبع فید</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=10').then(r=>r.json()).then(j=>{L=j;L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();apply();});
+fetch('library.json?v=11').then(r=>r.json()).then(j=>{L=j;L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawMap();drawTiles();apply();});
 </script>
 </body>
 </html>
