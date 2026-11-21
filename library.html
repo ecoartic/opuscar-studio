@@ -82,7 +82,6 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
   <div class="tiles" id="tiles"></div>
 
   <h2>ابزارها</h2>
-  <div class="log" id="log"></div><span id="log-anchor"></span>
   <input id="lq" class="lsearch" type="search" placeholder="جستجو در ابزارها… (مثلاً depth، splat، Blender، mocap)">
   <div class="wfs" id="kinds"></div>
   <p class="legend"><span class="st active">در استفاده</span> داخل همین سایت کار می‌کند · <span class="st ready">آماده، آنلاین</span> یک کلیک تا استفاده · <span class="st bench">پای سیستم تست شود</span> نیاز به سخت‌افزار و تست · <span class="st watch">زیر نظر</span> مرجع یا ایده</p>
@@ -139,8 +138,8 @@ function apply(){
     <p class="s">${esc(x.s)}</p><div class="meta">${x.req?`<span><b>نیاز:</b> ${esc(x.req)}</span>`:''}${x.lic?`<span><b>مجوز:</b> ${esc(x.lic)}</span>`:''}${x.chk?`<span><b>بررسی:</b> ${esc(x.chk)}</span>`:''}</div>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}${x.src?`<a href="${esc(x.src)}" target="_blank" rel="noopener">منبع فید</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=24').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawMap();drawTiles();drawKinds();apply();$('lq').oninput=apply;});
+fetch('library.json?v=24').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();drawKinds();apply();$('lq').oninput=apply;});
 </script>
-<script src="site.js?v=2"></script>
+<script src="site.js?v=3"></script>
 </body>
 </html>

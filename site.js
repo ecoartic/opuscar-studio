@@ -19,5 +19,5 @@
   btn.onclick=function(e){e.stopPropagation();set(menu.hidden);};
   document.addEventListener('click',function(e){if(!bar.contains(e.target))set(false);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
-  if(!document.body.classList.contains('full')){var f=document.createElement('div');f.className='site-foot';f.innerHTML='Behrang Lab · آزمایشگاه شخصی ابزار و ورک‌فلوی خلاق · <a href="library.html#log">آخرین تغییرات</a>';document.body.appendChild(f);}
+  if(!document.body.classList.contains('full')){var f=document.createElement('div');f.className='site-foot';f.innerHTML='Behrang Lab · آزمایشگاه شخصی ابزار و ورک‌فلوی خلاق';document.body.appendChild(f);}
 })();

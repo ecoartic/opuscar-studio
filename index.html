@@ -65,9 +65,6 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
     <a class="card" href="codevember.html"><img src="img/cv/06-orrery.webp" alt=""><div><b>گالری زنده‌ی Codevember</b><span>۲۱ صحنه‌ی تعاملی three.js به‌عنوان مرجع تکنیک.</span></div></a>
   </div>
 
-  <h2>آخرین تغییرات</h2>
-  <div class="log" id="log"></div>
-
   <h2>این سایت چیست؟</h2>
   <div class="about">این‌جا یادداشت کاری بهرنگ مظلومی است: ابزارهایی که برای استودیوی مجازی، سه‌بعدی و فیلم‌سازی با AI پیدا و بررسی می‌کنم. «پای سیستم تست شود» یعنی هنوز روی سخت‌افزار واقعی آزموده نشده؛ نتیجه‌ی تست‌ها به‌تدریج روی هر کارت ثبت می‌شود. تصاویر و ابزارها متعلق به سازندگانشان هستند و به منبع اصلی لینک شده‌اند.</div>
 </main>
@@ -76,9 +73,8 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 fetch('library.json?v=24').then(r=>r.json()).then(L=>{
   const n=L.items.length,act=L.items.filter(x=>x.st==='active').length,bench=L.items.filter(x=>x.st==='bench').length;
   document.getElementById('stats').innerHTML=[[n,'ابزار و تکنیک بررسی‌شده'],[98,'سبک فیلم با کد'],[703,'پرامپت واقعی'],[act,'در استفاده'],[bench,'در صف تست']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
-  document.getElementById('log').innerHTML=(L.changelog||[]).slice(0,4).map(c=>`<div>${esc(c.t)}<small>${esc(c.d)}</small></div>`).join('')+'<div><a href="library.html">همه‌ی تغییرات در کتابخانه ←</a></div>';
 }).catch(()=>{});
 </script>
-<script src="site.js?v=2"></script>
+<script src="site.js?v=3"></script>
 </body>
 </html>
