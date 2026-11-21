@@ -259,6 +259,26 @@
  ],
  "items": [
   {
+   "id": "designer-hq",
+   "t": "Designer HQ · Brand tools",
+   "cats": [
+    "agent",
+    "interactive",
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "site": "https://designerhq.app",
+   "reel": "https://www.instagram.com/reel/DfhkZ1ihlMj/",
+   "img": "img/lib/designer-hq.webp",
+   "added": "2026-11-21T19:45",
+   "n": 81,
+   "chk": "2026-11-21",
+   "lic": "سرویس تجاری (Nonstop Branding Ltd, UK) · رایگان برای ۱ مشتری",
+   "req": "حساب Designer HQ · اتصال Claude از راه MCP",
+   "s": "پلتفرم مدیریت استودیوی طراحی (مشتری، پروژه، فاکتور، Brand Hub) با اتصال MCP به Claude/ChatGPT/Cursor. «Brand tool»: ابزار تعاملی‌ای که Agent برای مشتری می‌سازد تا خودش asset روی‌برند تولید کند (مثلاً ژنراتور شیء سه‌بعدی از شکل‌های لوگو با اسلایدر رنگ/عمق/چرخش و خروجی ویدیو) و داخل پوشه‌ی مشتری منتشر می‌شود.",
+   "v": "خود ایده ارزشمند است و به هدف سفارش‌گرفتن تو ربط مستقیم دارد: به‌جای تحویل فایل، «ابزار برند» تحویل بده. اما برای ساختن و میزبانی‌اش لازم نیست مشترک شوی: همین Claude + Artifact (مثل Behrang Lab) همین کار را می‌کند. Designer HQ فقط وقتی می‌ارزد که مدیریت مشتری/فاکتور هم بخواهی. قیمت: رایگان (۱ مشتری، بدون Skills و توکن AI)، Core ‏۴۹ دلار در ماه، Studio ‏۱۴۹ دلار در ماه."
+  },
+  {
    "id": "pika-ugc-ads",
    "t": "Pika Creative Suite · ugc-ads",
    "cats": [
