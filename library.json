@@ -534,11 +534,11 @@
     "image-3d",
     "unreal"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "rxjfighting/scenemosaic",
    "src": "https://githubsignals.io/instagram/",
    "s": "از یک عکس داخلی، صحنه‌ی سه‌بعدی کاملاً قابل ویرایش می‌سازد؛ Agentها چیدمان را فعالانه بررسی می‌کنند (برای شبیه‌سازی رباتیک).",
-   "v": ""
+   "v": "کد پژوهشی دانشگاه هنگ‌کنگ برای صحنه‌ی شبیه‌سازی رباتیک؛ ایده‌ی چیدمان خوب است ولی ابزار تولید محیط سینمایی نیست."
   },
   {
    "id": "instanthmr",
@@ -546,11 +546,11 @@
    "cats": [
     "image-3d"
    ],
-   "st": "feed",
+   "st": "bench",
    "repo": "naturalpad-studio/instanthmr",
    "src": "https://githubsignals.io/instagram/",
    "s": "mesh کامل سه‌بعدی بدن از یک عکس در کمتر از ۵ میلی‌ثانیه، روی پردازنده‌ی گوشی.",
-   "v": ""
+   "v": "mesh بدن از یک عکس روی گوشی؛ مدل در Hugging Face. برای mocap سبک و قرار دادن بازیگر در صحنه."
   },
   {
    "id": "anymachine",
@@ -559,11 +559,11 @@
     "concept-3d",
     "blender"
    ],
-   "st": "feed",
+   "st": "bench",
    "repo": "apekshik/anymachine",
    "src": "https://githubsignals.io/instagram/",
    "s": "از اسکچ/تصویر کانسپت، ماشین سه‌بعدی کارا و انیمیشنی با Agent.",
-   "v": ""
+   "v": "خانواده‌ی چهارتایی Agent در Blender: AnyScene (کل ست)، AnyKit (پراپ)، AnyMachine (ماشین متحرک)، AnyShot (فیلم‌برداری). برای ساخت ست و previs."
   },
   {
    "id": "spritecast",
@@ -572,11 +572,11 @@
     "concept-3d",
     "motion"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "sunghwan0112/spritecast",
    "src": "https://githubsignals.io/instagram/",
    "s": "از یک طراحی، کاراکتر بازی کاملاً انیمیشنی با ثبات فریم‌ها.",
-   "v": ""
+   "v": "sprite ایزومتریک برای بازی؛ فقط اگر بازی/تعاملی pixel ساختی."
   },
   {
    "id": "viz3d",
@@ -586,11 +586,11 @@
     "threejs",
     "interactive"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "codepawl/viz3d",
    "src": "https://githubsignals.io/instagram/",
    "s": "Agent از هر موضوعی (رویداد تاریخی تا یک قطعه) جهان سه‌بعدی تعاملی، بازی یا اپ می‌سازد.",
-   "v": ""
+   "v": "Agent از موضوع، صحنه‌ی تعاملی سه‌بعدی می‌سازد؛ برای ایده‌ی آیتم تعاملی برنامه‌ی علمی."
   },
   {
    "id": "3dviz",
@@ -600,11 +600,11 @@
     "threejs",
     "blender"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "viettranx/3dviz-pro-max",
    "src": "https://githubsignals.io/instagram/",
    "s": "skill: از یک جمله به صحنه‌ی تعاملی سه‌بعدی با کتابخانه‌ی دستورالعمل‌های Three.js و Blender.",
-   "v": ""
+   "v": "کتابخانه‌ی دستورالعمل three.js و Blender برای Agent؛ هم‌خانواده‌ی viz3d."
   },
   {
    "id": "sand3d",
@@ -613,11 +613,11 @@
     "concept-3d",
     "blender"
    ],
-   "st": "feed",
+   "st": "bench",
    "repo": "sandflow-ai/sand3d",
    "src": "https://githubsignals.io/instagram/",
    "s": "کتابخانه‌ی مدل‌سازی Python برای AI: Blender به ابزار متنی تبدیل می‌شود تا مدل با کد کوتاه آبجکت پیچیده بسازد.",
-   "v": ""
+   "v": "مدل‌سازی Python برای LLM روی Blender؛ امتحان اینکه کیفیت procedural از Blender MCP خام بهتر است یا نه."
   },
   {
    "id": "pixelart-gs",
@@ -626,11 +626,11 @@
     "gaussian",
     "threejs"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "cobanov/pixelart-gaussiansplat",
    "src": "https://githubsignals.io/instagram/",
    "s": "رندر صحنه‌ی سه‌بعدی به‌صورت pixel art با splatهای تخت، outline و پالت محدود در مرورگر.",
-   "v": ""
+   "v": "رندر Gaussian splat به‌صورت pixel art در مرورگر؛ مرجع لوک، نه ابزار تولید."
   },
   {
    "id": "codevember",
@@ -639,11 +639,11 @@
     "threejs",
     "interactive"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "acher249/codevember-2026",
    "src": "https://githubsignals.io/instagram/",
    "s": "هر روز یک کلمه به یک جهان سه‌بعدی تعاملی و قابل گرفتن در مرورگر.",
-   "v": ""
+   "v": "۳۰ صحنه‌ی three.js روی WebGPU با کد؛ مرجع تکنیک و ایده برای فضای تعاملی."
   },
   {
    "id": "crucible",
@@ -653,24 +653,11 @@
     "interactive",
     "agent"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "codepawl/crucible",
    "src": "https://githubsignals.io/instagram/",
    "s": "موتور سه‌بعدی JavaScript مخصوص Agent: ساخت، نورپردازی و رندر صحنه در مرورگر.",
-   "v": ""
-  },
-  {
-   "id": "homescape",
-   "t": "Homescape",
-   "cats": [
-    "threejs",
-    "web-3d"
-   ],
-   "st": "feed",
-   "repo": "muratozturkdev/homescape",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "خانه‌ی هوشمند به‌شکل dollhouse سه‌بعدی زنده که همه‌ی اشیایش با کد رسم شده؛ بدون فایل مدل.",
-   "v": ""
+   "v": "موتور سه‌بعدی وب برای Agent و طراح؛ پروژه‌ی فعال و بزرگ. مرجع برای سایت سه‌بعدی."
   },
   {
    "id": "3dnewera",
@@ -679,61 +666,11 @@
     "web-3d",
     "concept-3d"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "leandrodaf/3d-new-era-ai",
    "src": "https://githubsignals.io/instagram/",
    "s": "ویرایشگر طراحی خانه که Agent دیوارها را می‌کشد؛ متن‌باز.",
-   "v": ""
-  },
-  {
-   "id": "knots",
-   "t": "Knots",
-   "cats": [
-    "threejs",
-    "interactive"
-   ],
-   "st": "feed",
-   "repo": "behnamazimi/knots",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "نمایش مراحل گره زدن با فیزیک واقعی طناب.",
-   "v": ""
-  },
-  {
-   "id": "wavedude",
-   "t": "WaveDude Next",
-   "cats": [
-    "interactive"
-   ],
-   "st": "feed",
-   "repo": "graealex/wavedudenext",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "شبیه‌ساز تعاملی اپتیک موجی real-time روی تصویر.",
-   "v": ""
-  },
-  {
-   "id": "livliv",
-   "t": "LivLiv Player",
-   "cats": [
-    "interactive",
-    "web-3d"
-   ],
-   "st": "feed",
-   "repo": "livliv-dev/player",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "آواتار دوبعدی متحرک با وبکم برای سایت با چند خط کد.",
-   "v": ""
-  },
-  {
-   "id": "mario64mr",
-   "t": "Mario 64 MR",
-   "cats": [
-    "interactive"
-   ],
-   "st": "feed",
-   "repo": "lucas-martinic/mario64mr",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "Mixed reality برای Meta Quest: بازی در فضای اتاق.",
-   "v": ""
+   "v": "ویرایشگر طراحی خانه با Agent در مرورگر؛ مرجع UI برای ویرایشگر سه‌بعدی."
   },
   {
    "id": "claude-blender-skills",
@@ -743,11 +680,11 @@
     "film-3d",
     "agent"
    ],
-   "st": "feed",
+   "st": "bench",
    "repo": "mromidev/claude-blender-skills",
    "src": "https://githubsignals.io/instagram/",
    "s": "skillهای رایگان برای انیمیشن سینمایی سه‌بعدی: مدل برنامه‌ریزی، ساخت، نور و رندر را در Blender انجام می‌دهد.",
-   "v": ""
+   "v": "هر skill ورک‌فلوی کامل یک شات واقعی با اسکریپت‌هایش: برنامه، ساخت، نور، انیمیشن و رندر در Blender خودت. برای شات‌های سینمایی."
   },
   {
    "id": "polyfork",
@@ -756,11 +693,11 @@
     "threejs",
     "web-3d"
    ],
-   "st": "feed",
+   "st": "bench",
    "repo": "lucas-martinic/polyfork-catalog",
    "src": "https://githubsignals.io/instagram/",
    "s": "۲۷۰۰ مدل سه‌بعدی رایگان (blocky) برای بازی و سایت.",
-   "v": ""
+   "v": "۳۴۸۹ مدل low-poly رایگان GLB در ۳۷ کیت، بدون حساب و کلید. دارایی آماده برای three.js و blockout."
   },
   {
    "id": "reshot",
@@ -769,11 +706,11 @@
     "film-3d",
     "depth"
    ],
-   "st": "feed",
+   "st": "bench",
    "repo": "maosika-ai/reshot",
    "src": "https://githubsignals.io/instagram/",
    "s": "از یک کلیپ، کوریوگرافی و حرکت دوربین را بدون بازیگرها استخراج می‌کند.",
-   "v": ""
+   "v": "از ویدیوی مرجع، depth map، اسکلت یا line video می‌سازد تا Seedance یا MiniMax H3 کوریوگرافی و حرکت دوربین را با کاراکتر خودت تکرار کنند. مستقیم برای Winter King."
   },
   {
    "id": "take-one",
@@ -782,24 +719,11 @@
     "motion",
     "film-3d"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "talsiach/take-one",
    "src": "https://githubsignals.io/instagram/",
    "s": "از یک جمله فیلم کوتاه کامل روی سیستم خودت: فیلمنامه، طراحی، موسیقی.",
-   "v": ""
-  },
-  {
-   "id": "slopus",
-   "t": "Slopus",
-   "cats": [
-    "film-3d",
-    "motion"
-   ],
-   "st": "feed",
-   "repo": "bitti-ai/slopus",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "استودیوی فیلم AI کامل روی سیستم خودت؛ داده از دستگاه خارج نمی‌شود.",
-   "v": ""
+   "v": "skill یک‌خطی تا فیلم کوتاه؛ هم‌دسته‌ی Opuscar، زیر نظر."
   },
   {
    "id": "henge",
@@ -808,11 +732,11 @@
     "film-3d",
     "matte"
    ],
-   "st": "feed",
+   "st": "bench",
    "repo": "alisson-anjos/henge",
    "src": "https://githubsignals.io/instagram/",
    "s": "تعویض کاراکتر و انتقال حرکت در ویدیو با ویدیوی مرجع و چند عکس.",
-   "v": ""
+   "v": "استودیوی ویدیو روی ComfyUI و MiniMax H3: تعویض کاراکتر، انتقال حرکت، تعویض سر؛ محلی یا RunPod. کنار FreeVideo تست شود."
   },
   {
    "id": "openfilm",
@@ -820,23 +744,11 @@
    "cats": [
     "motion"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "openfilm/openfilm",
    "src": "https://githubsignals.io/instagram/",
    "s": "Agent فیلم را به‌شکل صفحه‌ی وب قابل ویرایش در مرورگر می‌نویسد.",
-   "v": ""
-  },
-  {
-   "id": "looking-ahead",
-   "t": "Looking Ahead (Tencent ARC)",
-   "cats": [
-    "film-3d"
-   ],
-   "st": "feed",
-   "repo": "tencentarc/looking-ahead",
-   "src": "https://githubsignals.io/instagram/",
-   "s": "تحقیق: مدل ویدیو که فیزیک چند ثانیه جلوتر را پیش‌بینی می‌کند تا اشیا ناپدید نشوند.",
-   "v": ""
+   "v": "Agent ویدیو با کد (هم‌دسته‌ی Opuscar/Raea)؛ فقط زیر نظر."
   },
   {
    "id": "motion-educator",
@@ -845,11 +757,11 @@
     "motion-gfx",
     "motion"
    ],
-   "st": "feed",
+   "st": "bench",
    "repo": "zeative/motion-educator",
    "src": "https://githubsignals.io/instagram/",
    "s": "هر موضوع به مستند با کپی سه‌بعدی اشیای واقعی و حرکت دوربین کارگردانی‌شده.",
-   "v": ""
+   "v": "skill و موتور فیلم: اول استوری‌بورد و تأیید، بعد رندر 1080p60 فریم‌به‌فریم با کپی سه‌بعدی اشیا. خیلی نزدیک به برنامه‌ی علمی."
   },
   {
    "id": "papercut",
@@ -857,11 +769,11 @@
    "cats": [
     "motion-gfx"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "0xs4n4tg/papercut-explainer",
    "src": "https://githubsignals.io/instagram/",
    "s": "ویدیوی عمودی explainer با لوک دیورامای کاغذی سه‌بعدی، کامل با Claude Code.",
-   "v": ""
+   "v": "skill برای reel عمودی با لوک کاغذ لایه‌ای؛ مکمل سبک‌های Opuscar."
   },
   {
    "id": "line-art-anim",
@@ -869,11 +781,11 @@
    "cats": [
     "motion-gfx"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "jdhruv14/line-art-animation",
    "src": "https://githubsignals.io/instagram/",
    "s": "خیابان زنده با خطوط جوهری؛ حرکت طبیعی کاراکترهای دوبعدی.",
-   "v": ""
+   "v": "skill و کتابخانه‌ی SVG برای کاراکترهای line art متحرک؛ مرجع لوک."
   },
   {
    "id": "design-agent",
@@ -881,11 +793,11 @@
    "cats": [
     "motion-gfx"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "langchain-ai/design-agent",
    "src": "https://githubsignals.io/instagram/",
    "s": "از پیام چت به ویدیو و گرافیک هماهنگ با برند.",
-   "v": ""
+   "v": "LangChain: ویدیو و گرافیک هماهنگ با برند از چت؛ زیر نظر."
   },
   {
    "id": "fuobe",
@@ -894,11 +806,11 @@
     "motion",
     "film-3d"
    ],
-   "st": "feed",
+   "st": "bench",
    "repo": "workingprototype/fuobe",
    "src": "https://githubsignals.io/instagram/",
    "s": "استودیوی تولید روی GPU خودت با مدل‌های open-weight از طریق ComfyUI.",
-   "v": ""
+   "v": "استودیوی خلاق روی ComfyUI: تصویر، ویدیو، سه‌بعدی و صدا با مدل‌های open-weight روی GPU خودت."
   },
   {
    "id": "klad",
@@ -907,11 +819,11 @@
     "motion-gfx",
     "agent"
    ],
-   "st": "feed",
+   "st": "watch",
    "repo": "klad-app/klad",
    "src": "https://githubsignals.io/instagram/",
    "s": "بوم مشترک نقاشی با Agent که با قلم‌مو و لایه از ترمینال نقاشی می‌کند.",
-   "v": ""
+   "v": "نقاشی مشترک با Agent و انیمیشن ساده؛ جالب ولی حاشیه‌ای."
   }
  ]
 }
