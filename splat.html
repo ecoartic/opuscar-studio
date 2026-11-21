@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>نمایشگر Gaussian Splat — Opuscar Studio</title>
+<title>نمایشگر Gaussian Splat — Behrang Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 <script type="importmap">
@@ -28,7 +28,7 @@ input[type=range]{width:100%}
 .toggle{margin-top:6px;font-size:12.5px}
 @media(max-width:700px){.pan{top:auto;bottom:8px;right:8px;left:8px;width:auto;max-height:42vh}.hide{top:auto;bottom:8px}}.hide{position:fixed;top:56px;right:12px;z-index:4;display:none}
 </style>
-<link rel="stylesheet" href="common.css?v=1">
+<link rel="stylesheet" href="common.css?v=2">
 </head>
 <body class="full">
 <div id="view"></div><canvas id="px"></canvas>
@@ -96,6 +96,6 @@ function pixel(){const p=+$('ps').value,w=Math.max(1,Math.floor(innerWidth/p)),h
 $('shot').onclick=()=>{const c=$('pix').checked?px:renderer.domElement;c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='splat-view.png';a.click();});};
 renderer.setAnimationLoop(()=>{controls.update();renderer.render(scene,camera);const on=$('pix').checked;px.style.display=on?'block':'none';if(on)pixel();});
 </script>
-<script src="site.js?v=1"></script>
+<script src="site.js?v=2"></script>
 </body>
 </html>

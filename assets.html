@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>دارایی‌های سه‌بعدی — Opuscar Studio</title>
+<title>دارایی‌های سه‌بعدی — Behrang Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
@@ -32,7 +32,7 @@ model-viewer{width:100%;height:min(60vh,520px);background:radial-gradient(#3a3d4
 .meta{color:var(--mut);font-size:13px}
 footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;color:var(--mut);font-size:13px}
 </style>
-<link rel="stylesheet" href="common.css?v=1">
+<link rel="stylesheet" href="common.css?v=2">
 </head>
 <body>
 <header>
@@ -68,6 +68,6 @@ dlg.addEventListener('close',()=>{$('mv').removeAttribute('src');});
 $('q').oninput=$('kit').onchange=()=>{shown=60;render();};$('more').onclick=()=>{shown+=60;render();};
 fetch('assets.json?v=1').then(r=>r.json()).then(j=>{D=j;$('kit').innerHTML+=Object.entries(D.kits).sort((a,b)=>a[1].localeCompare(b[1])).map(([k,v])=>`<option value="${esc(k)}">${esc(v)}</option>`).join('');chips();render();}).catch(()=>$('count').textContent='بارگذاری ناموفق بود.');
 </script>
-<script src="site.js?v=1"></script>
+<script src="site.js?v=2"></script>
 </body>
 </html>

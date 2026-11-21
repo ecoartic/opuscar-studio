@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>گالری زنده‌ی Codevember — Opuscar Studio</title>
+<title>گالری زنده‌ی Codevember — Behrang Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -27,7 +27,7 @@ dialog{width:96vw;height:92vh;max-width:none;border:1px solid var(--line);border
 iframe{width:100%;height:calc(92vh - 46px);border:0;display:block}
 footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;color:var(--mut);font-size:13px}
 </style>
-<link rel="stylesheet" href="common.css?v=1">
+<link rel="stylesheet" href="common.css?v=2">
 </head>
 <body>
 <header>
@@ -49,6 +49,6 @@ fetch('codevember.json?v=1').then(r=>r.json()).then(L=>{$('grid').innerHTML=L.ma
 <div class="b"><h3>${esc(x.name)} <span>Day ${x.day}</span></h3><p class="d">${esc(x.desc)}</p>${x.play?`<p class="p">▶ ${esc(x.play)}</p>`:''}
 <div class="lk"><a href="#" onclick="play('${esc(x.id)}','${esc(x.name)}');return false">اجرا</a><a href="${LIVE+esc(x.id)}/" target="_blank" rel="noopener">تب جدید</a><a href="${CODE+esc(x.id)}" target="_blank" rel="noopener">کد</a></div></div></div>`).join('');});
 </script>
-<script src="site.js?v=1"></script>
+<script src="site.js?v=2"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Opuscar Studio — آزمایشگاه ابزار و ورک‌فلوی خلاق</title>
+<title>Behrang Lab — آزمایشگاه ابزار و ورک‌فلوی خلاق</title>
 <meta name="description" content="آزمایشگاه شخصی ابزارهای خلاق و فنی برای استودیوی مجازی، سه‌بعدی، موشن و فیلم با AI: غربال‌شده، دسته‌بندی‌شده و قابل اجرا در مرورگر.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
@@ -32,11 +32,11 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
 .log div{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}.log div:last-child{border:0}.log small{color:var(--mut);display:block;font-size:12px}
 .about{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;color:var(--mut);font-size:14px}
 </style>
-<link rel="stylesheet" href="common.css?v=1">
+<link rel="stylesheet" href="common.css?v=2">
 </head>
 <body>
 <header class="hero">
-  <h1>Opuscar <b>Studio</b></h1>
+  <h1>Behrang <b>Lab</b></h1>
   <p>آزمایشگاه شخصی ابزار و ورک‌فلوی خلاق برای استودیوی مجازی، سه‌بعدی، موشن و فیلم با AI. هر ابزار پیش از ورود بررسی می‌شود، در ورک‌فلو جایش مشخص است و هرجا ممکن بوده، همین‌جا در مرورگر اجرا می‌شود.</p>
   <div class="stats" id="stats"></div>
 </header>
@@ -73,12 +73,12 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
 </main>
 <script>
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-fetch('library.json?v=23').then(r=>r.json()).then(L=>{
+fetch('library.json?v=24').then(r=>r.json()).then(L=>{
   const n=L.items.length,act=L.items.filter(x=>x.st==='active').length,bench=L.items.filter(x=>x.st==='bench').length;
   document.getElementById('stats').innerHTML=[[n,'ابزار و تکنیک بررسی‌شده'],[98,'سبک فیلم با کد'],[703,'پرامپت واقعی'],[act,'در استفاده'],[bench,'در صف تست']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
   document.getElementById('log').innerHTML=(L.changelog||[]).slice(0,4).map(c=>`<div>${esc(c.t)}<small>${esc(c.d)}</small></div>`).join('')+'<div><a href="library.html">همه‌ی تغییرات در کتابخانه ←</a></div>';
 }).catch(()=>{});
 </script>
-<script src="site.js?v=1"></script>
+<script src="site.js?v=2"></script>
 </body>
 </html>

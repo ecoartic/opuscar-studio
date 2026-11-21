@@ -400,7 +400,7 @@
    "v": "هم‌دسته‌ی Opuscar؛ زیر نظر.",
    "added": "2026-11-21T14:05",
    "n": 67,
-   "img": "https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/biennale-yellow.png",
+   "img": "img/lib/hyperframes.webp",
    "lic": "Apache-2.0",
    "chk": "2026-11-21"
   },
@@ -467,7 +467,7 @@
    "st": "ready",
    "site": "https://geometric-art.com",
    "reel": "https://www.instagram.com/reel/DfsFN8wx-JC/",
-   "img": "https://geometric-art.com/og-flux.png",
+   "img": "img/lib/geometric.webp",
    "added": "2026-11-21T13:50",
    "n": 63,
    "s": "استودیوی تحت وب (پردازش محلی، رایگان) که عکس یا ویدیو را به موشن‌آرت هندسی تبدیل می‌کند: خطوط تراز نور، flow engraving، Delaunay، dither، pixel، glyph، شبکه‌ی ادیتوریال؛ لایه‌ی واکنش به صدا و برنامه‌ی حرکت؛ خروجی PNG، MP4 برای Reels/X و WebM.",
@@ -891,7 +891,7 @@
    "v": "در سایت: صفحه‌ی «دارایی‌های سه‌بعدی» با جستجو، پیش‌نمایش سه‌بعدی و دانلود GLB.",
    "n": 40,
    "added": "2026-11-21T13:40",
-   "img": "https://polyfork.dev/files/pop-top-camper-van-62a322/renders/hero.png?v=1793376536",
+   "img": "img/lib/polyfork.webp",
    "in": "assets.html",
    "lic": "آزاد (polyfork.dev)",
    "req": "مرورگر (در همین سایت)",
@@ -1102,7 +1102,7 @@
    "v": "موتور سه‌بعدی وب برای Agent و طراح؛ پروژه‌ی فعال و بزرگ. مرجع برای سایت سه‌بعدی.",
    "n": 29,
    "added": "2026-11-21T13:00",
-   "img": "https://crucible.codepawl.com/previews/hero-classroom.webp",
+   "img": "img/lib/crucible.webp",
    "lic": "MIT",
    "chk": "2026-11-21"
   },
@@ -1259,7 +1259,7 @@
    "v": "نسخه‌ی رایگان بدون واترمارک؛ کتابخانه‌ی کامل شیدرها و 4K در Pro. برای لوک گرافیکی سریع روی فوتیج و LED wall. ‖ سایت سازنده اجازه‌ی نمایش داخل صفحه‌ی دیگر را نمی‌دهد و کدش هم منتشر نشده؛ از دکمه‌ی «سایت» مستقیم باز کنید.",
    "n": 20,
    "added": "2026-11-21T12:00",
-   "img": "https://www.ascii-magic.com/og.jpg",
+   "img": "img/lib/ascii-magic.webp",
    "req": "فقط مرورگر",
    "chk": "2026-11-21"
   },
@@ -1298,7 +1298,7 @@
    "v": "برای benchmark محیط کنار OpenMVS و RealityScan؛ خروجی splat برای three.js.",
    "n": 18,
    "added": "2026-11-21T12:00",
-   "img": "https://user-images.githubusercontent.com/3310961/194022638-b591ce16-76e3-4ba6-9d70-3be252b36084.png",
+   "img": "img/lib/nerfstudio.webp",
    "lic": "Apache-2.0",
    "req": "NVIDIA GPU · CUDA",
    "chk": "2026-11-21"
@@ -1356,7 +1356,7 @@
    "v": "برای آیتم‌های explainer برنامه‌ی علمی قابل تست؛ پشتیبانی صدای فارسی نامعلوم. موتور Code ارزان‌تر است.",
    "n": 15,
    "added": "2026-11-21T12:00",
-   "img": "https://cdn.jsdelivr.net/gh/kaomei/stickman-video-director@2697fac5e0466f44098148a52c9648697521b3d6/assets/readme/previews/dark-theme-demo.gif",
+   "img": "img/lib/stickman.webp",
    "lic": "MIT",
    "req": "Claude Code/Codex + مدل تصویر",
    "chk": "2026-11-21"
@@ -1412,7 +1412,7 @@
    "v": "در کتابخانه‌ی پرامپت همین سایت اضافه شد.",
    "n": 12,
    "added": "2026-11-21T12:00",
-   "img": "https://media.skillry.dev/opus-5-5/_readme/mosaic.fc36404ce3.webp",
+   "img": "img/lib/opus-prompts.webp",
    "lic": "MIT",
    "chk": "2026-11-21"
   },
@@ -1503,7 +1503,7 @@
    "v": "مستقیم برای previs و handheld میکرو دراما و VP.",
    "n": 7,
    "added": "2026-11-21T12:00",
-   "img": "https://media.digitalproduction.download/2026/11/omniscient-product-shot-1.jpg",
+   "img": "img/lib/vcam.webp",
    "req": "آیفون/Quest + Blender/Unreal",
    "chk": "2026-11-21"
   },
@@ -1522,7 +1522,7 @@
    "v": "در benchmark محیط کنار RealityScan و 3DGS.",
    "n": 6,
    "added": "2026-11-21T12:00",
-   "img": "https://i.imgur.com/S4L0E6r.jpeg",
+   "img": "img/lib/openmvs.webp",
    "lic": "AGPL-3.0",
    "req": "build از سورس · COLMAP",
    "chk": "2026-11-21"
@@ -1575,7 +1575,7 @@
    "v": "الگوی خوب برای MCP روی Aximmetry.",
    "n": 3,
    "added": "2026-11-21T12:00",
-   "img": "https://blog.cloudflare.com/_emdash/api/media/file/01KW47KP2ERHW0YYWZBD4YRP8X.png",
+   "img": "img/lib/code-mode.webp",
    "site": "https://blog.cloudflare.com/code-mode/",
    "kind": "technique",
    "chk": "2026-11-21"
@@ -1614,6 +1614,10 @@
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-21 15:00",
+   "t": "نام سایت به Behrang Lab تغییر کرد؛ منوی سه‌خط با توضیح هر بخش؛ همه‌ی تامبنیل‌ها حالا محلی هستند و به سایت دیگری وابسته نیستند؛ نقشه‌ی سیمی ورک‌فلو روی موبایل هم برگشت."
+  },
   {
    "d": "2026-11-21 14:12",
    "t": "فیلتر «ابزارها / تکنیک‌ها» اضافه شد؛ تکنیک‌ها: کپچر سه‌بعدی با ۵ دوربین، Cloudflare Code Mode."

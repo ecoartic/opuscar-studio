@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>کتابخانه‌ی پرامپت — Opuscar Studio</title>
+<title>کتابخانه‌ی پرامپت — Behrang Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -44,7 +44,7 @@ main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
 .howto{max-width:900px;margin:36px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;font-size:14px;color:var(--mut)}
 footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;color:var(--mut);font-size:13px}
 </style>
-<link rel="stylesheet" href="common.css?v=1">
+<link rel="stylesheet" href="common.css?v=2">
 </head>
 <body>
 <header>
@@ -117,6 +117,6 @@ $('q').oninput=()=>{shown=PAGE;render();};$('fRemake').onchange=$('fFull').oncha
 $('more').onclick=()=>{shown+=PAGE;render();};
 fetch('prompts.json?v=3').then(r=>r.json()).then(j=>{D=j.sort((a,b)=>(b.r-a.r)||b.d.localeCompare(a.d));chips();render();}).catch(()=>{$('count').textContent='بارگذاری داده‌ها ناموفق بود.';});
 </script>
-<script src="site.js?v=1"></script>
+<script src="site.js?v=2"></script>
 </body>
 </html>

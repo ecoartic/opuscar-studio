@@ -1,9 +1,23 @@
 (function(){
-  var P=[['index.html','خانه'],['styles.html','سبک‌های فیلم'],['prompts.html','پرامپت‌ها'],['library.html','کتابخانه‌ی ابزار'],['assets.html','دارایی‌های سه‌بعدی'],['splat.html','نمایشگر Splat'],['brush.html','قلم‌مو'],['codevember.html','Codevember']];
-  var cur=(location.pathname.split('/').pop()||'index.html');
+  var P=[
+    ['index.html','خانه','🏠','معرفی و نقطه‌ی شروع'],
+    ['library.html','کتابخانه‌ی ابزار','🧭','نقشه‌ی ورک‌فلو و ابزارهای بررسی‌شده'],
+    ['styles.html','سبک‌های فیلم','🎞️','۹۸ سبک فیلم با کد و سازنده‌ی پرامپت'],
+    ['prompts.html','پرامپت‌ها','💬','۷۰۳ پرامپت واقعی ویدیو'],
+    ['assets.html','دارایی‌های سه‌بعدی','📦','۳۴۸۹ مدل GLB رایگان'],
+    ['splat.html','نمایشگر Splat','✨','Gaussian splat با pixel و کروما'],
+    ['brush.html','قلم‌مو','🖌️','پس‌زمینه و loop آبرنگی'],
+    ['codevember.html','Codevember','🧪','۲۱ صحنه‌ی تعاملی three.js']];
+  var cur=(location.pathname.split('/').pop()||'index.html'),me=P.find(function(p){return p[0]===cur;})||P[0];
   var bar=document.createElement('nav');bar.className='site-bar';bar.setAttribute('aria-label','ناوبری سایت');
-  bar.innerHTML='<a class="brand" href="index.html">Opuscar <b>Studio</b></a><div class="links">'+P.map(function(p){return '<a href="'+p[0]+'"'+(p[0]===cur?' class="on" aria-current="page"':'')+'>'+p[1]+'</a>';}).join('')+'</div>';
+  bar.innerHTML='<a class="brand" href="index.html">Behrang <b>Lab</b></a><span class="here">'+me[2]+' '+me[1]+'</span>'+
+    '<button class="burger" aria-label="منو" aria-expanded="false"><i></i><i></i><i></i></button>'+
+    '<div class="menu" hidden>'+P.map(function(p){return '<a href="'+p[0]+'"'+(p[0]===cur?' class="on" aria-current="page"':'')+'><span class="ic">'+p[2]+'</span><span><b>'+p[1]+'</b><small>'+p[3]+'</small></span></a>';}).join('')+'</div>';
   document.body.insertBefore(bar,document.body.firstChild);
-  var on=bar.querySelector('a.on');if(on&&on.scrollIntoView)try{on.scrollIntoView({block:'nearest',inline:'center'});}catch(e){}
-  if(!document.body.classList.contains('full')){var f=document.createElement('div');f.className='site-foot';f.innerHTML='Opuscar Studio · آزمایشگاه شخصی ابزار و ورک‌فلوی خلاق · <a href="library.html#log">آخرین تغییرات</a>';document.body.appendChild(f);}
+  var btn=bar.querySelector('.burger'),menu=bar.querySelector('.menu');
+  function set(o){menu.hidden=!o;btn.setAttribute('aria-expanded',o);bar.classList.toggle('open',o);}
+  btn.onclick=function(e){e.stopPropagation();set(menu.hidden);};
+  document.addEventListener('click',function(e){if(!bar.contains(e.target))set(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+  if(!document.body.classList.contains('full')){var f=document.createElement('div');f.className='site-foot';f.innerHTML='Behrang Lab · آزمایشگاه شخصی ابزار و ورک‌فلوی خلاق · <a href="library.html#log">آخرین تغییرات</a>';document.body.appendChild(f);}
 })();
