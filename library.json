@@ -259,6 +259,27 @@
  ],
  "items": [
   {
+   "id": "motionmaxxing",
+   "t": "motionmaxxing",
+   "cats": [
+    "motion-gfx",
+    "agent",
+    "motion"
+   ],
+   "st": "bench",
+   "repo": "Tejashmakwana/motionmaxxing",
+   "site": "https://finalmotion.video",
+   "reel": "https://www.instagram.com/reel/DfJJGp2j0H-/",
+   "img": "img/lib/motionmaxxing.webp",
+   "added": "2026-11-21T20:15",
+   "n": 84,
+   "chk": "2026-11-21",
+   "lic": "Apache-2.0",
+   "req": "Claude Code (یا هر Agent با SKILL.md) · Node 22+ · Python 3.9+ · ffmpeg · Chrome · اختیاری: کلید ElevenLabs (صدا/موسیقی)، Codex برای تصویر",
+   "s": "Agent Skill که ویدیوهای موشن‌گرافیک AI را از «اسلاید متحرک» به فیلم طراحی‌شده می‌برد: برند را تحلیل می‌کند و یک جهان بصری می‌سازد، با easeهای اندازه‌گیری‌شده از ۵۳ لحظه‌ی موشن حرفه‌ای انیمیت می‌کند، با HTML محلی در Chrome و ffmpeg رندر می‌کند و در پایان gateهای کیفی G0 تا G5 را با عدد گزارش می‌دهد. نمونه‌های قبل/بعد: Cluely، Spotify، Wispr.",
+   "v": "هم‌خانواده‌ی Lemo-Opuscar (رندر کدی، بدون مدل ویدیویی) ولی برای تیزر برند/محصول. برای تو: یک تست روی یک Case Study خودت و مقایسه با سبک Dark Keynote در Lemo. install.sh را خواندم: فقط پیش‌نیازها را چک و پوشه را به ~/.claude/skills لینک می‌کند، چیزی دانلود نمی‌کند. خودش را «early release» می‌نامد. آخرین commit: ۶ اکتبر ۲۰۲۶. سازنده در FinalMotion هم فعال است (سرویس جدا)."
+  },
+  {
    "id": "make-an-anime",
    "t": "Make an Anime (Claude Code plugin)",
    "cats": [
