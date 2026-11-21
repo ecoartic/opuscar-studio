@@ -64,7 +64,7 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
 <header>
   <h1>کتابخانه‌ی ابزار و ورک‌فلو</h1>
   <p>ابزارها و تکنیک‌هایی که از ریلزها جمع می‌شوند، دسته‌بندی‌شده. نقشه نشان می‌دهد هر دسته در کدام مرحله است و دسته‌ها چطور به هم وصل می‌شوند تا یک ورک‌فلو بسازند.</p>
-  <div class="nav"><a href="./">گالری سبک‌ها</a><a href="prompts.html">کتابخانه‌ی پرامپت</a></div>
+  <div class="nav"><a href="./">گالری سبک‌ها</a><a href="prompts.html">کتابخانه‌ی پرامپت</a><a href="assets.html">دارایی‌های سه‌بعدی</a><a href="brush.html">آزمایشگاه قلم‌مو</a><a href="splat.html">نمایشگر Splat</a><a href="codevember.html">Codevember</a></div>
 </header>
 <main>
   <h2>نقشه‌ی ورک‌فلو</h2>
@@ -130,7 +130,7 @@ function apply(){
     <p class="s">${esc(x.s)}</p>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}${x.src?`<a href="${esc(x.src)}" target="_blank" rel="noopener">منبع فید</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=15').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawMap();drawTiles();apply();});
+fetch('library.json?v=16').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawMap();drawTiles();apply();});
 </script>
 </body>
 </html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>دارایی‌های سه‌بعدی — Opuscar Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}a{color:var(--acc)}
+header{padding:40px 20px 18px;text-align:center;background:radial-gradient(ellipse at top,#2a2214 0%,var(--bg) 70%)}
+header h1{margin:0 0 6px;font-size:clamp(24px,4.5vw,38px);font-weight:800}header p{margin:0 auto;max-width:720px;color:var(--mut)}
+.nav{margin-top:10px;font-size:14px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.bar{position:sticky;top:0;z-index:5;background:rgba(14,15,18,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 14px}
+.bar input,.bar select{padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit}
+.row{display:flex;gap:8px;max-width:900px;margin:0 auto 8px;flex-wrap:wrap}.row input{flex:1 1 220px}.row select{flex:0 1 220px}
+.chips{display:flex;gap:6px;overflow-x:auto;justify-content:center}
+.chip{flex:0 0 auto;padding:3px 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--mut);cursor:pointer;font:inherit;font-size:13px}.chip.on{background:var(--acc);color:#1a1300;border-color:var(--acc)}
+main{max-width:1280px;margin:0 auto;padding:14px 14px 60px}.count{color:var(--mut);font-size:14px;margin:0 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(150px,45%),1fr));gap:12px}
+.c{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer}.c:hover{border-color:var(--acc)}
+.c img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#fff}
+.c div{padding:6px 9px;font-size:13px;direction:ltr;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.c small{display:block;color:var(--mut);font-size:11px}
+.more{display:block;margin:20px auto 0;padding:10px 22px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit;cursor:pointer}
+dialog{width:min(900px,96vw);border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--fg);padding:0}dialog::backdrop{background:rgba(0,0,0,.75)}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}.dh h2{margin:0;font-size:18px;direction:ltr}
+.x{background:none;border:0;color:var(--fg);font-size:26px;cursor:pointer}
+model-viewer{width:100%;height:min(60vh,520px);background:radial-gradient(#3a3d45,#16181d)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;padding:12px 14px;align-items:center}.btn{padding:8px 16px;border-radius:9px;background:var(--acc);color:#1a1300;font-weight:800;text-decoration:none}
+.meta{color:var(--mut);font-size:13px}
+footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>دارایی‌های سه‌بعدی</h1>
+  <p>۳۴۸۹ مدل low-poly رایگان از Polyfork برای blockout ست، previs، سایت و فضای تعاملی. جستجو کنید، مدل را در سه‌بعدی بچرخانید و GLB را دانلود کنید.</p>
+  <div class="nav"><a href="library.html">کتابخانه‌ی ابزار</a><a href="./">گالری سبک‌ها</a><a href="splat.html">نمایشگر Splat</a></div>
+</header>
+<div class="bar">
+  <div class="row"><input id="q" type="search" placeholder="جستجو… (مثلاً chair، tree، car، lamp)"><select id="kit"><option value="">همه‌ی کیت‌ها</option></select></div>
+  <div class="chips" id="types"></div>
+</div>
+<main>
+  <p class="count" id="count">در حال بارگذاری…</p>
+  <div class="grid" id="grid"></div>
+  <button class="more" id="more" hidden>نمایش بیشتر</button>
+</main>
+<dialog id="dlg">
+  <div class="dh"><h2 id="dt"></h2><button class="x" onclick="dlg.close()" aria-label="بستن">×</button></div>
+  <model-viewer id="mv" camera-controls auto-rotate shadow-intensity="1" exposure="1" environment-image="neutral" touch-action="pan-y"></model-viewer>
+  <div class="acts"><a class="btn" id="dl" download>دانلود GLB</a><a id="pg" target="_blank" rel="noopener">صفحه‌ی مدل در Polyfork</a><span class="meta" id="dm"></span></div>
+</dialog>
+<footer>مدل‌ها از <a href="https://polyfork.dev">Polyfork</a> — استفاده‌ی شخصی و تجاری آزاد؛ <a href="https://polyfork.dev/licensing">شرایط مجوز</a>. فهرست از <a href="https://github.com/lucas-martinic/polyfork-catalog">polyfork-catalog</a>.</footer>
+<script>
+const TY={prop:'پراپ',building:'ساختمان',animal:'حیوان',vehicle:'وسیله‌ی نقلیه',character:'کاراکتر',ultra:'Ultra',attachment:'ضمیمه',terrain:'زمین',hand:'دست'};
+const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let D,ty='',shown=60;const dlg=$('dlg');
+function chips(){$('types').innerHTML=['',...Object.keys(TY)].map(t=>`<button class="chip${t===ty?' on':''}" onclick="ty='${t}';shown=60;chips();render()">${t?TY[t]:'همه'}</button>`).join('');}
+function list(){const q=$('q').value.trim().toLowerCase(),k=$('kit').value;return D.assets.filter(a=>(!ty||a.y===ty)&&(!k||a.k===k)&&(!q||(a.t+' '+a.i+' '+(D.kits[a.k]||'')).toLowerCase().includes(q)));}
+function render(){const L=list();$('count').textContent=L.length+' مدل';
+ $('grid').innerHTML=L.slice(0,shown).map(a=>`<div class="c" onclick="openA('${esc(a.i)}')"><img loading="lazy" src="${esc(a.th)}" alt=""><div>${esc(a.t)}<small>${TY[a.y]||a.y} · ${a.tri.toLocaleString()} tri</small></div></div>`).join('');
+ $('more').hidden=L.length<=shown;}
+function openA(i){const a=D.assets.find(x=>x.i===i);$('dt').textContent=a.t;$('mv').src=a.g;$('mv').poster=a.th;$('dl').href=a.g;$('pg').href='https://polyfork.dev/asset/'+a.i;$('dm').textContent=(D.kits[a.k]?'کیت: '+D.kits[a.k]+' · ':'')+a.tri.toLocaleString()+' مثلث';dlg.showModal();}
+dlg.addEventListener('close',()=>{$('mv').removeAttribute('src');});
+$('q').oninput=$('kit').onchange=()=>{shown=60;render();};$('more').onclick=()=>{shown+=60;render();};
+fetch('assets.json?v=1').then(r=>r.json()).then(j=>{D=j;$('kit').innerHTML+=Object.entries(D.kits).sort((a,b)=>a[1].localeCompare(b[1])).map(([k,v])=>`<option value="${esc(k)}">${esc(v)}</option>`).join('');chips();render();}).catch(()=>$('count').textContent='بارگذاری ناموفق بود.');
+</script>
+</body>
+</html>

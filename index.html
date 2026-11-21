@@ -56,7 +56,7 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
 <header>
   <h1>استودیو سبک‌های فیلم</h1>
   <p>۹۸ سبک فیلم کوتاه که با کد ساخته می‌شوند، بدون مدل ویدیویی (۳ سبک برای تصاویرشان یک image generator هم لازم دارند). سبک را انتخاب کنید، داستانتان را بنویسید و پرامپت آماده‌ی ساخت را بگیرید.</p>
-  <p style="margin-top:12px"><a href="prompts.html">کتابخانه‌ی ۷۰۳ پرامپت واقعی →</a> · <a href="library.html">کتابخانه‌ی ابزار و ورک‌فلو →</a></p>
+  <p style="margin-top:12px"><a href="prompts.html">کتابخانه‌ی ۷۰۳ پرامپت واقعی →</a> · <a href="library.html">کتابخانه‌ی ابزار و ورک‌فلو →</a><br><a href="assets.html">دارایی‌های سه‌بعدی</a> · <a href="brush.html">آزمایشگاه قلم‌مو</a> · <a href="splat.html">نمایشگر Splat</a> · <a href="codevember.html">Codevember</a></p>
 </header>
 <div class="bar">
   <input id="q" type="search" placeholder="جستجوی سبک… (مثلاً watercolor، anime، 3D)">
@@ -166,7 +166,7 @@ function copyOut(){const t=document.getElementById('out').textContent;const b=do
 let HANDOFF=null;
 try{const h=sessionStorage.getItem('opuscar_story');if(h){HANDOFF=JSON.parse(h);}}catch(e){}
 if(HANDOFF){const n=document.getElementById('handoff');n.hidden=false;n.textContent='پرامپت @'+HANDOFF.author+' از کتابخانه آماده است؛ یک سبک انتخاب کنید تا به‌عنوان داستان در سازنده‌ی پرامپت قرار بگیرد. ';const x=document.createElement('button');x.className='lnk';x.textContent='لغو';x.onclick=()=>{HANDOFF=null;try{sessionStorage.removeItem('opuscar_story');}catch(e){}n.hidden=true;};n.appendChild(x);}
-fetch('library.json?v=15').then(r=>r.json()).then(j=>{const c=(j.changelog||[]).slice(0,2);if(!c.length)return;const e=document.getElementById('upd');e.hidden=false;e.innerHTML='<b>آخرین به‌روزرسانی‌ها</b> · <a href="library.html">کتابخانه‌ی ابزار و ورک‌فلو →</a>'+c.map(x=>'<div style="margin-top:4px">'+x.d.replace(/[<>&]/g,'')+' — '+x.t.replace(/[<>&]/g,'')+'</div>').join('');}).catch(()=>{});
+fetch('library.json?v=16').then(r=>r.json()).then(j=>{const c=(j.changelog||[]).slice(0,2);if(!c.length)return;const e=document.getElementById('upd');e.hidden=false;e.innerHTML='<b>آخرین به‌روزرسانی‌ها</b> · <a href="library.html">کتابخانه‌ی ابزار و ورک‌فلو →</a>'+c.map(x=>'<div style="margin-top:4px">'+x.d.replace(/[<>&]/g,'')+' — '+x.t.replace(/[<>&]/g,'')+'</div>').join('');}).catch(()=>{});
 renderChips();render();
 const m=location.hash.match(/^#style=([\w-]+)/);if(m&&S.find(x=>x.slug===m[1]))open_(m[1]);
 </script>

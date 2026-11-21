@@ -612,14 +612,15 @@
     "threejs",
     "web-3d"
    ],
-   "st": "bench",
+   "st": "active",
    "repo": "lucas-martinic/polyfork-catalog",
    "src": "https://githubsignals.io/instagram/",
    "s": "۲۷۰۰ مدل سه‌بعدی رایگان (blocky) برای بازی و سایت.",
-   "v": "۳۴۸۹ مدل low-poly رایگان GLB در ۳۷ کیت، بدون حساب و کلید. دارایی آماده برای three.js و blockout.",
+   "v": "در سایت: صفحه‌ی «دارایی‌های سه‌بعدی» با جستجو، پیش‌نمایش سه‌بعدی و دانلود GLB.",
    "n": 40,
-   "added": "2026-11-21T13:00",
-   "img": "https://polyfork.dev/files/pop-top-camper-van-62a322/renders/hero.png?v=1793376536"
+   "added": "2026-11-21T13:40",
+   "img": "https://polyfork.dev/files/pop-top-camper-van-62a322/renders/hero.png?v=1793376536",
+   "in": "assets.html"
   },
   {
    "id": "reshot",
@@ -758,14 +759,15 @@
     "gaussian",
     "threejs"
    ],
-   "st": "watch",
+   "st": "active",
    "repo": "cobanov/pixelart-gaussiansplat",
    "src": "https://githubsignals.io/instagram/",
    "s": "رندر صحنه‌ی سه‌بعدی به‌صورت pixel art با splatهای تخت، outline و پالت محدود در مرورگر.",
-   "v": "رندر Gaussian splat به‌صورت pixel art در مرورگر؛ مرجع لوک، نه ابزار تولید.",
+   "v": "در سایت: «نمایشگر Splat» با Spark و حالت pixel-art الهام‌گرفته از این پروژه.",
    "n": 31,
-   "added": "2026-11-21T13:00",
-   "img": "img/lib/pixelart-gs.webp"
+   "added": "2026-11-21T13:40",
+   "img": "img/lib/pixelart-gs.webp",
+   "in": "splat.html"
   },
   {
    "id": "codevember",
@@ -774,14 +776,15 @@
     "threejs",
     "interactive"
    ],
-   "st": "watch",
+   "st": "active",
    "repo": "acher249/codevember-2026",
    "src": "https://githubsignals.io/instagram/",
    "s": "هر روز یک کلمه به یک جهان سه‌بعدی تعاملی و قابل گرفتن در مرورگر.",
-   "v": "۳۰ صحنه‌ی three.js روی WebGPU با کد؛ مرجع تکنیک و ایده برای فضای تعاملی.",
+   "v": "در سایت: «گالری زنده‌ی Codevember» با ۲۱ صحنه‌ی قابل اجرا.",
    "n": 30,
-   "added": "2026-11-21T13:00",
-   "img": "img/lib/codevember.webp"
+   "added": "2026-11-21T13:40",
+   "img": "img/lib/codevember.webp",
+   "in": "codevember.html"
   },
   {
    "id": "crucible",
@@ -996,14 +999,15 @@
     "motion-gfx",
     "motion"
    ],
-   "st": "watch",
+   "st": "active",
    "repo": "acamposuribe/p5.brush",
    "reel": "https://www.instagram.com/reel/DeHP8DPsimI/",
    "s": "موشن generative با حس قلم‌مو و آبرنگ طبیعی در p5.js؛ در ریل با Claude: پالت hex، تایمینگ و حرکت با پرامپت.",
-   "v": "برای پس‌زمینه‌ی گرم و دست‌ساز، تیتراژ و آیتم‌های برنامه‌ی علمی؛ مکمل سبک Watercolor در Opuscar.",
+   "v": "در سایت: «آزمایشگاه قلم‌مو» برای پس‌زمینه و loop دست‌ساز با خروجی PNG و WebM.",
    "n": 16,
-   "added": "2026-11-21T12:00",
-   "img": "img/lib/p5brush.webp"
+   "added": "2026-11-21T13:40",
+   "img": "img/lib/p5brush.webp",
+   "in": "brush.html"
   },
   {
    "id": "stickman",
@@ -1243,6 +1247,10 @@
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-21 13:40",
+   "t": "۴ ابزار به سایت آمد و «در استفاده» شد: دارایی‌های سه‌بعدی (Polyfork)، آزمایشگاه قلم‌مو (p5.brush)، نمایشگر Gaussian Splat، گالری زنده‌ی Codevember."
+  },
   {
    "d": "2026-11-21 13:20",
    "t": "از فایل export (۲۴۰ پست، ۲۰۴ ریپو) غربال شد: ۱۸ ابزار اضافه شد (۸ پای سیستم، ۱۰ زیر نظر). ۲ ریپوی مشکوک به بدافزار رد شد."

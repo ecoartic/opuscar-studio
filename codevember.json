@@ -1,0 +1,149 @@
+[
+ {
+  "id": "01-fold",
+  "name": "Fold",
+  "day": 1,
+  "desc": "A strip of countryside printed on a paper map, with a river and a flock of sheep. Fold it along its creases and the land folds with it.",
+  "play": "Grab a gold crease and pull the way its arrows point. Drag anywhere else to look around. Pick up a sheep."
+ },
+ {
+  "id": "02-shatter",
+  "name": "Shatter",
+  "day": 2,
+  "desc": "The sky is a sheet of glass. Break it, and the pieces fall onto a frozen lake where deer wander between them.",
+  "play": "Grab a fallen piece and throw it. Turn gravity past zero and they rise."
+ },
+ {
+  "id": "03-melt",
+  "name": "Melt",
+  "day": 3,
+  "desc": "Liquid metal swelling and dripping from a ring into a mirrored pool. Pull the drops around and watch them merge and splash.",
+  "play": "Grab the metal and carry it around, or pull a drop off and throw it. Tap the mirror to splash it."
+ },
+ {
+  "id": "04-tangle",
+  "name": "Tangle",
+  "day": 4,
+  "desc": "Lacquered cords knotted together in a beam of light. Pull any loose end and the whole tangle answers.",
+  "play": "Pull a cord. Throw a bead."
+ },
+ {
+  "id": "05-moss",
+  "name": "Moss",
+  "day": 5,
+  "desc": "A mossy ledge high on a cliff, in the rain. Lean in close to the moss, or pick up a rock and send it over the edge.",
+  "play": "Get close to the moss. Carry a stone, or send one over the edge. The rocks hang in the air until you turn gravity back up."
+ },
+ {
+  "id": "06-orrery",
+  "name": "Orrery",
+  "day": 6,
+  "desc": "A working clockwork solar system in brass, set to today's date. Turn the crank to run the years, or pull the Sun and the machine comes apart.",
+  "play": "Turn the crank, or any wheel or planet, and the whole train answers. Pull the Sun to tear it apart and light the constellations. Let go and it comes back together. Tap a sign on the zodiac below."
+ },
+ {
+  "id": "07-hollow",
+  "name": "Hollow",
+  "day": 7,
+  "desc": "A giant peach, afloat at sunrise and cut live. The stone hangs by wet strands, and you can pull it out. Waves ported from Ultra Water by Humpalumps.",
+  "play": "Drag a bar on the frame to slice. Grab the stone and rip it out, or throw the whole peach. Orbit low to go under the water."
+ },
+ {
+  "id": "08-tesseract",
+  "name": "Tesseract",
+  "day": 8,
+  "desc": "A tesseract, the four-dimensional cube, turning itself inside out as it passes through our three dimensions.",
+  "play": "Drag to push it through the fourth dimension."
+ },
+ {
+  "id": "09-membrane",
+  "name": "Membrane",
+  "day": 9,
+  "desc": "A smooth clay skin over a sphere, a ring, a cube or a knot, and another skin under it, for ever. Swipe and it peels away in curls that float off.",
+  "play": "Swipe across the skin to peel it off as fast as you move. Click it for a slow ripple."
+ },
+ {
+  "id": "10-caustic",
+  "name": "Caustic",
+  "day": 10,
+  "desc": "Coloured glass on a table in low sun, its light bent and gathered into bright colours on the wood.",
+  "play": "Drag the glass about to push the pieces around, and turn the dial to move the sun."
+ },
+ {
+  "id": "11-rust",
+  "name": "Rust",
+  "day": 11,
+  "desc": "A rusted fence post, scanned and drawn as Gaussian splats by three.js's own WebGPU splat renderer.",
+  "play": "Drag to look around the post."
+ },
+ {
+  "id": "12-feather",
+  "name": "Feather",
+  "day": 12,
+  "desc": "A pair of bird's wings built from the bone out: a skinned skeleton you can pose, and every feather on the bone it grows from.",
+  "play": "Drag a wing to fold and open it. Grab the ball at the neck to carry the body while the wingtips stay put. Switch to Fly to see it beat its wings."
+ },
+ {
+  "id": "13-labyrinth",
+  "name": "Labyrinth",
+  "day": 13,
+  "desc": "A hedge maze without end that never stops rebuilding itself.",
+  "play": "Drag to look around, WASD to fly. Walk takes you down into the maze, Space to jump over the hedges; on a phone, hold still to walk."
+ },
+ {
+  "id": "14-tension",
+  "name": "Tension",
+  "day": 14,
+  "desc": "An orb web strung between twigs, beaded with dew, in four weathers. Pluck it and the spider comes running.",
+  "play": "Pull a thread and let it go. Pull too far and it snaps."
+ },
+ {
+  "id": "15-mirage",
+  "name": "Mirage",
+  "day": 15,
+  "desc": "A little desert whose sand turns to water under your hand. Where the water lingers, grass and palms grow, until the desert is an oasis.",
+  "play": "Drag across the dunes to turn the sand to water. Keep going and an oasis grows. Drag the sky, hold the middle button or swipe two fingers on a trackpad to look round."
+ },
+ {
+  "id": "16-spore",
+  "name": "Spore",
+  "day": 16,
+  "desc": "A forest floor at night. Spores drift down where you touch it, and where they land a bioluminescent bloom grows and spreads.",
+  "play": "Tap the forest floor to let spores go. Where they land, glowing mushrooms grow, and threads of light spread between them under the leaves. Hold, then drag, to scatter a trail. Drag to look round."
+ },
+ {
+  "id": "17-kelp",
+  "name": "Kelp",
+  "day": 17,
+  "desc": "A kelp forest under a moving surface: giant kelp to the top, sugar kelp on the rocks, sargassum adrift overhead, and fish from sardines to sharks. Sweep through it and the water moves.",
+  "play": "Sweep the pointer through the kelp to stir the water. Tap to send a surge. Press and hold on a kelp to pull it about, and turn the dial to move the sun."
+ },
+ {
+  "id": "18-pendulum",
+  "name": "Pendulum",
+  "day": 18,
+  "desc": "A can of paint swinging on a rope over a canvas in a white daylit studio. Pull it back, let it go, and it draws.",
+  "play": "Grab the can, pull it back and let it fly: it swings and pours, drawing as it goes. Try a bucket with more holes or a slot, spin it or the canvas either way, and save your painting when you like it."
+ },
+ {
+  "id": "19-erosion",
+  "name": "Erosion",
+  "day": 19,
+  "desc": "Erosion as the operator from mathematical morphology: voxel sculptures worn away by a brush, layer by layer, their finest parts first.",
+  "play": "Drag across the sculpture to erode it, cell by cell: the thinnest parts go first. Switch to Grow (or hold Shift) to build it back up anywhere, as far as you like; Reset brings back the original."
+ },
+ {
+  "id": "20-cocoon",
+  "name": "Cocoon",
+  "day": 20,
+  "desc": "A butterfly coming out of its chrysalis under a branch in Tension's garden: the case clears and splits, it climbs out, fills and dries its wings, flies up to walk the branch, and leaves; the next one's chrysalis grows.",
+  "play": "Click the chrysalis to start the transformation. Hover over the butterfly to send it up to the branch, and again to let it fly away."
+ },
+ {
+  "id": "21-bolt",
+  "name": "Bolt",
+  "day": 21,
+  "desc": "A plasma globe floating in a dark room it lights itself: filaments writhe from the electrode to the glass and gather to your fingertip.",
+  "play": "Touch the glass and the lightning swings to your fingertip; drag to lead it, or use several fingers on a phone. Drag anywhere off the globe to spin all the way round it; on a computer, right-drag (or Shift-drag) pans. Turn on IRL Hands to touch it with your real fingers through the camera: the tracking runs on this device and nothing is uploaded. Pinch to turn the view, or pinch with both hands to zoom."
+ }
+]
