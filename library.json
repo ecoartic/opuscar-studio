@@ -259,6 +259,26 @@
  ],
  "items": [
   {
+   "id": "inbetween",
+   "t": "Inbetween (StraySpark)",
+   "cats": [
+    "film-3d",
+    "blender",
+    "unreal"
+   ],
+   "st": "bench",
+   "site": "https://www.strayspark.studio/inbetween",
+   "reel": "https://www.instagram.com/reel/DfPeOb0ladm/",
+   "img": "img/lib/inbetween.webp",
+   "added": "2026-11-21T15:10",
+   "n": 75,
+   "chk": "2026-11-21",
+   "req": "Windows 10/11 · GPU محلی (macOS/Linux در ۲۰۲۷)",
+   "lic": "تجاری؛ دانلود رایگان، خروجی با پلن Personal (۸۹$/سال) یا Pro (۲۷۹$/سال)",
+   "s": "اپ دسکتاپ برای تمیز کردن mocap در یک مرحله (پرش، لرزش، سُر خوردن پا، کف)، retarget روی rig دیگر (Mixamo، UE5 Mannequin، Rigify، VRM)، ساخت rig برای مش بی‌اسکلت، و انیمیشن دستی با IK، dope sheet و curve editor؛ ورودی از ویدیوی گوشی هم؛ AI روی GPU خودت، بدون آپلود؛ با MCP به Claude وصل می‌شود.",
+   "v": "حلقه‌ی گمشده بعد از RGB MoCap: ویدیو ← mocap ← تمیزکاری و retarget ← Unreal/Blender. ولی خروجی گرفتن پولی است؛ قبل از خرید، جایگزین‌های رایگان (FreeMoCap، Blender) را کنارش بسنج."
+  },
+  {
    "id": "rig-capture",
    "t": "تکنیک: کپچر سه‌بعدی انسان با ۵ دوربین اکشن (Jörg Kahlhöfer)",
    "cats": [
