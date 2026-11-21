@@ -259,6 +259,26 @@
  ],
  "items": [
   {
+   "id": "make-an-anime",
+   "t": "Make an Anime (Claude Code plugin)",
+   "cats": [
+    "agent",
+    "motion",
+    "film-3d"
+   ],
+   "st": "bench",
+   "repo": "makevoid/claude-make-an-anime",
+   "reel": "https://www.instagram.com/reel/DfhbjWZAHj7/",
+   "img": "img/lib/make-an-anime.webp",
+   "added": "2026-11-21T20:10",
+   "n": 83,
+   "chk": "2026-11-21",
+   "lic": "MIT (کد) · تولید پولی از راه Fal",
+   "req": "Claude Code · کلید Fal با اعتبار · Ruby 3.2+ · FFmpeg · ImageMagick · Python 3 · Node 22.12+ و Chrome · (اختیاری macOS برای VFX)",
+   "s": "پلاگین Claude Code که از یک داستان انیمه‌ی کامل می‌سازد: style bible، شیت شخصیت و لوکیشن (GPT Image)، شات‌های با حرکت دوربین مشخص (پیش‌فرض MiniMax H3، یا Seedance)، صدا با لیپ‌سینک، موسیقی، تیتر و زیرنویس (p5)، کامپوزیت green-screen و VFX. از ۱۲ ثانیه تا یک اپیزود کامل. قبل از هر فراخوان پولی، برنامه‌ی تولید و تعداد فراخوان‌های پولی را برای تأیید نشان می‌دهد.",
+   "v": "مستقیم به پروژه‌ی میکرو دراما مربوط است: الگوی style bible → شیت شخصیت → شات → retake همان چیزی است که برای ثبات کاراکتر لازم داری؛ همچنین هر مرحله روی دیسک (prompts/ و output/) جدا قابل بازبینی است. هزینه: همه‌ی تولید از Fal است؛ قبل از اجرا تعداد فراخوان‌ها را از برنامه‌ی تولید بگیر و با Higgsfield مقایسه کن. روی ویندوز تست نشده (Ruby/ImageMagick؛ WSL پیشنهاد می‌شود). آخرین commit: ۸ نوامبر ۲۰۲۶."
+  },
+  {
    "id": "reanimate",
    "t": "reanimate",
    "cats": [
