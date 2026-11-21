@@ -259,6 +259,22 @@
  ],
  "items": [
   {
+   "id": "rig-capture",
+   "t": "تکنیک: کپچر سه‌بعدی انسان با ۵ دوربین اکشن (Jörg Kahlhöfer)",
+   "cats": [
+    "gaussian",
+    "film-3d",
+    "aximmetry"
+   ],
+   "st": "watch",
+   "reel": "https://www.instagram.com/reel/Df-_t0rxwKQ/",
+   "img": "img/lib/rig-capture.webp",
+   "added": "2026-11-21T14:10",
+   "n": 74,
+   "s": "تکنیک، نه ابزار: کپچر سه‌بعدی یک سوژه‌ی انسانی با rig پنج‌تایی دوربین DJI Action، رندر زنده در Octane، و کنترلر Quest 3 به‌عنوان دوربین مجازی؛ با «نگه داشتن» نما Octane فرصت رندر تمیز پیدا می‌کند و با ماشه عکس گرفته می‌شود.",
+   "v": "ایده‌ی مستقیم برای VP: کپچر حجمی ارزان مجری با چند دوربین + دوربین مجازی دستی (مثل Quest/گوشی). جزئیات rig و نرم‌افزار بازسازی در ریل نیامده؛ در کامنت‌ها هم پرسیده شده و جوابی نیست."
+  },
+  {
    "id": "rgbmocap",
    "t": "RGB MoCap (toyxyz)",
    "cats": [
@@ -1421,6 +1437,10 @@
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-21 14:10",
+   "t": "اضافه شد (تکنیک): کپچر سه‌بعدی انسان با ۵ دوربین اکشن و دوربین مجازی Quest 3."
+  },
   {
    "d": "2026-11-21 14:05",
    "t": "از gittrend.io (دسته‌های 3D Generation، AI Video، Computer Vision، Video Editing) غربال شد: ۱۰ ابزار اضافه شد (۳ پای سیستم: RGB MoCap، AnyScene، rea-video؛ ۷ زیر نظر). رد شد: ANR (فقط باینری)، Veyra، Deep-Live-Cam."
