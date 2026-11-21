@@ -52,7 +52,7 @@ h2{font-size:20px;margin:28px 0 6px}
 .ib h3{margin:0;font-size:16px;direction:ltr;text-align:right}
 .cats span{display:inline-block;margin:2px;padding:1px 8px;border-radius:6px;background:#222630;font-size:12px;direction:ltr;cursor:pointer}
 .st{display:inline-block;padding:1px 8px;border-radius:6px;font-size:12px}
-.st.active{background:#16361f;color:#7fe0a0}.st.bench{background:#3a2a10;color:var(--acc)}.st.watch{background:#1f2a3a;color:#8fbcef}.st.open{background:#33213a;color:#d6a3f0}.st.archive{background:#26282d;color:var(--mut)}
+.st.active{background:#16361f;color:#7fe0a0}.st.bench{background:#3a2a10;color:var(--acc)}.st.watch{background:#1f2a3a;color:#8fbcef}.st.open{background:#33213a;color:#d6a3f0}.st.archive{background:#26282d;color:var(--mut)}.st.feed{background:#1d2a2a;color:#8fd6cf}
 .s{font-size:14px;margin:0}
 .v{font-size:13px;color:var(--mut);margin:0}
 .lk{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;margin-top:auto;padding-top:4px}
@@ -81,7 +81,7 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
 </main>
 <footer>آخرین به‌روزرسانی: <span id="upd"></span> · تصاویر کارت‌ها تصویر معرفی ریپو در GitHub هستند.</footer>
 <script>
-const ST={active:'در استفاده',bench:'پای سیستم تست شود',watch:'زیر نظر',open:'باز، در حال بررسی',archive:'آرشیو'};
+const ST={active:'در استفاده',bench:'پای سیستم تست شود',watch:'زیر نظر',open:'باز، در حال بررسی',archive:'آرشیو',feed:'از فید، هنوز بررسی نشده'};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let L,C={},sel={type:null,id:null};
@@ -124,10 +124,10 @@ function apply(){
     return `<div class="it">${img}<div class="ib"><h3>${esc(x.t)}</h3>
     <div><span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
     <div class="cats">${x.cats.map(c=>`<span onclick="pick('cat','${c}')">${(C[c]||{}).g||''} ${esc((C[c]||{}).fa||c)}</span>`).join('')}</div>
-    <p class="s">${esc(x.s)}</p><p class="v">${esc(x.v)}</p>
-    <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}</div></div></div>`;}).join('');
+    <p class="s">${esc(x.s)}</p>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
+    <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}${x.src?`<a href="${esc(x.src)}" target="_blank" rel="noopener">منبع فید</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=8').then(r=>r.json()).then(j=>{L=j;L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();apply();});
+fetch('library.json?v=9').then(r=>r.json()).then(j=>{L=j;L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();apply();});
 </script>
 </body>
 </html>
