@@ -259,6 +259,26 @@
  ],
  "items": [
   {
+   "id": "human-centric-ai",
+   "t": "Human-Centric AI Resources",
+   "kind": "technique",
+   "cats": [
+    "image-3d",
+    "film-3d",
+    "depth"
+   ],
+   "st": "watch",
+   "repo": "cseeyangchen/human-centric-ai",
+   "reel": "https://www.instagram.com/reel/Df5JxpBypkv/",
+   "img": "img/lib/human-centric-ai.webp",
+   "added": "2026-11-21T15:15",
+   "n": 76,
+   "chk": "2026-11-21",
+   "lic": "MIT / CC BY 4.0",
+   "s": "مرجع (نه ابزار): هاب آکادمیک دانشگاه PolyU برای هوش مصنوعیِ انسان‌محور؛ مقاله‌ها، مدل‌ها و ابزارها، شبیه‌سازی و دوره‌ها در شش سطح: ظاهر، هندسه‌ی فضایی، دینامیک حرکت، تعامل، شبیه‌سازی جهان و عامل بدن‌مند.",
+   "v": "نقشه‌ی پژوهشی پشت ابزارهای mocap و mesh بدن (RGB MoCap، GEM-X، InstantHMR، MetaHuman Maker)؛ برای پیدا کردن مدل بهتر یا تازه‌تر در هر مرحله. فعال و به‌روز می‌شود."
+  },
+  {
    "id": "inbetween",
    "t": "Inbetween (StraySpark)",
    "cats": [

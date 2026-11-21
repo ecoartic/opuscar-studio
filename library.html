@@ -95,7 +95,7 @@ const NEWDAYS=7;let LATEST='';function isNew(x){return !!x.added&&x.added===LATE
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let L,C={},sel={type:null,id:null},kind='';
-function drawKinds(){const t=L.items.filter(x=>x.kind==='technique').length;$('kinds').innerHTML=[['','همه'],['tool','ابزارها ('+(L.items.length-t)+')'],['technique','تکنیک‌ها ('+t+')']].map(([k,l])=>`<button class="wf${kind===k?' on':''}" onclick="kind='${k}';drawKinds();apply()">${l}</button>`).join('');}
+function drawKinds(){const t=L.items.filter(x=>x.kind==='technique').length;$('kinds').innerHTML=[['','همه'],['tool','ابزارها ('+(L.items.length-t)+')'],['technique','تکنیک‌ها و مراجع ('+t+')']].map(([k,l])=>`<button class="wf${kind===k?' on':''}" onclick="kind='${k}';drawKinds();apply()">${l}</button>`).join('');}
 const COLX=[820,565,310,55],NW=150,NH=30,COLH=['ورودی / ساخت دارایی','پردازش','موتور','خروجی'];
 function layout(){
   const cols=[[],[],[],[]];L.categories.filter(c=>c.col>=0).forEach(c=>cols[c.col].push(c));
@@ -133,12 +133,12 @@ function apply(){
   $('items').innerHTML=list.map(x=>{const g=(C[x.cats[0]]||{}).g||'🧩';
     const img=x.img?`<img class="th" loading="lazy" src="${esc(x.img)}" alt="" onerror="this.outerHTML='<div class=ph>${g}</div>'">`:x.repo?`<img class="th" loading="lazy" src="https://opengraph.githubassets.com/1/${esc(x.repo)}" alt="" onerror="this.outerHTML='<div class=ph>${g}</div>'">`:`<div class="ph">${g}</div>`;
     return `<div class="it">${img}<div class="ib"><h3>${esc(x.t)}</h3>
-    <div>${isNew(x)?'<span class="newb">جدید</span>':''}${x.kind==='technique'?'<span class="st open">تکنیک</span> ':''}<span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
+    <div>${isNew(x)?'<span class="newb">جدید</span>':''}${x.kind==='technique'?'<span class="st open">'+(x.repo?'مرجع':'تکنیک')+'</span> ':''}<span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
     <div class="cats">${x.cats.map(c=>`<span onclick="pick('cat','${c}')">${(C[c]||{}).g||''} ${esc((C[c]||{}).fa||c)}</span>`).join('')}</div>
     <p class="s">${esc(x.s)}</p><div class="meta">${x.req?`<span><b>نیاز:</b> ${esc(x.req)}</span>`:''}${x.lic?`<span><b>مجوز:</b> ${esc(x.lic)}</span>`:''}${x.chk?`<span><b>بررسی:</b> ${esc(x.chk)}</span>`:''}</div>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}${x.src?`<a href="${esc(x.src)}" target="_blank" rel="noopener">منبع فید</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=25').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();drawKinds();apply();$('lq').oninput=apply;});
+fetch('library.json?v=26').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();drawKinds();apply();$('lq').oninput=apply;});
 </script>
 <script src="site.js?v=3"></script>
 </body>
