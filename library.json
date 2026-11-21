@@ -259,6 +259,274 @@
  ],
  "items": [
   {
+   "id": "corridorkey",
+   "t": "CorridorKey (+ EZ-CorridorKey)",
+   "cats": [
+    "chroma",
+    "matte"
+   ],
+   "st": "bench",
+   "repo": "nikopueringer/CorridorKey",
+   "img": "img/lib/corridorkey.webp",
+   "lic": "Corridor Key Licence (CC BY-NC-SA 4.0 + شرایط اضافه)",
+   "req": "GPU NVIDIA (fork EZ با حدود ۶GB VRAM) · Python/uv · مدل از Hugging Face",
+   "s": "کیر کروماکی عصبی Corridor Digital: برای هر پیکسل رنگ واقعی foreground و آلفای خطی را پیش‌بینی می‌کند؛ مو، motion blur، دیفوکوس و شیشه را درست جدا می‌کند. ورودی: فوتیج پرده‌ی سبز/آبی + یک alpha hint زبر. fork‌ها: EZ-CorridorKey (GUI دسکتاپ، کم‌حافظه) و CorridorKey-Runtime (پلاگین DaVinci Resolve).",
+   "v": "مستقیم برای استودیوی کروماکی آنتالیا: تست روی شات‌های مو و حرکت سریع و مقایسه با کیر Aximmetry/Resolve. مجوز: پردازش تصویر داخل پروژه‌ی تجاری مجاز اعلام شده، اما فروش مجدد، API پولی و ادغام در نرم‌افزار تجاری ممنوع/نیازمند قرارداد است. offline است، نه real-time؛ برای post و پلیت، نه پخش زنده.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 85
+  },
+  {
+   "id": "matanyone2",
+   "t": "MatAnyone 2",
+   "cats": [
+    "matte",
+    "chroma"
+   ],
+   "st": "bench",
+   "repo": "pq-yang/MatAnyone2",
+   "site": "https://pq-yang.github.io/projects/MatAnyone2/",
+   "img": "img/lib/matanyone2.webp",
+   "lic": "S-Lab License 1.0 (غیرتجاری؛ تجاری با مجوز)",
+   "req": "GPU NVIDIA · Python (uv) · دموی Hugging Face",
+   "s": "ماتینگ ویدیوی انسان بدون پرده‌ی سبز (CVPR 2026): با یک ماسک فریم اول، آلفای پایدار با جزئیات مو در کل ویدیو می‌سازد؛ یک Matting Quality Evaluator داخلی کیفیت لبه را کنترل می‌کند.",
+   "v": "برای وقتی که پرده‌ی سبز نیست یا خراب است: جداکردن مجری از فوتیج معمولی برای کامپوزیت در ست مجازی. مکمل CorridorKey (آن برای پرده‌ی سبز، این بدون پرده). مجوز غیرتجاری؛ برای کار سفارشی اجازه بگیر.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 86
+  },
+  {
+   "id": "diffusion-renderer",
+   "t": "DiffusionRenderer (NVIDIA Cosmos)",
+   "cats": [
+    "relight",
+    "depth"
+   ],
+   "st": "watch",
+   "repo": "nv-tlabs/cosmos-transfer1-diffusion-renderer",
+   "site": "https://research.nvidia.com/labs/toronto-ai/DiffusionRenderer",
+   "img": "img/lib/diffusion-renderer.webp",
+   "lic": "Apache-2.0 (کد) · مدل تحت مجوز NVIDIA",
+   "req": "GPU NVIDIA پرحافظه (Cosmos)",
+   "s": "رندر معکوس و رو به جلو با مدل ویدیویی: از ویدیوی واقعی G-buffer (base color، normal، depth، roughness) استخراج می‌کند و با نور جدید دوباره رندر می‌کند؛ relighting ویدیو و درج شیء با نور هماهنگ.",
+   "v": "مرجع اصلی relighting پلیت برای هماهنگی نور مجری با ست مجازی. سنگین است؛ اول روی کلیپ کوتاه با GPU اجاره‌ای تست کن. آخرین commit: ۲ اکتبر ۲۰۲۵ (کم‌تحرک).",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 87
+  },
+  {
+   "id": "relit-live",
+   "t": "Relit-LiVE",
+   "cats": [
+    "relight"
+   ],
+   "st": "watch",
+   "repo": "zhuxing0/Relit-LiVE",
+   "img": "img/lib/relit-live.webp",
+   "lic": "Apache-2.0",
+   "req": "GPU NVIDIA · Python",
+   "s": "relighting ویدیو با یادگیری هم‌زمان ویدیوی محیط (SIGGRAPH 2026): نور صحنه را با یک environment map یا ویدیوی نور عوض می‌کند و برای ویدیوهای طولانی پیوسته می‌ماند.",
+   "v": "جدیدترین گزینه‌ی باز برای relight؛ کنار DiffusionRenderer روی یک شات مجری تست کن. آخرین commit: ۸ ژوئن ۲۰۲۶.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 88
+  },
+  {
+   "id": "hy-world-2",
+   "t": "HY-World 2.0 (Tencent)",
+   "cats": [
+    "360-3d",
+    "gaussian",
+    "concept-3d"
+   ],
+   "st": "watch",
+   "repo": "Tencent-Hunyuan/HY-World-2.0",
+   "site": "https://3d-models.hunyuan.tencent.com/world/",
+   "img": "img/lib/hy-world-2.webp",
+   "lic": "Tencent HY-World 2.0 Community License — در اتحادیه‌ی اروپا، بریتانیا و کره‌ی جنوبی معتبر نیست",
+   "req": "GPU بسیار پرحافظه (WorldStereo-2 حدود 17B، HY-Pano-2 حدود 80B؛ نسخه‌ی سبک 425M)",
+   "s": "مدل جهان چندوجهی: متن/تصویر → پانورامای ۳۶۰ (HY-Pano-2) → جهان 3DGS قابل‌گردش (WorldStereo-2)؛ و چندنما/ویدیو → بازسازی سه‌بعدی (WorldMirror-2).",
+   "v": "کامل‌ترین زنجیره‌ی باز «۳۶۰ به جهان سه‌بعدی» برای ساخت پس‌زمینه‌ی ست مجازی. هشدار مجوز: در ترکیه مجاز است، اما اگر به آلمان/اتریش بروی، مجوز آن‌جا اعمال نمی‌شود. اجرای محلی بدون GPU قوی عملی نیست.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 89
+  },
+  {
+   "id": "matrix-3d",
+   "t": "Matrix-3D (Skywork)",
+   "cats": [
+    "360-3d",
+    "gaussian"
+   ],
+   "st": "watch",
+   "repo": "SkyworkAI/Matrix-3D",
+   "site": "https://matrix-3d.github.io",
+   "img": "img/lib/matrix-3d.webp",
+   "lic": "MIT",
+   "req": "Linux + GPU NVIDIA",
+   "s": "تولید جهان سه‌بعدی همه‌جهته: تصویر/متن → ویدیوی پانورامایی با مسیر دوربین → بازسازی 3DGS (سریع feed-forward یا دقیق با بهینه‌سازی). پانورامای خودت یا خروجی HunyuanWorld را هم می‌پذیرد.",
+   "v": "گزینه‌ی MIT (بدون محدودیت جغرافیایی) برای ۳۶۰→3D. آخرین commit: ۲۵ نوامبر ۲۰۲۵ (کم‌تحرک).",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 90
+  },
+  {
+   "id": "marble",
+   "t": "Marble (World Labs)",
+   "cats": [
+    "worldlabs",
+    "gaussian",
+    "360-3d"
+   ],
+   "st": "watch",
+   "site": "https://marble.worldlabs.ai",
+   "img": "img/lib/marble.webp",
+   "lic": "سرویس تجاری · Export و حق تجاری فقط در پلن Pro",
+   "req": "مرورگر · حساب World Labs",
+   "s": "تولید جهان سه‌بعدی ماندگار از متن، تصویر، ویدیو یا پانورامای ۳۶۰؛ خروجی Gaussian splat (SPZ/PLY ۲M یا ۵۰۰K)، مش GLB (collider و باکیفیت) و پانوراما؛ راهنمای رسمی export برای Unreal، Unity، Blender، Houdini و Spark.",
+   "v": "همان مسیر «World Labs → Unreal → Aximmetry» در ورک‌فلوی محیط مجازی. وضعیت تجاری در حال تغییر: AMD خرید World Labs را (حدود ۸٫۲ میلیارد دلار) تکمیل کرده و مدل جدید Atlas فعلاً early access است؛ آینده‌ی Marble به‌عنوان محصول اعلام نشده. قبل از پرداخت پلن Pro دوباره بررسی شود. تامبنیل: یک جهان ساخته‌شده با Marble از گالری worldlabs-mcp.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 91
+  },
+  {
+   "id": "spark",
+   "t": "Spark (sparkjs)",
+   "cats": [
+    "gaussian",
+    "threejs",
+    "web-3d",
+    "worldlabs"
+   ],
+   "st": "active",
+   "repo": "sparkjsdev/spark",
+   "site": "https://sparkjs.dev",
+   "img": "img/lib/spark.webp",
+   "in": "splat.html",
+   "lic": "MIT",
+   "req": "مرورگر (three.js + WebGL2)",
+   "s": "رندرکننده‌ی متن‌باز Gaussian splat برای three.js از World Labs: PLY/SPZ/SPLAT، ترکیب splat با مش، و از نسخه‌ی ۲ استریم LoD برای جهان‌های خیلی بزرگ روی موبایل و VR.",
+   "v": "همین الان در Behrang Lab استفاده می‌شود (صفحه‌ی Splat Lab با Spark 2.4). مسیر نمایش خروجی Marble/Brush روی وب. فعال: آخرین commit ۱۹ نوامبر ۲۰۲۶.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 92
+  },
+  {
+   "id": "worldlabs-mcp",
+   "t": "worldlabs-mcp",
+   "cats": [
+    "worldlabs",
+    "agent"
+   ],
+   "st": "watch",
+   "repo": "sandraschi/worldlabs-mcp",
+   "img": "img/lib/worldlabs-mcp.webp",
+   "lic": "MIT (کد) · تولید با API پولی World Labs",
+   "req": "کلید World API",
+   "s": "درگاه MCP به Marble و Spark 2: ساخت جهان از متن، تصویر، پانوراما، چندنما یا ویدیو از داخل Claude و نمایش با رندر استریم splat.",
+   "v": "پروژه‌ی جامعه (غیررسمی، یک نفره). برای اتوماسیون ساخت محیط از Claude؛ قبل از اتکا به آینده‌ی API بعد از خرید AMD توجه کن. آخرین commit: ۲۰ نوامبر ۲۰۲۶.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 93
+  },
+  {
+   "id": "brush-gs",
+   "t": "Brush (Gaussian splat trainer)",
+   "cats": [
+    "gaussian",
+    "image-3d"
+   ],
+   "st": "ready",
+   "repo": "ArthurBrussee/brush",
+   "site": "https://arthurbrussee.github.io/brush-demo",
+   "img": "img/lib/brush-gs.webp",
+   "lic": "Apache-2.0",
+   "req": "هر GPU (WebGPU؛ بدون CUDA) · Windows/macOS/Linux/Android/مرورگر",
+   "s": "موتور بازسازی سه‌بعدی با Gaussian splatting که روی AMD/NVIDIA/Intel و حتی مرورگر اجرا می‌شود؛ باینری بدون وابستگی، CLI، و پخش splat متحرک (4D).",
+   "v": "ساده‌ترین راه ساختن splat از فوتیج/عکس روی هر سیستمی، حتی بدون کارت NVIDIA. خروجی را در SuperSplat تمیز کن و با Spark یا پلاگین Unreal نشان بده. فعال: commit همین امروز.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 94
+  },
+  {
+   "id": "supersplat",
+   "t": "SuperSplat Editor",
+   "cats": [
+    "gaussian",
+    "web-3d",
+    "agent"
+   ],
+   "st": "ready",
+   "repo": "playcanvas/supersplat",
+   "site": "https://superspl.at/editor",
+   "img": "img/lib/supersplat.webp",
+   "lic": "MIT",
+   "req": "مرورگر با WebGPU",
+   "s": "ویرایشگر متن‌باز splat در مرورگر (PlayCanvas): پاک‌سازی، برش، ترکیب صحنه، تنظیم رنگ، انیمیشن دوربین و انتشار. نسخه‌ی ۳ روی WebGPU بازنویسی شده؛ نسخه‌ی ۳٫۷ ابزارهای WebMCP دارد تا Agent خودش splat را ویرایش کند.",
+   "v": "حلقه‌ی گم‌شده‌ی بین Brush/Marble و Unreal/Aximmetry: تمیزکاری قبل از ورود به ست. فعال: آخرین commit ۱۹ نوامبر ۲۰۲۶.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 95
+  },
+  {
+   "id": "lichtfeld",
+   "t": "LichtFeld Studio",
+   "cats": [
+    "gaussian",
+    "image-3d"
+   ],
+   "st": "watch",
+   "repo": "MrNeRF/LichtFeld-Studio",
+   "img": "img/lib/lichtfeld.webp",
+   "lic": "GPL-3.0",
+   "req": "GPU NVIDIA (CUDA) · Windows/Linux",
+   "s": "استودیوی دسکتاپ آموزش و نمایش 3DGS با رابط کامل، از سازنده‌ی جامعه‌ی MrNeRF؛ سریع و با تنظیمات کامل آموزش.",
+   "v": "جایگزین حرفه‌ای‌تر Brush وقتی GPU NVIDIA داری. GPL است: اگر در ابزار تجاری خودت ادغامش کنی، کد تو هم باید باز شود؛ برای استفاده‌ی داخلی مشکلی نیست. فعال: commit دیروز.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 96
+  },
+  {
+   "id": "depth-anything-3",
+   "t": "Depth Anything 3",
+   "cats": [
+    "depth",
+    "image-3d",
+    "gaussian"
+   ],
+   "st": "bench",
+   "repo": "ByteDance-Seed/Depth-Anything-3",
+   "site": "https://depth-anything-3.github.io",
+   "img": "img/lib/depth-anything-3.webp",
+   "lic": "Apache-2.0 (مدل‌های Large/Base/Small/Metric) · CC BY-NC 4.0 (مدل‌های Giant)",
+   "req": "GPU · Python یا نودهای بومی ComfyUI",
+   "s": "مدل پایه‌ی هندسه از ByteDance: عمق تک‌تصویر، عمق متریک (متر واقعی)، عمق ویدیویی پایدار، تخمین پوز دوربین و خروجی splat از هر تعداد تصویر.",
+   "v": "برای R&D عمق در GEM TV: نسخه‌ی Metric-Large (Apache) برای تخمین فاصله‌ی واقعی و depth map برای کامپوزیت/relight؛ نودهایش در ComfyUI بومی است. مدل‌های Giant غیرتجاری‌اند. آخرین commit: ۲۷ ژوئیه ۲۰۲۶.",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 97
+  },
+  {
+   "id": "aximmetry-3dgs",
+   "t": "Gaussian splat در Aximmetry (از راه پلاگین Unreal)",
+   "cats": [
+    "aximmetry",
+    "gaussian",
+    "unreal"
+   ],
+   "st": "watch",
+   "kind": "technique",
+   "site": "https://aximmetry.com/learn/virtual-production-workflow/obtaining-graphics-and-virtual-assets/using-gaussian-splats/introduction-to-using-gaussian-splats/",
+   "img": "img/lib/aximmetry-3dgs.webp",
+   "lic": "مستندات رسمی Aximmetry · پلاگین‌ها هرکدام مجوز خودشان",
+   "req": "Aximmetry DE/Unreal · AX Scene Editor · پلاگین 3DGS سازگار (مثل XYN Spatial Render، فایل PLY)",
+   "s": "راهنمای رسمی Aximmetry: موتور بومی Aximmetry فعلاً Gaussian splat رندر نمی‌کند؛ مسیر درست، رندر Unreal داخل AX Scene Editor با یک پلاگین 3DGS سازگار با pipeline آن است. برای پلاگین XYN Spatial Render راهنمای نصب و اجرای کامل دارد.",
+   "v": "پل مستقیم بین کار 3DGS و استودیوی تو: splat از Brush/Marble → تمیزکاری در SuperSplat → پلاگین Unreal → Aximmetry. قبل از خرید هر پلاگین، سازگاری‌اش با نسخه‌ی Aximmetry و Unreal استودیو را چک کن (راهنمای World Labs هم پلاگین‌های Unreal را فهرست کرده).",
+   "added": "2026-11-21T20:40",
+   "chk": "2026-11-21",
+   "n": 98
+  },
+  {
    "id": "motionmaxxing",
    "t": "motionmaxxing",
    "cats": [
