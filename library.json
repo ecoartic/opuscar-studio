@@ -259,6 +259,45 @@
  ],
  "items": [
   {
+   "id": "pika-ugc-ads",
+   "t": "Pika Creative Suite · ugc-ads",
+   "cats": [
+    "agent",
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "pika-labs/pika-plugins",
+   "site": "https://pika.art",
+   "reel": "https://www.instagram.com/reel/Ddw99b-uVNj/",
+   "img": "img/lib/pika-ugc-ads.webp",
+   "added": "2026-11-21T19:25",
+   "n": 79,
+   "chk": "2026-11-21",
+   "lic": "Apache-2.0 (کد Skill‌ها) · تولید روی سرویس پولی Pika",
+   "req": "Claude Code + MCP Pika (OAuth) · حساب و کردیت Pika",
+   "s": "Skill‌ها و پلاگین Claude Code برای Pika: ۵۸ ابزار MCP و چند ورک‌فلو مثل ugc-ads (آگهی UGC چندبرش: HOOK + ۳ jump cut + OUTRO، ۱۵ ثانیه، 9:16، با لیپ‌سینک)، content-director، explainer، viral-hook، vfx. قبل از تولید یک cost gate دارد و تأیید می‌گیرد.",
+   "v": "گران است: خود SKILL.md برای یک آگهی UGC معمولی تخمین حدود ۴۰۰۰ کردیت (~۴۰ دلار) با بودجه‌ی retry می‌دهد. برای ساختار و ریتم آگهی (hook/cut/outro) و الگوی cost gate ارزشمند است؛ برای تولید، اول با Higgsfield (حساب موجود) مقایسه‌ی هزینه کن. آخرین تغییر ریپو: ۲۰ ژوئیه ۲۰۲۶. ‖ ریل مرجع ایده: mr.pynk (۹ Skill برای تیزر محصول: Paper-Cut، Product-Ad، Content، Animation، AI-UGC، Director، Studio، Visual، Creative-Ad) — فایل‌هایش فقط از DM، بررسی‌نشده؛ این آیتم معادل عمومی و قابل‌بررسی آن است."
+  },
+  {
+   "id": "product-shots",
+   "t": "product-shots",
+   "cats": [
+    "agent",
+    "concept-3d"
+   ],
+   "st": "ready",
+   "repo": "motiful/product-shots",
+   "reel": "https://www.instagram.com/reel/Ddw99b-uVNj/",
+   "img": "img/lib/product-shots.webp",
+   "added": "2026-11-21T19:25",
+   "n": 80,
+   "chk": "2026-11-21",
+   "lic": "MIT",
+   "req": "Claude Code · API یک image gateway سازگار با OpenAI SDK (پیش‌فرض OmniMaaS / Gemini image)",
+   "s": "۷ Agent Skill: از یک عکس محصول، تصویر اصلی مطابق قوانین Amazon، ماژول‌های صفحه‌ی محصول (A+)، لوک‌بوک ۹ زاویه، آگهی مخصوص هر پلتفرم و پست شبکه‌ی اجتماعی می‌سازد. قوانین پلتفرم داخل فیلدهای پرامپت کد شده‌اند.",
+   "v": "برای Case Study محصول یا کار تبلیغاتی سفارشی، فقط تصویر (نه ویدیو). backend قابل‌تعویض است، پس می‌شود به هر سرویس تصویر سازگار با OpenAI SDK وصلش کرد؛ هزینه به همان سرویس بستگی دارد. وضعیت ریپو alpha؛ آخرین تغییر ۸ ژوئن ۲۰۲۶. ‖ ریل مرجع ایده: mr.pynk (۹ Skill برای تیزر محصول: Paper-Cut، Product-Ad، Content، Animation، AI-UGC، Director، Studio، Visual، Creative-Ad) — فایل‌هایش فقط از DM، بررسی‌نشده؛ این آیتم معادل عمومی و قابل‌بررسی آن است."
+  },
+  {
    "id": "pascal-editor",
    "t": "Pascal Editor",
    "cats": [
