@@ -270,7 +270,8 @@
    "s": "mesh کامل سه‌بعدی بدن از یک عکس در کمتر از ۵ میلی‌ثانیه، روی پردازنده‌ی گوشی.",
    "v": "mesh بدن از یک عکس روی گوشی؛ مدل در Hugging Face. برای mocap سبک و قرار دادن بازیگر در صحنه.",
    "n": 44,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/instanthmr.webp"
   },
   {
    "id": "anymachine",
@@ -285,7 +286,8 @@
    "s": "از اسکچ/تصویر کانسپت، ماشین سه‌بعدی کارا و انیمیشنی با Agent.",
    "v": "خانواده‌ی چهارتایی Agent در Blender: AnyScene (کل ست)، AnyKit (پراپ)، AnyMachine (ماشین متحرک)، AnyShot (فیلم‌برداری). برای ساخت ست و previs.",
    "n": 43,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/anymachine.webp"
   },
   {
    "id": "sand3d",
@@ -300,7 +302,8 @@
    "s": "کتابخانه‌ی مدل‌سازی Python برای AI: Blender به ابزار متنی تبدیل می‌شود تا مدل با کد کوتاه آبجکت پیچیده بسازد.",
    "v": "مدل‌سازی Python برای LLM روی Blender؛ امتحان اینکه کیفیت procedural از Blender MCP خام بهتر است یا نه.",
    "n": 42,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/sand3d.webp"
   },
   {
    "id": "claude-blender-skills",
@@ -316,7 +319,8 @@
    "s": "skillهای رایگان برای انیمیشن سینمایی سه‌بعدی: مدل برنامه‌ریزی، ساخت، نور و رندر را در Blender انجام می‌دهد.",
    "v": "هر skill ورک‌فلوی کامل یک شات واقعی با اسکریپت‌هایش: برنامه، ساخت، نور، انیمیشن و رندر در Blender خودت. برای شات‌های سینمایی.",
    "n": 41,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/claude-blender-skills.webp"
   },
   {
    "id": "polyfork",
@@ -331,7 +335,8 @@
    "s": "۲۷۰۰ مدل سه‌بعدی رایگان (blocky) برای بازی و سایت.",
    "v": "۳۴۸۹ مدل low-poly رایگان GLB در ۳۷ کیت، بدون حساب و کلید. دارایی آماده برای three.js و blockout.",
    "n": 40,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "https://polyfork.dev/files/pop-top-camper-van-62a322/renders/hero.png?v=1793376536"
   },
   {
    "id": "reshot",
@@ -346,7 +351,8 @@
    "s": "از یک کلیپ، کوریوگرافی و حرکت دوربین را بدون بازیگرها استخراج می‌کند.",
    "v": "از ویدیوی مرجع، depth map، اسکلت یا line video می‌سازد تا Seedance یا MiniMax H3 کوریوگرافی و حرکت دوربین را با کاراکتر خودت تکرار کنند. مستقیم برای Winter King.",
    "n": 39,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/reshot.webp"
   },
   {
    "id": "henge",
@@ -361,7 +367,8 @@
    "s": "تعویض کاراکتر و انتقال حرکت در ویدیو با ویدیوی مرجع و چند عکس.",
    "v": "استودیوی ویدیو روی ComfyUI و MiniMax H3: تعویض کاراکتر، انتقال حرکت، تعویض سر؛ محلی یا RunPod. کنار FreeVideo تست شود.",
    "n": 38,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/henge.webp"
   },
   {
    "id": "motion-educator",
@@ -376,7 +383,8 @@
    "s": "هر موضوع به مستند با کپی سه‌بعدی اشیای واقعی و حرکت دوربین کارگردانی‌شده.",
    "v": "skill و موتور فیلم: اول استوری‌بورد و تأیید، بعد رندر 1080p60 فریم‌به‌فریم با کپی سه‌بعدی اشیا. خیلی نزدیک به برنامه‌ی علمی.",
    "n": 37,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/motion-educator.webp"
   },
   {
    "id": "fuobe",
@@ -391,7 +399,8 @@
    "s": "استودیوی تولید روی GPU خودت با مدل‌های open-weight از طریق ComfyUI.",
    "v": "استودیوی خلاق روی ComfyUI: تصویر، ویدیو، سه‌بعدی و صدا با مدل‌های open-weight روی GPU خودت.",
    "n": 36,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/fuobe.webp"
   },
   {
    "id": "scenemosaic",
@@ -406,7 +415,8 @@
    "s": "از یک عکس داخلی، صحنه‌ی سه‌بعدی کاملاً قابل ویرایش می‌سازد؛ Agentها چیدمان را فعالانه بررسی می‌کنند (برای شبیه‌سازی رباتیک).",
    "v": "کد پژوهشی دانشگاه هنگ‌کنگ برای صحنه‌ی شبیه‌سازی رباتیک؛ ایده‌ی چیدمان خوب است ولی ابزار تولید محیط سینمایی نیست.",
    "n": 35,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/scenemosaic.webp"
   },
   {
    "id": "spritecast",
@@ -421,7 +431,8 @@
    "s": "از یک طراحی، کاراکتر بازی کاملاً انیمیشنی با ثبات فریم‌ها.",
    "v": "sprite ایزومتریک برای بازی؛ فقط اگر بازی/تعاملی pixel ساختی.",
    "n": 34,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/spritecast.webp"
   },
   {
    "id": "viz3d",
@@ -437,7 +448,8 @@
    "s": "Agent از هر موضوعی (رویداد تاریخی تا یک قطعه) جهان سه‌بعدی تعاملی، بازی یا اپ می‌سازد.",
    "v": "Agent از موضوع، صحنه‌ی تعاملی سه‌بعدی می‌سازد؛ برای ایده‌ی آیتم تعاملی برنامه‌ی علمی.",
    "n": 33,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/viz3d.webp"
   },
   {
    "id": "3dviz",
@@ -453,7 +465,8 @@
    "s": "skill: از یک جمله به صحنه‌ی تعاملی سه‌بعدی با کتابخانه‌ی دستورالعمل‌های Three.js و Blender.",
    "v": "کتابخانه‌ی دستورالعمل three.js و Blender برای Agent؛ هم‌خانواده‌ی viz3d.",
    "n": 32,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/3dviz.webp"
   },
   {
    "id": "pixelart-gs",
@@ -468,7 +481,8 @@
    "s": "رندر صحنه‌ی سه‌بعدی به‌صورت pixel art با splatهای تخت، outline و پالت محدود در مرورگر.",
    "v": "رندر Gaussian splat به‌صورت pixel art در مرورگر؛ مرجع لوک، نه ابزار تولید.",
    "n": 31,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/pixelart-gs.webp"
   },
   {
    "id": "codevember",
@@ -483,7 +497,8 @@
    "s": "هر روز یک کلمه به یک جهان سه‌بعدی تعاملی و قابل گرفتن در مرورگر.",
    "v": "۳۰ صحنه‌ی three.js روی WebGPU با کد؛ مرجع تکنیک و ایده برای فضای تعاملی.",
    "n": 30,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/codevember.webp"
   },
   {
    "id": "crucible",
@@ -499,7 +514,8 @@
    "s": "موتور سه‌بعدی JavaScript مخصوص Agent: ساخت، نورپردازی و رندر صحنه در مرورگر.",
    "v": "موتور سه‌بعدی وب برای Agent و طراح؛ پروژه‌ی فعال و بزرگ. مرجع برای سایت سه‌بعدی.",
    "n": 29,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "https://crucible.codepawl.com/previews/hero-classroom.webp"
   },
   {
    "id": "3dnewera",
@@ -514,7 +530,8 @@
    "s": "ویرایشگر طراحی خانه که Agent دیوارها را می‌کشد؛ متن‌باز.",
    "v": "ویرایشگر طراحی خانه با Agent در مرورگر؛ مرجع UI برای ویرایشگر سه‌بعدی.",
    "n": 28,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/3dnewera.webp"
   },
   {
    "id": "take-one",
@@ -543,7 +560,8 @@
    "s": "Agent فیلم را به‌شکل صفحه‌ی وب قابل ویرایش در مرورگر می‌نویسد.",
    "v": "Agent ویدیو با کد (هم‌دسته‌ی Opuscar/Raea)؛ فقط زیر نظر.",
    "n": 26,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/openfilm.webp"
   },
   {
    "id": "papercut",
@@ -557,7 +575,8 @@
    "s": "ویدیوی عمودی explainer با لوک دیورامای کاغذی سه‌بعدی، کامل با Claude Code.",
    "v": "skill برای reel عمودی با لوک کاغذ لایه‌ای؛ مکمل سبک‌های Opuscar.",
    "n": 25,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/papercut.webp"
   },
   {
    "id": "line-art-anim",
@@ -571,7 +590,8 @@
    "s": "خیابان زنده با خطوط جوهری؛ حرکت طبیعی کاراکترهای دوبعدی.",
    "v": "skill و کتابخانه‌ی SVG برای کاراکترهای line art متحرک؛ مرجع لوک.",
    "n": 24,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/line-art-anim.webp"
   },
   {
    "id": "design-agent",
@@ -585,7 +605,8 @@
    "s": "از پیام چت به ویدیو و گرافیک هماهنگ با برند.",
    "v": "LangChain: ویدیو و گرافیک هماهنگ با برند از چت؛ زیر نظر.",
    "n": 23,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/design-agent.webp"
   },
   {
    "id": "klad",
@@ -600,7 +621,8 @@
    "s": "بوم مشترک نقاشی با Agent که با قلم‌مو و لایه از ترمینال نقاشی می‌کند.",
    "v": "نقاشی مشترک با Agent و انیمیشن ساده؛ جالب ولی حاشیه‌ای.",
    "n": 22,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/klad.webp"
   },
   {
    "id": "inkline-town",
@@ -615,7 +637,8 @@
    "s": "بازی شهرسازی که همه‌ی ساختمان‌ها، گاری‌ها و آدم‌ها را به‌صورت line art سه‌بعدی زنده با کد رسم می‌کند؛ بدون هیچ فایل تصویر.",
    "v": "مرجع لوک: سه‌بعدی خطی روی زمینه‌ی روشن برای سایت/فضای تعاملی؛ اسکافولد در حین ارتقا ایده‌ی خوبی برای transition است.",
    "n": 21,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/inkline-town.webp"
   },
   {
    "id": "ascii-magic",
@@ -629,7 +652,8 @@
    "s": "استایلایزر تحت وب برای عکس و ویدیو: ASCII، dither، halftone، glitch، voxel، fluted؛ پیش‌نمایش زنده، پردازش محلی در مرورگر، خروجی MP4/GIF، سرور MCP برای Agent.",
    "v": "نسخه‌ی رایگان بدون واترمارک؛ کتابخانه‌ی کامل شیدرها و 4K در Pro. برای لوک گرافیکی سریع روی فوتیج و LED wall.",
    "n": 20,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "https://www.ascii-magic.com/og.jpg"
   },
   {
    "id": "trellis2",
@@ -645,7 +669,8 @@
    "s": "مدل ۴B: از یک تصویر به دارایی سه‌بعدی با متریال PBR (base color، roughness، metallic، opacity)؛ خروجی GLB.",
    "v": "مهم‌ترین گزینه‌ی image-to-3D با PBR برای Unreal؛ ولی ۲۴GB VRAM و فقط Linux تست‌شده. دموی Hugging Face برای تست بدون GPU.",
    "n": 19,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/trellis2.webp"
   },
   {
    "id": "nerfstudio",
@@ -661,7 +686,8 @@
    "s": "فریم‌ورک بازسازی صحنه از عکس/ویدیو: NeRF و Gaussian Splatting (splatfacto)، export به splat/mesh.",
    "v": "برای benchmark محیط کنار OpenMVS و RealityScan؛ خروجی splat برای three.js.",
    "n": 18,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "https://user-images.githubusercontent.com/3310961/194022638-b591ce16-76e3-4ba6-9d70-3be252b36084.png"
   },
   {
    "id": "blender-mcp",
@@ -676,7 +702,8 @@
    "s": "پلاگینی که Claude را به Blender وصل می‌کند: ساخت آبجکت، متریال و صحنه با متن.",
    "v": "روی سیستمت دیده شده ولی در تست اکتبر فعال نبود؛ پایه‌ی Blender Skills.",
    "n": 17,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/blender-mcp.webp"
   },
   {
    "id": "p5brush",
@@ -691,7 +718,8 @@
    "s": "موشن generative با حس قلم‌مو و آبرنگ طبیعی در p5.js؛ در ریل با Claude: پالت hex، تایمینگ و حرکت با پرامپت.",
    "v": "برای پس‌زمینه‌ی گرم و دست‌ساز، تیتراژ و آیتم‌های برنامه‌ی علمی؛ مکمل سبک Watercolor در Opuscar.",
    "n": 16,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/p5brush.webp"
   },
   {
    "id": "stickman",
@@ -706,7 +734,8 @@
    "s": "از متن/مقاله به ویدیوی explainer استیکمن با Agent: تصویر، صدا، زیرنویس و افکت؛ ۱۴ سبک، 16:9 و 9:16. دو موتور: Model (مدل ویدیو، اعتبار) و Code (تصویر AI + انیمیشن با کد، رندر محلی).",
    "v": "برای آیتم‌های explainer برنامه‌ی علمی قابل تست؛ پشتیبانی صدای فارسی نامعلوم. موتور Code ارزان‌تر است.",
    "n": 15,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "https://cdn.jsdelivr.net/gh/kaomei/stickman-video-director@2697fac5e0466f44098148a52c9648697521b3d6/assets/readme/previews/dark-theme-demo.gif"
   },
   {
    "id": "diorama",
@@ -721,7 +750,8 @@
    "s": "skill برای Agent: دیوراماهای کوچک سه‌بعدی pixel-art با three.js، loop دقیق؛ DESIGN.md، blockout خاکستری با دوربین قفل، QA با فریم‌های ثابت.",
    "v": "روش کارش (blockout خاکستری و QA فریم‌به‌فریم) الگوی خوبی برای Winter King و Opuscar است؛ خود سبک pixel در Opuscar هست.",
    "n": 14,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/diorama.webp"
   },
   {
    "id": "lemo-opuscar",
@@ -735,7 +765,8 @@
    "s": "۹۸ سبک فیلم کوتاه که با کد ساخته می‌شوند؛ پایه‌ی همین سایت.",
    "v": "ابزار اصلی فیلم کوتاه با کد.",
    "n": 13,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/lemo-opuscar.webp"
   },
   {
    "id": "opus-prompts",
@@ -751,7 +782,8 @@
    "s": "۷۰۳ پرامپت واقعی ویدیو با Opus 5.5 با تصویر و لینک پست اصلی.",
    "v": "در کتابخانه‌ی پرامپت همین سایت اضافه شد.",
    "n": 12,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "https://media.skillry.dev/opus-5-5/_readme/mosaic.fc36404ce3.webp"
   },
   {
    "id": "manimgx",
@@ -765,7 +797,8 @@
    "s": "موتور انیمیشن ریاضی سریع (Rust + wgpu) سازگار با Manim CE؛ 2D و 3D، Typst برای متن.",
    "v": "برای برنامه‌ی علمی؛ تست: متن فارسی RTL و صحنه‌ی 3D. خروجی alpha ندارد.",
    "n": 11,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/manimgx.webp"
   },
   {
    "id": "motlab",
@@ -795,7 +828,8 @@
    "s": "موتور ویرایش/رندر ویدیو با کد برای Agent؛ اپ دسکتاپ، رندر محلی روی GPU رایگان.",
    "v": "بالغ‌تر از Motlab؛ alpha و جزئیات 3D نامشخص.",
    "n": 9,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/raea.webp"
   },
   {
    "id": "freevideo",
@@ -825,7 +859,8 @@
    "s": "حرکت دوربین را با گوشی در صحنه‌ی سه‌بعدی ضبط کن؛ گزینه‌ها: Higgsfield phone cam، Omniscient، Live Link VCAM.",
    "v": "مستقیم برای previs و handheld میکرو دراما و VP.",
    "n": 7,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "https://media.digitalproduction.download/2026/11/omniscient-product-shot-1.jpg"
   },
   {
    "id": "openmvs",
@@ -841,7 +876,8 @@
    "s": "photogrammetry متن‌باز: از دوربین‌های align‌شده (COLMAP) به dense cloud، mesh و texture.",
    "v": "در benchmark محیط کنار RealityScan و 3DGS.",
    "n": 6,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "https://i.imgur.com/S4L0E6r.jpeg"
   },
   {
    "id": "blender-skills",
@@ -856,7 +892,8 @@
    "s": "skillهای Agent برای Blender از طریق MCP؛ از blockout تا export.",
    "v": "برای cleanup/export مفید؛ کیفیت مدل‌سازی را حل نمی‌کند.",
    "n": 5,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/blender-skills.webp"
   },
   {
    "id": "lazy-motion",
@@ -871,7 +908,8 @@
    "s": "پریست‌های انیمیشن Blender مثل پاره شدن پارچه و reveal.",
    "v": "باز؛ ایده‌ی Reveal & Transition Lab.",
    "n": 4,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1440,h=756,fit=crop,f=jpeg/AVLbabQa2Nc4xpJw/store-dOq4DyqoOwtQJGJw.png"
   },
   {
    "id": "code-mode",
@@ -884,7 +922,9 @@
    "s": "Agent به‌جای صدا زدن تک‌تک toolها کد می‌نویسد؛ context بسیار کمتر.",
    "v": "الگوی خوب برای MCP روی Aximmetry.",
    "n": 3,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "https://blog.cloudflare.com/_emdash/api/media/file/01KW47KP2ERHW0YYWZBD4YRP8X.png",
+   "site": "https://blog.cloudflare.com/code-mode/"
   },
   {
    "id": "ig-agent",
@@ -915,6 +955,10 @@
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-21 13:10",
+   "t": "تامبنیل کارت‌ها با تصویر واقعی هر ابزار (از README ریپو یا سایت خودش) جایگزین شد."
+  },
   {
    "d": "2026-11-21 13:00",
    "t": "۳۰ ابزار فید githubsignals غربال شد: ۹ «پای سیستم تست شود»، ۱۴ «زیر نظر»، ۷ حذف (Homescape، Knots، WaveDude، Mario 64 MR، LivLiv، Looking Ahead، Slopus)."

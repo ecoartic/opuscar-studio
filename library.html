@@ -81,7 +81,7 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
   <div class="filter" id="filter"></div>
   <div class="items" id="items"></div>
 </main>
-<footer>آخرین به‌روزرسانی: <span id="upd"></span> · تصاویر کارت‌ها تصویر معرفی ریپو در GitHub هستند.</footer>
+<footer>آخرین به‌روزرسانی: <span id="upd"></span> · تصاویر کارت‌ها از README ریپو یا سایت هر ابزار هستند و حق آن‌ها با سازندگان است.</footer>
 <script>
 const ST={active:'در استفاده',bench:'پای سیستم تست شود',watch:'زیر نظر',open:'باز، در حال بررسی',archive:'آرشیو',feed:'از فید، هنوز بررسی نشده'};
 const NEWDAYS=7;let LATEST='';function isNew(x){return !!x.added&&x.added===LATEST&&(Date.now()-new Date(x.added))/864e5<NEWDAYS;}
@@ -123,14 +123,14 @@ function apply(){
   if(sel.type==='wf'){list=list.filter(x=>x.cats.some(c=>nodes.has(c)));label='ورک‌فلوی «'+L.workflows.find(x=>x.id===sel.id).fa+'»';}
   $('filter').innerHTML=`${esc(label)}: ${list.length} ابزار ${sel.type?'· <button onclick="pick(null,null)">نمایش همه</button>':''}`;
   $('items').innerHTML=list.map(x=>{const g=(C[x.cats[0]]||{}).g||'🧩';
-    const img=x.repo?`<img class="th" loading="lazy" src="https://opengraph.githubassets.com/1/${esc(x.repo)}" alt="" onerror="this.outerHTML='<div class=ph>${g}</div>'">`:`<div class="ph">${g}</div>`;
+    const img=x.img?`<img class="th" loading="lazy" src="${esc(x.img)}" alt="" onerror="this.outerHTML='<div class=ph>${g}</div>'">`:x.repo?`<img class="th" loading="lazy" src="https://opengraph.githubassets.com/1/${esc(x.repo)}" alt="" onerror="this.outerHTML='<div class=ph>${g}</div>'">`:`<div class="ph">${g}</div>`;
     return `<div class="it">${img}<div class="ib"><h3>${esc(x.t)}</h3>
     <div>${isNew(x)?'<span class="newb">جدید</span>':''}<span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
     <div class="cats">${x.cats.map(c=>`<span onclick="pick('cat','${c}')">${(C[c]||{}).g||''} ${esc((C[c]||{}).fa||c)}</span>`).join('')}</div>
     <p class="s">${esc(x.s)}</p>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}${x.src?`<a href="${esc(x.src)}" target="_blank" rel="noopener">منبع فید</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=12').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawMap();drawTiles();apply();});
+fetch('library.json?v=13').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawMap();drawTiles();apply();});
 </script>
 </body>
 </html>

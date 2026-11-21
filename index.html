@@ -166,7 +166,7 @@ function copyOut(){const t=document.getElementById('out').textContent;const b=do
 let HANDOFF=null;
 try{const h=sessionStorage.getItem('opuscar_story');if(h){HANDOFF=JSON.parse(h);}}catch(e){}
 if(HANDOFF){const n=document.getElementById('handoff');n.hidden=false;n.textContent='پرامپت @'+HANDOFF.author+' از کتابخانه آماده است؛ یک سبک انتخاب کنید تا به‌عنوان داستان در سازنده‌ی پرامپت قرار بگیرد. ';const x=document.createElement('button');x.className='lnk';x.textContent='لغو';x.onclick=()=>{HANDOFF=null;try{sessionStorage.removeItem('opuscar_story');}catch(e){}n.hidden=true;};n.appendChild(x);}
-fetch('library.json?v=12').then(r=>r.json()).then(j=>{const c=(j.changelog||[]).slice(0,2);if(!c.length)return;const e=document.getElementById('upd');e.hidden=false;e.innerHTML='<b>آخرین به‌روزرسانی‌ها</b> · <a href="library.html">کتابخانه‌ی ابزار و ورک‌فلو →</a>'+c.map(x=>'<div style="margin-top:4px">'+x.d.replace(/[<>&]/g,'')+' — '+x.t.replace(/[<>&]/g,'')+'</div>').join('');}).catch(()=>{});
+fetch('library.json?v=13').then(r=>r.json()).then(j=>{const c=(j.changelog||[]).slice(0,2);if(!c.length)return;const e=document.getElementById('upd');e.hidden=false;e.innerHTML='<b>آخرین به‌روزرسانی‌ها</b> · <a href="library.html">کتابخانه‌ی ابزار و ورک‌فلو →</a>'+c.map(x=>'<div style="margin-top:4px">'+x.d.replace(/[<>&]/g,'')+' — '+x.t.replace(/[<>&]/g,'')+'</div>').join('');}).catch(()=>{});
 renderChips();render();
 const m=location.hash.match(/^#style=([\w-]+)/);if(m&&S.find(x=>x.slug===m[1]))open_(m[1]);
 </script>
