@@ -56,6 +56,7 @@ pre{white-space:pre-wrap;direction:ltr;text-align:left;background:#0b0c0f;border
 .howto{max-width:900px;margin:40px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
 .howto code,.howto pre{direction:ltr}
 footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;color:var(--mut);font-size:13px}
+.next{margin-top:14px;padding:14px 16px;border:1px solid #f5b94a55;border-radius:12px;background:#f5b94a12;font-size:14px;line-height:1.8}.next ol{margin:6px 0 0;padding-right:20px}.next pre{text-align:left;font-size:12px;margin:8px 0}.next[hidden]{display:none}
 </style>
 <link rel="stylesheet" href="common.css?v=2">
 </head>
@@ -112,6 +113,18 @@ claude plugin install lemo-opuscar@lemolab</pre>
       <button class="btn" onclick="build()">ساخت پرامپت</button>
       <pre id="out" hidden></pre>
       <button class="btn" id="cp" hidden onclick="copyOut()">کپی پرامپت</button>
+      <div class="next" id="snext" hidden>
+  <b>قدم بعد: این صفحه فقط پرامپت را می‌سازد، فیلم را نمی‌سازد.</b>
+  <p>ساخت فیلم کار یک agent است که کد بنویسد و رندر کند. یکی از دو راه:</p>
+  <ol>
+    <li><b>بدون نصب (سریع‌تر برای تست):</b> پرامپت را در یک گفتگوی Claude (پروژه‌ی CLAUDE REPOS) بچسبان. Claude در محیط ابری رندر می‌کند و mp4 را همان‌جا تحویل می‌دهد. بدون صدا و سبک‌های WebGL ساده‌تر (آن‌جا GPU نیست).</li>
+    <li><b>روی سیستم خودت (کیفیت کامل):</b> یک‌بار نصب کن، بعد در پوشه‌ای خالی <code>claude</code> را اجرا کن، <code>/effort high</code> و پرامپت را بچسبان:
+<pre dir="ltr">claude plugin marketplace add lemomo-ai/lemo-opuscar
+claude plugin install lemo-opuscar@lemolab
+mkdir lab-films && cd lab-films && claude</pre>
+    پیش‌نیاز: Node 20+، ffmpeg 7+، Python 3.11+.</li>
+  </ol>
+</div>
     </div>
   </div>
 </dialog>
@@ -135,6 +148,18 @@ claude plugin install lemo-opuscar@lemolab</pre>
     <button class="btn" id="mbuild">ساخت پرامپت</button>
     <pre id="mout" dir="ltr" style="text-align:left;unicode-bidi:plaintext;white-space:pre-wrap" hidden></pre>
     <button class="btn" id="mcp" hidden>کپی پرامپت</button>
+    <div class="next" id="mnext" hidden>
+  <b>قدم بعد: این صفحه فقط پرامپت را می‌سازد، فیلم را نمی‌سازد.</b>
+  <p>ساخت فیلم کار یک agent است که کد بنویسد و رندر کند. یکی از دو راه:</p>
+  <ol>
+    <li><b>بدون نصب (سریع‌تر برای تست):</b> پرامپت را در یک گفتگوی Claude (پروژه‌ی CLAUDE REPOS) بچسبان. Claude در محیط ابری رندر می‌کند و mp4 را همان‌جا تحویل می‌دهد. بدون صدا و سبک‌های WebGL ساده‌تر (آن‌جا GPU نیست).</li>
+    <li><b>روی سیستم خودت (کیفیت کامل):</b> یک‌بار نصب کن، بعد در پوشه‌ای خالی <code>claude</code> را اجرا کن، <code>/effort high</code> و پرامپت را بچسبان:
+<pre dir="ltr">claude plugin marketplace add lemomo-ai/lemo-opuscar
+claude plugin install lemo-opuscar@lemolab
+mkdir lab-films && cd lab-films && claude</pre>
+    پیش‌نیاز: Node 20+، ffmpeg 7+، Python 3.11+.</li>
+  </ol>
+</div>
   </div>
 </dialog>
 <footer>
@@ -180,14 +205,14 @@ function tray(){document.getElementById('mcount').textContent=MS.size;}
 document.getElementById('mbtn').onclick=()=>{const on=document.body.classList.toggle('multi');document.getElementById('mhint').hidden=!on;if(!on){MS.clear();render();}tray();};
 document.getElementById('mclr').onclick=()=>{MS.clear();render();tray();};
 const mdlg=document.getElementById('mdlg');
-document.getElementById('mgo').onclick=()=>{if(MS.size<2){alertBox('حداقل ۲ سبک انتخاب کنید.');return;}document.getElementById('msel').innerHTML=[...MS].map((k,i)=>`<span>${i+1}. ${S.find(x=>x.slug===k).en}</span>`).join('');document.getElementById('mout').hidden=true;document.getElementById('mcp').hidden=true;mdlg.showModal();};
+document.getElementById('mgo').onclick=()=>{if(MS.size<2){alertBox('حداقل ۲ سبک انتخاب کنید.');return;}document.getElementById('msel').innerHTML=[...MS].map((k,i)=>`<span>${i+1}. ${S.find(x=>x.slug===k).en}</span>`).join('');document.getElementById('mout').hidden=true;document.getElementById('mcp').hidden=true;document.getElementById('mnext').hidden=true;mdlg.showModal();};
 function alertBox(t){const h=document.getElementById('mhint');h.hidden=false;h.textContent=t;}
 document.getElementById('mbuild').onclick=()=>{const st=[...MS].map(k=>S.find(x=>x.slug===k)),story=document.getElementById('mStory').value.trim()||'[describe your story here]',len=document.getElementById('mLen').value||12,asp=document.getElementById('mAsp').value,lang=document.getElementById('mLang').value,cmp=document.getElementById('mCmp').value,sb=document.getElementById('mSb').checked;
  let p=`Make ${st.length} short films with lemo-opuscar, one per style, all telling the SAME story so they can be compared side by side.\n\nStory: ${story}\n\nStyles, in this order:\n`+st.map((x,i)=>`${i+1}. ${x.en} (styles/${x.slug})`).join('\n');
  p+=`\n\nRules:\n- Each film is ${len} seconds, format ${asp}; any on-screen text in ${lang}; no narration.\n- Keep the same characters, beats and timing in every film; only the visual style changes. Follow each style's STYLE.md completely.\n- Put the shared story (all on-screen texts and beat times) in one file that every film imports, so one change updates all films.\n- Every film must pass core/render/readcheck.mjs at its size; if a text is too long for its beat, shorten the text or move it earlier, never cut the reading time.\n- Save each film as films/<project>/<NN>-<style>.mp4.`;
  p+= cmp==='reel'?`\n- Finally join them into one vertical reel, each film introduced by a small label "${'${n}'}/${st.length} · <style name>".`:cmp==='grid'?`\n- Finally make a synced comparison grid video of all films and a contact-sheet PNG with one labeled key frame per style.`:`\n- Finally make (a) one reel that plays them in order with a small "n/${st.length} · <style name>" label, (b) a synced comparison grid video, and (c) a contact-sheet PNG with one labeled key frame per style.`;
  p+= sb?`\n- Before rendering, show me the storyboard for style 1 and wait for my OK; then render all styles.`:`\n- Render everything without stopping.`;
- const o=document.getElementById('mout');o.textContent=p.replace('${n}','n');o.hidden=false;document.getElementById('mcp').hidden=false;};
+ const o=document.getElementById('mout');o.textContent=p.replace('${n}','n');o.hidden=false;document.getElementById('mcp').hidden=false;document.getElementById('mnext').hidden=false;};
 document.getElementById('mcp').onclick=()=>{const t=document.getElementById('mout').textContent,b=document.getElementById('mcp');(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='کپی شد ✓';setTimeout(()=>b.textContent='کپی پرامپت',1500);}).catch(()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('mout'));getSelection().removeAllRanges();getSelection().addRange(r);});};
 function build(){
   const story=document.getElementById('fStory').value.trim()||'[describe your story here]';
@@ -200,7 +225,7 @@ function build(){
   p+=`\n\nFormat: ${asp}.`;
   p+= vo?`\nNarration: ${vo}, in ${lang}.`:`\nNo narration; any on-screen text in ${lang}.`;
   p+= sb?`\nShow me the storyboard (key shots in the real style) before rendering the full film.`:`\nGo straight to the finished film.`;
-  const o=document.getElementById('out');o.textContent=p;o.hidden=false;document.getElementById('cp').hidden=false;
+  const o=document.getElementById('out');o.textContent=p;o.hidden=false;document.getElementById('cp').hidden=false;document.getElementById('snext').hidden=false;
 }
 function copyOut(){const t=document.getElementById('out').textContent;const b=document.getElementById('cp');
   (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='کپی شد ✓';setTimeout(()=>b.textContent='کپی پرامپت',1500);}).catch(()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('out'));getSelection().removeAllRanges();getSelection().addRange(r);});}
