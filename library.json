@@ -259,6 +259,283 @@
  ],
  "items": [
   {
+   "id": "depth-pro-2",
+   "t": "Depth Pro 2 (Apple)",
+   "cats": [
+    "depth",
+    "relight"
+   ],
+   "st": "bench",
+   "repo": "apple-aiml-research/ml-depth-pro-2",
+   "src": "https://t.me/hackernewsgithubprojects/14750",
+   "s": "عمق متریک (متر) برای هر پیکسل از عکس، ویدیو یا دوربین زنده؛ لبه‌ی تیز و پایداری بین فریم‌ها، با رزولوشن کامل ورودی.",
+   "v": "مستقیم برای R&D عمق استودیو (الان ۸ تا ۱۲ fps): پایداری زمانی همان مشکل flicker فعلی را هدف گرفته. اولویت اول benchmark.",
+   "added": "2026-11-21T13:20",
+   "n": 62,
+   "img": "img/lib/depth-pro-2.webp"
+  },
+  {
+   "id": "ml-sharp",
+   "t": "SHARP (Apple)",
+   "cats": [
+    "image-3d",
+    "gaussian"
+   ],
+   "st": "bench",
+   "repo": "apple-aiml-research/ml-sharp",
+   "src": "https://t.me/hackernewsgithubprojects/14747",
+   "s": "از یک عکس، صحنه‌ی Gaussian سه‌بعدی فوتورئال در کمتر از یک ثانیه برای view synthesis.",
+   "v": "برای محیط پشت سوژه و parallax محدود در استودیو؛ کنار World Labs و 3DGS مقایسه شود.",
+   "added": "2026-11-21T13:20",
+   "n": 61,
+   "img": "img/lib/ml-sharp.webp"
+  },
+  {
+   "id": "jellyfish",
+   "t": "Jellyfish — AI Short Drama Studio",
+   "cats": [
+    "film-3d"
+   ],
+   "st": "bench",
+   "repo": "forget-c/jellyfish",
+   "src": "https://t.me/hackernewsgithubprojects/14756",
+   "s": "فضای کار کامل تولید short drama با AI: از فیلمنامه به استوری‌بورد ساخت‌یافته، مدیریت ثبات کاراکتر، آماده‌سازی شات، تولید ویدیو و خروجی.",
+   "v": "دقیقاً pipeline میکرو درامای Winter King؛ ببین مدیریت consistency و شات‌لیستش از روش فعلی ما بهتر است یا نه.",
+   "added": "2026-11-21T13:20",
+   "n": 60,
+   "img": "img/lib/jellyfish.webp"
+  },
+  {
+   "id": "seedance-realman",
+   "t": "Seedance Storyboard Generator (Realman)",
+   "cats": [
+    "film-3d"
+   ],
+   "st": "bench",
+   "repo": "liangdabiao/seedance-storyboard-generator-realman",
+   "src": "https://t.me/hackernewsgithubprojects/14690",
+   "s": "skill چینی: داستان به فیلمنامه‌ی short drama، پرامپت مرجع کاراکتر/صحنه/پراپ و ویدیوی Seedance با حس فیلم واقعی (نه کارتونی).",
+   "v": "قواعد «حس فیلم واقعی»اش برای پرامپت‌های Winter King ارزش استخراج دارد.",
+   "added": "2026-11-21T13:20",
+   "n": 59,
+   "img": "img/lib/seedance-realman.webp"
+  },
+  {
+   "id": "action-director",
+   "t": "YEDP Action Director",
+   "cats": [
+    "film-3d",
+    "blender",
+    "motion"
+   ],
+   "st": "bench",
+   "repo": "yedp123/comfyui-yedp-action-director",
+   "src": "https://t.me/hackernewsgithubprojects/14762",
+   "s": "viewport سه‌بعدی داخل ComfyUI برای کارگردانی انیمیشن کاراکتر (Mixamo/FBX)، محیط و دوربین و رندر pass برای ControlNet؛ نسخه‌ی دسکتاپ ویندوز هم دارد.",
+   "v": "previs سه‌بعدی که مستقیم به تولید AI وصل می‌شود؛ جایگزین/مکمل previs خاکستری Blender.",
+   "added": "2026-11-21T13:20",
+   "n": 58
+  },
+  {
+   "id": "reshoot-4d",
+   "t": "Reshoot 4D",
+   "cats": [
+    "film-3d",
+    "depth"
+   ],
+   "st": "bench",
+   "repo": "itsmetamike/reshoot-4d",
+   "src": "https://t.me/hackernewsgithubprojects/14665",
+   "s": "فیلم‌برداری دوباره‌ی هر ویدیو در 4D: دوربین مجازی جدید روی ویدیوی موجود، کاملاً محلی با ComfyUI و LTX 2.3، بدون API.",
+   "v": "تغییر زاویه/حرکت دوربین بعد از تولید شات؛ برای نجات شات‌های Winter King.",
+   "added": "2026-11-21T13:20",
+   "n": 57,
+   "img": "img/lib/reshoot-4d.webp"
+  },
+  {
+   "id": "metahumanmaker",
+   "t": "MetaHuman Maker",
+   "cats": [
+    "blender",
+    "unreal",
+    "image-3d"
+   ],
+   "st": "bench",
+   "repo": "tree-ind/metahumanmaker",
+   "src": "https://t.me/hackernewsgithubprojects/14613",
+   "s": "افزونه‌ی Blender: از عکس و mesh منبع، کاراکتر MetaHuman قابل ویرایش می‌سازد و به Unreal می‌برد؛ قابل کنترل با Agent از طریق Blender MCP.",
+   "v": "پل مستقیم Blender ↔ Unreal برای کاراکتر؛ برای مجری مجازی یا کاراکترهای سریال.",
+   "added": "2026-11-21T13:20",
+   "n": 56,
+   "img": "img/lib/metahumanmaker.webp"
+  },
+  {
+   "id": "autoclip",
+   "t": "AutoClip",
+   "cats": [
+    "motion",
+    "agent"
+   ],
+   "st": "bench",
+   "repo": "artbyjazi/autoclip",
+   "src": "https://t.me/hackernewsgithubprojects/14745",
+   "s": "کلیپ‌ساز محلی: ویدیوی بلند → کلیپ‌های 9:16 رتبه‌بندی‌شده با زیرنویس و دنبال کردن گوینده؛ whisper و LLM محلی.",
+   "v": "همان کار هایلایت فوتبال در Edit Ready؛ برای فوتیج استودیو و پشت‌صحنه مقایسه شود.",
+   "added": "2026-11-21T13:20",
+   "n": 55
+  },
+  {
+   "id": "anyshot",
+   "t": "AnyShot",
+   "cats": [
+    "film-3d",
+    "blender"
+   ],
+   "st": "watch",
+   "repo": "apekshik/anyshot",
+   "src": "https://t.me/hackernewsgithubprojects/14659",
+   "s": "فیلم‌بردار AI برای صحنه‌های سه‌بعدی؛ عضو خانواده‌ی AnyMachine/AnyScene.",
+   "v": "کنار AnyMachine بررسی شود.",
+   "added": "2026-11-21T13:20",
+   "n": 54
+  },
+  {
+   "id": "scandot",
+   "t": "ScanDot",
+   "cats": [
+    "image-3d"
+   ],
+   "st": "watch",
+   "repo": "faizwashere/scandot",
+   "src": "https://t.me/hackernewsgithubprojects/14614",
+   "s": "اپ اندروید برای اسکن point cloud با ARCore Depth، به‌اضافه‌ی pipeline فوتوگرامتری ویدیو با COLMAP روی سیستم.",
+   "v": "تجربی؛ برای اسکن سریع با گوشی اندروید.",
+   "added": "2026-11-21T13:20",
+   "n": 53
+  },
+  {
+   "id": "lemo-animi",
+   "t": "lemo-animi",
+   "cats": [
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "lemomo-ai/lemo-animi",
+   "src": "https://t.me/hackernewsgithubprojects/14796",
+   "s": "از همان تیم Lemo-Opuscar: انیمیشن استاپ‌موشن کوتاه از یک جمله با Codex یا Claude Code و مدل تصویر.",
+   "v": "مکمل Opuscar؛ نسخه‌ی اول و هنوز ناپخته.",
+   "added": "2026-11-21T13:20",
+   "n": 52,
+   "img": "img/lib/lemo-animi.webp"
+  },
+  {
+   "id": "holospot",
+   "t": "Holospot",
+   "cats": [
+    "threejs"
+   ],
+   "st": "watch",
+   "repo": "dmitrykurash/holospot",
+   "src": "https://t.me/hackernewsgithubprojects/14786",
+   "s": "متریال‌های هولوگرافیک three.js برای Agent.",
+   "v": "مرجع لوک برای گرافیک AR و سایت سه‌بعدی.",
+   "added": "2026-11-21T13:20",
+   "n": 51,
+   "img": "img/lib/holospot.webp"
+  },
+  {
+   "id": "crimson-loong",
+   "t": "Crimson Loong",
+   "cats": [
+    "threejs",
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "chetaslua/crimson-loong",
+   "src": "https://t.me/hackernewsgithubprojects/14774",
+   "s": "فیلم اژدها کاملاً با کد three.js و HTML.",
+   "v": "مرجع کیفیت فیلم سه‌بعدی با کد.",
+   "added": "2026-11-21T13:20",
+   "n": 50,
+   "img": "img/lib/crimson-loong.webp"
+  },
+  {
+   "id": "mulecreate",
+   "t": "Mule Create",
+   "cats": [
+    "concept-3d",
+    "blender"
+   ],
+   "st": "watch",
+   "repo": "felixbfx/mulecreate",
+   "src": "https://t.me/hackernewsgithubprojects/14656",
+   "s": "اسکچ سه‌بعدی با خط در فضا و سپردن آن به AI برای ساخت مدل؛ ویندوز، سورس GPL.",
+   "v": "برای concept to 3D؛ ببین خروجی‌اش به Blender می‌رسد.",
+   "added": "2026-11-21T13:20",
+   "n": 49,
+   "img": "img/lib/mulecreate.webp"
+  },
+  {
+   "id": "movieroll",
+   "t": "MovieRoll (Tencent Hunyuan)",
+   "cats": [
+    "film-3d"
+   ],
+   "st": "watch",
+   "repo": "tencent-hunyuan/movieroll",
+   "src": "https://t.me/hackernewsgithubprojects/14722",
+   "s": "پژوهش: چارچوب تولید ویدیوی بلند.",
+   "v": "فعلاً پژوهشی.",
+   "added": "2026-11-21T13:20",
+   "n": 48,
+   "img": "img/lib/movieroll.webp"
+  },
+  {
+   "id": "waoowaoo",
+   "t": "waoowaoo",
+   "cats": [
+    "film-3d",
+    "agent"
+   ],
+   "st": "watch",
+   "repo": "waooai/waoowaoo",
+   "src": "https://t.me/hackernewsgithubprojects/14757",
+   "s": "پلتفرم تولید ویدیو و ورک‌فلوی فیلم با Agent (۱۵k ستاره).",
+   "v": "مجوز Elastic 2.0؛ برای مقایسه با Jellyfish.",
+   "added": "2026-11-21T13:20",
+   "n": 47
+  },
+  {
+   "id": "motion-principles",
+   "t": "Design Motion Principles",
+   "cats": [
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "repo": "kylezantos/design-motion-principles",
+   "src": "https://t.me/hackernewsgithubprojects/14740",
+   "s": "skill اصول موشن‌دیزاین برای انیمیشن UI و CSS.",
+   "v": "برای کیفیت حرکت گرافیک‌های سایت و Opuscar.",
+   "added": "2026-11-21T13:20",
+   "n": 46
+  },
+  {
+   "id": "glyph-bloom",
+   "t": "Glyph Bloom",
+   "cats": [
+    "threejs",
+    "motion-gfx"
+   ],
+   "st": "watch",
+   "repo": "winchxyz/glyph-bloom",
+   "src": "https://t.me/hackernewsgithubprojects/14727",
+   "s": "تبدیل تصویر به هنر glyph سه‌بعدی در WebGL.",
+   "v": "مرجع لوک.",
+   "added": "2026-11-21T13:20",
+   "n": 45,
+   "img": "img/lib/glyph-bloom.webp"
+  },
+  {
    "id": "instanthmr",
    "t": "InstantHMR",
    "cats": [
@@ -955,6 +1232,10 @@
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-21 13:20",
+   "t": "از فایل export (۲۴۰ پست، ۲۰۴ ریپو) غربال شد: ۱۸ ابزار اضافه شد (۸ پای سیستم، ۱۰ زیر نظر). ۲ ریپوی مشکوک به بدافزار رد شد."
+  },
   {
    "d": "2026-11-21 13:10",
    "t": "تامبنیل کارت‌ها با تصویر واقعی هر ابزار (از README ریپو یا سایت خودش) جایگزین شد."
