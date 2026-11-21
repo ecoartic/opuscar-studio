@@ -259,6 +259,26 @@
  ],
  "items": [
   {
+   "id": "openjutsu",
+   "t": "Openjutsu",
+   "cats": [
+    "film-3d",
+    "matte",
+    "relight"
+   ],
+   "st": "bench",
+   "repo": "D3voz/openjutsu",
+   "reel": "https://www.instagram.com/reel/DfYzkbVkiQz/",
+   "img": "img/lib/openjutsu.webp",
+   "added": "2026-11-22T02:55",
+   "n": 99,
+   "chk": "2026-11-22",
+   "lic": "MIT (کد) · مدل MiniMax H3: Community License با محدودیت منطقه‌ای (US/EU/UK/کره مستثنا)",
+   "req": "GPU NVIDIA (تست‌شده: RTX 4060 Ti 16GB + 64GB RAM) · ComfyUI 0.41.2+ · Node 22.6+ · Python · ۱۲ پک custom node · مدل‌های H3 int8، SAM 3.1، Qwen3-VL",
+   "s": "نسخه‌ی متن‌باز و محلی Genjutsu در Higgsfield: یک ویدیو و یک عکس کاراکتر → شخص اصلی ویدیو با کاراکتر عوض می‌شود. حالت پیشرفته تا ۴ نفر با نقش، تعویض/حذف شیء یا پس‌زمینه با ماسک SAM، «From picture» با relight (۱۷ حالت نور) و Fix faces. یک رابط Next.js روی ورک‌فلوی ComfyUI.",
+   "v": "جایگزین رایگان Genjutsu در Higgsfield (که کردیت می‌خورد) — اگر سیستمت ۱۶GB VRAM و ۶۴GB RAM دارد. برای میکرو دراما (تعویض کاراکتر روی بازی بازیگر) مهم است. هشدارها: ۱) مجوز وزن‌های H3 در آمریکا، اتحادیه‌ی اروپا، بریتانیا و کره اعمال نمی‌شود؛ در ترکیه مجاز است، در آلمان/اتریش نه. ۲) فقط با رضایت افرادی که در ویدیو هستند و برای کاراکترهای خودت استفاده شود. آخرین commit: ۳۰ اکتبر ۲۰۲۶؛ لانچر start_openjutsu.bat را قبل از اجرا بخوان (پراکسی pip نصب می‌کند)."
+  },
+  {
    "id": "corridorkey",
    "t": "CorridorKey (+ EZ-CorridorKey)",
    "cats": [
