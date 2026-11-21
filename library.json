@@ -259,6 +259,22 @@
  ],
  "items": [
   {
+   "id": "geometric",
+   "t": "GEOMETRIC — Image + Motion Art Studio",
+   "cats": [
+    "motion-gfx",
+    "motion"
+   ],
+   "st": "bench",
+   "site": "https://geometric-art.com",
+   "reel": "https://www.instagram.com/reel/DfsFN8wx-JC/",
+   "img": "https://geometric-art.com/og-flux.png",
+   "added": "2026-11-21T13:50",
+   "n": 63,
+   "s": "استودیوی تحت وب (پردازش محلی، رایگان) که عکس یا ویدیو را به موشن‌آرت هندسی تبدیل می‌کند: خطوط تراز نور، flow engraving، Delaunay، dither، pixel، glyph، شبکه‌ی ادیتوریال؛ لایه‌ی واکنش به صدا و برنامه‌ی حرکت؛ خروجی PNG، MP4 برای Reels/X و WebM.",
+   "v": "بدون نیاز به سیستم، همین الان قابل استفاده؛ برای تیتراژ، کاور Case Study و محتوای LED wall از فوتیج استودیو. نسخه‌ی EN دارد."
+  },
+  {
    "id": "depth-pro-2",
    "t": "Depth Pro 2 (Apple)",
    "cats": [
@@ -1247,6 +1263,10 @@
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-21 13:50",
+   "t": "اضافه شد: GEOMETRIC (استودیوی موشن‌آرت هندسی تحت وب)."
+  },
   {
    "d": "2026-11-21 13:40",
    "t": "۴ ابزار به سایت آمد و «در استفاده» شد: دارایی‌های سه‌بعدی (Polyfork)، آزمایشگاه قلم‌مو (p5.brush)، نمایشگر Gaussian Splat، گالری زنده‌ی Codevember."
