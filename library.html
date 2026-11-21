@@ -43,6 +43,11 @@ h2{font-size:20px;margin:28px 0 6px}
 .tile .n{float:left;color:var(--acc);font-size:12px}
 .tile.empty{opacity:.55}
 .log{background:#1d2a2a;border:1px solid #2f4a48;border-radius:12px;padding:10px 14px;font-size:13px;color:#cfe9e6;margin:8px 0}.log b{color:#8fd6cf}.log div{margin:3px 0}.newb{display:inline-block;padding:1px 8px;border-radius:6px;font-size:12px;background:var(--acc);color:#1a1300;font-weight:700;margin-left:6px}
+.lsearch{width:100%;max-width:520px;display:block;margin:6px 0 10px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit}
+.legend{font-size:12.5px;color:var(--mut);margin:4px 0 0;line-height:2.2}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--mut)}.meta span{white-space:nowrap}.meta b{color:#c9ced6;font-weight:600}
+.wflist{display:none}
+@media(max-width:700px){.map{display:none}.wflist{display:grid;gap:8px}.wfl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.wfl b{display:block;font-size:14px;margin-bottom:4px}.wfl a{display:inline-block;margin:2px;padding:2px 9px;border-radius:999px;background:#222630;color:var(--fg);font-size:12.5px;text-decoration:none;direction:ltr}.wfl i{color:var(--mut);font-style:normal;margin:0 2px}}
 .filter{margin:14px 0;color:var(--mut);font-size:14px}
 .filter button{background:none;border:0;color:var(--acc);font:inherit;cursor:pointer;text-decoration:underline}
 .items{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:14px}
@@ -59,18 +64,18 @@ h2{font-size:20px;margin:28px 0 6px}
 .lk{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;margin-top:auto;padding-top:4px}
 footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;color:var(--mut);font-size:13px}
 </style>
+<link rel="stylesheet" href="common.css?v=1">
 </head>
 <body>
 <header>
   <h1>کتابخانه‌ی ابزار و ورک‌فلو</h1>
   <p>ابزارها و تکنیک‌هایی که از ریلزها جمع می‌شوند، دسته‌بندی‌شده. نقشه نشان می‌دهد هر دسته در کدام مرحله است و دسته‌ها چطور به هم وصل می‌شوند تا یک ورک‌فلو بسازند.</p>
-  <div class="nav"><a href="./">گالری سبک‌ها</a><a href="prompts.html">کتابخانه‌ی پرامپت</a><a href="assets.html">دارایی‌های سه‌بعدی</a><a href="brush.html">آزمایشگاه قلم‌مو</a><a href="splat.html">نمایشگر Splat</a><a href="codevember.html">Codevember</a></div>
-  <div class="nav" style="margin-top:4px;font-size:13px">ابزارهای آنلاین آماده: <a href="https://geometric-art.com" target="_blank" rel="noopener">GEOMETRIC ↗</a><a href="https://www.ascii-magic.com" target="_blank" rel="noopener">ASCII Magic ↗</a></div>
 </header>
 <main>
   <h2>نقشه‌ی ورک‌فلو</h2>
   <p class="sub">یک ورک‌فلو را انتخاب کنید تا مسیرش روشن شود، یا روی یک دسته بزنید تا ابزارهایش و اتصالاتش را ببینید. جریان از راست (ورودی) به چپ (خروجی) است.</p>
   <div class="wfs" id="wfs"></div>
+  <div class="wflist" id="wflist"></div>
   <div class="map"><svg id="map" viewBox="0 0 1000 330" direction="ltr" style="direction:ltr" xmlns="http://www.w3.org/2000/svg"></svg></div>
 
   <h2>دسته‌ها</h2>
@@ -78,8 +83,10 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
   <div class="tiles" id="tiles"></div>
 
   <h2>ابزارها</h2>
-  <div class="log" id="log"></div>
+  <div class="log" id="log"></div><span id="log-anchor"></span>
+  <input id="lq" class="lsearch" type="search" placeholder="جستجو در ابزارها… (مثلاً depth، splat، Blender، mocap)">
   <div class="wfs" id="kinds"></div>
+  <p class="legend"><span class="st active">در استفاده</span> داخل همین سایت کار می‌کند · <span class="st ready">آماده، آنلاین</span> یک کلیک تا استفاده · <span class="st bench">پای سیستم تست شود</span> نیاز به سخت‌افزار و تست · <span class="st watch">زیر نظر</span> مرجع یا ایده</p>
   <div class="filter" id="filter"></div>
   <div class="items" id="items"></div>
 </main>
@@ -110,6 +117,7 @@ function drawMap(){
     <text x="${c.x+NW-10}" y="${c.y+20}" text-anchor="end">${c.g} ${esc(c.fa)}</text>${n?`<text class="cnt" x="${c.x+10}" y="${c.y+20}">${n}</text>`:''}</g>`;});
   svg.innerHTML=h;
 }
+function drawWfList(){const col=id=>(C[id]||{}).col;$('wflist').innerHTML=L.workflows.map(w=>{const ns=[...new Set(w.edges.flat())].sort((a,b)=>col(a)-col(b));const g=[0,1,2,3].map(c=>ns.filter(n=>col(n)===c)).filter(a=>a.length);return `<div class="wfl" style="border-right:4px solid ${w.c}"><b>${esc(w.fa)}</b>${g.map(a=>a.map(n=>`<a href="#" onclick="pick('cat','${n}');return false">${C[n].g} ${esc(C[n].fa)}</a>`).join(' ')).join(' <i>←</i> ')}</div>`;}).join('');}
 function drawWfs(){$('wfs').innerHTML=L.workflows.map(w=>`<button class="wf" data-id="${w.id}" onclick="pick('wf','${w.id}')"><i style="background:${w.c}"></i>${esc(w.fa)}</button>`).join('');}
 function drawTiles(){$('tiles').innerHTML=L.categories.map(c=>{const n=count(c.id);return `<div class="tile${n?'':' empty'}" data-id="${c.id}" onclick="pick('cat','${c.id}')"><span class="n">${n||''}</span><span class="g">${c.g}</span><b>${esc(c.fa)}</b><small>${esc(c.d)}</small></div>`;}).join('');}
 function pick(type,id){if(sel.type===type&&sel.id===id){sel={type:null,id:null};}else sel={type,id};apply();if(type==='cat'&&sel.id)$('filter').scrollIntoView({behavior:'smooth',block:'start'});}
@@ -121,7 +129,7 @@ function apply(){
   document.querySelectorAll('.node').forEach(n=>{n.classList.toggle('on',sel.type==='cat'&&n.dataset.id===sel.id);n.classList.toggle('dim',!!nodes&&!nodes.has(n.dataset.id));});
   document.querySelectorAll('.wf').forEach(b=>b.classList.toggle('on',sel.type==='wf'&&b.dataset.id===sel.id));
   document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('on',!!nodes&&nodes.has(t.dataset.id)&&(sel.type==='wf'||t.dataset.id===sel.id)));
-  let list=[...L.items].filter(x=>!kind||(kind==='technique'?x.kind==='technique':x.kind!=='technique')).sort((a,b)=>(b.n||0)-(a.n||0)),label='همه‌ی ابزارها';
+  let qq=($('lq').value||'').trim().toLowerCase();let list=[...L.items].filter(x=>!qq||[x.t,x.s,x.v,x.repo,x.req,(x.cats||[]).map(c=>(C[c]||{}).fa+' '+c).join(' ')].join(' ').toLowerCase().includes(qq)).filter(x=>!kind||(kind==='technique'?x.kind==='technique':x.kind!=='technique')).sort((a,b)=>(b.n||0)-(a.n||0)),label='همه‌ی ابزارها';
   if(sel.type==='cat'){list=list.filter(x=>x.cats.includes(sel.id));label='دسته‌ی '+C[sel.id].fa;}
   if(sel.type==='wf'){list=list.filter(x=>x.cats.some(c=>nodes.has(c)));label='ورک‌فلوی «'+L.workflows.find(x=>x.id===sel.id).fa+'»';}
   $('filter').innerHTML=`${esc(label)}: ${list.length} ابزار ${sel.type?'· <button onclick="pick(null,null)">نمایش همه</button>':''}`;
@@ -130,10 +138,11 @@ function apply(){
     return `<div class="it">${img}<div class="ib"><h3>${esc(x.t)}</h3>
     <div>${isNew(x)?'<span class="newb">جدید</span>':''}${x.kind==='technique'?'<span class="st open">تکنیک</span> ':''}<span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
     <div class="cats">${x.cats.map(c=>`<span onclick="pick('cat','${c}')">${(C[c]||{}).g||''} ${esc((C[c]||{}).fa||c)}</span>`).join('')}</div>
-    <p class="s">${esc(x.s)}</p>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
+    <p class="s">${esc(x.s)}</p><div class="meta">${x.req?`<span><b>نیاز:</b> ${esc(x.req)}</span>`:''}${x.lic?`<span><b>مجوز:</b> ${esc(x.lic)}</span>`:''}${x.chk?`<span><b>بررسی:</b> ${esc(x.chk)}</span>`:''}</div>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}${x.src?`<a href="${esc(x.src)}" target="_blank" rel="noopener">منبع فید</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=22').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawMap();drawTiles();drawKinds();apply();});
+fetch('library.json?v=23').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;$('log').innerHTML='<b>آخرین تغییرات</b>'+(L.changelog||[]).map(c=>`<div>${esc(c.d)} — ${esc(c.t)}</div>`).join('');layout();drawWfs();drawWfList();drawMap();drawTiles();drawKinds();apply();$('lq').oninput=apply;});
 </script>
+<script src="site.js?v=1"></script>
 </body>
 </html>

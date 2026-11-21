@@ -27,12 +27,12 @@ input[type=range]{width:100%}
 .msg{font-size:13px;color:var(--mut);margin-top:8px;min-height:1.5em}
 footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;color:var(--mut);font-size:13px}
 </style>
+<link rel="stylesheet" href="common.css?v=1">
 </head>
 <body>
 <header>
   <h1>آزمایشگاه قلم‌مو</h1>
   <p>پس‌زمینه و loop دست‌ساز با قلم‌موی طبیعی (p5.brush) برای تیتراژ، برنامه‌ی علمی و LED wall. تنظیم کنید، بسازید و PNG یا ویدیو بگیرید.</p>
-  <div class="nav"><a href="library.html">کتابخانه‌ی ابزار</a><a href="./">گالری سبک‌ها</a></div>
 </header>
 <main>
   <div class="pan">
@@ -61,7 +61,7 @@ footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;colo
 </main>
 <footer>ساخته‌شده با <a href="https://github.com/acamposuribe/p5.brush">p5.brush</a> (نسخه‌ی standalone) از Alejandro Campos Uribe، مجوز MIT.</footer>
 <script type="module">
-import * as brush from 'https://cdn.jsdelivr.net/npm/p5.brush@latest/dist/brush.esm.js';
+import * as brush from 'https://cdn.jsdelivr.net/npm/p5.brush@3.0.0/dist/brush.esm.js';
 const $=id=>document.getElementById(id);
 const PALS={'کاغذ و جوهر':['#1f2a44','#b23a2e','#d9a441','#3f6e5a','#2b2b2b'],'آبی و طلا':['#0f2c4d','#2e6f9e','#8fb8d8','#d9a441','#f1d48a'],'گرم استودیو':['#3a1c14','#a3422b','#e07a3f','#f2b45a','#6b4a3a'],'سرد شب':['#0b1320','#1d3557','#457b9d','#a8dadc','#e63946'],'پاستیلی':['#e5989b','#b5838d','#6d6875','#ffcdb2','#9fc5e8'],'تک‌رنگ':['#111111','#333333','#555555','#777777','#999999']};
 let pal=Object.values(PALS)[0].slice(),W=1920,H=1080,canvas;
@@ -102,5 +102,6 @@ $('rec').onclick=async()=>{if(!window.MediaRecorder){$('msg').textContent='ای�
  rec.stop();};
 palUI();init();
 </script>
+<script src="site.js?v=1"></script>
 </body>
 </html>

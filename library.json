@@ -273,7 +273,8 @@
    "n": 74,
    "s": "تکنیک، نه ابزار: کپچر سه‌بعدی یک سوژه‌ی انسانی با rig پنج‌تایی دوربین DJI Action، رندر زنده در Octane، و کنترلر Quest 3 به‌عنوان دوربین مجازی؛ با «نگه داشتن» نما Octane فرصت رندر تمیز پیدا می‌کند و با ماشه عکس گرفته می‌شود.",
    "v": "ایده‌ی مستقیم برای VP: کپچر حجمی ارزان مجری با چند دوربین + دوربین مجازی دستی (مثل Quest/گوشی). جزئیات rig و نرم‌افزار بازسازی در ریل نیامده؛ در کامنت‌ها هم پرسیده شده و جوابی نیست.",
-   "kind": "technique"
+   "kind": "technique",
+   "chk": "2026-11-21"
   },
   {
    "id": "rgbmocap",
@@ -290,7 +291,10 @@
    "v": "mocap بدون لباس و سنسور برای کاراکترهای Blender/Unreal و previs Winter King؛ ویندوزی، پس روی سیستم خودت مستقیم قابل تست.",
    "added": "2026-11-21T14:05",
    "n": 73,
-   "img": "img/lib/rgbmocap.webp"
+   "img": "img/lib/rgbmocap.webp",
+   "lic": "MIT",
+   "req": "Windows · GPU",
+   "chk": "2026-11-21"
   },
   {
    "id": "anyscene",
@@ -306,7 +310,10 @@
    "v": "عضو اصلی خانواده‌ی AnyMachine؛ مستقیم برای ست و محیط. هزینه‌ی fal را قبل از تست بسنج.",
    "added": "2026-11-21T14:05",
    "n": 72,
-   "img": "img/lib/anyscene.webp"
+   "img": "img/lib/anyscene.webp",
+   "lic": "MIT",
+   "req": "Blender · fal (پولی)",
+   "chk": "2026-11-21"
   },
   {
    "id": "rea-video",
@@ -322,7 +329,10 @@
    "v": "برای تحلیل ریل‌های مرجع و شات‌های الهام Winter King؛ ممکن است همان کاری را بکند که برای ریل‌ها دستی انجام می‌دهیم.",
    "added": "2026-11-21T14:05",
    "n": 71,
-   "img": "img/lib/rea-video.webp"
+   "img": "img/lib/rea-video.webp",
+   "lic": "Apache-2.0",
+   "req": "Claude Code/Agent",
+   "chk": "2026-11-21"
   },
   {
    "id": "ink-studio",
@@ -338,7 +348,9 @@
    "v": "مکمل نمایشگر Splat سایت؛ مرجع لوک.",
    "added": "2026-11-21T14:05",
    "n": 70,
-   "img": "img/lib/ink-studio.webp"
+   "img": "img/lib/ink-studio.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "lingbot-map",
@@ -353,7 +365,9 @@
    "v": "برای بازسازی زنده‌ی فضا از ویدیو؛ فعلاً پژوهشی، کنار benchmark محیط دنبال شود.",
    "added": "2026-11-21T14:05",
    "n": 69,
-   "img": "img/lib/lingbot-map.webp"
+   "img": "img/lib/lingbot-map.webp",
+   "lic": "Apache-2.0",
+   "chk": "2026-11-21"
   },
   {
    "id": "anatomy",
@@ -369,7 +383,9 @@
    "v": "برای آیتم‌های توضیحی برنامه‌ی علمی.",
    "added": "2026-11-21T14:05",
    "n": 68,
-   "img": "img/lib/anatomy.webp"
+   "img": "img/lib/anatomy.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "hyperframes",
@@ -384,7 +400,9 @@
    "v": "هم‌دسته‌ی Opuscar؛ زیر نظر.",
    "added": "2026-11-21T14:05",
    "n": 67,
-   "img": "https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/biennale-yellow.png"
+   "img": "https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/biennale-yellow.png",
+   "lic": "Apache-2.0",
+   "chk": "2026-11-21"
   },
   {
    "id": "open-ai-canvas",
@@ -399,7 +417,9 @@
    "v": "هم‌دسته‌ی Jellyfish. احتیاط: پلاگین‌های پرداخت آن فایل exe آماده دارند؛ فقط از سورس و در محیط جدا اجرا شود.",
    "added": "2026-11-21T14:05",
    "n": 66,
-   "img": "img/lib/open-ai-canvas.webp"
+   "img": "img/lib/open-ai-canvas.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "openmontage",
@@ -415,7 +435,9 @@
    "v": "بزرگ و جاه‌طلبانه؛ برای مقایسه با Jellyfish و Take One.",
    "added": "2026-11-21T14:05",
    "n": 65,
-   "img": "img/lib/openmontage.webp"
+   "img": "img/lib/openmontage.webp",
+   "lic": "AGPL-3.0",
+   "chk": "2026-11-21"
   },
   {
    "id": "gem-x",
@@ -431,7 +453,9 @@
    "v": "پایه‌ی پژوهشی mocap؛ RGB MoCap نسخه‌ی کاربردی‌تر است.",
    "added": "2026-11-21T14:05",
    "n": 64,
-   "img": "img/lib/gem-x.webp"
+   "img": "img/lib/gem-x.webp",
+   "lic": "Apache-2.0",
+   "chk": "2026-11-21"
   },
   {
    "id": "geometric",
@@ -447,7 +471,9 @@
    "added": "2026-11-21T13:50",
    "n": 63,
    "s": "استودیوی تحت وب (پردازش محلی، رایگان) که عکس یا ویدیو را به موشن‌آرت هندسی تبدیل می‌کند: خطوط تراز نور، flow engraving، Delaunay، dither، pixel، glyph، شبکه‌ی ادیتوریال؛ لایه‌ی واکنش به صدا و برنامه‌ی حرکت؛ خروجی PNG، MP4 برای Reels/X و WebM.",
-   "v": "بدون نیاز به سیستم، همین الان قابل استفاده؛ برای تیتراژ، کاور Case Study و محتوای LED wall از فوتیج استودیو. نسخه‌ی EN دارد. ‖ سایت سازنده اجازه‌ی نمایش داخل صفحه‌ی دیگر را نمی‌دهد و کدش هم منتشر نشده؛ از دکمه‌ی «سایت» مستقیم باز کنید."
+   "v": "بدون نیاز به سیستم، همین الان قابل استفاده؛ برای تیتراژ، کاور Case Study و محتوای LED wall از فوتیج استودیو. نسخه‌ی EN دارد. ‖ سایت سازنده اجازه‌ی نمایش داخل صفحه‌ی دیگر را نمی‌دهد و کدش هم منتشر نشده؛ از دکمه‌ی «سایت» مستقیم باز کنید.",
+   "req": "فقط مرورگر",
+   "chk": "2026-11-21"
   },
   {
    "id": "depth-pro-2",
@@ -463,7 +489,10 @@
    "v": "مستقیم برای R&D عمق استودیو (الان ۸ تا ۱۲ fps): پایداری زمانی همان مشکل flicker فعلی را هدف گرفته. اولویت اول benchmark.",
    "added": "2026-11-21T13:20",
    "n": 62,
-   "img": "img/lib/depth-pro-2.webp"
+   "img": "img/lib/depth-pro-2.webp",
+   "lic": "Apple (پژوهشی)",
+   "req": "GPU · Linux/Apple silicon",
+   "chk": "2026-11-21"
   },
   {
    "id": "ml-sharp",
@@ -479,7 +508,10 @@
    "v": "برای محیط پشت سوژه و parallax محدود در استودیو؛ کنار World Labs و 3DGS مقایسه شود.",
    "added": "2026-11-21T13:20",
    "n": 61,
-   "img": "img/lib/ml-sharp.webp"
+   "img": "img/lib/ml-sharp.webp",
+   "lic": "Apple (پژوهشی)",
+   "req": "GPU",
+   "chk": "2026-11-21"
   },
   {
    "id": "jellyfish",
@@ -494,7 +526,10 @@
    "v": "دقیقاً pipeline میکرو درامای Winter King؛ ببین مدیریت consistency و شات‌لیستش از روش فعلی ما بهتر است یا نه.",
    "added": "2026-11-21T13:20",
    "n": 60,
-   "img": "img/lib/jellyfish.webp"
+   "img": "img/lib/jellyfish.webp",
+   "lic": "Apache-2.0",
+   "req": "Docker/Node · API مدل‌ها",
+   "chk": "2026-11-21"
   },
   {
    "id": "seedance-realman",
@@ -509,7 +544,9 @@
    "v": "قواعد «حس فیلم واقعی»اش برای پرامپت‌های Winter King ارزش استخراج دارد.",
    "added": "2026-11-21T13:20",
    "n": 59,
-   "img": "img/lib/seedance-realman.webp"
+   "img": "img/lib/seedance-realman.webp",
+   "req": "Seedance (پولی)",
+   "chk": "2026-11-21"
   },
   {
    "id": "action-director",
@@ -526,7 +563,10 @@
    "v": "previs سه‌بعدی که مستقیم به تولید AI وصل می‌شود؛ جایگزین/مکمل previs خاکستری Blender.",
    "added": "2026-11-21T13:20",
    "n": 58,
-   "img": "img/lib/action-director.webp"
+   "img": "img/lib/action-director.webp",
+   "lic": "MIT",
+   "req": "ComfyUI",
+   "chk": "2026-11-21"
   },
   {
    "id": "reshoot-4d",
@@ -542,7 +582,10 @@
    "v": "تغییر زاویه/حرکت دوربین بعد از تولید شات؛ برای نجات شات‌های Winter King.",
    "added": "2026-11-21T13:20",
    "n": 57,
-   "img": "img/lib/reshoot-4d.webp"
+   "img": "img/lib/reshoot-4d.webp",
+   "lic": "AGPL-3.0",
+   "req": "ComfyUI · LTX · GPU",
+   "chk": "2026-11-21"
   },
   {
    "id": "metahumanmaker",
@@ -559,7 +602,10 @@
    "v": "پل مستقیم Blender ↔ Unreal برای کاراکتر؛ برای مجری مجازی یا کاراکترهای سریال.",
    "added": "2026-11-21T13:20",
    "n": 56,
-   "img": "img/lib/metahumanmaker.webp"
+   "img": "img/lib/metahumanmaker.webp",
+   "lic": "MIT",
+   "req": "Blender · Unreal",
+   "chk": "2026-11-21"
   },
   {
    "id": "autoclip",
@@ -575,7 +621,10 @@
    "v": "همان کار هایلایت فوتبال در Edit Ready؛ برای فوتیج استودیو و پشت‌صحنه مقایسه شود.",
    "added": "2026-11-21T13:20",
    "n": 55,
-   "img": "img/lib/autoclip.webp"
+   "img": "img/lib/autoclip.webp",
+   "lic": "MIT",
+   "req": "Whisper + Ollama محلی",
+   "chk": "2026-11-21"
   },
   {
    "id": "anyshot",
@@ -591,7 +640,9 @@
    "v": "کنار AnyMachine بررسی شود.",
    "added": "2026-11-21T13:20",
    "n": 54,
-   "img": "img/lib/anyshot.webp"
+   "img": "img/lib/anyshot.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "scandot",
@@ -606,7 +657,10 @@
    "v": "تجربی؛ برای اسکن سریع با گوشی اندروید.",
    "added": "2026-11-21T13:20",
    "n": 53,
-   "img": "img/lib/scandot.webp"
+   "img": "img/lib/scandot.webp",
+   "lic": "MIT",
+   "req": "اندروید ARCore",
+   "chk": "2026-11-21"
   },
   {
    "id": "lemo-animi",
@@ -621,7 +675,9 @@
    "v": "مکمل Opuscar؛ نسخه‌ی اول و هنوز ناپخته.",
    "added": "2026-11-21T13:20",
    "n": 52,
-   "img": "img/lib/lemo-animi.webp"
+   "img": "img/lib/lemo-animi.webp",
+   "lic": "CC",
+   "chk": "2026-11-21"
   },
   {
    "id": "holospot",
@@ -636,7 +692,9 @@
    "v": "مرجع لوک برای گرافیک AR و سایت سه‌بعدی.",
    "added": "2026-11-21T13:20",
    "n": 51,
-   "img": "img/lib/holospot.webp"
+   "img": "img/lib/holospot.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "crimson-loong",
@@ -652,7 +710,8 @@
    "v": "مرجع کیفیت فیلم سه‌بعدی با کد.",
    "added": "2026-11-21T13:20",
    "n": 50,
-   "img": "img/lib/crimson-loong.webp"
+   "img": "img/lib/crimson-loong.webp",
+   "chk": "2026-11-21"
   },
   {
    "id": "mulecreate",
@@ -668,7 +727,9 @@
    "v": "برای concept to 3D؛ ببین خروجی‌اش به Blender می‌رسد.",
    "added": "2026-11-21T13:20",
    "n": 49,
-   "img": "img/lib/mulecreate.webp"
+   "img": "img/lib/mulecreate.webp",
+   "lic": "GPL",
+   "chk": "2026-11-21"
   },
   {
    "id": "movieroll",
@@ -683,7 +744,9 @@
    "v": "فعلاً پژوهشی.",
    "added": "2026-11-21T13:20",
    "n": 48,
-   "img": "img/lib/movieroll.webp"
+   "img": "img/lib/movieroll.webp",
+   "lic": "Tencent",
+   "chk": "2026-11-21"
   },
   {
    "id": "waoowaoo",
@@ -699,7 +762,9 @@
    "v": "مجوز Elastic 2.0؛ برای مقایسه با Jellyfish.",
    "added": "2026-11-21T13:20",
    "n": 47,
-   "img": "img/lib/waoowaoo.webp"
+   "img": "img/lib/waoowaoo.webp",
+   "lic": "Elastic-2.0",
+   "chk": "2026-11-21"
   },
   {
    "id": "motion-principles",
@@ -714,7 +779,9 @@
    "v": "برای کیفیت حرکت گرافیک‌های سایت و Opuscar.",
    "added": "2026-11-21T13:20",
    "n": 46,
-   "img": "img/lib/motion-principles.webp"
+   "img": "img/lib/motion-principles.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "glyph-bloom",
@@ -730,7 +797,9 @@
    "v": "مرجع لوک.",
    "added": "2026-11-21T13:20",
    "n": 45,
-   "img": "img/lib/glyph-bloom.webp"
+   "img": "img/lib/glyph-bloom.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "instanthmr",
@@ -745,7 +814,10 @@
    "v": "mesh بدن از یک عکس روی گوشی؛ مدل در Hugging Face. برای mocap سبک و قرار دادن بازیگر در صحنه.",
    "n": 44,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/instanthmr.webp"
+   "img": "img/lib/instanthmr.webp",
+   "lic": "Apache-2.0",
+   "req": "گوشی / Python",
+   "chk": "2026-11-21"
   },
   {
    "id": "anymachine",
@@ -761,7 +833,10 @@
    "v": "خانواده‌ی چهارتایی Agent در Blender: AnyScene (کل ست)، AnyKit (پراپ)، AnyMachine (ماشین متحرک)، AnyShot (فیلم‌برداری). برای ساخت ست و previs.",
    "n": 43,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/anymachine.webp"
+   "img": "img/lib/anymachine.webp",
+   "lic": "MIT",
+   "req": "Blender · Claude Code",
+   "chk": "2026-11-21"
   },
   {
    "id": "sand3d",
@@ -777,7 +852,10 @@
    "v": "مدل‌سازی Python برای LLM روی Blender؛ امتحان اینکه کیفیت procedural از Blender MCP خام بهتر است یا نه.",
    "n": 42,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/sand3d.webp"
+   "img": "img/lib/sand3d.webp",
+   "lic": "Apache-2.0",
+   "req": "Blender · Python",
+   "chk": "2026-11-21"
   },
   {
    "id": "claude-blender-skills",
@@ -794,7 +872,10 @@
    "v": "هر skill ورک‌فلوی کامل یک شات واقعی با اسکریپت‌هایش: برنامه، ساخت، نور، انیمیشن و رندر در Blender خودت. برای شات‌های سینمایی.",
    "n": 41,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/claude-blender-skills.webp"
+   "img": "img/lib/claude-blender-skills.webp",
+   "lic": "MIT",
+   "req": "Claude Code · Blender",
+   "chk": "2026-11-21"
   },
   {
    "id": "polyfork",
@@ -811,7 +892,10 @@
    "n": 40,
    "added": "2026-11-21T13:40",
    "img": "https://polyfork.dev/files/pop-top-camper-van-62a322/renders/hero.png?v=1793376536",
-   "in": "assets.html"
+   "in": "assets.html",
+   "lic": "آزاد (polyfork.dev)",
+   "req": "مرورگر (در همین سایت)",
+   "chk": "2026-11-21"
   },
   {
    "id": "reshot",
@@ -827,7 +911,10 @@
    "v": "از ویدیوی مرجع، depth map، اسکلت یا line video می‌سازد تا Seedance یا MiniMax H3 کوریوگرافی و حرکت دوربین را با کاراکتر خودت تکرار کنند. مستقیم برای Winter King.",
    "n": 39,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/reshot.webp"
+   "img": "img/lib/reshot.webp",
+   "lic": "Apache-2.0",
+   "req": "Seedance یا MiniMax H3",
+   "chk": "2026-11-21"
   },
   {
    "id": "henge",
@@ -843,7 +930,10 @@
    "v": "استودیوی ویدیو روی ComfyUI و MiniMax H3: تعویض کاراکتر، انتقال حرکت، تعویض سر؛ محلی یا RunPod. کنار FreeVideo تست شود.",
    "n": 38,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/henge.webp"
+   "img": "img/lib/henge.webp",
+   "lic": "MIT",
+   "req": "ComfyUI · GPU یا RunPod",
+   "chk": "2026-11-21"
   },
   {
    "id": "motion-educator",
@@ -859,7 +949,10 @@
    "v": "skill و موتور فیلم: اول استوری‌بورد و تأیید، بعد رندر 1080p60 فریم‌به‌فریم با کپی سه‌بعدی اشیا. خیلی نزدیک به برنامه‌ی علمی.",
    "n": 37,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/motion-educator.webp"
+   "img": "img/lib/motion-educator.webp",
+   "lic": "MIT",
+   "req": "Claude Code",
+   "chk": "2026-11-21"
   },
   {
    "id": "fuobe",
@@ -875,7 +968,10 @@
    "v": "استودیوی خلاق روی ComfyUI: تصویر، ویدیو، سه‌بعدی و صدا با مدل‌های open-weight روی GPU خودت.",
    "n": 36,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/fuobe.webp"
+   "img": "img/lib/fuobe.webp",
+   "lic": "MIT",
+   "req": "ComfyUI · GPU",
+   "chk": "2026-11-21"
   },
   {
    "id": "scenemosaic",
@@ -891,7 +987,9 @@
    "v": "کد پژوهشی دانشگاه هنگ‌کنگ برای صحنه‌ی شبیه‌سازی رباتیک؛ ایده‌ی چیدمان خوب است ولی ابزار تولید محیط سینمایی نیست.",
    "n": 35,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/scenemosaic.webp"
+   "img": "img/lib/scenemosaic.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "spritecast",
@@ -907,7 +1005,9 @@
    "v": "sprite ایزومتریک برای بازی؛ فقط اگر بازی/تعاملی pixel ساختی.",
    "n": 34,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/spritecast.webp"
+   "img": "img/lib/spritecast.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "viz3d",
@@ -924,7 +1024,9 @@
    "v": "Agent از موضوع، صحنه‌ی تعاملی سه‌بعدی می‌سازد؛ برای ایده‌ی آیتم تعاملی برنامه‌ی علمی.",
    "n": 33,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/viz3d.webp"
+   "img": "img/lib/viz3d.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "3dviz",
@@ -941,7 +1043,9 @@
    "v": "کتابخانه‌ی دستورالعمل three.js و Blender برای Agent؛ هم‌خانواده‌ی viz3d.",
    "n": 32,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/3dviz.webp"
+   "img": "img/lib/3dviz.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "pixelart-gs",
@@ -958,7 +1062,10 @@
    "n": 31,
    "added": "2026-11-21T13:40",
    "img": "img/lib/pixelart-gs.webp",
-   "in": "splat.html"
+   "in": "splat.html",
+   "lic": "MIT",
+   "req": "مرورگر (در همین سایت)",
+   "chk": "2026-11-21"
   },
   {
    "id": "codevember",
@@ -975,7 +1082,10 @@
    "n": 30,
    "added": "2026-11-21T13:40",
    "img": "img/lib/codevember.webp",
-   "in": "codevember.html"
+   "in": "codevember.html",
+   "lic": "MIT",
+   "req": "مرورگر WebGPU",
+   "chk": "2026-11-21"
   },
   {
    "id": "crucible",
@@ -992,7 +1102,9 @@
    "v": "موتور سه‌بعدی وب برای Agent و طراح؛ پروژه‌ی فعال و بزرگ. مرجع برای سایت سه‌بعدی.",
    "n": 29,
    "added": "2026-11-21T13:00",
-   "img": "https://crucible.codepawl.com/previews/hero-classroom.webp"
+   "img": "https://crucible.codepawl.com/previews/hero-classroom.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "3dnewera",
@@ -1008,7 +1120,9 @@
    "v": "ویرایشگر طراحی خانه با Agent در مرورگر؛ مرجع UI برای ویرایشگر سه‌بعدی.",
    "n": 28,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/3dnewera.webp"
+   "img": "img/lib/3dnewera.webp",
+   "lic": "Apache-2.0",
+   "chk": "2026-11-21"
   },
   {
    "id": "take-one",
@@ -1024,7 +1138,9 @@
    "v": "skill یک‌خطی تا فیلم کوتاه؛ هم‌دسته‌ی Opuscar، زیر نظر.",
    "n": 27,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/take-one.webp"
+   "img": "img/lib/take-one.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "openfilm",
@@ -1039,7 +1155,9 @@
    "v": "Agent ویدیو با کد (هم‌دسته‌ی Opuscar/Raea)؛ فقط زیر نظر.",
    "n": 26,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/openfilm.webp"
+   "img": "img/lib/openfilm.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "papercut",
@@ -1054,7 +1172,9 @@
    "v": "skill برای reel عمودی با لوک کاغذ لایه‌ای؛ مکمل سبک‌های Opuscar.",
    "n": 25,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/papercut.webp"
+   "img": "img/lib/papercut.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "line-art-anim",
@@ -1069,7 +1189,9 @@
    "v": "skill و کتابخانه‌ی SVG برای کاراکترهای line art متحرک؛ مرجع لوک.",
    "n": 24,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/line-art-anim.webp"
+   "img": "img/lib/line-art-anim.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "design-agent",
@@ -1084,7 +1206,9 @@
    "v": "LangChain: ویدیو و گرافیک هماهنگ با برند از چت؛ زیر نظر.",
    "n": 23,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/design-agent.webp"
+   "img": "img/lib/design-agent.webp",
+   "lic": "Apache-2.0",
+   "chk": "2026-11-21"
   },
   {
    "id": "klad",
@@ -1100,7 +1224,9 @@
    "v": "نقاشی مشترک با Agent و انیمیشن ساده؛ جالب ولی حاشیه‌ای.",
    "n": 22,
    "added": "2026-11-21T13:00",
-   "img": "img/lib/klad.webp"
+   "img": "img/lib/klad.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "inkline-town",
@@ -1116,7 +1242,9 @@
    "v": "مرجع لوک: سه‌بعدی خطی روی زمینه‌ی روشن برای سایت/فضای تعاملی؛ اسکافولد در حین ارتقا ایده‌ی خوبی برای transition است.",
    "n": 21,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/inkline-town.webp"
+   "img": "img/lib/inkline-town.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "ascii-magic",
@@ -1131,7 +1259,9 @@
    "v": "نسخه‌ی رایگان بدون واترمارک؛ کتابخانه‌ی کامل شیدرها و 4K در Pro. برای لوک گرافیکی سریع روی فوتیج و LED wall. ‖ سایت سازنده اجازه‌ی نمایش داخل صفحه‌ی دیگر را نمی‌دهد و کدش هم منتشر نشده؛ از دکمه‌ی «سایت» مستقیم باز کنید.",
    "n": 20,
    "added": "2026-11-21T12:00",
-   "img": "https://www.ascii-magic.com/og.jpg"
+   "img": "https://www.ascii-magic.com/og.jpg",
+   "req": "فقط مرورگر",
+   "chk": "2026-11-21"
   },
   {
    "id": "trellis2",
@@ -1148,7 +1278,10 @@
    "v": "مهم‌ترین گزینه‌ی image-to-3D با PBR برای Unreal؛ ولی ۲۴GB VRAM و فقط Linux تست‌شده. دموی Hugging Face برای تست بدون GPU.",
    "n": 19,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/trellis2.webp"
+   "img": "img/lib/trellis2.webp",
+   "lic": "MIT",
+   "req": "NVIDIA ≥24GB VRAM · Linux",
+   "chk": "2026-11-21"
   },
   {
    "id": "nerfstudio",
@@ -1165,7 +1298,10 @@
    "v": "برای benchmark محیط کنار OpenMVS و RealityScan؛ خروجی splat برای three.js.",
    "n": 18,
    "added": "2026-11-21T12:00",
-   "img": "https://user-images.githubusercontent.com/3310961/194022638-b591ce16-76e3-4ba6-9d70-3be252b36084.png"
+   "img": "https://user-images.githubusercontent.com/3310961/194022638-b591ce16-76e3-4ba6-9d70-3be252b36084.png",
+   "lic": "Apache-2.0",
+   "req": "NVIDIA GPU · CUDA",
+   "chk": "2026-11-21"
   },
   {
    "id": "blender-mcp",
@@ -1181,7 +1317,10 @@
    "v": "روی سیستمت دیده شده ولی در تست اکتبر فعال نبود؛ پایه‌ی Blender Skills.",
    "n": 17,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/blender-mcp.webp"
+   "img": "img/lib/blender-mcp.webp",
+   "lic": "MIT",
+   "req": "Blender · Claude",
+   "chk": "2026-11-21"
   },
   {
    "id": "p5brush",
@@ -1198,7 +1337,10 @@
    "n": 16,
    "added": "2026-11-21T13:40",
    "img": "img/lib/p5brush.webp",
-   "in": "brush.html"
+   "in": "brush.html",
+   "lic": "MIT",
+   "req": "مرورگر (در همین سایت)",
+   "chk": "2026-11-21"
   },
   {
    "id": "stickman",
@@ -1214,7 +1356,10 @@
    "v": "برای آیتم‌های explainer برنامه‌ی علمی قابل تست؛ پشتیبانی صدای فارسی نامعلوم. موتور Code ارزان‌تر است.",
    "n": 15,
    "added": "2026-11-21T12:00",
-   "img": "https://cdn.jsdelivr.net/gh/kaomei/stickman-video-director@2697fac5e0466f44098148a52c9648697521b3d6/assets/readme/previews/dark-theme-demo.gif"
+   "img": "https://cdn.jsdelivr.net/gh/kaomei/stickman-video-director@2697fac5e0466f44098148a52c9648697521b3d6/assets/readme/previews/dark-theme-demo.gif",
+   "lic": "MIT",
+   "req": "Claude Code/Codex + مدل تصویر",
+   "chk": "2026-11-21"
   },
   {
    "id": "diorama",
@@ -1230,7 +1375,9 @@
    "v": "روش کارش (blockout خاکستری و QA فریم‌به‌فریم) الگوی خوبی برای Winter King و Opuscar است؛ خود سبک pixel در Opuscar هست.",
    "n": 14,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/diorama.webp"
+   "img": "img/lib/diorama.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "lemo-opuscar",
@@ -1240,12 +1387,15 @@
    ],
    "st": "active",
    "repo": "lemomo-ai/lemo-opuscar",
-   "in": "./",
+   "in": "styles.html",
    "s": "۹۸ سبک فیلم کوتاه که با کد ساخته می‌شوند؛ پایه‌ی همین سایت.",
    "v": "ابزار اصلی فیلم کوتاه با کد.",
    "n": 13,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/lemo-opuscar.webp"
+   "img": "img/lib/lemo-opuscar.webp",
+   "lic": "MIT / CC BY 4.0",
+   "req": "Claude Code · Node · ffmpeg",
+   "chk": "2026-11-21"
   },
   {
    "id": "opus-prompts",
@@ -1262,7 +1412,9 @@
    "v": "در کتابخانه‌ی پرامپت همین سایت اضافه شد.",
    "n": 12,
    "added": "2026-11-21T12:00",
-   "img": "https://media.skillry.dev/opus-5-5/_readme/mosaic.fc36404ce3.webp"
+   "img": "https://media.skillry.dev/opus-5-5/_readme/mosaic.fc36404ce3.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "manimgx",
@@ -1277,7 +1429,10 @@
    "v": "برای برنامه‌ی علمی؛ تست: متن فارسی RTL و صحنه‌ی 3D. خروجی alpha ندارد.",
    "n": 11,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/manimgx.webp"
+   "img": "img/lib/manimgx.webp",
+   "lic": "MIT (wheel: GPL)",
+   "req": "Python 3.13+",
+   "chk": "2026-11-21"
   },
   {
    "id": "motlab",
@@ -1292,7 +1447,9 @@
    "v": "خیلی خام (۵ ستاره). ایده‌ی WebCodecs ارزش برداشتن دارد.",
    "n": 10,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/motlab.webp"
+   "img": "img/lib/motlab.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "raea",
@@ -1309,7 +1466,9 @@
    "v": "بالغ‌تر از Motlab؛ alpha و جزئیات 3D نامشخص.",
    "n": 9,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/raea.webp"
+   "img": "img/lib/raea.webp",
+   "lic": "نامشخص",
+   "chk": "2026-11-21"
   },
   {
    "id": "freevideo",
@@ -1324,7 +1483,10 @@
    "v": "برای draft رایگان Winter King؛ پای سیستم تست شود.",
    "n": 8,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/freevideo.webp"
+   "img": "img/lib/freevideo.webp",
+   "lic": "Apache-2.0 (وزن‌ها: MiniMax)",
+   "req": "GPU ≥8GB VRAM · ComfyUI",
+   "chk": "2026-11-21"
   },
   {
    "id": "vcam",
@@ -1341,7 +1503,9 @@
    "v": "مستقیم برای previs و handheld میکرو دراما و VP.",
    "n": 7,
    "added": "2026-11-21T12:00",
-   "img": "https://media.digitalproduction.download/2026/11/omniscient-product-shot-1.jpg"
+   "img": "https://media.digitalproduction.download/2026/11/omniscient-product-shot-1.jpg",
+   "req": "آیفون/Quest + Blender/Unreal",
+   "chk": "2026-11-21"
   },
   {
    "id": "openmvs",
@@ -1358,7 +1522,10 @@
    "v": "در benchmark محیط کنار RealityScan و 3DGS.",
    "n": 6,
    "added": "2026-11-21T12:00",
-   "img": "https://i.imgur.com/S4L0E6r.jpeg"
+   "img": "https://i.imgur.com/S4L0E6r.jpeg",
+   "lic": "AGPL-3.0",
+   "req": "build از سورس · COLMAP",
+   "chk": "2026-11-21"
   },
   {
    "id": "blender-skills",
@@ -1374,7 +1541,10 @@
    "v": "برای cleanup/export مفید؛ کیفیت مدل‌سازی را حل نمی‌کند.",
    "n": 5,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/blender-skills.webp"
+   "img": "img/lib/blender-skills.webp",
+   "lic": "MIT",
+   "req": "Blender MCP",
+   "chk": "2026-11-21"
   },
   {
    "id": "lazy-motion",
@@ -1390,7 +1560,8 @@
    "v": "باز؛ ایده‌ی Reveal & Transition Lab.",
    "n": 4,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/lazy-motion.webp"
+   "img": "img/lib/lazy-motion.webp",
+   "chk": "2026-11-21"
   },
   {
    "id": "code-mode",
@@ -1406,7 +1577,8 @@
    "added": "2026-11-21T12:00",
    "img": "https://blog.cloudflare.com/_emdash/api/media/file/01KW47KP2ERHW0YYWZBD4YRP8X.png",
    "site": "https://blog.cloudflare.com/code-mode/",
-   "kind": "technique"
+   "kind": "technique",
+   "chk": "2026-11-21"
   },
   {
    "id": "ig-agent",
@@ -1421,7 +1593,9 @@
    "v": "برای معرفی Case Studyها، بعداً.",
    "n": 2,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/ig-agent.webp"
+   "img": "img/lib/ig-agent.webp",
+   "lic": "MIT",
+   "chk": "2026-11-21"
   },
   {
    "id": "gfx-toys",
@@ -1435,7 +1609,8 @@
    "v": "آرشیو؛ با shader ساده قابل ساخت.",
    "n": 1,
    "added": "2026-11-21T12:00",
-   "img": "img/lib/gfx-toys.webp"
+   "img": "img/lib/gfx-toys.webp",
+   "chk": "2026-11-21"
   }
  ],
  "changelog": [

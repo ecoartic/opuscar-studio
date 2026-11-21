@@ -1,0 +1,18 @@
+/* Opuscar Studio — shared design tokens and chrome */
+:root{--bg:#0e0f12;--panel:#17191e;--panel2:#1d2026;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;--acc-ink:#1a1300;--r:12px}
+html{scroll-behavior:smooth}
+body{font-family:Vazirmatn,system-ui,sans-serif}
+.site-bar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:8px 16px;background:rgba(14,15,18,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.site-bar .brand{font-weight:800;color:var(--fg);text-decoration:none;white-space:nowrap;font-size:15px;letter-spacing:.2px}
+.site-bar .brand b{color:var(--acc)}
+.site-bar .links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1}
+.site-bar .links::-webkit-scrollbar{display:none}
+.site-bar .links a{flex:0 0 auto;padding:5px 11px;border-radius:999px;color:var(--mut);text-decoration:none;font-size:13.5px;white-space:nowrap}
+.site-bar .links a:hover{color:var(--fg);background:var(--panel)}
+.site-bar .links a.on{color:var(--acc-ink);background:var(--acc);font-weight:700}
+body.full .site-bar{position:fixed;left:0;right:0}
+.site-foot{border-top:1px solid var(--line);padding:16px;text-align:center;color:var(--mut);font-size:12.5px}
+.site-foot a{color:var(--acc)}
+/* when a page has its own sticky bar, sit it under the site bar */
+.bar{top:47px!important}
+@media(max-width:600px){.site-bar{gap:8px;padding:7px 10px}.site-bar .brand{font-size:13px}.bar{top:43px!important}}

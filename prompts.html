@@ -44,12 +44,12 @@ main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
 .howto{max-width:900px;margin:36px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;font-size:14px;color:var(--mut)}
 footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;color:var(--mut);font-size:13px}
 </style>
+<link rel="stylesheet" href="common.css?v=1">
 </head>
 <body>
 <header>
   <h1>کتابخانه‌ی پرامپت‌های واقعی</h1>
   <p>۷۰۳ پرامپت که سازنده‌ها برای ساخت ویدیو با Claude Opus 5.5 منتشر کرده‌اند، هر کدام با لینک پست اصلی. نقطه‌ی شروع برای نوشتن پرامپت خودتان، یا ایده برای داستان یک سبک.</p>
-  <div class="nav"><a href="./">← بازگشت به گالری سبک‌ها</a> · <a href="library.html">کتابخانه‌ی ابزار و ورک‌فلو</a></div>
 </header>
 <div class="bar">
   <input id="q" type="search" placeholder="جستجو در پرامپت‌ها… (مثلاً product launch، explainer، particles)">
@@ -112,10 +112,11 @@ function render(){
 function tog(b){const p=b.closest('.item').querySelector('.pr');p.classList.toggle('open');b.textContent=p.classList.contains('open')?'جمع کردن':'نمایش کامل';}
 function byS(s){return D.find(x=>x.s===s);}
 function cp(s,b){const t=byS(s).p;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='کپی شد ✓';setTimeout(()=>b.textContent='کپی',1500);}).catch(()=>{const r=document.createRange();r.selectNodeContents(b.closest('.item').querySelector('.pr'));getSelection().removeAllRanges();getSelection().addRange(r);});}
-function use(s,style){const x=byS(s);try{sessionStorage.setItem('opuscar_story',JSON.stringify({text:x.p,author:x.a}));}catch(e){}location.href='./#'+(style?'style='+style:'from-prompts');}
+function use(s,style){const x=byS(s);try{sessionStorage.setItem('opuscar_story',JSON.stringify({text:x.p,author:x.a}));}catch(e){}location.href='styles.html#'+(style?'style='+style:'from-prompts');}
 $('q').oninput=()=>{shown=PAGE;render();};$('fRemake').onchange=$('fFull').onchange=()=>{shown=PAGE;render();};
 $('more').onclick=()=>{shown+=PAGE;render();};
 fetch('prompts.json?v=3').then(r=>r.json()).then(j=>{D=j.sort((a,b)=>(b.r-a.r)||b.d.localeCompare(a.d));chips();render();}).catch(()=>{$('count').textContent='بارگذاری داده‌ها ناموفق بود.';});
 </script>
+<script src="site.js?v=1"></script>
 </body>
 </html>
