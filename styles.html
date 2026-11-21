@@ -23,6 +23,12 @@ main{max-width:1280px;margin:0 auto;padding:20px 16px 60px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,45%),1fr));gap:16px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .15s,border-color .15s}
 .card:hover{transform:translateY(-3px);border-color:var(--acc)}
+.card{position:relative}.card .ck{display:none;position:absolute;top:8px;left:8px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);border:2px solid #fff;color:#1a1300;font-weight:800;align-items:center;justify-content:center;font-size:14px}
+body.multi .card .ck{display:flex}body.multi .card.sel{border-color:var(--acc);outline:2px solid var(--acc)}body.multi .card.sel .ck{background:var(--acc);border-color:var(--acc)}
+.mtog{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:8px;font-size:13px;color:var(--mut);flex-wrap:wrap}body.multi #mbtn{background:var(--acc);color:#1a1300;border-color:var(--acc)}
+.tray{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:40;background:var(--panel);border:1px solid var(--acc);border-radius:14px;padding:8px 12px;display:none;gap:10px;align-items:center;box-shadow:0 12px 30px rgba(0,0,0,.5);max-width:calc(100vw - 20px)}
+body.multi .tray{display:flex}.tray b{color:var(--acc)}.tray button{padding:7px 14px;border-radius:9px;border:0;font:inherit;cursor:pointer}.tray .go{background:var(--acc);color:#1a1300;font-weight:800}.tray .clr{background:#26282d;color:var(--fg)}
+.msel{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}.msel span{padding:2px 9px;border-radius:7px;background:#222630;font-size:12.5px;direction:ltr}
 .card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#222}
 .card .t{padding:10px 12px}
 .card b{display:block;direction:ltr;text-align:right}
@@ -61,6 +67,7 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
 <div class="bar">
   <input id="q" type="search" placeholder="جستجوی سبک… (مثلاً watercolor، anime، 3D)">
   <div class="chips" id="chips"></div>
+  <div class="mtog"><button id="mbtn" class="chip">🎬 یک داستان، چند سبک</button><span id="mhint" hidden>سبک‌ها را انتخاب کنید (۲ تا ۱۲)؛ بعد «ساخت پرامپت» را بزنید.</span></div>
 </div>
 <main>
   <p class="note" id="handoff" hidden></p>
@@ -109,6 +116,27 @@ claude plugin install lemo-opuscar@lemolab</pre>
   </div>
 </dialog>
 
+<div class="tray" id="tray"><span><b id="mcount">0</b> سبک انتخاب شده</span><button class="clr" id="mclr">پاک کردن</button><button class="go" id="mgo">ساخت پرامپت</button></div>
+<dialog id="mdlg">
+  <div class="dh"><h2>یک داستان، چند سبک</h2><button class="x" onclick="mdlg.close()" aria-label="بستن">×</button></div>
+  <div style="padding:16px">
+    <div class="msel" id="msel"></div>
+    <label>داستان یا موضوع (برای همه‌ی سبک‌ها یکی)</label>
+    <textarea id="mStory" placeholder="مثلاً: یک شوالیه‌ی تنها در دره‌ای برفی با اژدهایی روبه‌رو می‌شود…"></textarea>
+    <div class="row">
+      <div><label>طول هر فیلم (ثانیه)</label><input id="mLen" type="number" min="5" max="60" value="12"></div>
+      <div><label>نسبت تصویر</label><select id="mAsp"><option value="9:16 vertical (1080×1920), for Reels/Shorts">عمودی 9:16 (ریلز)</option><option value="16:9 (1920×1080)">افقی 16:9</option><option value="1:1 (1080×1080)">مربع 1:1</option></select></div>
+    </div>
+    <div class="row">
+      <div><label>زبان متن روی تصویر</label><select id="mLang"><option>English</option><option>Persian (Farsi)</option><option>Turkish</option></select></div>
+      <div><label>خروجی مقایسه</label><select id="mCmp"><option value="reel">ریل پشت‌سرهم با شماره‌ی سبک</option><option value="grid">شبکه‌ی هم‌زمان + contact sheet</option><option value="both">هر دو</option></select></div>
+    </div>
+    <label><input type="checkbox" id="mSb" checked> اول استوری‌بورد سبک اول را نشانم بده</label>
+    <button class="btn" id="mbuild">ساخت پرامپت</button>
+    <pre id="mout" hidden></pre>
+    <button class="btn" id="mcp" hidden>کپی پرامپت</button>
+  </div>
+</dialog>
 <footer>
   تصاویر پیش‌نمایش و فیلم‌های نمونه از <a href="https://github.com/lemomo-ai/lemo-opuscar">Lemo-Opuscar by Lemomo (LemoLab)</a>، تحت مجوز <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> (تصاویر کوچک و فشرده شده‌اند). برخی تصاویر شامل مواد شخص ثالث با مجوز خودشان هستند (فایل REUSE.toml مخزن اصلی).<br>
   Memphis Diorama by EianLu · Crayon World 3D by 2nd1st, in Lemo-Opuscar by Lemomo (LemoLab).
@@ -129,9 +157,10 @@ function render(){
   const t=q.value.trim().toLowerCase();
   const list=S.filter(s=>(!cat||s.cat_en===cat)&&(!t||(s.en+' '+s.slug+' '+s.line+' '+(s.uses||[]).join(' ')).toLowerCase().includes(t)));
   document.getElementById('count').textContent=list.length+' سبک';
-  grid.innerHTML=list.map(s=>`<div class="card" data-s="${s.slug}"><img loading="lazy" src="img/${s.slug}.webp" alt="${s.en}"><div class="t"><b>${s.en}</b><small>${CAT[s.cat_en]||s.cat_en}</small>${NEEDS_IMG.has(s.slug)?'<br><span class="badge">نیاز به image generator</span>':''}</div></div>`).join('');
+  grid.innerHTML=list.map(s=>`<div class="card${MS.has(s.slug)?' sel':''}" data-s="${s.slug}"><span class="ck">✓</span><img loading="lazy" src="img/${s.slug}.webp" alt="${s.en}"><div class="t"><b>${s.en}</b><small>${CAT[s.cat_en]||s.cat_en}</small>${NEEDS_IMG.has(s.slug)?'<br><span class="badge">نیاز به image generator</span>':''}</div></div>`).join('');
 }
-grid.onclick=e=>{const c=e.target.closest('.card');if(c)open_(c.dataset.s);};
+const MS=new Set();
+grid.onclick=e=>{const c=e.target.closest('.card');if(!c)return;if(document.body.classList.contains('multi')){const k=c.dataset.s;if(MS.has(k))MS.delete(k);else if(MS.size<12)MS.add(k);c.classList.toggle('sel',MS.has(k));tray();return;}open_(c.dataset.s);};
 q.oninput=render;
 const dlg=document.getElementById('dlg');
 function open_(slug){
@@ -147,6 +176,19 @@ function open_(slug){
 }
 dlg.addEventListener('close',()=>{const v=document.getElementById('dv');v.pause();v.removeAttribute('src');v.load();});
 function useEx(){document.getElementById('fStory').value=EX[cur.slug]||'';}
+function tray(){document.getElementById('mcount').textContent=MS.size;}
+document.getElementById('mbtn').onclick=()=>{const on=document.body.classList.toggle('multi');document.getElementById('mhint').hidden=!on;if(!on){MS.clear();render();}tray();};
+document.getElementById('mclr').onclick=()=>{MS.clear();render();tray();};
+const mdlg=document.getElementById('mdlg');
+document.getElementById('mgo').onclick=()=>{if(MS.size<2){alertBox('حداقل ۲ سبک انتخاب کنید.');return;}document.getElementById('msel').innerHTML=[...MS].map((k,i)=>`<span>${i+1}. ${S.find(x=>x.slug===k).en}</span>`).join('');document.getElementById('mout').hidden=true;document.getElementById('mcp').hidden=true;mdlg.showModal();};
+function alertBox(t){const h=document.getElementById('mhint');h.hidden=false;h.textContent=t;}
+document.getElementById('mbuild').onclick=()=>{const st=[...MS].map(k=>S.find(x=>x.slug===k)),story=document.getElementById('mStory').value.trim()||'[describe your story here]',len=document.getElementById('mLen').value||12,asp=document.getElementById('mAsp').value,lang=document.getElementById('mLang').value,cmp=document.getElementById('mCmp').value,sb=document.getElementById('mSb').checked;
+ let p=`Make ${st.length} short films with lemo-opuscar, one per style, all telling the SAME story so they can be compared side by side.\n\nStory: ${story}\n\nStyles, in this order:\n`+st.map((x,i)=>`${i+1}. ${x.en} (styles/${x.slug})`).join('\n');
+ p+=`\n\nRules:\n- Each film is ${len} seconds, format ${asp}; any on-screen text in ${lang}; no narration.\n- Keep the same characters, beats and timing in every film; only the visual style changes. Follow each style's STYLE.md completely.\n- Save each film as films/<project>/<NN>-<style>.mp4.`;
+ p+= cmp==='reel'?`\n- Finally join them into one vertical reel, each film introduced by a small label "${'${n}'}/${st.length} · <style name>".`:cmp==='grid'?`\n- Finally make a synced comparison grid video of all films and a contact-sheet PNG with one labeled key frame per style.`:`\n- Finally make (a) one reel that plays them in order with a small "n/${st.length} · <style name>" label, (b) a synced comparison grid video, and (c) a contact-sheet PNG with one labeled key frame per style.`;
+ p+= sb?`\n- Before rendering, show me the storyboard for style 1 and wait for my OK; then render all styles.`:`\n- Render everything without stopping.`;
+ const o=document.getElementById('mout');o.textContent=p.replace('${n}','n');o.hidden=false;document.getElementById('mcp').hidden=false;};
+document.getElementById('mcp').onclick=()=>{const t=document.getElementById('mout').textContent,b=document.getElementById('mcp');(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='کپی شد ✓';setTimeout(()=>b.textContent='کپی پرامپت',1500);}).catch(()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('mout'));getSelection().removeAllRanges();getSelection().addRange(r);});};
 function build(){
   const story=document.getElementById('fStory').value.trim()||'[describe your story here]';
   const len=document.getElementById('fLen').value||40, asp=document.getElementById('fAsp').value,
