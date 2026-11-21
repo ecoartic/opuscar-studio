@@ -115,7 +115,7 @@ function cp(s,b){const t=byS(s).p;(navigator.clipboard?navigator.clipboard.write
 function use(s,style){const x=byS(s);try{sessionStorage.setItem('opuscar_story',JSON.stringify({text:x.p,author:x.a}));}catch(e){}location.href='./#'+(style?'style='+style:'from-prompts');}
 $('q').oninput=()=>{shown=PAGE;render();};$('fRemake').onchange=$('fFull').onchange=()=>{shown=PAGE;render();};
 $('more').onclick=()=>{shown+=PAGE;render();};
-fetch('prompts.json').then(r=>r.json()).then(j=>{D=j.sort((a,b)=>(b.r-a.r)||b.d.localeCompare(a.d));chips();render();}).catch(()=>{$('count').textContent='بارگذاری داده‌ها ناموفق بود.';});
+fetch('prompts.json?v=3').then(r=>r.json()).then(j=>{D=j.sort((a,b)=>(b.r-a.r)||b.d.localeCompare(a.d));chips();render();}).catch(()=>{$('count').textContent='بارگذاری داده‌ها ناموفق بود.';});
 </script>
 </body>
 </html>
