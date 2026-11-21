@@ -334,7 +334,8 @@
    "s": "viewport سه‌بعدی داخل ComfyUI برای کارگردانی انیمیشن کاراکتر (Mixamo/FBX)، محیط و دوربین و رندر pass برای ControlNet؛ نسخه‌ی دسکتاپ ویندوز هم دارد.",
    "v": "previs سه‌بعدی که مستقیم به تولید AI وصل می‌شود؛ جایگزین/مکمل previs خاکستری Blender.",
    "added": "2026-11-21T13:20",
-   "n": 58
+   "n": 58,
+   "img": "img/lib/action-director.webp"
   },
   {
    "id": "reshoot-4d",
@@ -382,7 +383,8 @@
    "s": "کلیپ‌ساز محلی: ویدیوی بلند → کلیپ‌های 9:16 رتبه‌بندی‌شده با زیرنویس و دنبال کردن گوینده؛ whisper و LLM محلی.",
    "v": "همان کار هایلایت فوتبال در Edit Ready؛ برای فوتیج استودیو و پشت‌صحنه مقایسه شود.",
    "added": "2026-11-21T13:20",
-   "n": 55
+   "n": 55,
+   "img": "img/lib/autoclip.webp"
   },
   {
    "id": "anyshot",
@@ -397,7 +399,8 @@
    "s": "فیلم‌بردار AI برای صحنه‌های سه‌بعدی؛ عضو خانواده‌ی AnyMachine/AnyScene.",
    "v": "کنار AnyMachine بررسی شود.",
    "added": "2026-11-21T13:20",
-   "n": 54
+   "n": 54,
+   "img": "img/lib/anyshot.webp"
   },
   {
    "id": "scandot",
@@ -411,7 +414,8 @@
    "s": "اپ اندروید برای اسکن point cloud با ARCore Depth، به‌اضافه‌ی pipeline فوتوگرامتری ویدیو با COLMAP روی سیستم.",
    "v": "تجربی؛ برای اسکن سریع با گوشی اندروید.",
    "added": "2026-11-21T13:20",
-   "n": 53
+   "n": 53,
+   "img": "img/lib/scandot.webp"
   },
   {
    "id": "lemo-animi",
@@ -503,7 +507,8 @@
    "s": "پلتفرم تولید ویدیو و ورک‌فلوی فیلم با Agent (۱۵k ستاره).",
    "v": "مجوز Elastic 2.0؛ برای مقایسه با Jellyfish.",
    "added": "2026-11-21T13:20",
-   "n": 47
+   "n": 47,
+   "img": "img/lib/waoowaoo.webp"
   },
   {
    "id": "motion-principles",
@@ -517,7 +522,8 @@
    "s": "skill اصول موشن‌دیزاین برای انیمیشن UI و CSS.",
    "v": "برای کیفیت حرکت گرافیک‌های سایت و Opuscar.",
    "added": "2026-11-21T13:20",
-   "n": 46
+   "n": 46,
+   "img": "img/lib/motion-principles.webp"
   },
   {
    "id": "glyph-bloom",
@@ -823,7 +829,8 @@
    "s": "از یک جمله فیلم کوتاه کامل روی سیستم خودت: فیلمنامه، طراحی، موسیقی.",
    "v": "skill یک‌خطی تا فیلم کوتاه؛ هم‌دسته‌ی Opuscar، زیر نظر.",
    "n": 27,
-   "added": "2026-11-21T13:00"
+   "added": "2026-11-21T13:00",
+   "img": "img/lib/take-one.webp"
   },
   {
    "id": "openfilm",
@@ -1089,7 +1096,8 @@
    "s": "ویدیو با کد: هر صحنه یک canvas با renderAt(t)؛ انکود با WebCodecs داخل صفحه.",
    "v": "خیلی خام (۵ ستاره). ایده‌ی WebCodecs ارزش برداشتن دارد.",
    "n": 10,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/motlab.webp"
   },
   {
    "id": "raea",
@@ -1120,7 +1128,8 @@
    "s": "اجرای محلی MiniMax H3 روی GPU از ۸GB VRAM؛ پلاگین ComfyUI، first/last frame، LoRA.",
    "v": "برای draft رایگان Winter King؛ پای سیستم تست شود.",
    "n": 8,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/freevideo.webp"
   },
   {
    "id": "vcam",
@@ -1215,7 +1224,8 @@
    "s": "۱۳ skill برای نوشتن Reel، کپشن، هوک و برنامه‌ی هفتگی.",
    "v": "برای معرفی Case Studyها، بعداً.",
    "n": 2,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/ig-agent.webp"
   },
   {
    "id": "gfx-toys",
@@ -1228,7 +1238,8 @@
    "s": "تبدیل عکس به line art، برش تصویر (fluted glass)، ژنراتور نوار نور.",
    "v": "آرشیو؛ با shader ساده قابل ساخت.",
    "n": 1,
-   "added": "2026-11-21T12:00"
+   "added": "2026-11-21T12:00",
+   "img": "img/lib/gfx-toys.webp"
   }
  ],
  "changelog": [
