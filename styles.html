@@ -133,7 +133,7 @@ claude plugin install lemo-opuscar@lemolab</pre>
     </div>
     <label><input type="checkbox" id="mSb" checked> اول استوری‌بورد سبک اول را نشانم بده</label>
     <button class="btn" id="mbuild">ساخت پرامپت</button>
-    <pre id="mout" hidden></pre>
+    <pre id="mout" dir="ltr" style="text-align:left;unicode-bidi:plaintext;white-space:pre-wrap" hidden></pre>
     <button class="btn" id="mcp" hidden>کپی پرامپت</button>
   </div>
 </dialog>
@@ -184,7 +184,7 @@ document.getElementById('mgo').onclick=()=>{if(MS.size<2){alertBox('حداقل �
 function alertBox(t){const h=document.getElementById('mhint');h.hidden=false;h.textContent=t;}
 document.getElementById('mbuild').onclick=()=>{const st=[...MS].map(k=>S.find(x=>x.slug===k)),story=document.getElementById('mStory').value.trim()||'[describe your story here]',len=document.getElementById('mLen').value||12,asp=document.getElementById('mAsp').value,lang=document.getElementById('mLang').value,cmp=document.getElementById('mCmp').value,sb=document.getElementById('mSb').checked;
  let p=`Make ${st.length} short films with lemo-opuscar, one per style, all telling the SAME story so they can be compared side by side.\n\nStory: ${story}\n\nStyles, in this order:\n`+st.map((x,i)=>`${i+1}. ${x.en} (styles/${x.slug})`).join('\n');
- p+=`\n\nRules:\n- Each film is ${len} seconds, format ${asp}; any on-screen text in ${lang}; no narration.\n- Keep the same characters, beats and timing in every film; only the visual style changes. Follow each style's STYLE.md completely.\n- Save each film as films/<project>/<NN>-<style>.mp4.`;
+ p+=`\n\nRules:\n- Each film is ${len} seconds, format ${asp}; any on-screen text in ${lang}; no narration.\n- Keep the same characters, beats and timing in every film; only the visual style changes. Follow each style's STYLE.md completely.\n- Put the shared story (all on-screen texts and beat times) in one file that every film imports, so one change updates all films.\n- Every film must pass core/render/readcheck.mjs at its size; if a text is too long for its beat, shorten the text or move it earlier, never cut the reading time.\n- Save each film as films/<project>/<NN>-<style>.mp4.`;
  p+= cmp==='reel'?`\n- Finally join them into one vertical reel, each film introduced by a small label "${'${n}'}/${st.length} · <style name>".`:cmp==='grid'?`\n- Finally make a synced comparison grid video of all films and a contact-sheet PNG with one labeled key frame per style.`:`\n- Finally make (a) one reel that plays them in order with a small "n/${st.length} · <style name>" label, (b) a synced comparison grid video, and (c) a contact-sheet PNG with one labeled key frame per style.`;
  p+= sb?`\n- Before rendering, show me the storyboard for style 1 and wait for my OK; then render all styles.`:`\n- Render everything without stopping.`;
  const o=document.getElementById('mout');o.textContent=p.replace('${n}','n');o.hidden=false;document.getElementById('mcp').hidden=false;};
