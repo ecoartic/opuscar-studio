@@ -69,7 +69,7 @@ footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;colo
   <h2>نقشه‌ی ورک‌فلو</h2>
   <p class="sub">یک ورک‌فلو را انتخاب کنید تا مسیرش روشن شود، یا روی یک دسته بزنید تا ابزارهایش و اتصالاتش را ببینید. جریان از راست (ورودی) به چپ (خروجی) است.</p>
   <div class="wfs" id="wfs"></div>
-  <div class="map"><svg id="map" viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="map"><svg id="map" viewBox="0 0 1000 330" direction="ltr" style="direction:ltr" xmlns="http://www.w3.org/2000/svg"></svg></div>
 
   <h2>دسته‌ها</h2>
   <p class="sub">کارکرد هر دسته در یک نگاه؛ عدد = تعداد ابزارهای ثبت‌شده.</p>
@@ -127,7 +127,7 @@ function apply(){
     <p class="s">${esc(x.s)}</p><p class="v">${esc(x.v)}</p>
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=1').then(r=>r.json()).then(j=>{L=j;L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();apply();});
+fetch('library.json?v=2').then(r=>r.json()).then(j=>{L=j;L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();apply();});
 </script>
 </body>
 </html>
