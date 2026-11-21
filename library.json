@@ -1,0 +1,45 @@
+{
+  "updated": "2026-11-21",
+  "categories": [
+    {"id":"concept-3d","fa":"Concept to 3D","g":"✏️","col":0,"d":"از اسکچ و کانسپت به مدل سه‌بعدی"},
+    {"id":"image-3d","fa":"Image to 3D","g":"🖼️","col":0,"d":"از عکس یا چند عکس به mesh/دارایی سه‌بعدی (photogrammetry، AI)"},
+    {"id":"360-3d","fa":"360 to 3D","g":"🌐","col":0,"d":"از تصویر/ویدیوی ۳۶۰ به فضای سه‌بعدی قابل حرکت"},
+    {"id":"worldlabs","fa":"World Labs","g":"🗺️","col":0,"d":"ساخت جهان سه‌بعدی از تصویر/متن؛ خروجی splat/mesh"},
+    {"id":"gaussian","fa":"Gaussian Splatting","g":"✨","col":0,"d":"بازسازی فوتورئال صحنه با 3DGS؛ کیفیت بصری بالا، relight محدود"},
+    {"id":"depth","fa":"Depth Map","g":"🌫️","col":0,"d":"عمق از تصویر/ویدیو برای کامپوزیت، occlusion و parallax"},
+    {"id":"blender","fa":"Blender","g":"🟠","col":1,"d":"مدل‌سازی، cleanup، اتوماسیون Python/MCP، previs"},
+    {"id":"chroma","fa":"Chroma Key","g":"🟩","col":1,"d":"جدا کردن سوژه از پرده‌ی سبز/آبی"},
+    {"id":"matte","fa":"Matte / Roto","g":"✂️","col":1,"d":"ماسک و roto، لبه‌ی مو و شفافیت"},
+    {"id":"relight","fa":"Relighting","g":"💡","col":1,"d":"نورپردازی دوباره‌ی سوژه یا صحنه با AI/normals"},
+    {"id":"motion","fa":"Motion (ویدیو با کد)","g":"🎞️","col":1,"d":"ساخت ویدیو و انیمیشن با کد و Agent"},
+    {"id":"motion-gfx","fa":"Motion Graphics","g":"🔷","col":1,"d":"گرافیک متحرک، تایپوگرافی، explainer"},
+    {"id":"unreal","fa":"Unreal Engine","g":"⚫","col":2,"d":"موتور real-time؛ Cook برای Aximmetry"},
+    {"id":"threejs","fa":"three.js","g":"🔺","col":2,"d":"موتور سه‌بعدی وب؛ splat، مدل، تعامل"},
+    {"id":"aximmetry","fa":"Aximmetry","g":"📺","col":3,"d":"استودیوی مجازی زنده، tracking، AR، خروجی Broadcast"},
+    {"id":"film-3d","fa":"فضای سه‌بعدی برای فیلم‌سازی","g":"🎬","col":3,"d":"previs، دوربین مجازی، محیط برای فیلم و میکرو دراما"},
+    {"id":"web-3d","fa":"سایت سه‌بعدی","g":"🕸️","col":3,"d":"وب‌سایت و پورتفولیوی سه‌بعدی"},
+    {"id":"interactive","fa":"فضای تعاملی سه‌بعدی","g":"🕹️","col":3,"d":"تجربه‌ی تعاملی، بازی، تور مجازی"},
+    {"id":"agent","fa":"Claude / Agent","g":"🤖","col":-1,"d":"ابزار کمکی برای Agent‌ها (خارج از نقشه‌ی ورک‌فلو)"}
+  ],
+  "workflows": [
+    {"id":"vp-env","fa":"محیط فوتورئال برای استودیوی مجازی","c":"#e8b04b","edges":[["concept-3d","blender"],["image-3d","blender"],["360-3d","blender"],["worldlabs","unreal"],["gaussian","unreal"],["blender","unreal"],["unreal","aximmetry"]]},
+    {"id":"live-comp","fa":"کامپوزیت و نور زنده","c":"#5fb3d9","edges":[["chroma","matte"],["depth","matte"],["matte","relight"],["depth","relight"],["relight","aximmetry"]]},
+    {"id":"web3d","fa":"سایت و فضای تعاملی سه‌بعدی","c":"#b58cf0","edges":[["gaussian","threejs"],["image-3d","threejs"],["worldlabs","threejs"],["blender","threejs"],["threejs","web-3d"],["threejs","interactive"]]},
+    {"id":"film","fa":"فیلم، previs و موشن","c":"#6fcf8a","edges":[["blender","film-3d"],["unreal","film-3d"],["motion","film-3d"],["motion-gfx","film-3d"],["depth","film-3d"]]}
+  ],
+  "items": [
+    {"id":"lemo-opuscar","t":"Lemo-Opuscar","cats":["motion"],"st":"active","repo":"lemomo-ai/lemo-opuscar","in":"./","s":"۹۸ سبک فیلم کوتاه که با کد ساخته می‌شوند؛ پایه‌ی همین سایت.","v":"ابزار اصلی فیلم کوتاه با کد."},
+    {"id":"opus-prompts","t":"awesome-opus5-5-videos","cats":["motion","motion-gfx"],"st":"active","repo":"yihui-dev/awesome-opus5-5-videos","in":"prompts.html","reel":"https://www.instagram.com/reel/DeQWqNXOa72/","s":"۷۰۳ پرامپت واقعی ویدیو با Opus 5.5 با تصویر و لینک پست اصلی.","v":"در کتابخانه‌ی پرامپت همین سایت اضافه شد."},
+    {"id":"manimgx","t":"ManimGX","cats":["motion-gfx"],"st":"bench","repo":"academa-labs/manimgx","reel":"https://www.instagram.com/reel/DefTOG7se5T/","s":"موتور انیمیشن ریاضی سریع (Rust + wgpu) سازگار با Manim CE؛ 2D و 3D، Typst برای متن.","v":"برای برنامه‌ی علمی؛ تست: متن فارسی RTL و صحنه‌ی 3D. خروجی alpha ندارد."},
+    {"id":"motlab","t":"Motlab","cats":["motion"],"st":"watch","repo":"staryone/motlab","reel":"https://www.instagram.com/reel/Df-LYwzlaF5/","s":"ویدیو با کد: هر صحنه یک canvas با renderAt(t)؛ انکود با WebCodecs داخل صفحه.","v":"خیلی خام (۵ ستاره). ایده‌ی WebCodecs ارزش برداشتن دارد."},
+    {"id":"raea","t":"Raea","cats":["motion","motion-gfx"],"st":"watch","repo":"shinyobjectz/raea","site":"https://raea.io","reel":"https://www.instagram.com/reel/DfvLYbgqpb2/","s":"موتور ویرایش/رندر ویدیو با کد برای Agent؛ اپ دسکتاپ، رندر محلی روی GPU رایگان.","v":"بالغ‌تر از Motlab؛ alpha و جزئیات 3D نامشخص."},
+    {"id":"freevideo","t":"FreeVideo (MiniMax H3)","cats":["film-3d"],"st":"bench","repo":"FlashML-org/FreeVideo","reel":"https://www.instagram.com/reel/Df9cMI4Py9_/","s":"اجرای محلی MiniMax H3 روی GPU از ۸GB VRAM؛ پلاگین ComfyUI، first/last frame، LoRA.","v":"برای draft رایگان Winter King؛ پای سیستم تست شود."},
+    {"id":"vcam","t":"دوربین مجازی با گوشی (Filmspace و جایگزین‌ها)","cats":["film-3d","blender","unreal"],"st":"bench","site":"https://digitalproduction.com/2026/11/06/omniscient-blender-gets-a-handheld-camera/","reel":"https://www.instagram.com/reel/DfKQb7fAl09/","s":"حرکت دوربین را با گوشی در صحنه‌ی سه‌بعدی ضبط کن؛ گزینه‌ها: Higgsfield phone cam، Omniscient، Live Link VCAM.","v":"مستقیم برای previs و handheld میکرو دراما و VP."},
+    {"id":"openmvs","t":"OpenMVS","cats":["image-3d","blender","unreal"],"st":"bench","repo":"cdcseacave/openMVS","reel":"https://www.instagram.com/reel/Df9waEzPShO/","s":"photogrammetry متن‌باز: از دوربین‌های align‌شده (COLMAP) به dense cloud، mesh و texture.","v":"در benchmark محیط کنار RealityScan و 3DGS."},
+    {"id":"blender-skills","t":"Blender Skills (۹۴ skill)","cats":["blender","agent"],"st":"bench","repo":"arjun988/blender-skills","reel":"https://www.instagram.com/reel/DfywFF4S7IH/","s":"skillهای Agent برای Blender از طریق MCP؛ از blockout تا export.","v":"برای cleanup/export مفید؛ کیفیت مدل‌سازی را حل نمی‌کند."},
+    {"id":"lazy-motion","t":"Lazy Motion (Cloth reveal)","cats":["blender","motion-gfx"],"st":"open","site":"https://cleverpoly.store","reel":"https://www.instagram.com/reel/DfuwHlXt6V_/","s":"پریست‌های انیمیشن Blender مثل پاره شدن پارچه و reveal.","v":"باز؛ ایده‌ی Reveal & Transition Lab."},
+    {"id":"code-mode","t":"Cloudflare Code Mode","cats":["agent"],"st":"watch","reel":"https://www.instagram.com/reel/Df9VMkRiml0/","s":"Agent به‌جای صدا زدن تک‌تک toolها کد می‌نویسد؛ context بسیار کمتر.","v":"الگوی خوب برای MCP روی Aximmetry."},
+    {"id":"ig-agent","t":"Instagram Agent Skill","cats":["agent"],"st":"watch","repo":"Jakeschincariol/instagram-agent-skill","reel":"https://www.instagram.com/reel/Df90gkjNYev/","s":"۱۳ skill برای نوشتن Reel، کپشن، هوک و برنامه‌ی هفتگی.","v":"برای معرفی Case Studyها، بعداً."},
+    {"id":"gfx-toys","t":"سه ابزار گرافیک (Waygilm و…)","cats":["motion-gfx"],"st":"archive","reel":"https://www.instagram.com/reel/DfukwRKTm1e/","s":"تبدیل عکس به line art، برش تصویر (fluted glass)، ژنراتور نوار نور.","v":"آرشیو؛ با shader ساده قابل ساخت."}
+  ]
+}

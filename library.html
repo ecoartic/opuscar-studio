@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>کتابخانه‌ی ابزار و ورک‌فلو — Opuscar Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}
+a{color:var(--acc)}
+header{padding:44px 20px 20px;text-align:center;background:radial-gradient(ellipse at top,#2a2214 0%,var(--bg) 70%)}
+header h1{margin:0 0 6px;font-size:clamp(24px,4.5vw,40px);font-weight:800}
+header p{margin:0 auto;max-width:720px;color:var(--mut)}
+.nav{margin-top:12px;font-size:14px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+main{max-width:1200px;margin:0 auto;padding:16px 16px 60px}
+h2{font-size:20px;margin:28px 0 6px}
+.sub{color:var(--mut);font-size:14px;margin:0 0 12px}
+.wfs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.wf{padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer;font:inherit;font-size:13px}
+.wf i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-left:6px;vertical-align:middle}
+.wf.on{border-color:var(--acc);background:#2a2214}
+.map{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px;overflow-x:auto}
+.map svg{display:block;width:100%;min-width:760px;height:auto}
+.node rect{fill:#1d2026;stroke:#3a3f4a;rx:9}
+.node text{fill:var(--fg);font-size:13px;font-family:Vazirmatn,sans-serif}
+.node .cnt{fill:var(--acc);font-size:11px}
+.node{cursor:pointer}
+.node.on rect{stroke:var(--acc);stroke-width:2}
+.node.dim{opacity:.28}
+.edge{fill:none;stroke-width:2;opacity:.5}
+.edge.dim{opacity:.07}
+.edge.on{opacity:1;stroke-width:3}
+.colh{fill:var(--mut);font-size:12px;font-family:Vazirmatn,sans-serif}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,46%),1fr));gap:10px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;transition:border-color .15s}
+.tile:hover,.tile.on{border-color:var(--acc)}
+.tile .g{font-size:22px}
+.tile b{display:block;direction:ltr;text-align:right}
+.tile small{color:var(--mut);display:block;font-size:12px;line-height:1.6}
+.tile .n{float:left;color:var(--acc);font-size:12px}
+.tile.empty{opacity:.55}
+.filter{margin:14px 0;color:var(--mut);font-size:14px}
+.filter button{background:none;border:0;color:var(--acc);font:inherit;cursor:pointer;text-decoration:underline}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:14px}
+.it{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.th{width:100%;aspect-ratio:2/1;object-fit:cover;display:block;background:#1d2026}
+.ph{width:100%;aspect-ratio:2/1;display:flex;align-items:center;justify-content:center;font-size:44px;background:linear-gradient(135deg,#2a2214,#17191e 60%,#1b2430)}
+.ib{padding:12px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.ib h3{margin:0;font-size:16px;direction:ltr;text-align:right}
+.cats span{display:inline-block;margin:2px;padding:1px 8px;border-radius:6px;background:#222630;font-size:12px;direction:ltr;cursor:pointer}
+.st{display:inline-block;padding:1px 8px;border-radius:6px;font-size:12px}
+.st.active{background:#16361f;color:#7fe0a0}.st.bench{background:#3a2a10;color:var(--acc)}.st.watch{background:#1f2a3a;color:#8fbcef}.st.open{background:#33213a;color:#d6a3f0}.st.archive{background:#26282d;color:var(--mut)}
+.s{font-size:14px;margin:0}
+.v{font-size:13px;color:var(--mut);margin:0}
+.lk{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;margin-top:auto;padding-top:4px}
+footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>کتابخانه‌ی ابزار و ورک‌فلو</h1>
+  <p>ابزارها و تکنیک‌هایی که از ریلزها جمع می‌شوند، دسته‌بندی‌شده. نقشه نشان می‌دهد هر دسته در کدام مرحله است و دسته‌ها چطور به هم وصل می‌شوند تا یک ورک‌فلو بسازند.</p>
+  <div class="nav"><a href="./">گالری سبک‌ها</a><a href="prompts.html">کتابخانه‌ی پرامپت</a></div>
+</header>
+<main>
+  <h2>نقشه‌ی ورک‌فلو</h2>
+  <p class="sub">یک ورک‌فلو را انتخاب کنید تا مسیرش روشن شود، یا روی یک دسته بزنید تا ابزارهایش و اتصالاتش را ببینید. جریان از راست (ورودی) به چپ (خروجی) است.</p>
+  <div class="wfs" id="wfs"></div>
+  <div class="map"><svg id="map" viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg"></svg></div>
+
+  <h2>دسته‌ها</h2>
+  <p class="sub">کارکرد هر دسته در یک نگاه؛ عدد = تعداد ابزارهای ثبت‌شده.</p>
+  <div class="tiles" id="tiles"></div>
+
+  <h2>ابزارها</h2>
+  <div class="filter" id="filter"></div>
+  <div class="items" id="items"></div>
+</main>
+<footer>آخرین به‌روزرسانی: <span id="upd"></span> · تصاویر کارت‌ها تصویر معرفی ریپو در GitHub هستند.</footer>
+<script>
+const ST={active:'در استفاده',bench:'پای سیستم تست شود',watch:'زیر نظر',open:'باز، در حال بررسی',archive:'آرشیو'};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let L,C={},sel={type:null,id:null};
+const COLX=[820,565,310,55],NW=150,NH=30,COLH=['ورودی / ساخت دارایی','پردازش','موتور','خروجی'];
+function layout(){
+  const cols=[[],[],[],[]];L.categories.filter(c=>c.col>=0).forEach(c=>cols[c.col].push(c));
+  cols.forEach((list,ci)=>{const gap=42,top=40+(6-list.length)*gap/2;list.forEach((c,i)=>{c.x=COLX[ci];c.y=top+i*gap;});});
+}
+function count(id){return L.items.filter(x=>x.cats.includes(id)).length;}
+function drawMap(){
+  const svg=$('map');let h='';
+  COLH.forEach((t,i)=>h+=`<text class="colh" x="${COLX[i]+NW/2}" y="20" text-anchor="middle">${t}</text>`);
+  L.workflows.forEach(w=>w.edges.forEach(([a,b])=>{const A=C[a],B=C[b];if(!A||!B)return;
+    let d;const ay=A.y+NH/2,by=B.y+NH/2;
+    if(A.col===B.col){const x=A.x;d=`M${x},${ay} C${x-45},${ay} ${x-45},${by} ${x},${by}`;}
+    else{const x1=A.x,x2=B.x+NW,mx=(x1+x2)/2;d=`M${x1},${ay} C${mx},${ay} ${mx},${by} ${x2},${by}`;}
+    h+=`<path class="edge" data-w="${w.id}" data-a="${a}" data-b="${b}" stroke="${w.c}" d="${d}"/>`;}));
+  L.categories.filter(c=>c.col>=0).forEach(c=>{const n=count(c.id);
+    h+=`<g class="node" data-id="${c.id}" onclick="pick('cat','${c.id}')"><rect x="${c.x}" y="${c.y}" width="${NW}" height="${NH}" rx="9"/>
+    <text x="${c.x+NW-10}" y="${c.y+20}" text-anchor="end">${c.g} ${esc(c.fa)}</text>${n?`<text class="cnt" x="${c.x+10}" y="${c.y+20}">${n}</text>`:''}</g>`;});
+  svg.innerHTML=h;
+}
+function drawWfs(){$('wfs').innerHTML=L.workflows.map(w=>`<button class="wf" data-id="${w.id}" onclick="pick('wf','${w.id}')"><i style="background:${w.c}"></i>${esc(w.fa)}</button>`).join('');}
+function drawTiles(){$('tiles').innerHTML=L.categories.map(c=>{const n=count(c.id);return `<div class="tile${n?'':' empty'}" data-id="${c.id}" onclick="pick('cat','${c.id}')"><span class="n">${n||''}</span><span class="g">${c.g}</span><b>${esc(c.fa)}</b><small>${esc(c.d)}</small></div>`;}).join('');}
+function pick(type,id){if(sel.type===type&&sel.id===id){sel={type:null,id:null};}else sel={type,id};apply();if(type==='cat'&&sel.id)$('filter').scrollIntoView({behavior:'smooth',block:'start'});}
+function apply(){
+  let nodes=null,edgeOn=e=>false;
+  if(sel.type==='wf'){const w=L.workflows.find(x=>x.id===sel.id);nodes=new Set(w.edges.flat());edgeOn=e=>e.dataset.w===w.id;}
+  if(sel.type==='cat'){nodes=new Set([sel.id]);document.querySelectorAll('.edge').forEach(e=>{if(e.dataset.a===sel.id||e.dataset.b===sel.id){nodes.add(e.dataset.a);nodes.add(e.dataset.b);}});edgeOn=e=>e.dataset.a===sel.id||e.dataset.b===sel.id;}
+  document.querySelectorAll('.edge').forEach(e=>{const on=sel.type&&edgeOn(e);e.classList.toggle('on',!!on);e.classList.toggle('dim',!!sel.type&&!on);});
+  document.querySelectorAll('.node').forEach(n=>{n.classList.toggle('on',sel.type==='cat'&&n.dataset.id===sel.id);n.classList.toggle('dim',!!nodes&&!nodes.has(n.dataset.id));});
+  document.querySelectorAll('.wf').forEach(b=>b.classList.toggle('on',sel.type==='wf'&&b.dataset.id===sel.id));
+  document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('on',!!nodes&&nodes.has(t.dataset.id)&&(sel.type==='wf'||t.dataset.id===sel.id)));
+  let list=L.items,label='همه‌ی ابزارها';
+  if(sel.type==='cat'){list=list.filter(x=>x.cats.includes(sel.id));label='دسته‌ی '+C[sel.id].fa;}
+  if(sel.type==='wf'){list=list.filter(x=>x.cats.some(c=>nodes.has(c)));label='ورک‌فلوی «'+L.workflows.find(x=>x.id===sel.id).fa+'»';}
+  $('filter').innerHTML=`${esc(label)}: ${list.length} ابزار ${sel.type?'· <button onclick="pick(null,null)">نمایش همه</button>':''}`;
+  $('items').innerHTML=list.map(x=>{const g=(C[x.cats[0]]||{}).g||'🧩';
+    const img=x.repo?`<img class="th" loading="lazy" src="https://opengraph.githubassets.com/1/${esc(x.repo)}" alt="" onerror="this.outerHTML='<div class=ph>${g}</div>'">`:`<div class="ph">${g}</div>`;
+    return `<div class="it">${img}<div class="ib"><h3>${esc(x.t)}</h3>
+    <div><span class="st ${x.st}">${ST[x.st]||x.st}</span></div>
+    <div class="cats">${x.cats.map(c=>`<span onclick="pick('cat','${c}')">${(C[c]||{}).g||''} ${esc((C[c]||{}).fa||c)}</span>`).join('')}</div>
+    <p class="s">${esc(x.s)}</p><p class="v">${esc(x.v)}</p>
+    <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}</div></div></div>`;}).join('');
+}
+fetch('library.json?v=1').then(r=>r.json()).then(j=>{L=j;L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();apply();});
+</script>
+</body>
+</html>
