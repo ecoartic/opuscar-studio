@@ -156,6 +156,13 @@
    "d": "AR در مرورگر و موبایل: image/face tracking، مدل در اتاق، Quest passthrough"
   },
   {
+   "id": "avatar",
+   "fa": "آواتار زنده (AI Avatar)",
+   "g": "🗣️",
+   "col": 2,
+   "d": "آواتار گفتگوی real-time از یک عکس، مجری مجازی، lip-sync و سر سه‌بعدی Gaussian؛ از API ابری تا مدل متن‌باز روی GPU خودت"
+  },
+  {
    "id": "agent",
    "fa": "Claude / Agent",
    "g": "🤖",
@@ -328,6 +335,37 @@
     [
      "stereo",
      "xr"
+    ]
+   ]
+  },
+  {
+   "id": "avatar",
+   "fa": "آواتار و مجری زنده",
+   "c": "#f07ab0",
+   "edges": [
+    [
+     "concept-3d",
+     "avatar"
+    ],
+    [
+     "blender",
+     "avatar"
+    ],
+    [
+     "unreal",
+     "avatar"
+    ],
+    [
+     "gaussian",
+     "avatar"
+    ],
+    [
+     "avatar",
+     "aximmetry"
+    ],
+    [
+     "avatar",
+     "interactive"
     ]
    ]
   }
@@ -1034,7 +1072,8 @@
    "cats": [
     "film-3d",
     "blender",
-    "unreal"
+    "unreal",
+    "avatar"
    ],
    "st": "bench",
    "repo": "toyxyz/toyxyz_RGBMocap",
@@ -1345,7 +1384,8 @@
    "cats": [
     "blender",
     "unreal",
-    "image-3d"
+    "image-3d",
+    "avatar"
    ],
    "st": "bench",
    "repo": "tree-ind/metahumanmaker",
@@ -2917,9 +2957,142 @@
    "v": "همان ایده‌ی Set Builder و WorldDraft. نکته‌ی فنی: GPT-6 Astra طبق مستندات OpenAI فقط خروجی متن دارد، پس در این ورک‌فلو احتمالاً پرامپت/رفرنس نوشته و تصویر با ابزار دیگری ساخته شده. H3 در ComfyUI ویدیوی کنترلی Canny/Depth/Pose می‌گیرد؛ پس رندر depth یا pose از Maya/Blender مستقیم ورودی است. هشدار: بازسازی چهره‌ی بازیگران واقعی بدون اجازه مشکل حقوقی دارد؛ برای کار خودت از کاراکتر خودت استفاده کن.",
    "n": 112,
    "chk": "2026-11-23"
+  },
+  {
+   "id": "lemonslice",
+   "t": "LemonSlice 2.1 (آواتار real-time از یک عکس)",
+   "cats": [
+    "avatar"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "site": "https://lemonslice.com/avatar-api",
+   "img": "img/lib/lemonslice.webp",
+   "lic": "سرویس تجاری (اشتراک + هزینه‌ی دقیقه‌ای میزبانی)",
+   "req": "API یا widget؛ LiveKit Agents، Agora؛ هر LLM و TTS (Claude، OpenAI، ElevenLabs، Cartesia)",
+   "s": "از یک عکس (واقعی، کارتون، نقاشی) آواتاری می‌سازد که در تماس ویدیویی گوش می‌دهد و جواب می‌دهد؛ بدون آموزش جداگانه. مدل پایه LemonSlice-2 با ۲۰ میلیارد پارامتر روی یک GPU اجرا می‌شود. شرکت latency را 471ms p99 اعلام کرده (عدد خود فروشنده). مدل کارتون از اکتبر ۲۰۲۶ در API است.",
+   "v": "کاندیدای اول برای «مجری/مهمان مجازی» در استودیو: می‌شود متن را با هر LLM و صدا را با هر TTS ساخت. در دموی AI Engineer لباس و محیط آواتار وسط تماس با متن عوض شد. تست لازم: خروجی WebRTC را به NDI/OBS و بعد Aximmetry برسانیم و latency واقعی از استانبول اندازه بگیریم.",
+   "n": 113,
+   "chk": "2026-11-23",
+   "added": "2026-11-23T01:50"
+  },
+  {
+   "id": "runway-characters",
+   "t": "Runway Characters (GWM-1)",
+   "cats": [
+    "avatar"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "site": "https://runwayml.com/characters",
+   "img": "img/lib/runway-characters.webp",
+   "lic": "سرویس تجاری؛ Runway API credits (هر credit = $0.01)",
+   "req": "Runway Dev API؛ WebRTC؛ React SDK، LiveKit Agents یا ElevenLabs Agents",
+   "s": "API آواتار گفتگو real-time از یک تصویر (۹ مارس ۲۰۲۶). طبق مقاله‌ی فنی Runway: ۷۲۰p با ۲۴fps، ۳۷ms زمان مدل برای هر فریم و ۱٫۷۵ ثانیه از پایان حرف تا اولین فریم پاسخ. هزینه: ۲ credit شروع + ۲ credit برای هر ۶ ثانیه، یعنی حدود ۰٫۲۰ دلار در دقیقه.",
+   "v": "محدودیت مهم برای پخش زنده: هر Session حداکثر ۵ دقیقه است؛ برای برنامه‌ی طولانی باید session را پشت‌سرهم باز کرد. knowledge base تا ۵۰ هزار توکن و tool calling دارد. برای کاراکتر کارتونی/ماسکوت برند قوی است.",
+   "n": 114,
+   "chk": "2026-11-23",
+   "added": "2026-11-23T01:50"
+  },
+  {
+   "id": "gemini-live-avatar",
+   "t": "Gemini 3.8 Live + Live Avatar (Google)",
+   "cats": [
+    "avatar"
+   ],
+   "st": "watch",
+   "kind": "tool",
+   "site": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-with-live-avatar/",
+   "img": "img/lib/gemini-live-avatar.webp",
+   "lic": "سرویس تجاری Google (Gemini Enterprise)",
+   "req": "Gemini Enterprise / Gemini Live API",
+   "s": "از ۲۴ سپتامبر ۲۰۲۶ عمومی شد: مدل گفتگوی صوتی Gemini 3.8 Live با چهره‌ی ویدیویی که lip-sync و حالت چهره دارد و در ۹۷ زبان وسط گفتگو زبان عوض می‌کند. همه‌ی خروجی‌ها واترمارک SynthID دارند.",
+   "v": "زیر نظر: گوگل برای Live Avatar هنوز عدد latency و قیمت جداگانه منتشر نکرده. توکن Gemini 3.8 Live ارزان است (۰٫۷۵ / ۴٫۵ دلار در میلیون)، ولی ویدیو حدود ۲۵۰ برابر صدا توکن مصرف می‌کند. مزیت برای GEM TV: چندزبانه (فارسی/ترکی) در یک جلسه.",
+   "n": 115,
+   "chk": "2026-11-23",
+   "added": "2026-11-23T01:50"
+  },
+  {
+   "id": "avtr-1",
+   "t": "AVTR-1 (Avaturn Live، وزن باز)",
+   "cats": [
+    "avatar"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "avaturn-live/avtr-1",
+   "site": "https://avaturn.live",
+   "img": "img/lib/avtr-1.webp",
+   "lic": "AVTR-1 Community License: رایگان برای نهادهای با درآمد سالانه زیر ۱۰ میلیون دلار؛ بالاتر از آن لایسنس تجاری لازم است. بند کنترل صادرات دارد.",
+   "req": "GPU انویدیا Ampere یا جدیدتر؛ TensorRT؛ pixi",
+   "s": "مدل flow-matching خودبازگشتی برای گفتگوی زنده: از یک پرتره و صدای دوطرفه، هم حرف‌زدن و هم «گوش‌دادن فعال» را با ۲۵fps روی یک GPU می‌سازد؛ کل صورت تولید می‌شود، نه فقط لب. هر chunk پنج‌فریمی روی L40 حدود ۸۴ms و روی A100 حدود ۹۱ms (README خود repo). backend جلسه‌ی زنده هم داخل repo است.",
+   "v": "بهترین گزینه‌ی self-host اگر GPU داشته باشیم: داده از استودیو خارج نمی‌شود و هزینه‌ی دقیقه‌ای ندارد. هشدار لایسنس: اگر GEM TV (با شرکت‌های وابسته) بیش از ۱۰ میلیون دلار درآمد سالانه دارد، استفاده‌ی تجاری بدون لایسنس پولی ممنوع است؛ برای تست شخصی و R&D مشکلی نیست.",
+   "n": 116,
+   "chk": "2026-11-23",
+   "added": "2026-11-23T01:50"
+  },
+  {
+   "id": "mynah",
+   "t": "Mynah (انسان دیجیتال self-hosted + SoulX-FlashHead)",
+   "cats": [
+    "avatar",
+    "interactive"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "honwee/mynah",
+   "img": "img/lib/mynah.webp",
+   "lic": "Apache-2.0 (Mynah)؛ SoulX-FlashHead هم Apache-2.0",
+   "req": "یک GPU انویدیا کلاس 4090 (پروفایل سبک wav2lip روی GPU ضعیف‌تر)؛ هر worker یک جلسه‌ی زنده",
+   "s": "پلتفرم کامل متن‌باز «انسان دیجیتال»: گفتگوی صوتی real-time با ویدیوی lip-sync، کنسول مدیریت، knowledge base و انتشار در کانال‌ها. هر بخش یک endpoint شبکه است، پس worker آواتار می‌تواند روی ماشین GPU جدا باشد. موتور FlashHead نسخه‌ی Lite روی یک RTX 4090 حدود ۹۶fps می‌دهد (نسخه‌ی Pro برای real-time دو RTX 5090 می‌خواهد).",
+   "v": "اگر بخواهیم کل زنجیره (ASR، LLM، TTS، چهره) داخل شبکه‌ی استودیو باشد، این نقطه‌ی شروع آماده است؛ آخرین commit ۲۴ اکتبر ۲۰۲۶. خروجی را می‌شود به‌عنوان یک منبع ویدیو وارد Aximmetry کرد.",
+   "n": 117,
+   "chk": "2026-11-23",
+   "added": "2026-11-23T01:50"
+  },
+  {
+   "id": "liveavatar-intel",
+   "t": "LiveAvatar (Intel Labs، سر Gaussian سه‌بعدی زنده)",
+   "cats": [
+    "avatar",
+    "gaussian"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "IntelLabs/LiveAvatar",
+   "img": "img/lib/liveavatar-intel.webp",
+   "lic": "Apache-2.0",
+   "req": "Python؛ GPU؛ وب‌کم",
+   "s": "ویدیوی تک‌دوربین (وب‌کم) را زنده به آواتار سر سه‌بعدی Gaussian تبدیل می‌کند و می‌تواند از روی یک عکس، چهره‌ی دیگری را با حرکت شما بچرخاند (cross-identity). سرور streaming وب‌کم دارد.",
+   "v": "با بقیه فرق دارد: خروجی سه‌بعدی است، نه ویدیوی دوبعدی؛ پس در صحنه‌ی مجازی می‌شود دور سر چرخید و با دوربین ردیابی‌شده‌ی استودیو هماهنگش کرد. به پایپ‌لاین 3DGS در Aximmetry نزدیک است. آخرین commit ۵ اوت ۲۰۲۶.",
+   "n": 118,
+   "chk": "2026-11-23",
+   "added": "2026-11-23T01:50"
+  },
+  {
+   "id": "liveavatar-quark",
+   "t": "Live Avatar (Alibaba Quark، ECCV 2026)",
+   "cats": [
+    "avatar"
+   ],
+   "st": "watch",
+   "kind": "tool",
+   "repo": "Alibaba-Quark/LiveAvatar",
+   "img": "img/lib/liveavatar-quark.webp",
+   "lic": "Apache-2.0 (مدل پایه Wan 2.2 هم Apache-2.0)",
+   "req": "real-time: چند GPU دیتاسنتری؛ تک GPU فقط با ۸۰GB VRAM و غیر real-time",
+   "s": "تولید ویدیوی آواتار با صدا، streaming و بی‌پایان (بدون افت کیفیت در طول زمان)، بر پایه‌ی Wan 2.2. وزن‌ها و کد real-time منتشر شده‌اند.",
+   "v": "زیر نظر: سخت‌افزار real-time آن از توان ما بیرون است؛ ولی برای ساخت ویدیوی طولانی مجری به‌صورت آفلاین روی GPU اجاره‌ای قابل استفاده است. لایسنس بازترین در این دسته است.",
+   "n": 119,
+   "chk": "2026-11-23",
+   "added": "2026-11-23T01:50"
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-23 01:50",
+   "t": "دسته و ورک‌فلوی تازه: «آواتار زنده» — LemonSlice، Runway Characters، Gemini Live Avatar، AVTR-1، Mynah، LiveAvatar (Intel و Alibaba). MetaHuman Maker و RGB MoCap هم به این ورک‌فلو وصل شدند."
+  },
   {
    "d": "2026-11-23 01:20",
    "t": "ابزار تازه روی سایت: «تغییر نسبت هوشمند» (Seam Carving، seam.html). به کتابخانه اضافه شد: caire، billion-context، و تکنیک لی‌اوت Maya ← MiniMax H3."
