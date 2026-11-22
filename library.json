@@ -259,6 +259,26 @@
  ],
  "items": [
   {
+   "id": "anamorphic-plates",
+   "t": "پلیت‌های آنامورفیک برای ویدیوی AI (Nexus)",
+   "cats": [
+    "film-3d",
+    "relight"
+   ],
+   "st": "ready",
+   "kind": "technique",
+   "site": "https://dreamina.capcut.com",
+   "reel": "https://www.instagram.com/reel/DgAk1LDiWEU/",
+   "img": "img/lib/anamorphic-plates.webp",
+   "added": "2026-11-22T03:50",
+   "n": 106,
+   "chk": "2026-11-22",
+   "lic": "تکنیک (کپشن عمومی ریل) · Skill اصلی فقط از DM، بررسی‌نشده",
+   "req": "هر مدل تصویر + Seedance (در ریل: Seedream 5.5 و Seedance روی Dreamina)",
+   "s": "سه قاعده از تیم pjacefilms برای قسمت دوم سریال Nexus: ۱) شیت کاراکتر با صدها نسخه و بعد انتخاب؛ ۲) پلیت لوکیشن طوری ساخته شود که انگار با لنز آنامورفیک قدیمی گرفته شده (بوکه‌ی بیضی، لبه‌های نرم، عمق میدان کم، خمیدگی لبه‌ی قاب) چون Seedance همین ویژگی‌ها را به ویدیو منتقل می‌کند؛ ۳) نور سخت و جهت‌دار در هر پلیت، چون Seedance اگر رها شود همه‌چیز را به یک نوردهی تخت می‌کشاند.",
+   "v": "مستقیم برای میکرو دراما: «نگاه» را در پلیت ثابت قفل کن، نه در پرامپت ویدیو؛ و کنتراست نور را از قبل در تصویر بساز. ریل اسپانسر Dreamina است و Skill «LENS» فقط با کامنت فرستاده می‌شود؛ خود قواعد بدون آن Skill هم قابل اجراست (کلمات کلیدی پرامپت تصویر: anamorphic lens، oval bokeh، soft edges، shallow depth of field، hard directional key light). همین قواعد را در پلیت‌های Higgsfield یا GPT Image هم تست کن."
+  },
+  {
    "id": "onetake",
    "t": "onetake",
    "cats": [
