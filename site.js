@@ -8,6 +8,8 @@
     ['animation.html','انیمیشن آبرنگی','🎥','شخصیت لنزو با p5.brush و خروجی MP4'],
     ['assets.html','دارایی‌های سه‌بعدی','📦','۳۴۸۹ مدل GLB رایگان'],
     ['artarget.html','AR روی کارت خودت','📇','عکس از هر سطح → تارگت AR، بدون ARCore'],
+    ['xr.html','اتاق XR','🥽','مدل در VR/AR با اندازه‌ی واقعی (Quest، اندروید)'],
+    ['depth.html','آزمایشگاه عمق','🌗','عمق از عکس، پارالاکس 2.5D، DoF، استریو'],
     ['splat.html','نمایشگر Splat','✨','Gaussian splat با pixel و کروما'],
     ['gsbrush.html','ساخت Splat (Brush)','🧩','آموزش Gaussian splat در مرورگر'],
     ['supersplat/','ویرایشگر SuperSplat','✂️','تمیزکاری و ترکیب splat (نسخه‌ی خود سایت)'],

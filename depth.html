@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>آزمایشگاه عمق — Behrang Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;--ok:#5fd38d;--bad:#ff6b6b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}a{color:var(--acc)}
+header{padding:34px 18px 12px;text-align:center;background:radial-gradient(ellipse at top,#16222e 0%,var(--bg) 70%)}
+header h1{margin:0 0 6px;font-size:clamp(22px,4.5vw,34px);font-weight:800}header p{margin:0 auto;max-width:720px;color:var(--mut)}
+main{max-width:980px;margin:0 auto;padding:10px 14px 70px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:12px 0}
+.btn{display:inline-block;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:#22252c;color:var(--fg);font:inherit;cursor:pointer;margin:3px 0 3px 6px}
+.btn.p{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}.btn:disabled{opacity:.45}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.tab{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#111317;color:var(--mut);cursor:pointer;font:inherit;font-size:14px}.tab.on{background:var(--acc);color:#111;border-color:var(--acc)}
+#stage{position:relative;background:#000;border-radius:12px;overflow:hidden;display:flex;justify-content:center;touch-action:none}
+canvas#gl{max-width:100%;max-height:70vh;display:block}
+.mut{color:var(--mut);font-size:13px}.bar{height:6px;background:#22252c;border-radius:4px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;width:0;background:var(--acc)}
+label.s{display:flex;gap:8px;align-items:center;font-size:14px;margin:4px 0}label.s input[type=range]{flex:1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>🌗 آزمایشگاه عمق</h1>
+<p>از یک عکس، نقشه‌ی عمق می‌سازد (Depth Anything V2 Small، داخل مرورگر، بدون سرور) و همان را به پارالاکس 2.5D، عمق میدان (DoF) با فوکوس لمسی و تصویر استریو برای هدست تبدیل می‌کند. خروجی‌ها: depth PNG، فریم، ویدیوی پارالاکس.</p>
+</header>
+<main>
+<section class="panel">
+ <div class="row">
+  <label class="btn p">🖼️ انتخاب عکس<input type="file" id="file" accept="image/*" hidden></label>
+  <label class="btn">📷 عکس با دوربین<input type="file" id="cam" accept="image/*" capture="environment" hidden></label>
+  <button class="btn" id="sample">نمونه</button>
+  <span class="mut" id="dev"></span>
+ </div>
+ <div class="bar" id="pbw" style="display:none"><i id="pb"></i></div>
+ <div class="mut" id="st">مدل بار اول حدود ۲۵ تا ۵۰ مگابایت دانلود می‌شود و در مرورگر ذخیره می‌ماند. عکس شما از دستگاه خارج نمی‌شود.</div>
+</section>
+
+<section class="panel" id="viewer" style="display:none">
+ <div class="tabs" id="tabs">
+  <button class="tab" data-m="0">تصویر</button><button class="tab" data-m="1">عمق</button><button class="tab" data-m="2">عمق رنگی</button>
+  <button class="tab on" data-m="3">پارالاکس 2.5D</button><button class="tab" data-m="4">عمق میدان (DoF)</button><button class="tab" data-m="5">استریو SBS</button>
+ </div>
+ <div id="stage"><canvas id="gl"></canvas></div>
+ <p class="mut" id="hint">انگشت یا ماوس را روی تصویر حرکت دهید؛ روی گوشی با کج کردن گوشی هم کار می‌کند.</p>
+ <div class="grid2">
+  <label class="s">شدت پارالاکس <input type="range" id="str" min="0" max="0.12" step="0.002" value="0.04"></label>
+  <label class="s">صفحه‌ی فوکوس <input type="range" id="foc" min="0" max="1" step="0.01" value="0.5"></label>
+  <label class="s">دیافراگم (تاری) <input type="range" id="ap" min="0" max="28" step="0.5" value="10"></label>
+  <label class="s">فاصله‌ی چشم (استریو) <input type="range" id="eye" min="0" max="0.06" step="0.002" value="0.025"></label>
+  <label class="s"><input type="checkbox" id="orbit" checked style="flex:0"> حرکت خودکار دوربین</label>
+  <label class="s"><input type="checkbox" id="gyro" style="flex:0"> کنترل با کج کردن گوشی</label>
+ </div>
+ <div class="row">
+  <button class="btn" id="dlDepth">⬇️ depth PNG</button>
+  <button class="btn" id="dlView">⬇️ همین نما (PNG)</button>
+  <button class="btn" id="rec">🎬 ویدیوی پارالاکس ۴ ثانیه</button>
+ </div>
+ <p class="mut">در حالت DoF روی تصویر بزنید تا فوکوس روی همان نقطه بنشیند. خروجی SBS را روی Quest یا با iw3 / پلیر VR به‌صورت Side-by-Side ببینید.</p>
+</section>
+
+<details class="panel"><summary><b>کاربرد در ورکفلو و محدودیت‌ها</b></summary>
+<ul class="mut">
+ <li><b>Virtual Production:</b> پاس عمق سریع برای fog/DoF در کامپوزیت، پیش‌نمایش پارالاکس پلیت‌های AI قبل از ساخت لایه‌ی واقعی، یا رفرنس فاصله برای چیدمان ست.</li>
+ <li>عمق <b>نسبی</b> است (نزدیک/دور)، نه به متر؛ برای متریک: Depth Pro، MoGe-2 یا MapAnything روی GPU خودتان (در <a href="library.html">کتابخانه</a>).</li>
+ <li>پارالاکس 2.5D پشت اشیا را نمی‌بیند؛ با شدت زیاد لبه‌ها کش می‌آیند. برای حرکت واقعی دوربین: Gaussian Splat.</li>
+ <li>مدل: <a href="https://huggingface.co/onnx-community/depth-anything-v2-small" target="_blank" rel="noopener">Depth Anything V2 Small</a> (Apache-2.0) با <a href="https://github.com/huggingface/transformers.js" target="_blank" rel="noopener">transformers.js</a>؛ روی WebGPU سریع، بدون آن با WASM (کندتر).</li>
+</ul></details>
+</main>
+<footer>Depth Anything V2 Small (Apache-2.0) · transformers.js (Apache-2.0) · Behrang Lab</footer>
+
+<script type="module">
+const $=id=>document.getElementById(id);
+const TF='https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.2';
+let pipe=null,img=null,W=0,H=0,mode=3,depthU8=null;
+const useGPU=!!navigator.gpu;$('dev').textContent=useGPU?'⚡ WebGPU':'WASM (کندتر)';
+
+async function getPipe(){if(pipe)return pipe;
+ const {pipeline,env}=await import(TF);env.allowLocalModels=false;
+ $('pbw').style.display='block';const files={};
+ pipe=await pipeline('depth-estimation','onnx-community/depth-anything-v2-small',{device:useGPU?'webgpu':'wasm',dtype:useGPU?'fp16':'q8',
+  progress_callback:p=>{if(p.status==='progress'&&p.total){files[p.file]=[p.loaded,p.total];let a=0,b=0;for(const k in files){a+=files[k][0];b+=files[k][1];}
+   $('pb').style.width=(100*a/b).toFixed(0)+'%';$('st').textContent=`دانلود مدل: ${(a/1e6).toFixed(1)} / ${(b/1e6).toFixed(1)} MB`;}}});
+ $('pbw').style.display='none';return pipe;}
+
+async function loadImage(src){const im=new Image();im.crossOrigin='anonymous';im.src=src;await im.decode();
+ const M=1280,s=Math.min(1,M/Math.max(im.naturalWidth,im.naturalHeight));W=Math.round(im.naturalWidth*s);H=Math.round(im.naturalHeight*s);
+ const c=document.createElement('canvas');c.width=W;c.height=H;c.getContext('2d').drawImage(im,0,0,W,H);return c;}
+
+async function run(src){
+ try{$('st').textContent='در حال آماده‌سازی…';const c=await loadImage(src);img=c;
+  const p=await getPipe();$('st').textContent='در حال تخمین عمق…';const t0=performance.now();
+  const out=await p(c.toDataURL('image/jpeg',.95));
+  const d=out.depth; // RawImage, 1 channel, near = bright
+  let data=d.data;if(d.channels!==1){const g=new Uint8Array(d.width*d.height);for(let i=0;i<g.length;i++)g[i]=data[i*d.channels];data=g;}
+  depthU8={data,w:d.width,h:d.height};
+  $('st').textContent=`عمق آماده شد (${((performance.now()-t0)/1000).toFixed(1)} ثانیه، ${d.width}×${d.height}).`;
+  setup();$('viewer').style.display='block';
+ }catch(e){console.error(e);$('st').textContent='خطا: '+e.message;}}
+$('file').onchange=e=>{const f=e.target.files[0];if(f)run(URL.createObjectURL(f));};
+$('cam').onchange=e=>{const f=e.target.files[0];if(f)run(URL.createObjectURL(f));};
+$('sample').onclick=()=>run('img/lib/vork.webp');
+
+// ---------- WebGL2 renderer ----------
+const cv=$('gl');let gl,prog,texI,texD,U={};
+const VS=`#version 300 es
+in vec2 p;out vec2 uv;void main(){uv=p*.5+.5;uv.y=1.-uv.y;gl_Position=vec4(p,0,1);}`;
+const FS=`#version 300 es
+precision highp float;in vec2 uv;out vec4 o;uniform sampler2D I,D;uniform int M;uniform vec2 off;uniform float foc,ap,eye;uniform vec2 px;
+float dep(vec2 t){return texture(D,t).r;}
+vec2 para(vec2 t,vec2 P){vec2 s=t;for(int i=0;i<10;i++)s=t-(dep(s)-foc)*P;return s;}
+vec3 turbo(float x){x=clamp(x,0.,1.);vec4 kr=vec4(.13572138,4.61539260,-42.66032258,132.13108234),kg=vec4(.09140261,2.19418839,4.84296658,-14.18503333),kb=vec4(.10667330,12.64194608,-60.58204836,110.36276771);vec2 kr2=vec2(-152.94239396,59.28637943),kg2=vec2(4.27729857,2.82956604),kb2=vec2(-89.90310912,27.34824973);vec4 v4=vec4(1.,x,x*x,x*x*x);vec2 v2=v4.zw*v4.z;return vec3(dot(v4,kr)+dot(v2,kr2),dot(v4,kg)+dot(v2,kg2),dot(v4,kb)+dot(v2,kb2));}
+void main(){vec2 t=uv;
+ if(M==0){o=texture(I,t);return;}
+ if(M==1){float d=dep(t);o=vec4(vec3(d),1);return;}
+ if(M==2){o=vec4(turbo(dep(t)),1);return;}
+ if(M==3){o=texture(I,clamp(para(t,off),0.,1.));return;}
+ if(M==5){bool L=t.x<.5;vec2 tt=vec2(L?t.x*2.:(t.x-.5)*2.,t.y);o=texture(I,clamp(para(tt,vec2(L?-eye:eye,0)),0.,1.));return;}
+ // DoF: gather with circle-of-confusion, golden-angle spiral
+ float d0=dep(t),c0=abs(d0-foc)*ap;vec3 acc=vec3(0);float wsum=0.;
+ for(int i=0;i<48;i++){float r=sqrt(float(i)+.5)/sqrt(48.);float a=float(i)*2.39996;vec2 q=t+vec2(cos(a),sin(a))*r*max(c0,.0)*px*2.;
+  float dq=dep(q),cq=abs(dq-foc)*ap;float rad=r*max(c0,.0)*2.;
+  float w=dq>d0+.02?smoothstep(rad-1.,rad+1.,cq*2.):1.; // sharp background must not bleed over a blurred foreground only if foreground coc reaches
+  acc+=texture(I,q).rgb*w;wsum+=w;}
+ o=vec4(acc/max(wsum,1e-3),1);}`;
+function sh(t,s){const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);if(!gl.getShaderParameter(x,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(x));return x;}
+function setup(){
+ if(!gl){gl=cv.getContext('webgl2',{preserveDrawingBuffer:true});prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);gl.useProgram(prog);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const l=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,2,gl.FLOAT,false,0,0);
+  ['I','D','M','off','foc','ap','eye','px'].forEach(k=>U[k]=gl.getUniformLocation(prog,k));texI=gl.createTexture();texD=gl.createTexture();requestAnimationFrame(loop);}
+ const tex=(t,unit)=>{gl.activeTexture(gl.TEXTURE0+unit);gl.bindTexture(gl.TEXTURE_2D,t);for(const [k,v] of [[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]])gl.texParameteri(gl.TEXTURE_2D,k,v);};
+ tex(texI,0);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+ tex(texD,1);gl.pixelStorei(gl.UNPACK_ALIGNMENT,1);
+ // light smoothing of the 8-bit depth to avoid stair-stepping in parallax/DoF
+ const {data,w,h}=depthU8,f=new Uint8Array(w*h);for(let y=0;y<h;y++)for(let x=0;x<w;x++){let s=0,n=0;for(let j=-1;j<=1;j++)for(let i=-1;i<=1;i++){const xx=Math.min(w-1,Math.max(0,x+i)),yy=Math.min(h-1,Math.max(0,y+j));s+=data[yy*w+xx];n++;}f[y*w+x]=s/n;}
+ gl.texImage2D(gl.TEXTURE_2D,0,gl.R8,w,h,0,gl.RED,gl.UNSIGNED_BYTE,f);
+ gl.uniform1i(U.I,0);gl.uniform1i(U.D,1);size();}
+function size(){cv.width=mode===5?W*2:W;cv.height=H;gl.viewport(0,0,cv.width,cv.height);}
+let ptr=null,gyr=null,tStart=performance.now();
+function offset(){const s=+$('str').value;if($('gyro').checked&&gyr)return [gyr[0]*s,gyr[1]*s];if(ptr)return [ptr[0]*s,ptr[1]*s];
+ if($('orbit').checked){const a=(performance.now()-tStart)/1000*1.6;return [Math.cos(a)*s,Math.sin(a)*s*.6];}return [0,0];}
+function loop(){if(gl&&img){gl.uniform1i(U.M,mode);const o=offset();gl.uniform2f(U.off,o[0],o[1]);gl.uniform1f(U.foc,+$('foc').value);gl.uniform1f(U.ap,+$('ap').value);gl.uniform1f(U.eye,+$('eye').value);gl.uniform2f(U.px,1/W,1/H);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);}requestAnimationFrame(loop);}
+$('tabs').onclick=e=>{const b=e.target.closest('.tab');if(!b)return;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));mode=+b.dataset.m;size();
+ $('hint').textContent=mode===4?'روی تصویر بزنید تا فوکوس روی همان نقطه بنشیند.':mode===5?'چپ و راست = چشم چپ و راست (Side-by-Side).':'انگشت یا ماوس را روی تصویر حرکت دهید؛ روی گوشی با کج کردن گوشی هم کار می‌کند.';};
+const rel=e=>{const r=cv.getBoundingClientRect();return [(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height];};
+cv.addEventListener('pointermove',e=>{if(mode===3||mode===5){const [x,y]=rel(e);ptr=[(x-.5)*2,(y-.5)*2];}});
+cv.addEventListener('pointerleave',()=>ptr=null);
+cv.addEventListener('pointerdown',e=>{if(mode!==4||!depthU8)return;const [x,y]=rel(e);const {data,w,h}=depthU8;$('foc').value=data[Math.min(h-1,Math.floor(y*h))*w+Math.min(w-1,Math.floor(x*w))]/255;});
+$('gyro').onchange=async e=>{if(!e.target.checked)return;try{if(DeviceOrientationEvent.requestPermission)await DeviceOrientationEvent.requestPermission();}catch(_){}
+ addEventListener('deviceorientation',ev=>{if(ev.gamma==null)return;gyr=[Math.max(-1,Math.min(1,ev.gamma/30)),Math.max(-1,Math.min(1,(ev.beta-45)/30))];});};
+$('dlDepth').onclick=()=>{const {data,w,h}=depthU8,c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d'),id=x.createImageData(w,h);for(let i=0;i<w*h;i++){id.data[i*4]=id.data[i*4+1]=id.data[i*4+2]=data[i];id.data[i*4+3]=255;}x.putImageData(id,0,0);save(c,'depth.png');};
+$('dlView').onclick=()=>save(cv,['image','depth','depth-turbo','parallax','dof','sbs'][mode]+'.png');
+function save(c,n){c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();},'image/png');}
+$('rec').onclick=()=>{if(!window.MediaRecorder){alert('ضبط ویدیو در این مرورگر پشتیبانی نمی‌شود');return;}
+ const prev=[mode,$('orbit').checked];if(mode!==3&&mode!==5){mode=3;size();}$('orbit').checked=true;ptr=null;tStart=performance.now();
+ const s=cv.captureStream(30),mime=['video/mp4;codecs=avc1','video/webm;codecs=vp9','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'';
+ const r=new MediaRecorder(s,mime?{mimeType:mime,videoBitsPerSecond:12e6}:{}),ch=[];r.ondataavailable=e=>e.data.size&&ch.push(e.data);
+ r.onstop=()=>{const b=new Blob(ch,{type:r.mimeType}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='parallax.'+((r.mimeType||'').includes('mp4')?'mp4':'webm');a.click();$('rec').disabled=false;$('rec').textContent='🎬 ویدیوی پارالاکس ۴ ثانیه';
+  [mode]=prev;$('orbit').checked=prev[1];size();};
+ $('rec').disabled=true;$('rec').textContent='در حال ضبط…';r.start();setTimeout(()=>r.stop(),3930);};
+window.__depthTest={get ready(){return !!depthU8},setMode:m=>{mode=m;size();}};
+</script>
+<script src="site.js?v=8"></script>
+</body>
+</html>

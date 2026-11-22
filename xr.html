@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>اتاق XR — Behrang Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0f12;--panel:rgba(23,25,30,.92);--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif}
+#ui{position:fixed;z-index:10;top:0;right:0;width:min(380px,100%);max-height:100%;overflow:auto;background:var(--panel);border-left:1px solid var(--line);padding:12px 14px;backdrop-filter:blur(6px);box-sizing:border-box}
+#ui.min{max-height:52px;overflow:hidden}
+h1{font-size:19px;margin:0 0 4px}.mut{color:var(--mut);font-size:13px;line-height:1.6}
+input[type=search]{width:100%;box-sizing:border-box;padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:#111317;color:var(--fg);font:inherit}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0;max-height:220px;overflow:auto}
+.m{background:#fff;border:2px solid transparent;border-radius:8px;overflow:hidden;cursor:pointer;padding:0}.m.on{border-color:var(--acc)}.m img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+label.s{display:flex;gap:8px;align-items:center;font-size:14px;margin:5px 0}label.s input[type=range]{flex:1}
+.btn{padding:8px 12px;border-radius:9px;border:1px solid var(--line);background:#22252c;color:var(--fg);font:inherit;cursor:pointer;margin:3px 0 3px 4px}
+.btn.p{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}
+#tog{position:absolute;top:10px;left:10px}
+a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div id="ui">
+ <button class="btn" id="tog">▾</button>
+ <h1>🥽 اتاق XR</h1>
+ <p class="mut">یک مدل از ۳۴۸۹ مدل Polyfork را در VR (Quest، PCVR) یا AR (Quest 3 passthrough، اندروید با ARCore) با اندازه‌ی واقعی ببینید. در AR، با انتخاب کنترلر یا لمس صفحه، مدل روی زمین واقعی گذاشته می‌شود. ساخته‌شده با A-Frame (MIT).</p>
+ <input type="search" id="q" placeholder="جستجو (انگلیسی): chair, tree, car…">
+ <div class="grid" id="grid"></div>
+ <div class="mut" id="sel">مدل: —</div>
+ <label class="s">ارتفاع مدل (متر) <input type="range" id="h" min="0.1" max="4" step="0.05" value="1"><span id="hv">1.00</span></label>
+ <label class="s"><input type="checkbox" id="emu" style="flex:0"> شبیه‌ساز Quest 3 روی دسکتاپ (IWER)</label>
+ <p class="mut" id="xrs"></p>
+ <p class="mut">در VR: دسته‌ی کنترلر راست = چرخش مدل، دسته‌ی چپ = بزرگ/کوچک. روی دسکتاپ: کشیدن ماوس + کلیدهای WASD.</p>
+ <p class="mut"><a href="index.html">← Behrang Lab</a> · <a href="splat.html">نمایشگر Splat (VR/AR)</a> · <a href="artarget.html">AR روی کارت</a></p>
+</div>
+<script type="module">
+const $=id=>document.getElementById(id);
+const P=new URLSearchParams(location.search),EMU=P.has('emulate');$('emu').checked=EMU;
+$('emu').onchange=()=>{const u=new URL(location.href);$('emu').checked?u.searchParams.set('emulate','1'):u.searchParams.delete('emulate');location.href=u;};
+$('tog').onclick=()=>{$('ui').classList.toggle('min');$('tog').textContent=$('ui').classList.contains('min')?'▸':'▾';};
+if(EMU){try{const {XRDevice,metaQuest3}=await import('https://cdn.jsdelivr.net/npm/iwer@2.8.0/build/iwer.module.min.js');new XRDevice(metaQuest3).installRuntime({forceInstall:true});}catch(e){console.warn('iwer',e);}}
+await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/aframe@1.8.0/dist/aframe-v1.8.0.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+const A=window.AFRAME,THREE=A.THREE;
+// fit model: height in meters, base on the floor, centered
+A.registerComponent('fit-height',{schema:{h:{default:1}},init(){this.el.addEventListener('model-loaded',()=>this.fit());},update(){this.fit();},
+ fit(){const m=this.el.getObject3D('mesh');if(!m)return;m.scale.setScalar(1);m.position.set(0,0,0);m.updateMatrixWorld(true);
+  const b=new THREE.Box3().setFromObject(m),sz=b.getSize(new THREE.Vector3());const k=this.data.h/Math.max(sz.y,1e-6);m.scale.setScalar(k);m.updateMatrixWorld(true);
+  const b2=new THREE.Box3().setFromObject(m),c=b2.getCenter(new THREE.Vector3()),wp=this.el.object3D.getWorldPosition(new THREE.Vector3());
+  m.position.set(-(c.x-wp.x),-(b2.min.y-wp.y),-(c.z-wp.z));}});
+// thumbsticks: right = rotate, left = scale
+A.registerComponent('stick-edit',{init(){this.el.addEventListener('thumbstickmoved',e=>{const t=document.querySelector('#model');if(!t)return;const {x,y}=e.detail;
+ if(this.el.id==='rh'){t.object3D.rotation.y-=x*0.05;}else{const s=Math.max(.1,Math.min(10,t.object3D.scale.x*(1-y*0.02)));t.object3D.scale.setScalar(s);}});}});
+document.body.insertAdjacentHTML('beforeend',`
+<a-scene renderer="colorManagement:true;antialias:true" xr-mode-ui="XRMode: xr" webxr="optionalFeatures: hit-test, local-floor" ar-hit-test="target:#model; type: footprint" loading-screen="enabled:false">
+ <a-entity light="type:hemisphere;color:#fff;groundColor:#555;intensity:1.6"></a-entity>
+ <a-entity light="type:directional;intensity:1.4;castShadow:true" position="2 4 2"></a-entity>
+ <a-sky color="#1b1e24" hide-on-enter-ar></a-sky>
+ <a-grid hide-on-enter-ar></a-grid>
+ <a-plane rotation="-90 0 0" width="30" height="30" color="#2a2d35" hide-on-enter-ar></a-plane>
+ <a-entity id="model" position="0 0 -1.6" fit-height="h:1"></a-entity>
+ <a-entity id="rig"><a-entity camera look-controls wasd-controls position="0 1.6 0"></a-entity>
+  <a-entity id="lh" laser-controls="hand:left" stick-edit></a-entity><a-entity id="rh" laser-controls="hand:right" stick-edit></a-entity></a-entity>
+</a-scene>`);
+// a-grid fallback (not core): simple line grid
+if(!A.primitives.primitives['a-grid']){const g=document.querySelector('a-grid');g.outerHTML='<a-entity hide-on-enter-ar id="grid3"></a-entity>';
+ setTimeout(()=>{const e=document.querySelector('#grid3');if(e)e.setObject3D('mesh',new THREE.GridHelper(30,30,0x555b66,0x33363d));},0);}
+const model=document.querySelector('#model');
+let assets=[];fetch('assets.json?v=1').then(r=>r.json()).then(j=>{assets=j.assets;render('chair');$('q').value='chair';});
+function render(q){q=q.trim().toLowerCase();const L=(q?assets.filter(a=>a.t.toLowerCase().includes(q)||(a.y||'').includes(q)):assets).slice(0,40);
+ $('grid').innerHTML=L.map(a=>`<button class="m" data-g="${a.g}" data-t="${a.t.replace(/"/g,'')}"><img loading="lazy" src="${a.th}" alt=""></button>`).join('');}
+$('q').oninput=e=>render(e.target.value);
+$('grid').onclick=e=>{const b=e.target.closest('.m');if(!b)return;document.querySelectorAll('.m.on').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+ model.setAttribute('gltf-model',b.dataset.g);$('sel').textContent='مدل: '+b.dataset.t;};
+$('h').oninput=e=>{$('hv').textContent=(+e.target.value).toFixed(2);model.setAttribute('fit-height','h',+e.target.value);};
+(async()=>{const x=navigator.xr;let vr=false,ar=false;if(x){try{vr=await x.isSessionSupported('immersive-vr');ar=await x.isSessionSupported('immersive-ar');}catch(e){}}
+ $('xrs').textContent=vr||ar?('پشتیبانی این مرورگر: '+[vr&&'VR',ar&&'AR'].filter(Boolean).join(' + ')+' — دکمه‌های پایین-راست صفحه.'):'WebXR در این مرورگر نیست؛ روی Quest در Meta Quest Browser باز کنید یا شبیه‌ساز را روشن کنید.';})();
+window.__xrTest={scene:()=>document.querySelector('a-scene'),model};
+</script>
+</body>
+</html>
