@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>گالری ویدیوهای Claude — Behrang Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}
+a{color:var(--acc)}
+header{padding:48px 20px 24px;text-align:center;background:radial-gradient(ellipse at top,#2a2214 0%,var(--bg) 70%)}
+header h1{margin:0 0 8px;font-size:clamp(24px,4.5vw,40px);font-weight:800}
+header p{margin:0 auto;max-width:700px;color:var(--mut)}
+.nav{margin-top:14px;font-size:14px}
+.bar{position:sticky;top:0;z-index:5;background:rgba(14,15,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 16px}
+.bar input{width:100%;max-width:520px;display:block;margin:0 auto 10px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.chip{flex:0 0 auto;padding:4px 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--mut);cursor:pointer;font:inherit;font-size:13px}
+.chip.on{background:var(--acc);color:#1a1300;border-color:var(--acc)}
+.chips.tags .chip{direction:ltr}
+.opts{display:flex;gap:14px;justify-content:center;font-size:13px;color:var(--mut);margin-top:6px;flex-wrap:wrap}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
+.count{color:var(--mut);margin:0 0 14px;font-size:14px}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:14px}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.th{display:block;width:calc(100% + 28px);margin:-14px -14px 2px;aspect-ratio:16/9;object-fit:cover;background:#1d2026;border-radius:12px 12px 0 0}
+.sug{font-size:13px;color:var(--mut)}
+.sug a{display:inline-block;margin:2px 3px;padding:1px 9px;border-radius:999px;border:1px solid var(--line);direction:ltr;text-decoration:none;font-size:12px}
+.nofilm{font-size:12px;color:#d98b5f}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--mut);flex-wrap:wrap}
+.meta a{direction:ltr}
+.tg span{display:inline-block;margin:2px;padding:1px 8px;border-radius:6px;background:#222630;font-size:12px;direction:ltr}
+.tg .c{background:#3a2a10;color:var(--acc)}
+.pr{direction:ltr;text-align:left;white-space:pre-wrap;font-size:13px;background:#0b0c0f;border:1px solid var(--line);border-radius:9px;padding:10px;margin:0;max-height:9.5em;overflow:hidden;position:relative}
+.pr.open{max-height:none}
+.warn{font-size:12px;color:#d98b5f}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.acts button,.acts a{flex:1 1 auto;text-align:center;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:#101216;color:var(--fg);font:inherit;font-size:13px;cursor:pointer;text-decoration:none}
+.acts .pri{background:var(--acc);color:#1a1300;border-color:var(--acc);font-weight:700}
+.more{display:block;margin:22px auto 0;padding:10px 22px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit;cursor:pointer}
+.howto{max-width:900px;margin:36px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;font-size:14px;color:var(--mut)}
+footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;color:var(--mut);font-size:13px}
+
+.guide{max-width:1100px;margin:18px auto 0;padding:0 16px}
+.guide details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.guide summary{cursor:pointer;font-weight:700}
+.guide table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+.guide td,.guide th{border-top:1px solid var(--line);padding:8px;vertical-align:top;text-align:right}
+.guide th{color:var(--acc);white-space:nowrap;direction:ltr;text-align:right}
+.ttl{font-weight:700;direction:ltr;text-align:left;line-height:1.5}
+.tz{font-size:13px;color:var(--mut);direction:ltr;text-align:left}
+.ph{display:flex;align-items:center;justify-content:center;width:calc(100% + 28px);margin:-14px -14px 2px;aspect-ratio:16/9;background:linear-gradient(135deg,#1d2026,#14161b);border-radius:12px 12px 0 0;color:#5b616c;font-size:13px}
+.mt{display:inline-block;padding:1px 8px;border-radius:6px;font-size:12px;direction:ltr;background:#222630}
+.mt.f52{background:#4a2a1c;color:#f0a27a}.mt.o55{background:#2a2414;color:var(--acc)}.mt.s55{background:#1b2a3a;color:#8fc1ef}.mt.h55{background:#1d3324;color:#8fd7a4}
+.pp{background:#203a26;color:#8fd7a4;border-radius:6px;padding:1px 8px;font-size:12px}
+</style>
+<link rel="stylesheet" href="common.css?v=2">
+</head>
+<body>
+<header>
+  <h1>گالری ویدیوهای ساخته‌شده با Claude</h1>
+  <p><span id="n">۵۹۱</span> اثر واقعی از Opus 5.5 تا Fable 5.2، هر کدام با لینک پست اصلی سازنده، مدل گزارش‌شده و دسته. مکمل <a href="prompts.html">کتابخانه‌ی پرامپت</a>: آن‌جا «چه بنویسم»، این‌جا «چه ساخته شده و با کدام مدل».</p>
+</header>
+<div class="guide"><details><summary>راهنمای انتخاب مدل (از مقایسه‌های کنار هم)</summary>
+<table>
+<tr><th>Fable 5.2</th><td>3D و AR پیچیده، Blender، صدای ساخته‌شده با کد، فیلم بلند. در دور اول قابل‌اعتمادتر، ولی خودبررسی عمیق خروجی و هزینه را بالا می‌برد.</td></tr>
+<tr><th>Opus 5.5</th><td>موشن‌گرافیک استاندارد، فیلم لانچ، کارگردانی چندعاملی. بیشترین نمونه و Skill؛ صحنه‌ی سه‌بعدی یا فیزیکی پیچیده معمولاً ۲ تا ۳ دور اصلاح می‌خواهد.</td></tr>
+<tr><th>Sonnet 5.5</th><td>explainer تعاملی و موشن متوسط؛ اغلب زیر دست Opus شات‌ها را اجرا می‌کند. سقف هندسه‌ی سه‌بعدی پیچیده پایین‌تر.</td></tr>
+<tr><th>Haiku 5.5</th><td>تدوین فوتیج، زیرنویس و فصل‌بندی، کار انبوه. ارزانی هر توکن یعنی ارزانی کل کار نیست؛ یک تیم ۶۴٫۲٪ هزینه را در retryهای Haiku گزارش کرده.</td></tr>
+</table>
+<p class="sug">جمع‌بندی سازنده‌ی مجموعه از گزارش‌های خود سازندگان آثار، نه بنچمارک کنترل‌شده.</p>
+</details></div>
+<div class="bar">
+  <input id="q" type="search" placeholder="جستجو در عنوان‌ها و سازنده‌ها… (مثلاً Blender، shader، explainer)">
+  <div class="chips" id="models"></div>
+  <div class="chips" id="cats" style="margin-top:6px"></div>
+  <div class="opts">
+    <label><input type="checkbox" id="fImg" checked> فقط آن‌هایی که پیش‌نمایش دارند</label>
+    <label><input type="checkbox" id="fP"> فقط با پرامپت منتشرشده</label>
+  </div>
+</div>
+<main>
+  <p class="count" id="count"></p>
+  <div class="list" id="list"></div>
+  <button class="more" id="more" hidden>بیشتر</button>
+  <div class="howto">منبع: <a href="https://github.com/athemeroy/awesome-claude-5-5-videos" target="_blank" rel="noopener">athemeroy/awesome-claude-5-5-videos</a> (متن و جدول‌ها CC BY 4.0؛ به‌روزرسانی ۱۶ نوامبر ۲۰۲۶). ویدیوها، پرامپت‌ها و فریم‌های پیش‌نمایش متعلق به سازندگان‌اند و فقط با لینک به پست اصلی نمایش داده می‌شوند. مدل‌ها «گزارش سازنده»اند و جداگانه تأیید نشده‌اند. برای ساختن نسخه‌ی خودت از یک ایده، سبکش را در <a href="styles.html">استودیو سبک‌ها</a> انتخاب کن.</div>
+</main>
+<script src="site.js?v=4"></script>
+<script>
+const CAT={motion:'موشن',interactive:'تعاملی','3d':'سه‌بعدی',procedural_2d:'۲بعدی رویه‌ای',source_review:'بررسی منبع',comparison:'مقایسه‌ی مدل‌ها',existing_source_transformation:'بازسازی از منبع موجود',educational_explainer:'آموزشی',followup_workflow:'ورک‌فلو',character:'کاراکتر',science:'علمی','creator demo or comparison reply':'دموی سازنده',promo:'تبلیغ',app_or_game_capture:'اپ و بازی',mixed_or_not_established:'نامشخص',explainer:'explainer',music:'موسیقی',external_video_model:'همراه مدل ویدیویی',history:'تاریخ',product:'محصول',editing:'تدوین',unresolved:'حل‌نشده',later_workflow:'ورک‌فلوی بعدی',production_resource:'منبع تولید'};
+const MC={'Fable 5.2':'f52','Opus 5.5':'o55','Sonnet 5.5':'s55','Haiku 5.5':'h55'};
+const fa=n=>n.toLocaleString('fa-IR');
+let D=[],M=null,C=null,shown=48;
+const $=id=>document.getElementById(id);
+const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function chips(el,vals,cur,set){el.innerHTML='';[['',`همه`]].concat(vals).forEach(([v,l])=>{const b=document.createElement('button');b.className='chip'+((cur||'')===v?' on':'');b.textContent=l;b.onclick=()=>{set(v||null);shown=48;render()};el.appendChild(b)})}
+function filt(){const q=$('q').value.trim().toLowerCase();return D.filter(i=>(!M||i.m.includes(M))&&(!C||i.c===C)&&(!$('fImg').checked||i.img)&&(!$('fP').checked||i.p)&&(!q||(i.t+' '+i.tz+' '+i.a).toLowerCase().includes(q)))}
+function render(){
+  const cnt=(k,f)=>{const m=new Map();D.forEach(i=>[].concat(k(i)).forEach(v=>m.set(v,(m.get(v)||0)+1)));return [...m].sort((a,b)=>b[1]-a[1]).map(([v,n])=>[v,`${f(v)} ${fa(n)}`])};
+  chips($('models'),cnt(i=>i.m,v=>v),M,v=>M=v);
+  chips($('cats'),cnt(i=>i.c,v=>CAT[v]||v),C,v=>C=v);
+  const L=filt();$('count').textContent=`${fa(L.length)} اثر`;
+  $('list').innerHTML=L.slice(0,shown).map(i=>`<div class="item">${i.img?`<a href="${i.u}" target="_blank" rel="noopener"><img class="th" loading="lazy" src="${i.img}" alt=""></a>`:`<div class="ph">بدون پیش‌نمایش</div>`}
+<div class="ttl">${esc(i.t)}</div>${i.tz?`<div class="tz">${esc(i.tz)}</div>`:''}
+<div class="tg">${i.m.map(m=>`<span class="mt ${MC[m]||''}">${esc(m)}${i.rep==='creator'?' · گزارش سازنده':''}</span>`).join(' ')} <span>${esc(CAT[i.c]||i.c)}</span>${i.p?' <span class="pp">پرامپت منتشرشده</span>':''}</div>
+<div class="meta"><a href="${i.u}" target="_blank" rel="noopener">@${esc(i.a)}</a><span>${i.s?fa(i.s)+' ثانیه · ':''}${esc(i.d)}</span></div>
+<div class="acts"><a class="pri" href="${i.u}" target="_blank" rel="noopener">دیدن پست اصلی</a>${i.doc?`<a href="${i.doc}" target="_blank" rel="noopener">یادداشت تحلیل</a>`:''}</div></div>`).join('');
+  $('more').hidden=L.length<=shown;
+}
+$('more').onclick=()=>{shown+=48;render()};
+['q','fImg','fP'].forEach(id=>$(id).addEventListener('input',()=>{shown=48;render()}));
+fetch('videos.json?v=1').then(r=>r.json()).then(j=>{D=j.items;$('n').textContent=fa(D.length);render()});
+</script>
+</body>
+</html>

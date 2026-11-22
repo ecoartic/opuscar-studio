@@ -54,6 +54,7 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
     <a class="card" href="library.html"><img src="img/hub/library.webp" alt=""><div><span class="tag l">مرجع</span><b>کتابخانه‌ی ابزار و ورک‌فلو</b><span>ابزارهای غربال‌شده با نقشه‌ی ورک‌فلو، وضعیت تست و نظر.</span></div></a>
     <a class="card" href="styles.html"><img src="img/hub/styles.webp" alt=""><div><span class="tag">در استفاده</span><b>سبک‌های فیلم (Lemo-Opuscar)</b><span>۹۸ سبک فیلم کوتاه با کد و سازنده‌ی پرامپت.</span></div></a>
     <a class="card" href="prompts.html"><img src="img/hub/prompts.webp" alt=""><div><span class="tag">در استفاده</span><b>کتابخانه‌ی پرامپت</b><span>۷۰۳ پرامپت واقعی ویدیو با Opus، با سبک پیشنهادی.</span></div></a>
+    <a class="card" href="videos.html"><img src="img/hub/videos.webp" alt=""><div><span class="tag">جدید</span><b>گالری ویدیوهای Claude</b><span>۵۹۱ اثر واقعی از Opus 5.5 تا Fable 5.2، با مدل و دسته، و راهنمای انتخاب مدل.</span></div></a>
   </div>
 
   <h2 id="tools">ابزارهای داخل مرورگر</h2>
@@ -70,11 +71,11 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
 </main>
 <script>
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-fetch('library.json?v=40').then(r=>r.json()).then(L=>{
+fetch('library.json?v=41').then(r=>r.json()).then(L=>{
   const n=L.items.length,act=L.items.filter(x=>x.st==='active').length,bench=L.items.filter(x=>x.st==='bench').length;
   document.getElementById('stats').innerHTML=[[n,'ابزار و تکنیک بررسی‌شده'],[98,'سبک فیلم با کد'],[703,'پرامپت واقعی'],[act,'در استفاده'],[bench,'در صف تست']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
 }).catch(()=>{});
 </script>
-<script src="site.js?v=3"></script>
+<script src="site.js?v=4"></script>
 </body>
 </html>
