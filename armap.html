@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AR بدون تارگت (نقشه‌ی ابرنقاط) — Behrang Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;--ok:#5fd38d;--bad:#ff6b6b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}a{color:var(--acc)}
+header{padding:34px 18px 12px;text-align:center;background:radial-gradient(ellipse at top,#1d1730 0%,var(--bg) 70%)}
+header h1{margin:0 0 6px;font-size:clamp(22px,4.5vw,34px);font-weight:800}header p{margin:0 auto;max-width:720px;color:var(--mut)}
+main{max-width:760px;margin:0 auto;padding:10px 14px 70px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:12px 0}
+.btn{display:inline-block;padding:10px 16px;border-radius:10px;border:1px solid var(--line);background:#22252c;color:var(--fg);font:inherit;cursor:pointer;margin:3px 0 3px 6px}
+.btn.p{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}.mut{color:var(--mut);font-size:13px}
+#ar{position:fixed;inset:0;z-index:50;background:#000;display:none;touch-action:none}
+#ar video,#ar canvas{position:absolute;inset:0;width:100%;height:100%}#ar video{object-fit:cover}
+#hud{position:fixed;z-index:60;top:calc(8px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:none;background:rgba(0,0,0,.6);padding:4px 14px;border-radius:20px;font-size:13px;white-space:nowrap}
+#ctl{position:fixed;z-index:60;left:0;right:0;bottom:calc(12px + env(safe-area-inset-bottom));display:none;justify-content:center;gap:6px;flex-wrap:wrap;padding:0 8px}
+#ctl .btn{padding:8px 12px;font-size:14px}
+label.s{display:flex;gap:8px;align-items:center;font-size:14px}label.s input{flex:1}
+table{border-collapse:collapse;width:100%;font-size:13px}td{border-bottom:1px solid var(--line);padding:4px 6px}
+</style>
+</head>
+<body>
+<header>
+<h1>🗺️ AR بدون تارگت — نقشه‌ی ابرنقاط</h1>
+<p>از یک ویدیوی معمولی دور میز، با Structure-from-Motion (COLMAP) نقشه‌ی سه‌بعدی ابرنقاط ساخته شده است. گوشی در هر فریم با تطبیق نقاط و PnP جای دقیق خودش را در این نقشه پیدا می‌کند؛ مدل روی سطح واقعی میز می‌نشیند و از هر زاویه سر جایش می‌ماند. بدون ARCore و ژیروسکوپ.</p>
+</header>
+<main>
+<section class="panel">
+ <b>نقشه‌ی فعلی:</b> <span id="mname">…</span>
+ <table id="mstat"></table>
+ <p class="mut">این نقشه فقط برای همان فضایی است که فیلم‌برداری شده (میز Behrang، Galaxy M13). برای فضای خودتان: ویدیوی ۳۰–۶۰ ثانیه‌ای با <a href="https://ecoartic.github.io/behrang-ar/bench/capture/">صفحه‌ی ضبط</a> بگیرید و بفرستید تا نقشه ساخته شود (ساخت خودکار در مرورگر: فاز بعد).</p>
+ <label class="s">ارتفاع مدل (سانتی‌متر) <input type="range" id="mh" min="5" max="120" value="25"><span id="mhv">25</span></label>
+ <label class="s"><input type="checkbox" id="pcv" checked style="flex:0"> نمایش ابرنقاط روی تصویر (برای دیدن دقت)</label>
+ <button class="btn p" id="go">▶️ شروع</button>
+ <p class="mut" id="st"></p>
+</section>
+<details class="panel"><summary><b>چطور کار می‌کند؟</b></summary>
+<ol class="mut">
+ <li><b>نقشه (آفلاین):</b> ۱۲۷ فریم تیز از ویدیو → COLMAP: پوز هر فریم + ۲۰٬۵۷۵ نقطه‌ی سه‌بعدی (خطای بازتصویر ۰٫۷۸ پیکسل). جهت «بالا» از شتاب‌سنج گوشی (هم‌خوانی ۹۹٫۹۸٪ با چرخش‌های COLMAP). مقیاس از ارتفاع میز (۷۵ سانتی‌متر، فرض).</li>
+ <li>برای هر نقطه‌ی سه‌بعدی، توصیف‌گر ORB از چند نما ذخیره می‌شود (۳۱٬۹۲۲ ورودی، ۱٫۵ مگابایت).</li>
+ <li><b>اجرا:</b> ORB روی فریم دوربین → تطبیق با نقشه → <code>solvePnPRansac</code> → پوز ۶DoF دوربین؛ بین بازیابی‌ها، دنبال کردن نقاط با optical flow و PnP سریع.</li>
+ <li>تست روی فریم‌هایی که در نقشه نبودند: ۶۳ از ۶۳ پیدا شدند؛ خطای مکان میانه ۲٫۷ میلی‌متر، چرخش ۰٫۱ درجه (با فرض مقیاس میز).</li>
+</ol></details>
+</main>
+<div id="ar"><video id="v" playsinline muted autoplay></video></div>
+<div id="hud">…</div>
+<div id="ctl"><button class="btn" id="stop">✕ پایان</button><button class="btn" id="pcb">ابرنقاط</button><span class="mut" style="align-self:center;background:rgba(0,0,0,.5);padding:2px 8px;border-radius:8px">روی میز بزنید تا مدل آن‌جا برود</span></div>
+
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {loadCV} from './ar/mosaic.js';
+const $=id=>document.getElementById(id);const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const MAP_URL='maps/m13-desk.bin',MODEL='https://polyfork.dev/cdn/a-frame-cabin-6cb550.glb';
+let map=null;
+async function loadMap(){const b=await (await fetch(MAP_URL)).arrayBuffer();const dv=new DataView(b);const hl=dv.getUint32(0,true);
+ const meta=JSON.parse(new TextDecoder().decode(new Uint8Array(b,4,hl)));let o=4+hl;o+=(4-o%4)%4;const n=meta.n;
+ const xyz=new Float32Array(b.slice(o,o+n*12));o+=n*12;const des=new Uint8Array(b.slice(o,o+n*32));o+=n*32;const kf=new Uint16Array(b.slice(o,o+n*2));o+=n*2;o+=(4-o%4)%4;
+ const np=new DataView(b,o,4).getUint32(0,true);o+=4;const pc=new Float32Array(b.slice(o,o+np*12));o+=np*12;const pcc=new Uint8Array(b.slice(o,o+np*3));
+ const byKF=new Map();for(let i=0;i<n;i++){const k=kf[i];if(!byKF.has(k))byKF.set(k,[]);byKF.get(k).push(i);}
+ return {meta,xyz,des,kf,pc,pcc,byKF,n};}
+loadMap().then(m=>{map=m;const M=m.meta;$('mname').textContent=M.name;
+ $('mstat').innerHTML=[['نقاط نقشه',fa(m.n)+' توصیف‌گر'],['نماهای مرجع',fa(M.keyframes.length)],['مقیاس',(M.scale_m_per_unit*100).toFixed(1)+' سانتی‌متر در هر واحد ('+M.assumption+')'],['حجم','۱٫۵ مگابایت']].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');});
+$('mh').oninput=e=>{$('mhv').textContent=e.target.value;if(model)fitModel();};
+
+// ---------------- runtime ----------------
+let cv,stream,running=false,renderer,scene,camera,pcObj,model,holder,K=null,dist=null,proc,pctx,orb,clahe,bf,allDes=null;
+let prevGray=null,track=null,lastReloc=-99,frameNo=0,pose=null,lastOK=0,stats={inl:0,trk:0,mode:''};
+const up=new THREE.Vector3();
+function kfCandidates(){if(!pose)return null;const R=pose.R,t=pose.t;const C=[-(R[0]*t[0]+R[3]*t[1]+R[6]*t[2]),-(R[1]*t[0]+R[4]*t[1]+R[7]*t[2]),-(R[2]*t[0]+R[5]*t[1]+R[8]*t[2])];const z=[R[6],R[7],R[8]];
+ return map.meta.keyframes.map((k,i)=>[Math.hypot(k[0]-C[0],k[1]-C[1],k[2]-C[2])*(2-(k[3]*z[0]+k[4]*z[1]+k[5]*z[2])),i]).sort((a,b)=>a[0]-b[0]).slice(0,10).map(x=>x[1]);}
+function subsetMat(idx){const m=new cv.Mat(idx.length,32,cv.CV_8U);for(let r=0;r<idx.length;r++)m.data.set(map.des.subarray(idx[r]*32,idx[r]*32+32),r*32);return m;}
+function relocalize(gray){
+ const kp=new cv.KeyPointVector(),des=new cv.Mat(),none=new cv.Mat();orb.detectAndCompute(gray,none,kp,des);none.delete();
+ let idx=null,D=allDes;const cands=kfCandidates();if(cands){idx=[];cands.forEach(k=>{const l=map.byKF.get(k);if(l)idx.push(...l);});D=subsetMat(idx);}
+ const mm=new cv.DMatchVectorVector();if(des.rows>10)bf.knnMatch(des,D,mm,2);const o3=[],o2=[];
+ for(let i=0;i<mm.size();i++){const m=mm.get(i);if(m.size()<2)continue;const a=m.get(0),b=m.get(1);if(a.distance<0.8*b.distance){const j=idx?idx[a.trainIdx]:a.trainIdx;o3.push(map.xyz[j*3],map.xyz[j*3+1],map.xyz[j*3+2]);const p=kp.get(a.queryIdx).pt;o2.push(p.x,p.y);}}
+ mm.delete();des.delete();kp.delete();if(idx)D.delete();
+ if(o2.length/2<15)return false;
+ const ob=cv.matFromArray(o3.length/3,1,cv.CV_32FC3,o3),im=cv.matFromArray(o2.length/2,1,cv.CV_32FC2,o2),rv=new cv.Mat(),tv=new cv.Mat(),inl=new cv.Mat();
+ const ok=cv.solvePnPRansac(ob,im,K,dist,rv,tv,false,200,5.0,0.99,inl,cv.SOLVEPNP_SQPNP);
+ let res=false;if(ok&&inl.rows>=15){setPose(rv,tv);const keep=[],k3=[];for(let r=0;r<inl.rows;r++){const i=inl.data32S[r];keep.push(o2[i*2],o2[i*2+1]);k3.push(o3[i*3],o3[i*3+1],o3[i*3+2]);}
+  track={p2:keep,p3:k3,rv:rv.clone(),tv:tv.clone()};stats.inl=inl.rows;res=true;}
+ ob.delete();im.delete();rv.delete();tv.delete();inl.delete();return res;}
+function setPose(rv,tv){const R=new cv.Mat();cv.Rodrigues(rv,R);pose={R:Array.from(R.data64F),t:Array.from(tv.data64F)};R.delete();}
+function trackLK(gray){if(!track||!prevGray||track.p2.length<8)return false;
+ const p0=cv.matFromArray(track.p2.length/2,1,cv.CV_32FC2,track.p2),p1=new cv.Mat(),st=new cv.Mat(),er=new cv.Mat();
+ cv.calcOpticalFlowPyrLK(prevGray,gray,p0,p1,st,er,new cv.Size(21,21),3);const n2=[],n3=[];
+ for(let i=0;i<st.rows;i++)if(st.data[i]===1&&er.data32F[i]<20){n2.push(p1.data32F[i*2],p1.data32F[i*2+1]);n3.push(track.p3[i*3],track.p3[i*3+1],track.p3[i*3+2]);}
+ p0.delete();p1.delete();st.delete();er.delete();if(n2.length/2<12){track=null;return false;}
+ const ob=cv.matFromArray(n3.length/3,1,cv.CV_32FC3,n3),im=cv.matFromArray(n2.length/2,1,cv.CV_32FC2,n2);
+ const ok=cv.solvePnP(ob,im,K,dist,track.rv,track.tv,true,cv.SOLVEPNP_ITERATIVE);ob.delete();im.delete();
+ if(!ok){track=null;return false;}track.p2=n2;track.p3=n3;setPose(track.rv,track.tv);stats.trk=n2.length/2;return true;}
+function step(){if(!running)return;const v=$('v');if(!v.videoWidth){requestAnimationFrame(step);return;}
+ const t0=performance.now();pctx.drawImage(v,0,0,proc.width,proc.height);const rgba=cv.imread(proc),g0=new cv.Mat(),gray=new cv.Mat();cv.cvtColor(rgba,g0,cv.COLOR_RGBA2GRAY);clahe.apply(g0,gray);rgba.delete();g0.delete();
+ let ok=trackLK(gray);stats.mode='trk';
+ if(!ok||frameNo-lastReloc>=12||stats.trk<40){const r=relocalize(gray);lastReloc=frameNo;if(r){ok=true;stats.mode='reloc';}}
+ if(prevGray)prevGray.delete();prevGray=gray;frameNo++;
+ if(ok){lastOK=performance.now();applyCamera();}
+ const lost=performance.now()-lastOK>700;holder.visible=!lost;if(pcObj)pcObj.visible=!lost&&$('pcv').checked;
+ $('hud').textContent=lost?'دنبال نقشه می‌گردم… گوشی را به سمت میز بگیرید':`✓ مکان‌یابی · ${fa(stats.inl)} نقطه‌ی PnP · دنبال‌شده ${fa(stats.trk|0)} · ${Math.round(performance.now()-t0)}ms`;
+ renderer.render(scene,camera);setTimeout(step,0);}
+function applyCamera(){const R=pose.R,t=pose.t;// world->cv (row-major R)
+ const m=new THREE.Matrix4().set(R[0],-R[3],-R[6],-(R[0]*t[0]+R[3]*t[1]+R[6]*t[2]), R[1],-R[4],-R[7],-(R[1]*t[0]+R[4]*t[1]+R[7]*t[2]), R[2],-R[5],-R[8],-(R[2]*t[0]+R[5]*t[1]+R[8]*t[2]), 0,0,0,1);
+ camera.matrixWorld.copy(m);camera.matrixWorldInverse.copy(m).invert();}
+function setProjection(){const W=innerWidth,H=innerHeight,k=Math.max(W/proc.width,H/proc.height),ox=(W-proc.width*k)/2,oy=(H-proc.height*k)/2;
+ const fx=K.data64F[0]*k,fy=K.data64F[4]*k,cx=K.data64F[2]*k+ox,cy=K.data64F[5]*k+oy,n=0.01,f=1000;
+ camera.projectionMatrix.set(2*fx/W,0,1-2*cx/W,0, 0,2*fy/H,2*cy/H-1,0, 0,0,-(f+n)/(f-n),-2*f*n/(f-n), 0,0,-1,0);camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();renderer.setSize(W,H);}
+function fitModel(){const u=map.meta.scale_m_per_unit,hm=+$('mh').value/100/u;model.scale.setScalar(1);model.position.set(0,0,0);model.updateMatrixWorld(true);
+ const b=new THREE.Box3().setFromObject(model),sz=b.getSize(new THREE.Vector3());model.scale.setScalar(hm/Math.max(sz.y,1e-6));model.updateMatrixWorld(true);
+ const b2=new THREE.Box3().setFromObject(model),c=b2.getCenter(new THREE.Vector3());model.position.set(-c.x,-b2.min.y,-c.z);}
+$('go').onclick=async()=>{if(!map)return;$('go').disabled=true;$('st').textContent='در حال بار کردن OpenCV…';
+ try{cv=await loadCV(t=>$('st').textContent=t);
+  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:false});
+  const v=$('v');v.srcObject=stream;await new Promise(r=>{if(v.videoWidth)r();else v.onloadedmetadata=r;});await v.play().catch(()=>{});
+  const vw=v.videoWidth,vh=v.videoHeight,s=480/Math.max(vw,vh);proc=document.createElement('canvas');proc.width=Math.round(vw*s);proc.height=Math.round(vh*s);pctx=proc.getContext('2d',{willReadFrequently:true});
+  const M=map.meta,fs=M.K[0]*Math.max(proc.width,proc.height)/Math.max(M.size[0],M.size[1]);
+  K=cv.matFromArray(3,3,cv.CV_64F,[fs,0,proc.width/2,0,fs,proc.height/2,0,0,1]);dist=cv.matFromArray(4,1,cv.CV_64F,[M.k1,0,0,0]);
+  const o=M.orb;orb=new cv.ORB(o.n,o.scale,o.levels,o.edge,0,2,0,31,o.fast);clahe=new cv.CLAHE(2.5,new cv.Size(8,8));bf=new cv.BFMatcher(cv.NORM_HAMMING,false);
+  allDes=new cv.Mat(map.n,32,cv.CV_8U);allDes.data.set(map.des);
+  renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});renderer.outputColorSpace=THREE.SRGBColorSpace;$('ar').appendChild(renderer.domElement);
+  scene=new THREE.Scene();camera=new THREE.PerspectiveCamera();camera.matrixAutoUpdate=false;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x444444,2.2));const dl=new THREE.DirectionalLight(0xffffff,1.5);up.fromArray(M.up);dl.position.copy(up).multiplyScalar(10).add(new THREE.Vector3(3,0,2));scene.add(dl);
+  // point cloud
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(map.pc,3));const col=new Float32Array(map.pcc.length);for(let i=0;i<col.length;i++)col[i]=map.pcc[i]/255;g.setAttribute('color',new THREE.BufferAttribute(col,3));
+  pcObj=new THREE.Points(g,new THREE.PointsMaterial({size:3,sizeAttenuation:false,vertexColors:true,transparent:true,opacity:.85}));scene.add(pcObj);
+  // model on the desk plane, up = gravity from the accelerometer
+  holder=new THREE.Group();holder.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),up);holder.position.fromArray(M.deskCenter);
+  holder.position.addScaledVector(up,M.deskH-holder.position.dot(up));scene.add(holder);
+  const glb=await new GLTFLoader().loadAsync(MODEL);model=glb.scene;holder.add(model);fitModel();
+  $('ar').style.display='block';$('hud').style.display='block';$('ctl').style.display='flex';document.body.style.overflow='hidden';
+  setProjection();addEventListener('resize',setProjection);running=true;$('st').textContent='';step();
+ }catch(e){console.error(e);$('st').textContent='خطا: '+e.message;stop();}$('go').disabled=false;};
+// tap to place on the desk plane
+$('ar').addEventListener('pointerdown',e=>{if(!pose)return;const r=renderer.domElement.getBoundingClientRect();const nd=new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);
+ const ray=new THREE.Raycaster();ray.setFromCamera(nd,camera);const pl=new THREE.Plane(up.clone(),-map.meta.deskH),p=new THREE.Vector3();if(ray.ray.intersectPlane(pl,p))holder.position.copy(p);});
+function stop(){running=false;if(stream)stream.getTracks().forEach(t=>t.stop());$('ar').style.display='none';$('hud').style.display='none';$('ctl').style.display='none';document.body.style.overflow='';
+ if(renderer){renderer.domElement.remove();renderer.dispose();renderer=null;}track=null;pose=null;}
+$('stop').onclick=stop;$('pcb').onclick=()=>{$('pcv').checked=!$('pcv').checked;};
+window.__mapTest={get pose(){return pose},get stats(){return stats},get lost(){return performance.now()-lastOK>700}};
+</script>
+<script src="site.js?v=9"></script>
+</body>
+</html>

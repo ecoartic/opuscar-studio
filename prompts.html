@@ -117,6 +117,6 @@ $('q').oninput=()=>{shown=PAGE;render();};$('fRemake').onchange=$('fFull').oncha
 $('more').onclick=()=>{shown+=PAGE;render();};
 fetch('prompts.json?v=3').then(r=>r.json()).then(j=>{D=j.sort((a,b)=>(b.r-a.r)||b.d.localeCompare(a.d));chips();render();}).catch(()=>{$('count').textContent='بارگذاری داده‌ها ناموفق بود.';});
 </script>
-<script src="site.js?v=8"></script>
+<script src="site.js?v=9"></script>
 </body>
 </html>

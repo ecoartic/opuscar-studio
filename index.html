@@ -62,6 +62,7 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
   <div class="grid">
     <a class="card" href="xr.html"><img src="img/hub/xr.webp" alt=""><div><span class="tag">جدید</span><b>اتاق XR</b><span>هر مدل Polyfork را در VR یا AR (Quest 3 passthrough، اندروید) با ارتفاع واقعی ببینید؛ با شبیه‌ساز Quest روی دسکتاپ.</span></div></a>
     <a class="card" href="depth.html"><img src="img/hub/depth.webp?v=2" alt=""><div><span class="tag">جدید</span><b>آزمایشگاه عمق</b><span>Depth Anything داخل مرورگر: depth PNG، پارالاکس 2.5D، عمق میدان با فوکوس لمسی، استریو SBS برای هدست.</span></div></a>
+    <a class="card" href="armap.html"><img src="img/hub/armap.webp" alt=""><div><span class="tag">Tested Prototype</span><b>AR بدون تارگت (ابرنقاط)</b><span>نقشه‌ی سه‌بعدی از یک ویدیو با COLMAP؛ گوشی با PnP جای خودش را پیدا می‌کند و مدل روی میز واقعی از هر زاویه ثابت می‌ماند. بدون ARCore و ژیروسکوپ.</span></div></a>
     <a class="card" href="artarget.html"><img src="img/hub/artarget.webp" alt=""><div><b>AR روی کارت خودت</b><span>از کارت، جلد کتاب یا هر سطح پرجزئیات عکس بگیرید؛ مدل سه‌بعدی روی همان می‌نشیند. روی تقریباً هر گوشی، بدون ARCore.</span></div></a>
     <a class="card" href="assets.html"><img src="img/hub/assets.webp" alt=""><div><b>دارایی‌های سه‌بعدی</b><span>۳۴۸۹ مدل GLB رایگان؛ پیش‌نمایش، دانلود و دیدن در اتاق با AR روی گوشی.</span></div></a>
     <a class="card" href="splat.html"><img src="img/hub/splat.webp" alt=""><div><b>نمایشگر Gaussian Splat</b><span>PLY/SPZ/SPLAT خودتان؛ pixel-art، کروما، و ورود به VR/AR روی Quest (+ شبیه‌ساز).</span></div></a>
@@ -89,6 +90,6 @@ fetch('library.json?v=50').then(r=>r.json()).then(L=>{
   document.getElementById('stats').innerHTML=[[n,'ابزار و تکنیک بررسی‌شده'],[98,'سبک فیلم با کد'],[703,'پرامپت واقعی'],[act,'در استفاده'],[bench,'در صف تست']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
 }).catch(()=>{});
 </script>
-<script src="site.js?v=8"></script>
+<script src="site.js?v=9"></script>
 </body>
 </html>
