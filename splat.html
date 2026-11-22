@@ -128,6 +128,6 @@ function pixel(){const p=+$('ps').value,w=Math.max(1,Math.floor(innerWidth/p)),h
 $('shot').onclick=()=>{const c=$('pix').checked?px:renderer.domElement;c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='splat-view.png';a.click();});};
 renderer.setAnimationLoop(()=>{const xr=renderer.xr.isPresenting;if(!xr)controls.update();renderer.render(scene,camera);const on=$('pix').checked&&!xr;px.style.display=on?'block':'none';if(on)pixel();});
 </script>
-<script src="site.js?v=9"></script>
+<script src="site.js?v=10"></script>
 </body>
 </html>

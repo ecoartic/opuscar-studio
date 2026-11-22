@@ -219,6 +219,6 @@ $('qgo').onclick=()=>{if(qBuilt){$('mh').value=Math.min(60,+$('mh').value);start
 window.__qTest={async add(url,corners){cv=cv||await loadCV();const im=new Image();im.src=url;await im.decode();const c=document.createElement('canvas');c.width=270;c.height=480;c.getContext('2d').drawImage(im,0,0,270,480);qFrame=c;qCorners=corners;$('qok').onclick();},closeCap:()=>qClose()};
 window.__mapTest={get pose(){return pose},get stats(){return stats},get lost(){return performance.now()-lastOK>700}};
 </script>
-<script src="site.js?v=9"></script>
+<script src="site.js?v=10"></script>
 </body>
 </html>

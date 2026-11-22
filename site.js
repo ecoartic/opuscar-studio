@@ -11,6 +11,7 @@
     ['armap.html','AR بدون تارگت','🗺️','نقشه‌ی ابرنقاط (COLMAP) + مکان‌یابی PnP'],
     ['xr.html','اتاق XR','🥽','مدل در VR/AR با اندازه‌ی واقعی (Quest، اندروید)'],
     ['depth.html','آزمایشگاه عمق','🌗','عمق از عکس، پارالاکس 2.5D، DoF، استریو'],
+    ['seam.html','تغییر نسبت هوشمند','↔️','Seam Carving: ۹:۱۶ و دیوار LED بدون کشیدگی'],
     ['splat.html','نمایشگر Splat','✨','Gaussian splat با pixel و کروما'],
     ['gsbrush.html','ساخت Splat (Brush)','🧩','آموزش Gaussian splat در مرورگر'],
     ['supersplat/','ویرایشگر SuperSplat','✂️','تمیزکاری و ترکیب splat (نسخه‌ی خود سایت)'],

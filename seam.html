@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>تغییر نسبت هوشمند (Seam Carving) — Behrang Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;--ok:#5fd38d;--bad:#ff6b6b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}a{color:var(--acc)}
+header{padding:34px 18px 12px;text-align:center;background:radial-gradient(ellipse at top,#2a1f12 0%,var(--bg) 70%)}
+header h1{margin:0 0 6px;font-size:clamp(22px,4.5vw,34px);font-weight:800}header p{margin:0 auto;max-width:760px;color:var(--mut)}
+main{max-width:1080px;margin:0 auto;padding:10px 14px 70px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:12px 0}
+.btn{display:inline-block;padding:8px 13px;border-radius:10px;border:1px solid var(--line);background:#22252c;color:var(--fg);font:inherit;font-size:14px;cursor:pointer;margin:3px 0 3px 6px}
+.btn.p{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}.btn:disabled{opacity:.45;cursor:default}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.tab{padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:#111317;color:var(--mut);cursor:pointer;font:inherit;font-size:14px}.tab.on{background:var(--acc);color:#111;border-color:var(--acc)}
+.tab.g.on{background:var(--ok);border-color:var(--ok)}.tab.r.on{background:var(--bad);border-color:var(--bad)}
+#stage{position:relative;background:#08090b url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><rect width="8" height="8" fill="%23111"/><rect x="8" y="8" width="8" height="8" fill="%23111"/></svg>');border-radius:12px;overflow:hidden;display:flex;justify-content:center;align-items:center;min-height:240px;touch-action:none}
+#wrap{position:relative;line-height:0}
+#wrap canvas{max-width:100%;max-height:68vh;display:block}
+#mk{position:absolute;inset:0;width:100%;height:100%;opacity:.55;cursor:crosshair}
+.mut{color:var(--mut);font-size:13px}.bar{height:6px;background:#22252c;border-radius:4px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .1s}
+label.s{display:flex;gap:8px;align-items:center;font-size:14px;margin:4px 0}label.s input[type=range]{flex:1}
+input[type=number]{width:78px;background:#111317;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:4px 6px;font:inherit}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px}@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+#cmp{display:none;gap:10px;margin-top:10px}#cmp figure{margin:0;flex:1;text-align:center}#cmp canvas{max-width:100%;max-height:40vh;border-radius:8px}#cmp figcaption{font-size:13px;color:var(--mut)}
+details summary{cursor:pointer;color:var(--acc)}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>↔️ تغییر نسبت هوشمند</h1>
+<p>Seam Carving داخل مرورگر: عکس را به نسبت جدید (۹:۱۶، مربع، دیوار LED…) می‌برد بدون کشیدگی و بدون کراپ. «درزهای» کم‌اهمیت حذف یا تکثیر می‌شوند. با قلم سبز بخش‌های مهم را محافظت کنید و با قلم قرمز یک شیء را کاملاً پاک کنید.</p>
+</header>
+<main>
+<section class="panel">
+ <div class="row">
+  <label class="btn p">🖼️ انتخاب عکس<input type="file" id="file" accept="image/*" hidden></label>
+  <label class="btn">📷 دوربین<input type="file" id="cam" accept="image/*" capture="environment" hidden></label>
+  <button class="btn" id="sample">نمونه</button>
+  <span class="mut" id="info">عکسی انتخاب نشده</span>
+ </div>
+ <label class="s">حداکثر ضلع کاری <input type="range" id="maxs" min="400" max="2400" step="100" value="1200"><b id="maxsv">1200</b>px</label>
+ <div class="mut">بزرگ‌تر یعنی کیفیت بیشتر و پردازش کندتر. زمان تقریباً با «پیکسل × تعداد درز» بالا می‌رود.</div>
+</section>
+
+<section class="panel">
+ <div class="mut" style="margin-bottom:4px">نسبت مقصد</div>
+ <div class="tabs" id="ratios">
+  <button class="tab" data-r="9:16">۹:۱۶ استوری</button><button class="tab" data-r="4:5">۴:۵</button><button class="tab" data-r="1:1">۱:۱</button>
+  <button class="tab" data-r="16:9">۱۶:۹</button><button class="tab" data-r="21:9">۲۱:۹</button><button class="tab" data-r="32:9">۳۲:۹ دیوار LED</button><button class="tab on" data-r="custom">دستی</button>
+ </div>
+ <label class="s"><input type="checkbox" id="grow"> به‌جای کوچک‌کردن، ضلع دیگر را بزرگ کن (مثلاً پهن‌تر کردن پلیت برای دیوار LED)</label>
+ <div class="row">عرض <input type="number" id="tw"> × ارتفاع <input type="number" id="th"> <span class="mut" id="delta"></span></div>
+ <label class="s"><input type="checkbox" id="fwd" checked> Forward energy (کیفیت بهتر روی لبه‌ها؛ Rubinstein 2008)</label>
+ <label class="s"><input type="checkbox" id="showSeams" checked> نمایش درزها هنگام پردازش</label>
+ <div class="mut" style="margin:8px 0 4px">ماسک</div>
+ <div class="tabs" id="brushes">
+  <button class="tab on" data-b="0">بدون قلم</button><button class="tab g" data-b="1">🟩 محافظت</button><button class="tab r" data-b="-1">🟥 حذف شیء</button><button class="tab" data-b="2">پاک‌کن</button>
+  <button class="btn" id="clearMk">پاک کردن ماسک</button>
+ </div>
+ <label class="s">اندازه‌ی قلم <input type="range" id="bs" min="4" max="120" value="28"><b id="bsv">28</b></label>
+ <div class="row" style="margin-top:8px">
+  <button class="btn p" id="go" disabled>▶ تغییر اندازه</button>
+  <button class="btn" id="rmObj" disabled>🧽 حذف شیء قرمز</button>
+  <label class="s" style="margin:0 6px"><input type="checkbox" id="restore" checked> بعد از حذف، اندازه‌ی اصلی برگردد</label>
+  <button class="btn" id="stop" disabled>توقف</button>
+  <button class="btn" id="reset" disabled>↺ برگشت به اصل</button>
+  <button class="btn" id="dl" disabled>⬇ PNG</button>
+ </div>
+ <div class="bar"><i id="pb"></i></div>
+ <div class="mut" id="st">آماده</div>
+</section>
+
+<div id="stage"><div id="wrap"><canvas id="cv"></canvas><canvas id="mk"></canvas></div></div>
+<div id="cmp"><figure><canvas id="c1"></canvas><figcaption>اصل</figcaption></figure><figure><canvas id="c2"></canvas><figcaption>کشیدن ساده (scale)</figcaption></figure><figure><canvas id="c3"></canvas><figcaption>Seam Carving</figcaption></figure></div>
+
+<section class="panel">
+<details><summary>چطور کار می‌کند و کجا به درد می‌خورد</summary>
+<p>برای هر پیکسل یک «انرژی» از اختلاف رنگ با همسایه‌ها حساب می‌شود. با برنامه‌ریزی پویا (dynamic programming) کم‌هزینه‌ترین مسیر یک‌پیکسلی از بالا به پایین پیدا و حذف می‌شود و این کار تکرار می‌شود. برای بزرگ‌کردن، همان درزها پیدا و تکثیر می‌شوند. ماسک سبز انرژی را خیلی بالا و ماسک قرمز خیلی پایین می‌برد. Forward energy به‌جای انرژی خود پیکسل، لبه‌ی تازه‌ای را می‌سنجد که بعد از حذف ساخته می‌شود؛ خط‌های صاف کمتر می‌شکنند.</p>
+<p>کاربرد: پلیت و پس‌زمینه برای دیوار LED با نسبت عجیب، نسخه‌ی عمودی از رندر افقی، جا باز کردن برای تیتر، پاک کردن شیء کوچک بدون inpainting. محدودیت: روی خط‌های راست بلند، چهره‌ها و صحنه‌های شلوغ بدون فضای خالی، اعوجاج می‌سازد؛ این‌ها را با قلم سبز محافظت کنید یا کراپ کنید.</p>
+<p class="mut">الگوریتم: Avidan &amp; Shamir، SIGGRAPH 2007؛ Forward energy: Rubinstein، Shamir و Avidan، SIGGRAPH 2008. الهام از <a href="https://github.com/esimov/caire" target="_blank" rel="noopener">caire</a> (MIT). این پیاده‌سازی مستقل و JavaScript خالص است و همه‌چیز در مرورگر شما می‌ماند.</p>
+</details>
+</section>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const cv=$('cv'),cx=cv.getContext('2d',{willReadFrequently:true}),mkc=$('mk'),mx=mkc.getContext('2d',{willReadFrequently:true});
+let orig=null,origMask=null,cur=null,curMask=null,W=0,H=0,ratio='custom',brush=0,worker=null,srcImg=null;
+
+/* ---------- worker (inline) ---------- */
+const WSRC=`
+let W,H,px,mk,g;const BIG=1e6;
+function lum(p){return 0.299*(p&255)+0.587*((p>>>8)&255)+0.114*((p>>>16)&255)}
+function mkGray(){g=new Float32Array(W*H);for(let i=0;i<W*H;i++)g[i]=lum(px[i])}
+function transpose(){const n=new Uint32Array(W*H),m=new Int8Array(W*H),gg=new Float32Array(W*H);
+ for(let y=0;y<H;y++)for(let x=0;x<W;x++){const s=y*W+x,d=x*H+y;n[d]=px[s];m[d]=mk[s];gg[d]=g[s]}
+ px=n;mk=m;g=gg;const t=W;W=H;H=t}
+function seam(fwd){const M=new Float32Array(W*H),B=new Int8Array(W*H),s=new Int32Array(H);
+ const I=(x,y)=>g[y*W+(x<0?0:x>=W?W-1:x)];
+ const pen=i=>mk[i]===1?BIG:mk[i]===-1?-BIG:0;
+ for(let x=0;x<W;x++){let e;if(fwd)e=Math.abs(I(x+1,0)-I(x-1,0));else e=Math.abs(I(x+1,0)-I(x-1,0))+Math.abs(g[W+x]-g[x]);M[x]=e+pen(x)}
+ for(let y=1;y<H;y++){const r=y*W,p=r-W;
+  for(let x=0;x<W;x++){let cu,cl,cr;
+   if(fwd){cu=Math.abs(I(x+1,y)-I(x-1,y));cl=cu+Math.abs(I(x,y-1)-I(x-1,y));cr=cu+Math.abs(I(x,y-1)-I(x+1,y))}
+   else{const e=Math.abs(I(x+1,y)-I(x-1,y))+Math.abs((y+1<H?g[r+W+x]:g[r+x])-g[p+x]);cu=cl=cr=e}
+   let best=M[p+x]+cu,b=0;
+   if(x>0&&M[p+x-1]+cl<best){best=M[p+x-1]+cl;b=-1}
+   if(x<W-1&&M[p+x+1]+cr<best){best=M[p+x+1]+cr;b=1}
+   M[r+x]=best+pen(r+x);B[r+x]=b}}
+ let bx=0,bv=Infinity;const lr=(H-1)*W;for(let x=0;x<W;x++)if(M[lr+x]<bv){bv=M[lr+x];bx=x}
+ for(let y=H-1;y>=0;y--){s[y]=bx;bx+=B[y*W+bx]}return s}
+function removeSeam(s){const n=new Uint32Array((W-1)*H),m=new Int8Array((W-1)*H),gg=new Float32Array((W-1)*H);
+ for(let y=0;y<H;y++){const a=y*W,b=y*(W-1),c=s[y];
+  n.set(px.subarray(a,a+c),b);n.set(px.subarray(a+c+1,a+W),b+c);
+  m.set(mk.subarray(a,a+c),b);m.set(mk.subarray(a+c+1,a+W),b+c);
+  gg.set(g.subarray(a,a+c),b);gg.set(g.subarray(a+c+1,a+W),b+c)}
+ px=n;mk=m;g=gg;W--}
+function avg(a,b){let r=0;for(let k=0;k<32;k+=8)r|=((((a>>>k)&255)+((b>>>k)&255))>>1)<<k;return r>>>0}
+let stop=false,lastPost=0,done=0,total=1,transposed=false;
+function post(force,s){const t=Date.now();if(!force&&t-lastPost<120)return;lastPost=t;
+ let P=px,w=W,h=H;
+ if(s&&showSeams){P=px.slice();for(let y=0;y<H;y++)P[y*W+s[y]]=0xff3355ff}
+ if(transposed){const n=new Uint32Array(W*H);for(let y=0;y<H;y++)for(let x=0;x<W;x++)n[x*H+y]=P[y*W+x];P=n;w=H;h=W}
+ postMessage({type:'frame',w,h,buf:P.buffer.slice(0),p:done/total})}
+function prog(){const t=Date.now();if(t-lastPost<120)return;lastPost=t;postMessage({type:'prog',p:done/total})}
+function shrink(k,fwd){for(let i=0;i<k&&!stop;i++){const s=seam(fwd);post(false,s);removeSeam(s);done++}}
+function enlarge(k,fwd){
+ /* find k seams on a copy, recording original columns, then duplicate them */
+ const P0=px,M0=mk,G0=g,W0=W;let ids=new Int32Array(W*H);for(let y=0;y<H;y++)for(let x=0;x<W;x++)ids[y*W+x]=x;
+ const cols=[];
+ for(let i=0;i<k&&!stop;i++){const s=seam(fwd);const c=new Int32Array(H);
+  for(let y=0;y<H;y++){c[y]=ids[y*W+s[y]];}cols.push(c);
+  const n=new Int32Array((W-1)*H);for(let y=0;y<H;y++){const a=y*W,b=y*(W-1);n.set(ids.subarray(a,a+s[y]),b);n.set(ids.subarray(a+s[y]+1,a+W),b+s[y])}
+  ids=n;removeSeam(s);done+=.5;prog()}
+ px=P0;mk=M0;g=G0;W=W0;const k2=cols.length,NW=W+k2;
+ const n=new Uint32Array(NW*H),m=new Int8Array(NW*H),gg=new Float32Array(NW*H);
+ const dup=new Uint8Array(W);
+ for(let y=0;y<H;y++){dup.fill(0);for(const c of cols)dup[c[y]]++;let o=y*NW;const a=y*W;
+  for(let x=0;x<W;x++){const p=px[a+x];n[o]=p;m[o]=mk[a+x];gg[o]=g[a+x];o++;
+   for(let d=0;d<dup[x];d++){const q=x+1<W?px[a+x+1]:p;const v=avg(p,q);n[o]=v;m[o]=mk[a+x];gg[o]=lum(v);o++}}}
+ px=n;mk=m;g=gg;W=NW;done+=k2*.5;post(true)}
+function resizeW(target,fwd){let d=target-W;
+ if(d<0)shrink(-d,fwd);
+ while(d>0&&!stop){const k=Math.min(d,Math.max(1,Math.floor(W*0.45)));enlarge(k,fwd);d=target-W}}
+let showSeams=true;
+onmessage=e=>{const q=e.data;if(q.type==='stop'){stop=true;return}
+ stop=false;showSeams=q.showSeams;W=q.w;H=q.h;px=new Uint32Array(q.buf);mk=new Int8Array(q.mk);mkGray();transposed=false;done=0;
+ if(q.type==='resize'){total=Math.abs(q.tw-W)+Math.abs(q.th-H)||1;
+  resizeW(q.tw,q.fwd);
+  if(!stop&&q.th!==H){transpose();transposed=true;resizeW(q.th,q.fwd);transpose();transposed=false}}
+ else if(q.type==='remove'){
+  /* carve along the narrower side of the red region until no red pixels remain */
+  let x0=W,x1=-1,y0=H,y1=-1;for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(mk[y*W+x]===-1){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+  if(x1<0){postMessage({type:'err',msg:'ماسک قرمزی پیدا نشد'});return}
+  const vert=(x1-x0)<=(y1-y0),ow=W,oh=H;if(!vert){transpose();transposed=true}
+  total=(vert?x1-x0:y1-y0)+1;if(q.restore)total*=2;
+  let guard=0;const any=()=>{for(let i=0;i<mk.length;i++)if(mk[i]===-1)return true;return false};
+  while(any()&&!stop&&guard++<W*0.9){const s=seam(q.fwd);post(false,s);removeSeam(s);done++}
+  for(let i=0;i<mk.length;i++)if(mk[i]===-1)mk[i]=0;
+  if(q.restore&&!stop){total=done+(vert?ow:oh)-W;resizeW(vert?ow:oh,q.fwd)}
+  if(transposed){transpose();transposed=false}}
+ const m2=mk.slice();postMessage({type:'done',w:W,h:H,buf:px.buffer,mk:m2.buffer,stopped:stop},[px.buffer,m2.buffer])};
+`;
+function newWorker(){worker&&worker.terminate();worker=new Worker(URL.createObjectURL(new Blob([WSRC],{type:'text/javascript'})));worker.onmessage=onW;}
+
+/* ---------- image loading ---------- */
+function loadImage(src){const im=new Image();im.onload=()=>{srcImg=im;prepare();};im.onerror=()=>st('خواندن تصویر ممکن نشد');im.src=src;}
+function prepare(){if(!srcImg)return;const mxs=+$('maxs').value;let w=srcImg.naturalWidth,h=srcImg.naturalHeight;const k=Math.min(1,mxs/Math.max(w,h));w=Math.round(w*k);h=Math.round(h*k);
+ const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.drawImage(srcImg,0,0,w,h);
+ orig={w,h,data:x.getImageData(0,0,w,h)};origMask=new Int8Array(w*h);setCur(orig.data,origMask.slice(),w,h);
+ $('info').textContent=`${srcImg.naturalWidth}×${srcImg.naturalHeight} → کاری ${w}×${h}`;applyRatio();['go','rmObj','reset','dl'].forEach(i=>$(i).disabled=false);$('cmp').style.display='none';}
+function setCur(id,mask,w,h){W=w;H=h;cv.width=mkc.width=w;cv.height=mkc.height=h;cx.putImageData(id,0,0);cur=id;curMask=mask;drawMask();}
+$('file').onchange=$('cam').onchange=e=>{const f=e.target.files[0];if(f)loadImage(URL.createObjectURL(f));};
+$('sample').onclick=()=>loadImage('img/ukiyoe.webp');
+$('maxs').oninput=()=>{$('maxsv').textContent=$('maxs').value;};$('maxs').onchange=prepare;
+
+/* ---------- ratio ---------- */
+document.querySelectorAll('#ratios .tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('#ratios .tab').forEach(t=>t.classList.toggle('on',t===b));ratio=b.dataset.r;applyRatio();});
+function applyRatio(){if(!orig)return;let w=orig.w,h=orig.h;
+ if(ratio!=='custom'){const [a,b]=ratio.split(':').map(Number);const r=a/b;
+  /* keep the larger content dimension, change the other (shrink one side preferred) */
+  const g=$('grow').checked;if(w/h>r){if(g)h=Math.round(w/r);else w=Math.round(h*r);}else{if(g)w=Math.round(h*r);else h=Math.round(w/r);}}
+ $('tw').value=w;$('th').value=h;showDelta();}
+function showDelta(){if(!orig)return;const dw=+$('tw').value-orig.w,dh=+$('th').value-orig.h;$('delta').textContent=`(${dw>=0?'+':''}${dw} ستون، ${dh>=0?'+':''}${dh} ردیف نسبت به اصل)`;}
+$('grow').onchange=applyRatio;
+$('tw').oninput=$('th').oninput=()=>{document.querySelectorAll('#ratios .tab').forEach(t=>t.classList.toggle('on',t.dataset.r==='custom'));ratio='custom';showDelta();};
+
+/* ---------- mask painting ---------- */
+document.querySelectorAll('#brushes .tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('#brushes .tab').forEach(t=>t.classList.toggle('on',t===b));brush=+b.dataset.b;mkc.style.pointerEvents=brush?'auto':'none';});
+mkc.style.pointerEvents='none';
+$('bs').oninput=()=>$('bsv').textContent=$('bs').value;
+let painting=false,last=null;
+function toImg(e){const r=mkc.getBoundingClientRect();return [(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*H/r.height];}
+function dab(x,y){const R=+$('bs').value*W/mkc.getBoundingClientRect().width/2,v=brush===2?0:brush;
+ const x0=Math.max(0,Math.floor(x-R)),x1=Math.min(W-1,Math.ceil(x+R)),y0=Math.max(0,Math.floor(y-R)),y1=Math.min(H-1,Math.ceil(y+R));
+ for(let j=y0;j<=y1;j++)for(let i=x0;i<=x1;i++)if((i-x)**2+(j-y)**2<=R*R)curMask[j*W+i]=v;}
+function stroke(p){if(last){const d=Math.hypot(p[0]-last[0],p[1]-last[1]),n=Math.max(1,Math.ceil(d/2));for(let k=1;k<=n;k++)dab(last[0]+(p[0]-last[0])*k/n,last[1]+(p[1]-last[1])*k/n);}else dab(...p);last=p;drawMask();}
+mkc.onpointerdown=e=>{if(!brush||!cur)return;painting=true;last=null;mkc.setPointerCapture(e.pointerId);stroke(toImg(e));};
+mkc.onpointermove=e=>{if(painting)stroke(toImg(e));};
+mkc.onpointerup=mkc.onpointercancel=()=>{painting=false;last=null;};
+function drawMask(){const id=mx.createImageData(W,H),d=id.data;for(let i=0;i<W*H;i++){const v=curMask[i];if(v===1){d[i*4+1]=220;d[i*4+3]=200}else if(v===-1){d[i*4]=255;d[i*4+1]=40;d[i*4+3]=200}}mx.putImageData(id,0,0);}
+$('clearMk').onclick=()=>{if(curMask){curMask.fill(0);drawMask();}};
+
+/* ---------- run ---------- */
+let t0=0,mode='';
+function run(type){if(!cur)return;newWorker();const px=new Uint32Array(cur.data.buffer.slice(0));t0=performance.now();mode=type;
+ const msg={type,w:W,h:H,buf:px.buffer,mk:curMask.slice().buffer,fwd:$('fwd').checked,showSeams:$('showSeams').checked,tw:Math.max(8,+$('tw').value|0),th:Math.max(8,+$('th').value|0),restore:$('restore').checked};
+ if(type==='resize'){const big=Math.abs(msg.tw-W)+Math.abs(msg.th-H);if(!big){st('اندازه همان است');return;}}
+ busy(true);st('در حال پردازش…');worker.postMessage(msg,[msg.buf,msg.mk]);}
+function busy(b){['go','rmObj','reset','dl','sample'].forEach(i=>$(i).disabled=b);$('stop').disabled=!b;}
+function onW(e){const q=e.data;
+ if(q.type==='frame'){const id=new ImageData(new Uint8ClampedArray(q.buf),q.w,q.h);if(cv.width!==q.w||cv.height!==q.h){cv.width=mkc.width=q.w;cv.height=mkc.height=q.h;mx.clearRect(0,0,q.w,q.h);}cx.putImageData(id,0,0);$('pb').style.width=(100*Math.min(1,q.p))+'%';st(`در حال پردازش… ${q.w}×${q.h}`);}
+ else if(q.type==='prog'){$('pb').style.width=(100*Math.min(1,q.p))+'%';st('یافتن درزها برای بزرگ‌کردن…');}
+ else if(q.type==='err'){busy(false);st(q.msg);}
+ else if(q.type==='done'){const id=new ImageData(new Uint8ClampedArray(q.buf),q.w,q.h);setCur(id,new Int8Array(q.mk),q.w,q.h);$('pb').style.width='100%';busy(false);
+  const s=((performance.now()-t0)/1000).toFixed(1);st(`${q.stopped?'متوقف شد':'تمام'} — ${q.w}×${q.h} در ${s} ثانیه`);compare();window.__seamTest={w:q.w,h:q.h,sec:+s,mode};}}
+$('go').onclick=()=>run('resize');$('rmObj').onclick=()=>run('remove');
+$('stop').onclick=()=>worker&&worker.postMessage({type:'stop'});
+$('reset').onclick=()=>{if(orig){setCur(orig.data,origMask.slice(),orig.w,orig.h);$('cmp').style.display='none';st('برگشت به اصل');}};
+$('dl').onclick=()=>cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`seam_${W}x${H}.png`;a.click();},'image/png');
+function compare(){if(!orig)return;const o=document.createElement('canvas');o.width=orig.w;o.height=orig.h;o.getContext('2d').putImageData(orig.data,0,0);
+ const c1=$('c1'),c2=$('c2'),c3=$('c3');c1.width=orig.w;c1.height=orig.h;c1.getContext('2d').drawImage(o,0,0);
+ c2.width=W;c2.height=H;c2.getContext('2d').drawImage(o,0,0,W,H);c3.width=W;c3.height=H;c3.getContext('2d').drawImage(cv,0,0);$('cmp').style.display='flex';}
+function st(t){$('st').textContent=t;}
+window.__seamTest=null;
+</script>
+<script src="site.js?v=10"></script>
+</body>
+</html>
