@@ -67,7 +67,7 @@ import {SparkRenderer,SplatMesh} from '@sparkjsdev/spark';
 import {VRButton} from 'three/addons/webxr/VRButton.js';
 import {ARButton} from 'three/addons/webxr/ARButton.js';
 const EMU=new URLSearchParams(location.search).has('emulate');
-if(EMU){try{const {XRDevice,metaQuest3}=await import('iwer');const dev=new XRDevice(metaQuest3);dev.installRuntime();
+if(EMU){try{const {XRDevice,metaQuest3}=await import('iwer');const dev=new XRDevice(metaQuest3);dev.installRuntime({forceInstall:true});
  try{const {DevUI}=await import('@iwer/devui');new DevUI(dev);}catch(e){console.warn('devui',e);}}catch(e){console.warn('iwer',e);}}
 const $=id=>document.getElementById(id),msg=t=>$('msg').textContent=t;
 const view=$('view'),renderer=new THREE.WebGLRenderer({antialias:false,preserveDrawingBuffer:true,alpha:true});
