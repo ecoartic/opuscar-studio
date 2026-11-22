@@ -27,10 +27,14 @@ const proj = (H, x, y) => { const w = H[6] * x + H[7] * y + H[8]; return [(H[0] 
 const area = q => { let a = 0; for (let i = 0; i < q.length; i++) { const p = q[i], n = q[(i + 1) % q.length]; a += p[0] * n[1] - n[0] * p[1]; } return a / 2; };
 const convex = q => { let s = 0; for (let i = 0; i < 4; i++) { const a = q[i], b = q[(i + 1) % 4], c = q[(i + 2) % 4]; const z = (b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0]); if (z === 0) return false; const sg = Math.sign(z); if (s && sg !== s) return false; s = sg; } return true; };
 
+const inQuad = (q, x, y) => { let c = false; for (let i = 0, j = 3; i < 4; j = i++) { const a = q[i], b = q[j]; if (((a[1] > y) !== (b[1] > y)) && (x < (b[0] - a[0]) * (y - a[1]) / (b[1] - a[1]) + a[0])) c = !c; } return c; };
+const ang = q => Math.atan2(q[1][1] - q[0][1], q[1][0] - q[0][0]);
+
 export class Mosaic {
   constructor(cv, { maxSide = 480, size = 2600 } = {}) {
     this.cv = cv; this.maxSide = maxSide; this.size = size;
-    this.orb = new cv.ORB(1200); this.bf = new cv.BFMatcher(cv.NORM_HAMMING, false);
+    this.orb = new cv.ORB(1500, 1.2, 8, 19, 0, 2, 0, 31, 10); // fastThreshold 10 (default 20): more corners on low-contrast surfaces
+    this.clahe = new cv.CLAHE(2.5, new cv.Size(8, 8)); this.G = 20; this.cov = new Uint8Array(Math.ceil(size / 20) ** 2); this.bf = new cv.BFMatcher(cv.NORM_HAMMING, false);
     this.kfs = []; this.canvas = document.createElement('canvas'); this.canvas.width = this.canvas.height = size;
     this.ctx = this.canvas.getContext('2d'); this.grab = document.createElement('canvas');
     this.bbox = null; this.lastQuad = null; this.lost = 0;
@@ -39,7 +43,8 @@ export class Mosaic {
     const vw = video.videoWidth, vh = video.videoHeight, s = this.maxSide / Math.max(vw, vh);
     const w = Math.round(vw * s), h = Math.round(vh * s); this.grab.width = w; this.grab.height = h;
     const g = this.grab.getContext('2d', { willReadFrequently: true }); g.drawImage(video, 0, 0, w, h);
-    const cv = this.cv, rgba = cv.imread(this.grab), gray = new cv.Mat(); cv.cvtColor(rgba, gray, cv.COLOR_RGBA2GRAY);
+    const cv = this.cv, rgba = cv.imread(this.grab), gray0 = new cv.Mat(), gray = new cv.Mat(); cv.cvtColor(rgba, gray0, cv.COLOR_RGBA2GRAY);
+    this.clahe.apply(gray0, gray); gray0.delete(); // local contrast boost (helps dim / low-texture surfaces)
     const kp = new cv.KeyPointVector(), des = new cv.Mat(), none = new cv.Mat();
     this.orb.detectAndCompute(gray, none, kp, des); none.delete(); gray.delete();
     const pts = []; for (let i = 0; i < kp.size(); i++) { const p = kp.get(i).pt; pts.push([p.x, p.y]); } kp.delete();
@@ -52,9 +57,17 @@ export class Mosaic {
     for (let i = 0; i < mm.size(); i++) { const m = mm.get(i); if (m.size() < 2) continue; const a = m.get(0), b = m.get(1); if (a.distance < 0.78 * b.distance) { src.push(...f.pts[a.queryIdx]); dst.push(...kf.pts[a.trainIdx]); } }
     mm.delete(); if (src.length / 2 < 15) return null;
     const S = cv.matFromArray(src.length / 2, 1, cv.CV_32FC2, src), D = cv.matFromArray(dst.length / 2, 1, cv.CV_32FC2, dst), mask = new cv.Mat();
-    const Hm = cv.findHomography(S, D, cv.RANSAC, 4.0, mask); let inl = 0; for (let i = 0; i < mask.rows; i++) inl += mask.data[i];
+    const Hm = cv.findHomography(S, D, cv.USAC_MAGSAC !== undefined ? cv.USAC_MAGSAC : cv.RANSAC, 4.0, mask); let inl = 0; for (let i = 0; i < mask.rows; i++) inl += mask.data[i];
     const H = Hm.rows === 3 ? Array.from(Hm.data64F) : null; S.delete(); D.delete(); mask.delete(); Hm.delete();
     return H ? { H, inl, n: src.length / 2 } : null;
+  }
+  _cover(q, mark) { // fraction of quad cells not yet covered; optionally mark them
+    const G = this.G, n = Math.ceil(this.size / G); let tot = 0, nw = 0;
+    const xs = q.map(p => p[0]), ys = q.map(p => p[1]);
+    for (let gy = Math.max(0, Math.floor(Math.min(...ys) / G)); gy <= Math.min(n - 1, Math.floor(Math.max(...ys) / G)); gy++)
+      for (let gx = Math.max(0, Math.floor(Math.min(...xs) / G)); gx <= Math.min(n - 1, Math.floor(Math.max(...xs) / G)); gx++) {
+        if (!inQuad(q, gx * G + G / 2, gy * G + G / 2)) continue; tot++; const i = gy * n + gx; if (!this.cov[i]) { nw++; if (mark) this.cov[i] = 1; } }
+    return tot ? nw / tot : 0;
   }
   _quad(H, w, h) { return [[0, 0], [w, 0], [w, h], [0, h]].map(p => proj(H, p[0], p[1])); }
   _paint(f, H) {
@@ -72,7 +85,7 @@ export class Mosaic {
   start(video) {
     const f = this._frame(video), ox = (this.size - f.w) / 2, oy = (this.size - f.h) / 2, H = [1, 0, ox, 0, 1, oy, 0, 0, 1];
     this.refArea = f.w * f.h; this._paint(f, H); f.rgba.delete(); this.kfs.push({ des: f.des, pts: f.pts, H, c: proj(H, f.w / 2, f.h / 2), w: f.w, h: f.h });
-    this.lastQuad = this._quad(H, f.w, f.h); return { ok: true, kfs: 1, inl: f.pts.length };
+    this.lastQuad = this._quad(H, f.w, f.h); this._cover(this.lastQuad, true); this.kfs[0].q = this.lastQuad; return { ok: true, kfs: 1, inl: f.pts.length };
   }
   step(video) {
     const f = this._frame(video);
@@ -80,16 +93,23 @@ export class Mosaic {
     const ref = this.lastQuad ? [(this.lastQuad[0][0] + this.lastQuad[2][0]) / 2, (this.lastQuad[0][1] + this.lastQuad[2][1]) / 2] : this.kfs[0].c;
     const cand = this.kfs.map(k => [Math.hypot(k.c[0] - ref[0], k.c[1] - ref[1]), k]).sort((a, b) => a[0] - b[0]).slice(0, 3).map(x => x[1]);
     if (!cand.includes(this.kfs[0])) cand.push(this.kfs[0]);
+    const lastKF = this.kfs[this.kfs.length - 1]; if (!cand.includes(lastKF)) cand.push(lastKF);
     let best = null;
     for (const kf of cand) { const r = this._match(f, kf); if (r && (!best || r.inl > best.inl)) best = { ...r, kf }; }
     let res = { ok: false, kfs: this.kfs.length, inl: best ? best.inl : 0, added: false };
-    if (best && best.inl >= 25) {
+    if (best && best.inl >= 20) {
       const Hm = mul(best.kf.H, best.H), q = this._quad(Hm, f.w, f.h), a = Math.abs(area(q)) / this.refArea;
       if (convex(q) && a > 0.15 && a < 6) {
         res.ok = true; this.lastQuad = q; this.lost = 0; res.quad = q;
-        const c = proj(Hm, f.w / 2, f.h / 2), dmin = Math.min(...this.kfs.map(k => Math.hypot(k.c[0] - c[0], k.c[1] - c[1])));
-        if (dmin > 0.28 * Math.sqrt(this.refArea) && best.inl >= 40 && this.kfs.length < 40) {
-          this._paint(f, Hm); this.kfs.push({ des: f.des, pts: f.pts, H: Hm, c, w: f.w, h: f.h }); res.added = true; res.kfs = this.kfs.length;
+        const c = proj(Hm, f.w / 2, f.h / 2), near = this.kfs.map(k => [Math.hypot(k.c[0] - c[0], k.c[1] - c[1]), k]).sort((a, b) => a[0] - b[0])[0][1];
+        const newFrac = this._cover(q, false); res.newFrac = newFrac;
+        let dA = Math.abs(ang(q) - ang(near.q)); dA = Math.min(dA, 2 * Math.PI - dA);
+        const sc = Math.sqrt(Math.abs(area(q)) / Math.abs(area(near.q)));
+        // keyframe when the view adds new surface, OR looks at known surface from a new direction / distance (walking around)
+        const want = this.force || newFrac > 0.22 || dA > 0.45 || sc < 0.72 || sc > 1.4;
+        if (want && best.inl >= 30 && this.kfs.length < 40) {
+          this.force = false; this._paint(f, Hm); this._cover(q, true);
+          this.kfs.push({ des: f.des, pts: f.pts, H: Hm, c, w: f.w, h: f.h, q }); res.added = true; res.kfs = this.kfs.length;
           f.rgba.delete(); return res;
         }
       }
@@ -111,7 +131,9 @@ export class Mosaic {
     const im = new Image(); im.src = c.toDataURL('image/jpeg', .9); await im.decode();
     // tiles = rectified keyframe footprints (each ≈ one camera view) → detectable when only part of the surface is in view
     const chosen = []; const minD = 0.45 * Math.sqrt(this.refArea);
-    for (const k of this.kfs) { if (chosen.length >= maxTiles) break; if (chosen.every(o => Math.hypot(o.c[0] - k.c[0], o.c[1] - k.c[1]) > minD)) chosen.push(k); }
+    // diversity in position OR viewing direction (MindAR features are only partly invariant to strong perspective/rotation)
+    const diff = (o, k) => { let d = Math.abs(ang(o.q) - ang(k.q)); d = Math.min(d, 2 * Math.PI - d); return Math.hypot(o.c[0] - k.c[0], o.c[1] - k.c[1]) > minD || d > 0.7; };
+    for (const k of this.kfs) { if (chosen.length >= maxTiles) break; if (chosen.every(o => diff(o, k))) chosen.push(k); }
     const tiles = [];
     for (const k of chosen) {
       const q = this._quad(k.H, k.w, k.h);
@@ -126,5 +148,6 @@ export class Mosaic {
     const n = this.kfs.length; this.dispose(); this.kfs = [];
     return { image: im, keyframes: n, tiles, size: [c.width, c.height] };
   }
-  dispose() { try { this.kfs.forEach(k => k.des.delete()); this.orb.delete(); this.bf.delete(); } catch (e) { } }
+  addNext() { this.force = true; }
+  dispose() { try { this.kfs.forEach(k => k.des.delete()); this.orb.delete(); this.bf.delete(); this.clahe.delete(); } catch (e) { } }
 }

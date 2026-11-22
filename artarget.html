@@ -105,7 +105,7 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
  <div id="mmsg" style="position:absolute;top:calc(12px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:14px;padding:0 16px;text-shadow:0 0 4px #000">گوشی را تقریباً عمود از بالا روی سطح بگیرید و «📌 شروع» را بزنید</div>
  <div id="mexp" style="position:absolute;top:calc(38px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:11px;color:#ddd;direction:ltr"></div>
  <div style="position:absolute;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:8px;flex-wrap:wrap">
-  <button class="btn" id="mx">✕ لغو</button><button class="btn p" id="mgo">📌 شروع</button><button class="btn p" id="mfin" style="display:none">✓ پایان و ساخت تارگت</button></div>
+  <button class="btn" id="mx">✕ لغو</button><button class="btn p" id="mgo">📌 شروع</button><button class="btn" id="madd" style="display:none">＋ نما</button><button class="btn p" id="mfin" style="display:none">✓ پایان و ساخت تارگت</button></div>
 </div>
 <div id="ar"></div>
 <div id="arst">دنبال تارگت می‌گردم…</div>
@@ -194,19 +194,19 @@ function ready(){$('s2').classList.remove('off');if(glbURL)$('s3').classList.rem
 // ---- mosaic capture (walk around the surface) ----
 let mosStream=null,mosExpo=null,mos=null,mosRun=false;
 async function openMosaic(){
- $('mmsg').textContent='در حال آماده‌سازی…';$('mos').style.display='block';document.body.style.overflow='hidden';$('mgo').style.display='';$('mfin').style.display='none';$('mgo').disabled=true;
+ $('mmsg').textContent='در حال آماده‌سازی…';$('mos').style.display='block';document.body.style.overflow='hidden';$('mgo').style.display='';$('mfin').style.display='none';$('madd').style.display='none';$('mgo').disabled=true;
  try{const M=await import('./ar/mosaic.js');const cv=await M.loadCV(t=>$('mmsg').textContent=t);
   mosStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:960}},audio:false});
   $('mv').srcObject=mosStream;mosExpo=smartExposure(mosStream.getVideoTracks()[0],$('mv'),st=>{$('mexp').textContent=expStr(st);});
   mos=new M.Mosaic(cv);$('mgo').disabled=false;$('mmsg').textContent='گوشی را تقریباً عمود از بالا روی سطح بگیرید و «📌 شروع» را بزنید';
  }catch(err){$('mmsg').textContent='خطا: '+err.message;}}
 function closeMosaic(){mosRun=false;if(mosExpo){mosExpo.stop();mosExpo=null;}if(mosStream)mosStream.getTracks().forEach(t=>t.stop());mosStream=null;$('mv').srcObject=null;if(mos&&mos.kfs.length)mos.dispose();mos=null;$('mos').style.display='none';document.body.style.overflow='';}
-$('mosb').onclick=openMosaic;$('mx').onclick=closeMosaic;
+$('mosb').onclick=openMosaic;$('madd').onclick=()=>{if(mos)mos.addNext();};$('mx').onclick=closeMosaic;
 $('mgo').onclick=()=>{const v=$('mv');if(!v.videoWidth||!mos)return;const r=mos.start(v);mos.preview($('mprev'));
- $('mgo').style.display='none';$('mfin').style.display='';mosRun=true;$('mmsg').textContent='✓ مرجع ثبت شد — آرام دور سطح حرکت کنید';
+ $('mgo').style.display='none';$('mfin').style.display='';$('madd').style.display='';mosRun=true;$('mmsg').textContent='✓ مرجع ثبت شد — آرام دور سطح حرکت کنید';
  const loop=()=>{if(!mosRun)return;const t0=performance.now();let r;try{r=mos.step(v);}catch(e){r={ok:false,inl:0,kfs:mos.kfs.length};console.warn(e);}
   mos.preview($('mprev'));
-  $('mmsg').textContent=r.ok?`✓ ردیابی (${fa(r.inl)} نقطه) · ${fa(r.kfs)} نما${r.added?' · ＋نمای جدید':''}`:`⚠️ گم شد (${fa(r.inl)}) — به بخشی که قبلاً دیده شده برگردید`;
+  $('mmsg').textContent=r.ok?`✓ ردیابی (${fa(r.inl)} نقطه) · ${fa(r.kfs)} نما${r.added?' · ＋نمای جدید':(r.newFrac!=null?' · سطح تازه '+fa(Math.round(r.newFrac*100))+'٪':'')}`:`⚠️ گم شد (${fa(r.inl)}) — به بخشی که قبلاً دیده شده برگردید`;
   $('mmsg').style.color=r.ok?'':'#ff8a8a';setTimeout(loop,Math.max(60,220-(performance.now()-t0)));};loop();};
 $('mfin').onclick=async()=>{if(!mos)return;mosRun=false;$('mfin').disabled=true;$('mmsg').textContent='در حال ساخت نقشه‌ی سطح…';
  try{const R=await mos.finish();mos=null;closeMosaic();$('mfin').disabled=false;
