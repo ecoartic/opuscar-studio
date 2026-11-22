@@ -53,11 +53,13 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
 <h2><b>۱</b>ثبت کارت یا سطح (میز، کتاب، کارت…)</h2>
 <div class="row">
  <button class="btn p" id="live">🎯 ثبت سطح با دوربین زنده</button>
+ <button class="btn p" id="mosb">🚶 موزاییک: حرکت دور سطح</button>
  <label class="btn">🖼️ عکس / تصویر<input type="file" id="img" accept="image/*" capture="environment" hidden></label>
  <label class="btn">📂 فایل ‎.mind‎ قبلی<input type="file" id="mindf" accept=".mind" hidden></label>
 </div>
 <ol class="tips">
  <li><b>دوربین زنده:</b> گوشی را روی میز، کتاب یا هر سطح بگیرید تا داخل کادر زرد پر از جزئیات باشد و «ثبت این سطح» را بزنید؛ هر بار می‌توانید سطح جدیدی ثبت کنید و بین سطح‌های ثبت‌شده جابه‌جا شوید.</li>
+ <li><b>موزاییک (برای کل میز یا کف):</b> اول گوشی را تقریباً عمود از بالا بگیرید و «📌 شروع» بزنید؛ بعد آرام دور سطح راه بروید و ارتفاع را ثابت نگه دارید؛ نقشه‌ی سطح خودکار ساخته می‌شود و AR روی کل آن کار می‌کند.</li>
  <li>میز چوبی با رگه، فرش، روزنامه، جلد کتاب خوب است؛ میز سفید یکدست یا شیشه‌ای کار نمی‌کند.</li>
  <li>شیء را صاف روی میز بگذارید و از بالا، عمود، طوری عکس بگیرید که <b>کل کادر</b> را پر کند (حاشیه‌ی میز نیفتد).</li>
  <li>سطح پرجزئیات و مات بهتر است؛ لوگوی ساده روی زمینه‌ی سفید یا سطح براق ضعیف است.</li>
@@ -97,6 +99,14 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
  <div style="position:absolute;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:8px">
   <button class="btn" id="capx">✕ لغو</button><button class="btn p" id="capgo">📌 ثبت این سطح</button></div>
 </div>
+<div id="mos" style="position:fixed;inset:0;z-index:70;background:#000;display:none">
+ <video id="mv" playsinline muted autoplay style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+ <canvas id="mprev" width="300" height="300" style="position:absolute;top:calc(60px + env(safe-area-inset-top));left:10px;width:130px;height:130px;border:2px solid var(--acc);border-radius:10px;background:#222"></canvas>
+ <div id="mmsg" style="position:absolute;top:calc(12px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:14px;padding:0 16px;text-shadow:0 0 4px #000">گوشی را تقریباً عمود از بالا روی سطح بگیرید و «📌 شروع» را بزنید</div>
+ <div id="mexp" style="position:absolute;top:calc(38px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:11px;color:#ddd;direction:ltr"></div>
+ <div style="position:absolute;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:8px;flex-wrap:wrap">
+  <button class="btn" id="mx">✕ لغو</button><button class="btn p" id="mgo">📌 شروع</button><button class="btn p" id="mfin" style="display:none">✓ پایان و ساخت تارگت</button></div>
+</div>
 <div id="ar"></div>
 <div id="arst">دنبال تارگت می‌گردم…</div>
 <div id="arexp" style="position:fixed;z-index:60;top:calc(44px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);font-size:11px;color:#ddd;text-shadow:0 0 3px #000;direction:ltr"></div>
@@ -124,15 +134,18 @@ async function loadImg(file){
  c.getContext('2d').drawImage(im,0,0,c.width,c.height);
  const out=new Image();out.src=c.toDataURL('image/jpeg',.92);await out.decode();URL.revokeObjectURL(url);return out;}
 const targets=[];let cur=-1;
-async function compileImage(im,label){
+async function compileImage(im,label,mos){
  $('prev').src=im.src;$('prev').style.display='block';
  $('cwrap').style.display='block';$('qual').textContent='';$('dlmind').style.display='none';$('cst').textContent='در حال بار کردن کامپایلر…';$('pb').style.width='0';
  const {Compiler}=await import('mindar-image');const comp=new Compiler();
  $('cst').textContent='در حال ساخت تارگت (چند ثانیه تا یک دقیقه، بسته به گوشی)…';
- const data=await comp.compileImageTargets([im],p=>{$('pb').style.width=Math.min(100,p).toFixed(0)+'%';setCapMsg('در حال ساخت تارگت… '+fa(Math.min(100,p).toFixed(0))+'٪');});
+ const imgs=mos&&mos.tiles.length?mos.tiles.map(t=>t.image):[im];
+ const data=await comp.compileImageTargets(imgs,p=>{$('pb').style.width=Math.min(100,p).toFixed(0)+'%';setCapMsg('در حال ساخت تارگت… '+fa(Math.min(100,p).toFixed(0))+'٪');});
  const buf=await comp.exportData();
- let n=0;(data[0].matchingData||[]).forEach(m=>{n+=(m.maximaPoints||[]).length+(m.minimaPoints||[]).length;});
- const t={url:URL.createObjectURL(new Blob([buf])),thumb:im.src,n,st:imgStats(im),asp:im.naturalHeight/im.naturalWidth,label:label||('سطح '+fa(targets.length+1))};
+ let n=0;data.forEach(dd=>(dd.matchingData||[]).forEach(m=>{n+=(m.maximaPoints||[]).length+(m.minimaPoints||[]).length;}));n=Math.round(n/data.length);
+ const [Wm,Hm]=mos?mos.size:[im.naturalWidth,im.naturalHeight];
+ const tiles=mos&&mos.tiles.length?mos.tiles.map(t=>{const [x,y,w,h]=t.rect;return {k:Wm/w,ox:(Wm/2-(x+w/2))/w,oy:-(Hm/2-(y+h/2))/w};}):[{k:1,ox:0,oy:0}];
+ const t={url:URL.createObjectURL(new Blob([buf])),thumb:im.src,n,tiles,st:imgStats(im),asp:im.naturalHeight/im.naturalWidth,label:label||('سطح '+fa(targets.length+1))};
  targets.push(t);selectTarget(targets.length-1);$('pb').style.width='100%';$('cst').textContent='تارگت آماده شد.';return t;}
 function imgStats(im){const W=160,H=Math.round(160*im.naturalHeight/im.naturalWidth),c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(im,0,0,W,H);
  const d=x.getImageData(0,0,W,H).data,g=new Float32Array(W*H);let L=0;for(let i=0;i<W*H;i++){g[i]=.299*d[i*4]+.587*d[i*4+1]+.114*d[i*4+2];L+=g[i];}L/=W*H;
@@ -177,6 +190,30 @@ $('capgo').onclick=async()=>{const v=$('cv');if(!v.videoWidth)return;$('capgo').
 $('mindf').onchange=e=>{const f=e.target.files[0];if(!f)return;targets.push({url:URL.createObjectURL(f),thumb:'',n:null,asp:null,label:f.name.slice(0,14)});selectTarget(targets.length-1);e.target.value='';};
 function ready(){$('s2').classList.remove('off');if(glbURL)$('s3').classList.remove('off');}
 
+
+// ---- mosaic capture (walk around the surface) ----
+let mosStream=null,mosExpo=null,mos=null,mosRun=false;
+async function openMosaic(){
+ $('mmsg').textContent='در حال آماده‌سازی…';$('mos').style.display='block';document.body.style.overflow='hidden';$('mgo').style.display='';$('mfin').style.display='none';$('mgo').disabled=true;
+ try{const M=await import('./ar/mosaic.js');const cv=await M.loadCV(t=>$('mmsg').textContent=t);
+  mosStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:960}},audio:false});
+  $('mv').srcObject=mosStream;mosExpo=smartExposure(mosStream.getVideoTracks()[0],$('mv'),st=>{$('mexp').textContent=expStr(st);});
+  mos=new M.Mosaic(cv);$('mgo').disabled=false;$('mmsg').textContent='گوشی را تقریباً عمود از بالا روی سطح بگیرید و «📌 شروع» را بزنید';
+ }catch(err){$('mmsg').textContent='خطا: '+err.message;}}
+function closeMosaic(){mosRun=false;if(mosExpo){mosExpo.stop();mosExpo=null;}if(mosStream)mosStream.getTracks().forEach(t=>t.stop());mosStream=null;$('mv').srcObject=null;if(mos&&mos.kfs.length)mos.dispose();mos=null;$('mos').style.display='none';document.body.style.overflow='';}
+$('mosb').onclick=openMosaic;$('mx').onclick=closeMosaic;
+$('mgo').onclick=()=>{const v=$('mv');if(!v.videoWidth||!mos)return;const r=mos.start(v);mos.preview($('mprev'));
+ $('mgo').style.display='none';$('mfin').style.display='';mosRun=true;$('mmsg').textContent='✓ مرجع ثبت شد — آرام دور سطح حرکت کنید';
+ const loop=()=>{if(!mosRun)return;const t0=performance.now();let r;try{r=mos.step(v);}catch(e){r={ok:false,inl:0,kfs:mos.kfs.length};console.warn(e);}
+  mos.preview($('mprev'));
+  $('mmsg').textContent=r.ok?`✓ ردیابی (${fa(r.inl)} نقطه) · ${fa(r.kfs)} نما${r.added?' · ＋نمای جدید':''}`:`⚠️ گم شد (${fa(r.inl)}) — به بخشی که قبلاً دیده شده برگردید`;
+  $('mmsg').style.color=r.ok?'':'#ff8a8a';setTimeout(loop,Math.max(60,220-(performance.now()-t0)));};loop();};
+$('mfin').onclick=async()=>{if(!mos)return;mosRun=false;$('mfin').disabled=true;$('mmsg').textContent='در حال ساخت نقشه‌ی سطح…';
+ try{const R=await mos.finish();mos=null;closeMosaic();$('mfin').disabled=false;
+  const t=await compileImage(R.image,'موزاییک '+fa(R.keyframes)+' نما',R);
+  if(glbURL)$('go').click();else $('s2').scrollIntoView({behavior:'smooth'});
+ }catch(err){$('mmsg').textContent='خطا: '+err.message;$('mfin').disabled=false;}};
+
 // ---------- Step 2: model ----------
 fetch('assets.json?v=1').then(r=>r.json()).then(j=>{assets=j.assets;render('');});
 function render(q){q=q.trim().toLowerCase();const L=(q?assets.filter(a=>a.t.toLowerCase().includes(q)||(a.y||'').includes(q)):assets).slice(0,48);
@@ -218,13 +255,21 @@ async function startGravity(){if(grav.on)return;grav.on=true;
 // ---------- Step 3: AR ----------
 // hierarchy: anchor.group (card plane = XY, +Z toward camera, card width = 1)
 //   └ pivot (user move/rotate/scale)  └ holder (stand: +Y→+Z)  └ model (normalized: footprint = 1)
-let mindar=null,model=null,holder=null,pivot=null,anchor=null,gizmo=null,locked=false,arExpo=null;
+let mindar=null,model=null,holder=null,pivot=null,anchor=null,gizmo=null,locked=false,arExpo=null,baseS=0.6;
+// mosaic targets = several tiles (MindAR targets) of one planar map; the visible tile's pose × tile→map transform = map pose
+const _T=new THREE.Matrix4();
+function syncPlane(){const A=anchor;if(!A||!A.anchors)return;
+ let i=A.active>=0&&A.anchors[A.active].group.visible?A.active:A.anchors.findIndex(a=>a.group.visible);
+ const was=A.group.visible;
+ if(i<0){A.group.visible=false;A.active=-1;}else{A.active=i;const t=A.tiles[i];_T.makeScale(t.k,t.k,t.k).setPosition(t.ox,t.oy,0);
+  A.group.matrix.copy(A.anchors[i].group.matrix).multiply(_T);A.group.matrixWorldNeedsUpdate=true;A.group.visible=true;}
+ if(was!==A.group.visible)$('arst').textContent=A.group.visible?(locked?'✓ قفل شده — دور مدل بچرخید':'✓ پیدا شد — مدل را تنظیم و تثبیت کنید')+(A.tiles.length>1?` · بخش ${fa(i+1)}/${fa(A.tiles.length)}`:''):'دنبال سطح می‌گردم…';}
 const E={x:0,y:0,rot:0,ls:0,stand:true};
 function normalize(){holder.rotation.set(E.stand?Math.PI/2:0,0,0);model.scale.setScalar(1);model.position.set(0,0,0);model.updateMatrixWorld(true);
  const b=new THREE.Box3().setFromObject(model),sz=b.getSize(new THREE.Vector3()),k=1/Math.max(sz.x,E.stand?sz.z:sz.y,1e-6);
  model.scale.setScalar(k);const b2=new THREE.Box3().setFromObject(model),c=b2.getCenter(new THREE.Vector3());
  model.position.set(-c.x,E.stand?-b2.min.y:-c.y,E.stand?-c.z:-b2.min.z);}
-function applyE(){if(!pivot)return;pivot.position.set(E.x,E.y,0);pivot.rotation.set(0,0,THREE.MathUtils.degToRad(E.rot));pivot.scale.setScalar(Math.pow(2,E.ls)*0.6);
+function applyE(){if(!pivot)return;pivot.position.set(E.x,E.y,0);pivot.rotation.set(0,0,THREE.MathUtils.degToRad(E.rot));pivot.scale.setScalar(Math.pow(2,E.ls)*baseS);
  $('esc').value=E.ls;$('erot').value=((E.rot+540)%360)-180;$('estand').textContent=E.stand?'⬇️ خوابیده':'⬆️ ایستاده';}
 function makeGizmo(asp){const root=new THREE.Group(),ring=new THREE.Group();root.add(ring);
  const m1=new THREE.Mesh(new THREE.RingGeometry(0.56,0.6,64),new THREE.MeshBasicMaterial({color:0xe8b04b,transparent:true,opacity:.9,depthTest:false,side:THREE.DoubleSide}));m1.renderOrder=9;ring.add(m1);
@@ -267,14 +312,16 @@ $('go').onclick=async()=>{
   mindar=new MindARThree({container:$('ar'),imageTargetSrc:mindURL,uiScanning:'no',uiLoading:'no',filterMinCF:0.0005,filterBeta:300,warmupTolerance:3,missTolerance:8});
   const {renderer,scene,camera}=mindar;renderer.outputColorSpace=THREE.SRGBColorSpace;
   scene.add(new THREE.HemisphereLight(0xffffff,0x444444,2.2));const dl=new THREE.DirectionalLight(0xffffff,1.6);dl.position.set(0.5,1,1);scene.add(dl);
-  anchor=mindar.addAnchor(0);pivot=new THREE.Group();holder=new THREE.Group();pivot.add(holder);anchor.group.add(pivot);
-  gizmo=makeGizmo(targets[cur]?targets[cur].asp:null);anchor.group.add(gizmo);
+  const TT=targets[cur],tiles=(TT&&TT.tiles)||[{k:1,ox:0,oy:0}];baseS=0.6*tiles.length/tiles.reduce((a,t)=>a+t.k,0);
+  const planeG=new THREE.Group();planeG.matrixAutoUpdate=false;planeG.visible=false;scene.add(planeG);
+  anchor={group:planeG,anchors:tiles.map((_,i)=>mindar.addAnchor(i)),tiles,active:-1};
+  pivot=new THREE.Group();holder=new THREE.Group();pivot.add(holder);planeG.add(pivot);
+  gizmo=makeGizmo(TT?TT.asp:null);planeG.add(gizmo);
   const g=await new GLTFLoader().loadAsync(glbURL);model=g.scene;holder.add(model);normalize();applyE();setLocked(false);
-  anchor.onTargetFound=()=>{$('arst').textContent=locked?'✓ قفل شده — دور مدل بچرخید':'✓ پیدا شد — مدل را تنظیم و تثبیت کنید';};
-  anchor.onTargetLost=()=>{$('arst').textContent='دنبال تارگت می‌گردم…';};
+
   await mindar.start();
   try{const tr=mindar.video.srcObject.getVideoTracks()[0];arExpo=smartExposure(tr,mindar.video,st=>{$('arexp').textContent=expStr(st);});}catch(e){}
-  renderer.setAnimationLoop(()=>{gravityAlign();if(gizmo){const r=gizmo.userData.ring;r.position.copy(pivot.position);r.rotation.copy(pivot.rotation);r.scale.copy(pivot.scale);}renderer.render(scene,camera);});
+  renderer.setAnimationLoop(()=>{syncPlane();gravityAlign();if(gizmo){const r=gizmo.userData.ring;r.position.copy(pivot.position);r.rotation.copy(pivot.rotation);r.scale.copy(pivot.scale);}renderer.render(scene,camera);});
  }catch(err){alert('شروع AR ممکن نشد: '+err.message+'\nاجازه‌ی دوربین و باز بودن صفحه در Chrome/Safari را چک کنید.');stopAR();}
  $('go').disabled=false;$('go').textContent='▶️ شروع AR';};
 function stopAR(){if(arExpo){arExpo.stop();arExpo=null;}$('arexp').textContent='';try{if(mindar){mindar.renderer.setAnimationLoop(null);mindar.stop();}}catch(e){}mindar=null;model=null;anchor=null;gizmo=null;ptrs.clear();
@@ -286,7 +333,7 @@ $('shot').onclick=()=>{const gv=gizmo&&gizmo.visible;if(gizmo)gizmo.visible=fals
  const r=v.getBoundingClientRect(),cr=cv.getBoundingClientRect(),k=cv.width/cr.width;
  x.drawImage(v,(r.left-cr.left)*k,(r.top-cr.top)*k,r.width*k,r.height*k);x.drawImage(cv,0,0);if(gizmo)gizmo.visible=gv;
  const a=document.createElement('a');a.download='behrang-ar.png';a.href=c.toDataURL('image/png');a.click();};
-window.__arTest={get tilt(){return surfTilt},E,applyE:()=>applyE(),get locked(){return locked}};
+window.__arTest={get found(){return !!(anchor&&anchor.group.visible)},get tilt(){return surfTilt},E,applyE:()=>applyE(),get locked(){return locked}};
 </script>
 <script src="site.js?v=7"></script>
 </body>
