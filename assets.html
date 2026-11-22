@@ -68,6 +68,6 @@ dlg.addEventListener('close',()=>{$('mv').removeAttribute('src');});
 $('q').oninput=$('kit').onchange=()=>{shown=60;render();};$('more').onclick=()=>{shown+=60;render();};
 fetch('assets.json?v=1').then(r=>r.json()).then(j=>{D=j;$('kit').innerHTML+=Object.entries(D.kits).sort((a,b)=>a[1].localeCompare(b[1])).map(([k,v])=>`<option value="${esc(k)}">${esc(v)}</option>`).join('');chips();render();}).catch(()=>$('count').textContent='بارگذاری ناموفق بود.');
 </script>
-<script src="site.js?v=5"></script>
+<script src="site.js?v=6"></script>
 </body>
 </html>

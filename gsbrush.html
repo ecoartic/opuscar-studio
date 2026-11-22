@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ساخت Gaussian Splat با Brush — Behrang Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}a{color:var(--acc)}
+header{padding:28px 20px 10px;text-align:center;background:radial-gradient(ellipse at top,#2a2214 0%,var(--bg) 70%)}
+header h1{margin:0 0 6px;font-size:clamp(22px,4vw,34px);font-weight:800}header p{margin:0 auto;max-width:820px;color:var(--mut);font-size:15px}
+.flow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0 0;font-size:13px}
+.flow a,.flow span{padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);text-decoration:none;color:var(--fg)}
+.flow b{color:var(--acc)}
+.wrap{max-width:1400px;margin:14px auto;padding:0 14px}
+iframe{width:100%;height:78vh;min-height:520px;border:1px solid var(--line);border-radius:12px;background:#000}
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:14px 0 30px}
+.tips div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--mut)}
+.tips b{color:var(--fg)}
+footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;color:var(--mut);font-size:13px}
+</style>
+<link rel="stylesheet" href="common.css?v=2">
+</head>
+<body>
+<header>
+  <h1>ساخت Gaussian Splat در مرورگر (Brush)</h1>
+  <p>عکس‌ها یا یک دیتاست COLMAP/Nerfstudio را بده تا همین‌جا splat آموزش داده شود؛ روی هر GPU (NVIDIA، AMD، Intel) با WebGPU، بدون نصب. خروجی PLY را بعد در SuperSplat تمیز کن و در نمایشگر Splat یا Unreal/Aximmetry ببر.</p>
+  <div class="flow"><span><b>۱</b> Brush: آموزش</span><a href="supersplat/" target="_blank"><b>۲</b> SuperSplat: تمیزکاری ↗</a><a href="splat.html"><b>۳</b> نمایشگر Splat: نما و خروجی</a><a href="library.html?q=aximmetry"><b>۴</b> Unreal → Aximmetry</a></div>
+</header>
+<div class="wrap">
+  <iframe src="https://arthurbrussee.github.io/brush-demo/" allow="fullscreen; cross-origin-isolated" title="Brush"></iframe>
+  <div class="tips">
+    <div><b>ورودی:</b> «Directory» برای پوشه‌ی دیتاست (خروجی COLMAP یا Nerfstudio با تصاویر)، «File» برای PLY آماده یا ZIP دیتاست، «URL» برای فایل آنلاین.</div>
+    <div><b>مرورگر:</b> Chrome یا Edge جدید با WebGPU. برای دیتاست‌های بزرگ نسخه‌ی دسکتاپ (Windows/macOS/Linux) سریع‌تر است: از صفحه‌ی <a href="https://github.com/ArthurBrussee/brush/releases" target="_blank" rel="noopener">Releases</a>.</div>
+    <div><b>اگر بالا نیامد:</b> <a href="https://arthurbrussee.github.io/brush-demo/" target="_blank" rel="noopener">در تب جدا باز کن ↗</a>. دموی رسمی سازنده است که این‌جا قاب شده.</div>
+  </div>
+</div>
+<footer>Brush از <a href="https://github.com/ArthurBrussee/brush" target="_blank" rel="noopener">Arthur Brussee</a> (Apache-2.0)، دموی رسمی سازنده داخل قاب. SuperSplat (MIT، PlayCanvas) روی همین سایت میزبانی می‌شود.</footer>
+<script src="site.js?v=6"></script>
+</body>
+</html>

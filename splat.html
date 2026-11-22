@@ -48,6 +48,7 @@ input[type=range]{width:100%}
   <label><input type="checkbox" id="ol" checked> خط دور (outline)</label>
   <label>پس‌زمینه</label><select id="bg"><option value="#101216">تیره</option><option value="#e9e4d8">روشن</option><option value="#00b140">کروما سبز</option><option value="#0047bb">کروما آبی</option></select>
   <button class="btn s" id="shot">عکس از نما (PNG)</button>
+  <button class="btn s" id="toSS">ویرایش همین splat در SuperSplat ↗</button>
   <button class="btn s" id="hidep">پنهان کردن پنل</button>
   <div class="msg" id="msg"></div>
   <p style="margin-top:8px">موتور: <a href="https://github.com/sparkjsdev/spark">Spark</a> روی three.js؛ حالت pixel از ایده‌ی <a href="https://github.com/cobanov/pixelart-gaussiansplat">pixelart-gaussiansplat</a>. <a href="library.html">← کتابخانه</a></p>
@@ -66,12 +67,14 @@ let mesh=null;
 function size(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();}
 addEventListener('resize',size);size();
 function orient(m){m.quaternion.identity();const f=$('flip').value;if(f==='x180')m.rotation.x=Math.PI;else if(f==='x90')m.rotation.x=-Math.PI/2;}
-async function show(opts,name){try{msg('در حال بارگذاری '+name+' …');if(mesh){scene.remove(mesh);mesh.dispose?.();}
+let LAST_URL='https://sparkjs.dev/assets/splats/butterfly.spz';
+async function show(opts,name){try{LAST_URL=opts.url||null;msg('در حال بارگذاری '+name+' …');if(mesh){scene.remove(mesh);mesh.dispose?.();}
  mesh=new SplatMesh(opts);orient(mesh);scene.add(mesh);await mesh.initialized;
  const box=mesh.getBoundingBox?mesh.getBoundingBox():null;
  if(box&&!box.isEmpty()){const c=box.getCenter(new THREE.Vector3()),s=box.getSize(new THREE.Vector3()).length();const wc=c.clone().applyQuaternion(mesh.quaternion);controls.target.copy(wc);camera.position.copy(wc).add(new THREE.Vector3(0,s*0.15,s*0.9));camera.near=s/1000;camera.far=s*50;camera.updateProjectionMatrix();}
  else{controls.target.set(0,0,0);camera.position.set(0,0,3);}
  msg(name+' بارگذاری شد.');}catch(e){msg('خطا: '+e.message);}}
+$('toSS').onclick=()=>{if(LAST_URL)window.open('supersplat/?load='+encodeURIComponent(LAST_URL),'_blank');else{window.open('supersplat/','_blank');msg('فایل محلی را در SuperSplat هم روی صفحه بکشید (Drag & Drop).');}};
 $('sample').onclick=()=>{$('flip').value='x180';show({url:'https://sparkjs.dev/assets/splats/butterfly.spz'},'پروانه');};
 $('load').onclick=()=>{const u=$('url').value.trim();if(u)show({url:u},u.split('/').pop());};
 $('drop').onclick=()=>$('file').click();
@@ -96,6 +99,6 @@ function pixel(){const p=+$('ps').value,w=Math.max(1,Math.floor(innerWidth/p)),h
 $('shot').onclick=()=>{const c=$('pix').checked?px:renderer.domElement;c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='splat-view.png';a.click();});};
 renderer.setAnimationLoop(()=>{controls.update();renderer.render(scene,camera);const on=$('pix').checked;px.style.display=on?'block':'none';if(on)pixel();});
 </script>
-<script src="site.js?v=5"></script>
+<script src="site.js?v=6"></script>
 </body>
 </html>

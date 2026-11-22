@@ -577,17 +577,18 @@
     "gaussian",
     "image-3d"
    ],
-   "st": "ready",
+   "st": "active",
    "repo": "ArthurBrussee/brush",
    "site": "https://arthurbrussee.github.io/brush-demo",
    "img": "img/lib/brush-gs.webp",
    "lic": "Apache-2.0",
    "req": "هر GPU (WebGPU؛ بدون CUDA) · Windows/macOS/Linux/Android/مرورگر",
    "s": "موتور بازسازی سه‌بعدی با Gaussian splatting که روی AMD/NVIDIA/Intel و حتی مرورگر اجرا می‌شود؛ باینری بدون وابستگی، CLI، و پخش splat متحرک (4D).",
-   "v": "ساده‌ترین راه ساختن splat از فوتیج/عکس روی هر سیستمی، حتی بدون کارت NVIDIA. خروجی را در SuperSplat تمیز کن و با Spark یا پلاگین Unreal نشان بده. فعال: commit همین امروز.",
+   "v": "حالا در سایت: صفحه‌ی «ساخت Splat» دموی رسمی Brush را با زنجیره‌ی Brush → SuperSplat → نمایشگر Splat → Unreal/Aximmetry نشان می‌دهد. ساده‌ترین راه ساختن splat از فوتیج/عکس روی هر سیستمی، حتی بدون کارت NVIDIA. خروجی را در SuperSplat تمیز کن و با Spark یا پلاگین Unreal نشان بده. فعال: commit همین امروز.",
    "added": "2026-11-21T20:40",
    "chk": "2026-11-21",
-   "n": 94
+   "n": 94,
+   "in": "gsbrush.html"
   },
   {
    "id": "supersplat",
@@ -597,17 +598,18 @@
     "web-3d",
     "agent"
    ],
-   "st": "ready",
+   "st": "active",
    "repo": "playcanvas/supersplat",
    "site": "https://superspl.at/editor",
    "img": "img/lib/supersplat.webp",
    "lic": "MIT",
    "req": "مرورگر با WebGPU",
    "s": "ویرایشگر متن‌باز splat در مرورگر (PlayCanvas): پاک‌سازی، برش، ترکیب صحنه، تنظیم رنگ، انیمیشن دوربین و انتشار. نسخه‌ی ۳ روی WebGPU بازنویسی شده؛ نسخه‌ی ۳٫۷ ابزارهای WebMCP دارد تا Agent خودش splat را ویرایش کند.",
-   "v": "حلقه‌ی گم‌شده‌ی بین Brush/Marble و Unreal/Aximmetry: تمیزکاری قبل از ورود به ست. فعال: آخرین commit ۱۹ نوامبر ۲۰۲۶.",
+   "v": "حالا روی خود سایت: نسخه‌ی 3.9.2 از سورس ساخته و میزبانی شده (supersplat/)؛ از نمایشگر Splat با دکمه‌ی «ویرایش در SuperSplat» همان فایل باز می‌شود. حلقه‌ی گم‌شده‌ی بین Brush/Marble و Unreal/Aximmetry: تمیزکاری قبل از ورود به ست. فعال: آخرین commit ۱۹ نوامبر ۲۰۲۶.",
    "added": "2026-11-21T20:40",
    "chk": "2026-11-21",
-   "n": 95
+   "n": 95,
+   "in": "supersplat/"
   },
   {
    "id": "lichtfeld",

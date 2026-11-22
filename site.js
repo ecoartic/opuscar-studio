@@ -8,6 +8,8 @@
     ['animation.html','انیمیشن آبرنگی','🎥','شخصیت لنزو با p5.brush و خروجی MP4'],
     ['assets.html','دارایی‌های سه‌بعدی','📦','۳۴۸۹ مدل GLB رایگان'],
     ['splat.html','نمایشگر Splat','✨','Gaussian splat با pixel و کروما'],
+    ['gsbrush.html','ساخت Splat (Brush)','🧩','آموزش Gaussian splat در مرورگر'],
+    ['supersplat/','ویرایشگر SuperSplat','✂️','تمیزکاری و ترکیب splat (نسخه‌ی خود سایت)'],
     ['brush.html','قلم‌مو','🖌️','پس‌زمینه و loop آبرنگی'],
     ['codevember.html','Codevember','🧪','۲۱ صحنه‌ی تعاملی three.js']];
   var cur=(location.pathname.split('/').pop()||'index.html'),me=P.find(function(p){return p[0]===cur;})||P[0];
