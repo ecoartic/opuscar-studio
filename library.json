@@ -259,6 +259,28 @@
  ],
  "items": [
   {
+   "id": "worlddraft",
+   "t": "WorldDraft (کد دنیا را می‌سازد، مدل ویدیو رندر می‌کند)",
+   "cats": [
+    "film-3d",
+    "threejs",
+    "blender"
+   ],
+   "st": "ready",
+   "kind": "technique",
+   "repo": "KevinHuge/WorldDraft",
+   "site": "https://haroldchen19.github.io/WorldDraft-site/",
+   "reel": "https://www.instagram.com/reel/Df-8DyEBajj/",
+   "img": "img/lib/worlddraft.webp",
+   "added": "2026-11-22T04:05",
+   "n": 108,
+   "chk": "2026-11-22",
+   "lic": "Apache-2.0 (کد ارزیابی و بنچمارک)",
+   "req": "فقط مطالعه؛ برای اجرای بنچمارک GPU و مدل‌های ویدیویی",
+   "s": "بنچمارک (HKUST و همکاران، ۱۳ نوامبر ۲۰۲۶): یک Agent با کد دنیای سه‌بعدی متحرک می‌سازد، از آن «ویدیوی پیش‌نویس» (blockout) رندر می‌شود و مدل ویدیو فقط باید آن را واقعی کند. ۴۳۲ تست، هر دنیا در ۹ نسخه (۳ سطح جزئیات × خاکستری، رنگ هم‌خوان یا متضاد)، روی ۱۲ مدل: SolarRenderer، MiniMax-H3، Wan2.1/2.2-VACE، Wan 3.0، Seedance 2.5 و دیگران.",
+   "v": "پشتوانه‌ی پژوهشی ایده‌ی Set Builder. یافته‌ها برای تو: ۱) حفظ دنیا (هندسه/حرکت) و واقع‌گرایی در تضادند؛ SolarRenderer بهترین حفظ، Wan 3.0 بهترین ظاهر ولی کمترین حفظ؛ بهترین ترکیب LynnReal-Omni و بعد Seedance 2.5. ۲) پیش‌نویس پرجزئیات‌تر ساختار را بهتر نگه می‌دارد ولی ظاهر را خراب‌تر می‌کند. ۳) رنگ پیش‌نویس که با پرامپت تضاد دارد به خروجی «نشت» می‌کند (تا ۶۴٪ در Wan2.1-VACE): blockout را خاکستری یا هم‌رنگ هدف بساز. ۴) راه‌حل بدون آموزش: WorldDraft-Primer، نشانه‌های ظریف شیء و ویژگی فقط روی فریم اول. هم‌خانواده‌ها: Code World Model و Code Video Model (صحنه‌ی three.js + MiniMax-H3 که فقط در گام‌های اول denoise مشروط می‌شود، بدون آموزش)."
+  },
+  {
    "id": "ugg",
    "t": "UGG (Unified Generative Geometry)",
    "cats": [
