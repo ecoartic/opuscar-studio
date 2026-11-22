@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22",
+ "updated": "2026-11-23",
  "categories": [
   {
    "id": "concept-3d",
@@ -2837,9 +2837,34 @@
    "s": "تخمین عمق نسبی تک‌تصویر داخل مرورگر بدون سرور (ONNX، WebGPU یا WASM)؛ نسخه‌ی Small تنها نسخه‌ی تجاری‌آزاد Depth Anything V2 است.",
    "v": "روی سایت: «آزمایشگاه عمق» (depth.html) — depth PNG، پارالاکس 2.5D با حرکت ماوس/ژیروسکوپ و خروجی ویدیو، عمق میدان با فوکوس لمسی، استریو Side-by-Side برای Quest. عمق نسبی است؛ برای متر از Depth Pro/MoGe-2/MapAnything روی GPU استفاده کنید.",
    "in": "depth.html"
+  },
+  {
+   "id": "colmap",
+   "t": "COLMAP 4.2 (Structure-from-Motion)",
+   "cats": [
+    "spatial",
+    "gaussian"
+   ],
+   "st": "active",
+   "kind": "tool",
+   "repo": "colmap/colmap",
+   "site": "https://colmap.github.io",
+   "img": "img/lib/colmap.webp",
+   "reel": "https://www.instagram.com/reel/DexlHjvj_5D/",
+   "lic": "BSD (new BSD، ETH Zürich و UNC)",
+   "req": "PC؛ CUDA اختیاری · pip install pycolmap",
+   "n": 109,
+   "added": "2026-11-23T00:15",
+   "chk": "2026-11-23",
+   "s": "استاندارد SfM و MVS: از عکس‌های بی‌GPS و بی‌EXIF، پوز دوربین، فاصله‌ی کانونی و ابر نقاط را با bundle adjustment به‌دست می‌دهد. نسخه‌ی 4.2.1 (۲۹ سپتامبر ۲۰۲۶). نسخه‌ی 4.2 global mapper چندمؤلفه‌ای و feature/matching یادگرفته‌ی LoMa روی ONNX اضافه کرد.",
+   "v": "ورودی تقریباً همه‌ی pipelineهای 3DGS و NeRF. در behrang-ar همین الان استفاده می‌شود: نقشه‌ی ابر نقاط صفحه‌ی armap با pycolmap 4.2.1 از ویدیوی میز ساخته شد (127/127 فریم، خطای 0.78 px). نکته‌ی ریل: COLMAP زوم وسط پرواز را هم بدون متادیتا تشخیص داد، یعنی intrinsics برای هر فریم قابل حل است. تصویر: بازسازی sparse رم از مستندات خود COLMAP؛ نقاط قرمز جای دوربین‌ها هستند."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-23 00:15",
+   "t": "COLMAP 4.2 به کتابخانه اضافه شد (SfM؛ پایه‌ی نقشه‌ی ابر نقاط صفحه‌ی AR بدون تارگت)."
+  },
   {
    "d": "2026-11-21 15:00",
    "t": "نام سایت به Behrang Lab تغییر کرد؛ منوی سه‌خط با توضیح هر بخش؛ همه‌ی تامبنیل‌ها حالا محلی هستند و به سایت دیگری وابسته نیستند؛ نقشه‌ی سیمی ورک‌فلو روی موبایل هم برگشت."
