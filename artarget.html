@@ -186,20 +186,27 @@ $('grid').onclick=e=>{const b=e.target.closest('.m');if(!b)return;document.query
 $('glbf').onchange=e=>{const f=e.target.files[0];if(!f)return;glbURL=URL.createObjectURL(f);$('msel').textContent='GLB شما: '+f.name;if(mindURL)$('s3').classList.remove('off');};
 
 // ---------- camera helpers: smart exposure + gravity ----------
-// Smart exposure (from behrang-ar Phase 0): auto-exposure drops budget phones to ~24 fps with motion blur indoors.
-// Keep shutter <= 1/60 s, raise ISO first, allow up to 1/30 s only when ISO is maxed.
-function smartExposure(track,video,onStatus){const cap=track.getCapabilities?track.getCapabilities():{};
- if(!(cap.exposureMode&&cap.exposureMode.includes('manual')&&cap.exposureTime)){onStatus&&onStatus(null);return {stop(){}}; }
+// Camera tuning v2 (field report 2026-11-22, Galaxy M13): manual ISO is accepted by the API but the HAL
+// does not apply it reliably → ISO number climbed 400→1200 while the image got darker.
+// New strategy: keep the phone's own auto-exposure (it controls ISO correctly) and only lock the
+// frame-rate range to ≥28 fps, which caps exposure time (~1/30 s) and forces AE to raise ISO itself.
+// If the scene stays dark for 2 s, relax the lock (brightness first); re-lock when light returns.
+function smartExposure(track,video,onStatus){
+ const cap=track.getCapabilities?track.getCapabilities():{};let alive=true,locked=false,darkSince=0,brightSince=0,frames=0,fps=0,last=performance.now();
  const c=document.createElement('canvas');c.width=48;c.height=48;const x=c.getContext('2d',{willReadFrequently:true});
- let et=Math.min(166,cap.exposureTime.max),iso=cap.iso?Math.min(cap.iso.max,Math.max(cap.iso.min,400)):null,alive=true;const T=110;
- const step=async()=>{if(!alive||track.readyState!=='live')return;try{if(video.videoWidth){x.drawImage(video,0,0,48,48);const d=x.getImageData(0,0,48,48).data;let L=0;for(let i=0;i<d.length;i+=4)L+=.299*d[i]+.587*d[i+1]+.114*d[i+2];L/=d.length/4;
-  const k=Math.max(.6,Math.min(1.7,T/Math.max(L,1)));
-  if(Math.abs(k-1)>.08){if(cap.iso){let ni=iso*k;if(ni>cap.iso.max){et=Math.min(333,cap.exposureTime.max,et*ni/cap.iso.max);ni=cap.iso.max;}else if(et>166&&k<1){et=Math.max(166,et*k);ni=iso;}iso=Math.max(cap.iso.min,Math.round(ni));}
-   else et=Math.max(cap.exposureTime.min,Math.min(333,et*k));
-   const adv={exposureMode:'manual',exposureTime:Math.round(et)};if(cap.iso)adv.iso=iso;await track.applyConstraints({advanced:[adv]});}
-  onStatus&&onStatus({L,et,iso});}}catch(e){alive=false;onStatus&&onStatus(null);return;}setTimeout(step,450);};
- step();return {stop(){alive=false;}};}
-const expStr=s=>s?`☀︎ ${s.L.toFixed(0)} · 1/${Math.round(10000/s.et)}${s.iso?' · ISO '+s.iso:''}${s.et>=333?' · نور کم':''}`:'';
+ const setLock=async on=>{try{const base=cap.exposureMode&&cap.exposureMode.includes('continuous')?{exposureMode:'continuous'}:{};
+   await track.applyConstraints(on?{frameRate:{min:28,ideal:30},advanced:[base]}:{frameRate:{min:10,ideal:30},advanced:[base]});locked=on;}catch(e){locked=false;}};
+ const onFrame=()=>{if(!alive)return;frames++;const n=performance.now();if(n-last>=1000){fps=frames*1000/(n-last);frames=0;last=n;}video.requestVideoFrameCallback(onFrame);};
+ if(video.requestVideoFrameCallback)video.requestVideoFrameCallback(onFrame);
+ let L=null;const step=()=>{if(!alive||track.readyState!=='live')return;
+  try{if(video.videoWidth){x.drawImage(video,0,0,48,48);const d=x.getImageData(0,0,48,48).data;let l=0;for(let i=0;i<d.length;i+=4)l+=.299*d[i]+.587*d[i+1]+.114*d[i+2];l/=d.length/4;L=L==null?l:L*.6+l*.4;
+   const now=performance.now();
+   if(locked&&L<40){darkSince=darkSince||now;if(now-darkSince>2000){setLock(false);darkSince=0;}}else darkSince=0;
+   if(!locked&&L>75){brightSince=brightSince||now;if(now-brightSince>3000){setLock(true);brightSince=0;}}else brightSince=0;
+   const st=track.getSettings();onStatus&&onStatus({L,fps,locked,iso:st.iso||null,et:st.exposureTime||null});}}catch(e){}
+  setTimeout(step,500);};
+ setLock(true).then(step);return {stop(){alive=false;}};}
+const expStr=s=>s?`☀︎ ${s.L.toFixed(0)} · ${s.fps?s.fps.toFixed(0)+' fps':''} · ${s.locked?'AE + fps≥28':'AE آزاد (نور کم)'}${s.iso?' · ISO '+s.iso:''}`:'';
 // gravity (accelerometer works even on phones without a gyroscope, e.g. Galaxy M13)
 const grav={v:null,on:false};
 async function startGravity(){if(grav.on)return;grav.on=true;
