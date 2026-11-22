@@ -93,11 +93,13 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
  <video id="cv" playsinline muted autoplay style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
  <div id="guide" style="position:absolute;left:10%;right:10%;top:22%;bottom:22%;border:3px solid var(--acc);border-radius:12px;box-shadow:0 0 0 9999px rgba(0,0,0,.45)"></div>
  <div style="position:absolute;top:calc(12px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:14px;padding:0 16px" id="capmsg">سطح را داخل کادر زرد بیاورید (از بالا یا کمی مایل، با نور یکنواخت)</div>
+ <div id="capexp" style="position:absolute;top:calc(40px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:11px;color:#ddd;direction:ltr"></div>
  <div style="position:absolute;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:8px">
   <button class="btn" id="capx">✕ لغو</button><button class="btn p" id="capgo">📌 ثبت این سطح</button></div>
 </div>
 <div id="ar"></div>
 <div id="arst">دنبال تارگت می‌گردم…</div>
+<div id="arexp" style="position:fixed;z-index:60;top:calc(44px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);font-size:11px;color:#ddd;text-shadow:0 0 3px #000;direction:ltr"></div>
 <div id="edit">
  <div class="eh">یک انگشت: جابه‌جایی روی سطح · دو انگشت: بزرگ‌/کوچک و چرخش</div>
  <label class="s">اندازه <input type="range" id="esc" min="-1.6" max="1.6" step="0.01" value="0"></label>
@@ -130,12 +132,17 @@ async function compileImage(im,label){
  const data=await comp.compileImageTargets([im],p=>{$('pb').style.width=Math.min(100,p).toFixed(0)+'%';setCapMsg('در حال ساخت تارگت… '+fa(Math.min(100,p).toFixed(0))+'٪');});
  const buf=await comp.exportData();
  let n=0;(data[0].matchingData||[]).forEach(m=>{n+=(m.maximaPoints||[]).length+(m.minimaPoints||[]).length;});
- const t={url:URL.createObjectURL(new Blob([buf])),thumb:im.src,n,asp:im.naturalHeight/im.naturalWidth,label:label||('سطح '+fa(targets.length+1))};
+ const t={url:URL.createObjectURL(new Blob([buf])),thumb:im.src,n,st:imgStats(im),asp:im.naturalHeight/im.naturalWidth,label:label||('سطح '+fa(targets.length+1))};
  targets.push(t);selectTarget(targets.length-1);$('pb').style.width='100%';$('cst').textContent='تارگت آماده شد.';return t;}
-function qualHTML(n){const cls=n>=400?'good':n>=150?'mid':'bad',lbl=n>=400?'عالی':n>=150?'قابل استفاده':'ضعیف — احتمالاً پیدا نمی‌شود؛ سطح پرجزئیات‌تر یا نزدیک‌تر';
- return `کیفیت تارگت: <span class="q ${cls}">${lbl}</span> (${fa(n)} نقطه‌ی مشخصه — معیار تقریبی)`;}
+function imgStats(im){const W=160,H=Math.round(160*im.naturalHeight/im.naturalWidth),c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(im,0,0,W,H);
+ const d=x.getImageData(0,0,W,H).data,g=new Float32Array(W*H);let L=0;for(let i=0;i<W*H;i++){g[i]=.299*d[i*4]+.587*d[i*4+1]+.114*d[i*4+2];L+=g[i];}L/=W*H;
+ let sum=0,sq=0,n=0;for(let y=1;y<H-1;y++)for(let x2=1;x2<W-1;x2++){const i=y*W+x2,lap=4*g[i]-g[i-1]-g[i+1]-g[i-W]-g[i+W];sum+=lap;sq+=lap*lap;n++;}
+ const sharp=sq/n-(sum/n)**2;return {L,sharp};}
+function qualHTML(n,st){const cls=n>=400?'good':n>=150?'mid':'bad',lbl=n>=400?'عالی':n>=150?'قابل استفاده':'ضعیف — احتمالاً پیدا نمی‌شود؛ سطح پرجزئیات‌تر یا نزدیک‌تر';
+ let w='';if(st){if(st.L<45)w+=' · <span class="q bad">تاریک</span>';if(st.sharp<60)w+=' · <span class="q bad">تار</span>';}
+ return `کیفیت تارگت: <span class="q ${cls}">${lbl}</span> (${fa(n)} نقطه‌ی مشخصه — معیار تقریبی)${w}`;}
 function selectTarget(i){cur=i;const t=targets[i];mindURL=t.url;$('prev').src=t.thumb;$('prev').style.display='block';
- $('qual').innerHTML=t.n!=null?qualHTML(t.n):'تارگت از فایل: '+t.label;$('dlmind').href=t.url;$('dlmind').style.display='inline-block';
+ $('qual').innerHTML=t.n!=null?qualHTML(t.n,t.st):'تارگت از فایل: '+t.label;$('dlmind').href=t.url;$('dlmind').style.display='inline-block';
  drawList();ready();}
 function drawList(){$('tl').innerHTML=targets.map((x,k)=>`<span class="tg"><button class="m${k===cur?' on':''}" data-k="${k}" style="width:74px"><img src="${x.thumb||''}" alt=""><span>${x.label}</span></button><button class="del" data-d="${k}" title="حذف">✕</button></span>`).join('');}
 function deleteTarget(k){const t=targets[k];if(!t)return;URL.revokeObjectURL(t.url);targets.splice(k,1);
@@ -146,13 +153,13 @@ $('img').onchange=async e=>{const f=e.target.files[0];if(!f)return;
  try{await compileImage(await loadImg(f),f.name.slice(0,14));}catch(err){$('cst').textContent='خطا در ساخت تارگت: '+err.message;console.error(err);}
  e.target.value='';};
 // ---- live capture ----
-let capStream=null;const setCapMsg=m=>{if($('cap').style.display==='block')$('capmsg').textContent=m;};
+let capStream=null,capExpo=null;const setCapMsg=m=>{if($('cap').style.display==='block')$('capmsg').textContent=m;};
 async function openCapture(){
  try{capStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:960}},audio:false});}
  catch(err){alert('دوربین باز نشد: '+err.message+'\nاجازه‌ی دوربین و باز بودن صفحه در Chrome/Safari را چک کنید.');return;}
- $('cv').srcObject=capStream;$('cap').style.display='block';document.body.style.overflow='hidden';$('capgo').disabled=false;
+ $('cv').srcObject=capStream;$('cap').style.display='block';capExpo=smartExposure(capStream.getVideoTracks()[0],$('cv'),st=>{$('capexp').textContent=expStr(st);});document.body.style.overflow='hidden';$('capgo').disabled=false;
  $('capmsg').textContent='سطح را داخل کادر زرد بیاورید (از بالا یا کمی مایل، با نور یکنواخت)';}
-function closeCapture(){if(capStream)capStream.getTracks().forEach(t=>t.stop());capStream=null;$('cv').srcObject=null;$('cap').style.display='none';document.body.style.overflow='';}
+function closeCapture(){if(capExpo){capExpo.stop();capExpo=null;}if(capStream)capStream.getTracks().forEach(t=>t.stop());capStream=null;$('cv').srcObject=null;$('cap').style.display='none';document.body.style.overflow='';}
 $('live').onclick=openCapture;$('capx').onclick=closeCapture;
 $('capgo').onclick=async()=>{const v=$('cv');if(!v.videoWidth)return;$('capgo').disabled=true;
  const W=v.clientWidth,H=v.clientHeight,vw=v.videoWidth,vh=v.videoHeight,k=Math.max(W/vw,H/vh),ox=(W-vw*k)/2,oy=(H-vh*k)/2;
@@ -164,7 +171,7 @@ $('capgo').onclick=async()=>{const v=$('cv');if(!v.videoWidth)return;$('capgo').
  const im=new Image();im.src=c.toDataURL('image/jpeg',.92);await im.decode();
  setCapMsg('در حال ساخت تارگت…');
  try{const t=await compileImage(im);closeCapture();
-  if(t.n<150&&!confirm('کیفیت این سطح ضعیف است ('+fa(t.n)+' نقطه). احتمالاً پیدا نمی‌شود. باز هم AR شروع شود؟')){openCapture();return;}
+  const bad=t.n<150||t.st.L<45||t.st.sharp<60;if(bad&&!confirm('این سطح مشکل دارد: '+[t.n<150?'نقطه‌ی مشخصه کم ('+fa(t.n)+')':'',t.st.L<45?'تصویر تاریک':'',t.st.sharp<60?'تصویر تار (گوشی را ثابت‌تر نگه دارید)':''].filter(Boolean).join('، ')+'. احتمالاً خوب پیدا نمی‌شود. باز هم AR شروع شود؟')){openCapture();return;}
   if(glbURL)$('go').click();else{$('s2').scrollIntoView({behavior:'smooth'});}
  }catch(err){setCapMsg('خطا: '+err.message);$('capgo').disabled=false;}};
 $('mindf').onchange=e=>{const f=e.target.files[0];if(!f)return;targets.push({url:URL.createObjectURL(f),thumb:'',n:null,asp:null,label:f.name.slice(0,14)});selectTarget(targets.length-1);e.target.value='';};
@@ -178,10 +185,33 @@ $('q').oninput=e=>render(e.target.value);
 $('grid').onclick=e=>{const b=e.target.closest('.m');if(!b)return;document.querySelectorAll('.m.on').forEach(x=>x.classList.remove('on'));b.classList.add('on');glbURL=b.dataset.g;$('msel').textContent='انتخاب: '+b.dataset.t;if(mindURL)$('s3').classList.remove('off');};
 $('glbf').onchange=e=>{const f=e.target.files[0];if(!f)return;glbURL=URL.createObjectURL(f);$('msel').textContent='GLB شما: '+f.name;if(mindURL)$('s3').classList.remove('off');};
 
+// ---------- camera helpers: smart exposure + gravity ----------
+// Smart exposure (from behrang-ar Phase 0): auto-exposure drops budget phones to ~24 fps with motion blur indoors.
+// Keep shutter <= 1/60 s, raise ISO first, allow up to 1/30 s only when ISO is maxed.
+function smartExposure(track,video,onStatus){const cap=track.getCapabilities?track.getCapabilities():{};
+ if(!(cap.exposureMode&&cap.exposureMode.includes('manual')&&cap.exposureTime)){onStatus&&onStatus(null);return {stop(){}}; }
+ const c=document.createElement('canvas');c.width=48;c.height=48;const x=c.getContext('2d',{willReadFrequently:true});
+ let et=Math.min(166,cap.exposureTime.max),iso=cap.iso?Math.min(cap.iso.max,Math.max(cap.iso.min,400)):null,alive=true;const T=110;
+ const step=async()=>{if(!alive||track.readyState!=='live')return;try{if(video.videoWidth){x.drawImage(video,0,0,48,48);const d=x.getImageData(0,0,48,48).data;let L=0;for(let i=0;i<d.length;i+=4)L+=.299*d[i]+.587*d[i+1]+.114*d[i+2];L/=d.length/4;
+  const k=Math.max(.6,Math.min(1.7,T/Math.max(L,1)));
+  if(Math.abs(k-1)>.08){if(cap.iso){let ni=iso*k;if(ni>cap.iso.max){et=Math.min(333,cap.exposureTime.max,et*ni/cap.iso.max);ni=cap.iso.max;}else if(et>166&&k<1){et=Math.max(166,et*k);ni=iso;}iso=Math.max(cap.iso.min,Math.round(ni));}
+   else et=Math.max(cap.exposureTime.min,Math.min(333,et*k));
+   const adv={exposureMode:'manual',exposureTime:Math.round(et)};if(cap.iso)adv.iso=iso;await track.applyConstraints({advanced:[adv]});}
+  onStatus&&onStatus({L,et,iso});}}catch(e){alive=false;onStatus&&onStatus(null);return;}setTimeout(step,450);};
+ step();return {stop(){alive=false;}};}
+const expStr=s=>s?`☀︎ ${s.L.toFixed(0)} · 1/${Math.round(10000/s.et)}${s.iso?' · ISO '+s.iso:''}${s.et>=333?' · نور کم':''}`:'';
+// gravity (accelerometer works even on phones without a gyroscope, e.g. Galaxy M13)
+const grav={v:null,on:false};
+async function startGravity(){if(grav.on)return;grav.on=true;
+ try{if(typeof DeviceMotionEvent!=='undefined'&&DeviceMotionEvent.requestPermission)await DeviceMotionEvent.requestPermission();}catch(e){}
+ addEventListener('devicemotion',e=>{const g=e.accelerationIncludingGravity;if(!g||g.x==null)return;
+  const a=(screen.orientation&&screen.orientation.angle||0)*Math.PI/180,ca=Math.cos(a),sa=Math.sin(a);
+  const v=new THREE.Vector3(g.x*ca+g.y*sa,-g.x*sa+g.y*ca,g.z).normalize(); // "up" in camera/screen coords
+  grav.v=grav.v?grav.v.lerp(v,.15).normalize():v;});}
 // ---------- Step 3: AR ----------
 // hierarchy: anchor.group (card plane = XY, +Z toward camera, card width = 1)
 //   └ pivot (user move/rotate/scale)  └ holder (stand: +Y→+Z)  └ model (normalized: footprint = 1)
-let mindar=null,model=null,holder=null,pivot=null,anchor=null,gizmo=null,locked=false;
+let mindar=null,model=null,holder=null,pivot=null,anchor=null,gizmo=null,locked=false,arExpo=null;
 const E={x:0,y:0,rot:0,ls:0,stand:true};
 function normalize(){holder.rotation.set(E.stand?Math.PI/2:0,0,0);model.scale.setScalar(1);model.position.set(0,0,0);model.updateMatrixWorld(true);
  const b=new THREE.Box3().setFromObject(model),sz=b.getSize(new THREE.Vector3()),k=1/Math.max(sz.x,E.stand?sz.z:sz.y,1e-6);
@@ -195,6 +225,15 @@ function makeGizmo(asp){const root=new THREE.Group(),ring=new THREE.Group();root
  if(asp){const h=asp/2,pts=[[-.5,-h],[.5,-h],[.5,h],[-.5,h]].map(p=>new THREE.Vector3(p[0],p[1],0));
   const card=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x5ec8f0,transparent:true,opacity:.8,depthTest:false}));card.renderOrder=8;root.add(card);}
  root.userData.ring=ring;return root;}
+const _q=new THREE.Quaternion(),_m=new THREE.Matrix4(),_Y=new THREE.Vector3(0,1,0),_Z=new THREE.Vector3(0,0,1);let surfTilt=null;
+function gravityAlign(){if(!holder||!anchor||!anchor.group.visible||!grav.v||!E.stand){surfTilt=null;return;}
+ // world up (camera space; MindAR camera is fixed at origin) → anchor-local
+ _m.extractRotation(anchor.group.matrixWorld).invert();const up=grav.v.clone().applyMatrix4(_m).normalize();
+ const tilt=THREE.MathUtils.radToDeg(Math.acos(Math.min(1,Math.abs(up.dot(_Z)))));surfTilt=tilt;
+ // pivot rotates around card normal; express up in pivot space
+ const upP=up.clone().applyAxisAngle(_Z,-pivot.rotation.z);
+ const target=tilt>35?_q.setFromUnitVectors(_Y,upP):_q.setFromEuler(new THREE.Euler(Math.PI/2,0,0)); // steep surface → stand upright in the world; table → stand on the surface
+ holder.quaternion.slerp(target,.2);}
 function setLocked(v){locked=v;if(anchor&&anchor.group.visible)$('arst').textContent=v?'✓ قفل شد — حالا دور مدل بچرخید':'✎ حالت ویرایش — مدل را تنظیم و تثبیت کنید';$('edit').style.display=v?'none':'block';$('eopen').style.display=v?'inline-block':'none';if(gizmo)gizmo.visible=!v;}
 // gestures
 const ptrs=new Map();let g0=null;const ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,0,1),0),inv=new THREE.Matrix4();
@@ -214,11 +253,11 @@ $('estand').onclick=()=>{E.stand=!E.stand;normalize();applyE();};
 $('ereset').onclick=()=>{Object.assign(E,{x:0,y:0,rot:0,ls:0});applyE();};
 $('elock').onclick=()=>setLocked(true);$('eopen').onclick=()=>setLocked(false);
 $('go').onclick=async()=>{
- if(!mindURL||!glbURL)return;$('go').disabled=true;$('go').textContent='در حال آماده‌سازی…';
+ if(!mindURL||!glbURL)return;startGravity();$('go').disabled=true;$('go').textContent='در حال آماده‌سازی…';
  try{
   const {MindARThree}=await import('mindar-image-three');
   $('ar').style.display='block';$('arui').style.display='flex';$('arst').style.display='block';document.body.style.overflow='hidden';
-  mindar=new MindARThree({container:$('ar'),imageTargetSrc:mindURL,uiScanning:'no',uiLoading:'no',filterMinCF:0.0001,filterBeta:0.001});
+  mindar=new MindARThree({container:$('ar'),imageTargetSrc:mindURL,uiScanning:'no',uiLoading:'no',filterMinCF:0.0005,filterBeta:300,warmupTolerance:3,missTolerance:8});
   const {renderer,scene,camera}=mindar;renderer.outputColorSpace=THREE.SRGBColorSpace;
   scene.add(new THREE.HemisphereLight(0xffffff,0x444444,2.2));const dl=new THREE.DirectionalLight(0xffffff,1.6);dl.position.set(0.5,1,1);scene.add(dl);
   anchor=mindar.addAnchor(0);pivot=new THREE.Group();holder=new THREE.Group();pivot.add(holder);anchor.group.add(pivot);
@@ -227,10 +266,11 @@ $('go').onclick=async()=>{
   anchor.onTargetFound=()=>{$('arst').textContent=locked?'✓ قفل شده — دور مدل بچرخید':'✓ پیدا شد — مدل را تنظیم و تثبیت کنید';};
   anchor.onTargetLost=()=>{$('arst').textContent='دنبال تارگت می‌گردم…';};
   await mindar.start();
-  renderer.setAnimationLoop(()=>{if(gizmo){const r=gizmo.userData.ring;r.position.copy(pivot.position);r.rotation.copy(pivot.rotation);r.scale.copy(pivot.scale);}renderer.render(scene,camera);});
+  try{const tr=mindar.video.srcObject.getVideoTracks()[0];arExpo=smartExposure(tr,mindar.video,st=>{$('arexp').textContent=expStr(st);});}catch(e){}
+  renderer.setAnimationLoop(()=>{gravityAlign();if(gizmo){const r=gizmo.userData.ring;r.position.copy(pivot.position);r.rotation.copy(pivot.rotation);r.scale.copy(pivot.scale);}renderer.render(scene,camera);});
  }catch(err){alert('شروع AR ممکن نشد: '+err.message+'\nاجازه‌ی دوربین و باز بودن صفحه در Chrome/Safari را چک کنید.');stopAR();}
  $('go').disabled=false;$('go').textContent='▶️ شروع AR';};
-function stopAR(){try{if(mindar){mindar.renderer.setAnimationLoop(null);mindar.stop();}}catch(e){}mindar=null;model=null;anchor=null;gizmo=null;ptrs.clear();
+function stopAR(){if(arExpo){arExpo.stop();arExpo=null;}$('arexp').textContent='';try{if(mindar){mindar.renderer.setAnimationLoop(null);mindar.stop();}}catch(e){}mindar=null;model=null;anchor=null;gizmo=null;ptrs.clear();
  $('ar').innerHTML='';$('ar').style.display='none';$('arui').style.display='none';$('arst').style.display='none';$('edit').style.display='none';document.body.style.overflow='';}
 $('stop').onclick=stopAR;$('newsurf').onclick=()=>{stopAR();setTimeout(openCapture,300);};
 $('shot').onclick=()=>{const gv=gizmo&&gizmo.visible;if(gizmo)gizmo.visible=false;
@@ -239,7 +279,7 @@ $('shot').onclick=()=>{const gv=gizmo&&gizmo.visible;if(gizmo)gizmo.visible=fals
  const r=v.getBoundingClientRect(),cr=cv.getBoundingClientRect(),k=cv.width/cr.width;
  x.drawImage(v,(r.left-cr.left)*k,(r.top-cr.top)*k,r.width*k,r.height*k);x.drawImage(cv,0,0);if(gizmo)gizmo.visible=gv;
  const a=document.createElement('a');a.download='behrang-ar.png';a.href=c.toDataURL('image/png');a.click();};
-window.__arTest={E,applyE:()=>applyE(),get locked(){return locked}};
+window.__arTest={get tilt(){return surfTilt},E,applyE:()=>applyE(),get locked(){return locked}};
 </script>
 <script src="site.js?v=7"></script>
 </body>
