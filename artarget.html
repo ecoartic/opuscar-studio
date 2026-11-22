@@ -34,6 +34,10 @@ label.s{display:flex;gap:8px;align-items:center;font-size:14px;margin:6px 0}labe
 #ar{position:fixed;inset:0;z-index:50;background:#000;display:none}
 #arui{position:fixed;z-index:60;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));display:none;justify-content:center;gap:8px}
 #arst{position:fixed;z-index:60;top:calc(10px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:none;background:rgba(0,0,0,.6);padding:4px 14px;border-radius:20px;font-size:14px}
+#edit{position:fixed;z-index:61;left:8px;right:8px;bottom:calc(64px + env(safe-area-inset-bottom));display:none;background:rgba(14,15,18,.78);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:14px;padding:8px 12px;max-width:520px;margin:0 auto}
+#edit .eh{font-size:12px;color:var(--mut);text-align:center}#edit .btn{padding:7px 12px;font-size:14px}
+#ar{touch-action:none}
+.tg{position:relative;display:inline-block}.tg .del{position:absolute;top:-6px;left:-6px;width:22px;height:22px;border-radius:50%;border:0;background:var(--bad);color:#fff;font-size:13px;line-height:22px;padding:0;cursor:pointer}
 ol.tips{margin:6px 0;padding-right:20px;font-size:14px;color:var(--mut)}
 footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
 </style>
@@ -71,14 +75,12 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
 <input type="search" id="q" placeholder="جستجو در ۳۴۸۹ مدل Polyfork (انگلیسی: chair, tree, car…)">
 <div class="grid" id="grid"></div>
 <div class="row" style="margin-top:8px"><label class="btn">📦 GLB خودتان<input type="file" id="glbf" accept=".glb,.gltf" hidden></label><span class="mut" id="msel">مدلی انتخاب نشده</span></div>
-<label class="s">اندازه نسبت به عرض کارت <input type="range" id="sc" min="0.2" max="3" step="0.05" value="1"><span id="scv">۱×</span></label>
-<label class="s">چرخش <input type="range" id="rot" min="0" max="360" step="5" value="0"></label>
-<label class="s"><input type="checkbox" id="stand" checked style="flex:0"> ایستاده روی کارت (کارت = زمین)</label>
+<p class="mut">اندازه، چرخش و جای مدل را بعد از باز شدن دوربین، روی خود صحنه تنظیم می‌کنید.</p>
 </section>
 
 <section class="step off" id="s3">
 <h2><b>۳</b>شروع AR</h2>
-<p class="mut">دوربین پشت باز می‌شود. گوشی را به سمت همان شیء بگیرید؛ وقتی پیدا شد مدل ظاهر می‌شود. صفحه باید از HTTPS باز شود و در مرورگر اصلی (Chrome/Safari)، نه داخل اینستاگرام یا تلگرام.</p>
+<p class="mut">دوربین پشت باز می‌شود. گوشی را به سمت همان سطح بگیرید؛ وقتی پیدا شد مدل با حلقه‌ی زرد (گیزمو) ظاهر می‌شود: با یک انگشت جابه‌جا، با دو انگشت بزرگ/کوچک و بچرخانید، یا از اسلایدرها استفاده کنید؛ بعد «✓ تثبیت» را بزنید تا گیزمو برود و دور مدل بچرخید. صفحه باید از HTTPS باز شود و در مرورگر اصلی (Chrome/Safari)، نه داخل اینستاگرام یا تلگرام.</p>
 <button class="btn p" id="go">▶️ شروع AR</button>
 </section>
 
@@ -96,7 +98,13 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
 </div>
 <div id="ar"></div>
 <div id="arst">دنبال تارگت می‌گردم…</div>
-<div id="arui"><button class="btn" id="stop">✕ پایان</button><button class="btn" id="newsurf">🎯 سطح جدید</button><button class="btn" id="shot">📸 عکس</button></div>
+<div id="edit">
+ <div class="eh">یک انگشت: جابه‌جایی روی سطح · دو انگشت: بزرگ‌/کوچک و چرخش</div>
+ <label class="s">اندازه <input type="range" id="esc" min="-1.6" max="1.6" step="0.01" value="0"></label>
+ <label class="s">چرخش <input type="range" id="erot" min="-180" max="180" step="1" value="0"></label>
+ <div class="row" style="justify-content:center"><button class="btn" id="estand">⬆️ ایستاده</button><button class="btn" id="ereset">⟲ بازنشانی</button><button class="btn p" id="elock">✓ تثبیت</button></div>
+</div>
+<div id="arui"><button class="btn" id="stop">✕ پایان</button><button class="btn" id="newsurf">🎯 سطح جدید</button><button class="btn" id="eopen" style="display:none">✎ ویرایش مدل</button><button class="btn" id="shot">📸 عکس</button></div>
 <footer>MindAR (MIT) · three.js (MIT) · مدل‌ها از <a href="https://polyfork.dev">Polyfork</a></footer>
 
 <script type="module">
@@ -122,14 +130,18 @@ async function compileImage(im,label){
  const data=await comp.compileImageTargets([im],p=>{$('pb').style.width=Math.min(100,p).toFixed(0)+'%';setCapMsg('در حال ساخت تارگت… '+fa(Math.min(100,p).toFixed(0))+'٪');});
  const buf=await comp.exportData();
  let n=0;(data[0].matchingData||[]).forEach(m=>{n+=(m.maximaPoints||[]).length+(m.minimaPoints||[]).length;});
- const t={url:URL.createObjectURL(new Blob([buf])),thumb:im.src,n,label:label||('سطح '+fa(targets.length+1))};
+ const t={url:URL.createObjectURL(new Blob([buf])),thumb:im.src,n,asp:im.naturalHeight/im.naturalWidth,label:label||('سطح '+fa(targets.length+1))};
  targets.push(t);selectTarget(targets.length-1);$('pb').style.width='100%';$('cst').textContent='تارگت آماده شد.';return t;}
 function qualHTML(n){const cls=n>=400?'good':n>=150?'mid':'bad',lbl=n>=400?'عالی':n>=150?'قابل استفاده':'ضعیف — احتمالاً پیدا نمی‌شود؛ سطح پرجزئیات‌تر یا نزدیک‌تر';
  return `کیفیت تارگت: <span class="q ${cls}">${lbl}</span> (${fa(n)} نقطه‌ی مشخصه — معیار تقریبی)`;}
 function selectTarget(i){cur=i;const t=targets[i];mindURL=t.url;$('prev').src=t.thumb;$('prev').style.display='block';
  $('qual').innerHTML=t.n!=null?qualHTML(t.n):'تارگت از فایل: '+t.label;$('dlmind').href=t.url;$('dlmind').style.display='inline-block';
- $('tl').innerHTML=targets.length>1?targets.map((x,k)=>`<button class="m${k===i?' on':''}" data-k="${k}" style="width:74px"><img src="${x.thumb||''}" alt=""><span>${x.label}</span></button>`).join(''):'';ready();}
-$('tl').onclick=e=>{const b=e.target.closest('[data-k]');if(b)selectTarget(+b.dataset.k);};
+ drawList();ready();}
+function drawList(){$('tl').innerHTML=targets.map((x,k)=>`<span class="tg"><button class="m${k===cur?' on':''}" data-k="${k}" style="width:74px"><img src="${x.thumb||''}" alt=""><span>${x.label}</span></button><button class="del" data-d="${k}" title="حذف">✕</button></span>`).join('');}
+function deleteTarget(k){const t=targets[k];if(!t)return;URL.revokeObjectURL(t.url);targets.splice(k,1);
+ if(!targets.length){cur=-1;mindURL=null;$('prev').style.display='none';$('qual').textContent='';$('dlmind').style.display='none';$('cwrap').style.display='none';$('s3').classList.add('off');drawList();return;}
+ selectTarget(Math.min(k<cur?cur-1:cur,targets.length-1));}
+$('tl').onclick=e=>{const d=e.target.closest('[data-d]');if(d){deleteTarget(+d.dataset.d);return;}const b=e.target.closest('[data-k]');if(b)selectTarget(+b.dataset.k);};
 $('img').onchange=async e=>{const f=e.target.files[0];if(!f)return;
  try{await compileImage(await loadImg(f),f.name.slice(0,14));}catch(err){$('cst').textContent='خطا در ساخت تارگت: '+err.message;console.error(err);}
  e.target.value='';};
@@ -155,7 +167,7 @@ $('capgo').onclick=async()=>{const v=$('cv');if(!v.videoWidth)return;$('capgo').
   if(t.n<150&&!confirm('کیفیت این سطح ضعیف است ('+fa(t.n)+' نقطه). احتمالاً پیدا نمی‌شود. باز هم AR شروع شود؟')){openCapture();return;}
   if(glbURL)$('go').click();else{$('s2').scrollIntoView({behavior:'smooth'});}
  }catch(err){setCapMsg('خطا: '+err.message);$('capgo').disabled=false;}};
-$('mindf').onchange=e=>{const f=e.target.files[0];if(!f)return;targets.push({url:URL.createObjectURL(f),thumb:'',n:null,label:f.name.slice(0,14)});selectTarget(targets.length-1);e.target.value='';};
+$('mindf').onchange=e=>{const f=e.target.files[0];if(!f)return;targets.push({url:URL.createObjectURL(f),thumb:'',n:null,asp:null,label:f.name.slice(0,14)});selectTarget(targets.length-1);e.target.value='';};
 function ready(){$('s2').classList.remove('off');if(glbURL)$('s3').classList.remove('off');}
 
 // ---------- Step 2: model ----------
@@ -165,17 +177,42 @@ function render(q){q=q.trim().toLowerCase();const L=(q?assets.filter(a=>a.t.toLo
 $('q').oninput=e=>render(e.target.value);
 $('grid').onclick=e=>{const b=e.target.closest('.m');if(!b)return;document.querySelectorAll('.m.on').forEach(x=>x.classList.remove('on'));b.classList.add('on');glbURL=b.dataset.g;$('msel').textContent='انتخاب: '+b.dataset.t;if(mindURL)$('s3').classList.remove('off');};
 $('glbf').onchange=e=>{const f=e.target.files[0];if(!f)return;glbURL=URL.createObjectURL(f);$('msel').textContent='GLB شما: '+f.name;if(mindURL)$('s3').classList.remove('off');};
-$('sc').oninput=e=>{$('scv').textContent=fa(e.target.value)+'×';if(model)fit();};
-$('rot').oninput=()=>{if(model)fit();};$('stand').onchange=()=>{if(model)fit();};
 
 // ---------- Step 3: AR ----------
-let mindar=null,model=null,holder=null;
-function fit(){ // card width = 1 unit in MindAR anchor space; plane = XY, +Z toward camera
- const s=+$('sc').value;holder.rotation.set($('stand').checked?Math.PI/2:0,0,0);
- model.rotation.set(0,THREE.MathUtils.degToRad(+$('rot').value),0);model.scale.setScalar(1);model.position.set(0,0,0);
- const b=new THREE.Box3().setFromObject(model),sz=b.getSize(new THREE.Vector3()),k=s/Math.max(sz.x,sz.z,$('stand').checked?0.0001:sz.y,1e-6);
+// hierarchy: anchor.group (card plane = XY, +Z toward camera, card width = 1)
+//   └ pivot (user move/rotate/scale)  └ holder (stand: +Y→+Z)  └ model (normalized: footprint = 1)
+let mindar=null,model=null,holder=null,pivot=null,anchor=null,gizmo=null,locked=false;
+const E={x:0,y:0,rot:0,ls:0,stand:true};
+function normalize(){holder.rotation.set(E.stand?Math.PI/2:0,0,0);model.scale.setScalar(1);model.position.set(0,0,0);model.updateMatrixWorld(true);
+ const b=new THREE.Box3().setFromObject(model),sz=b.getSize(new THREE.Vector3()),k=1/Math.max(sz.x,E.stand?sz.z:sz.y,1e-6);
  model.scale.setScalar(k);const b2=new THREE.Box3().setFromObject(model),c=b2.getCenter(new THREE.Vector3());
- model.position.set(-c.x,$('stand').checked?-b2.min.y:-c.y,-c.z);}
+ model.position.set(-c.x,E.stand?-b2.min.y:-c.y,E.stand?-c.z:-b2.min.z);}
+function applyE(){if(!pivot)return;pivot.position.set(E.x,E.y,0);pivot.rotation.set(0,0,THREE.MathUtils.degToRad(E.rot));pivot.scale.setScalar(Math.pow(2,E.ls)*0.6);
+ $('esc').value=E.ls;$('erot').value=((E.rot+540)%360)-180;$('estand').textContent=E.stand?'⬇️ خوابیده':'⬆️ ایستاده';}
+function makeGizmo(asp){const root=new THREE.Group(),ring=new THREE.Group();root.add(ring);
+ const m1=new THREE.Mesh(new THREE.RingGeometry(0.56,0.6,64),new THREE.MeshBasicMaterial({color:0xe8b04b,transparent:true,opacity:.9,depthTest:false,side:THREE.DoubleSide}));m1.renderOrder=9;ring.add(m1);
+ const tick=new THREE.Mesh(new THREE.CircleGeometry(0.05,24),new THREE.MeshBasicMaterial({color:0xe8b04b,depthTest:false,side:THREE.DoubleSide}));tick.position.set(0,0.58,0);tick.renderOrder=9;ring.add(tick);
+ if(asp){const h=asp/2,pts=[[-.5,-h],[.5,-h],[.5,h],[-.5,h]].map(p=>new THREE.Vector3(p[0],p[1],0));
+  const card=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x5ec8f0,transparent:true,opacity:.8,depthTest:false}));card.renderOrder=8;root.add(card);}
+ root.userData.ring=ring;return root;}
+function setLocked(v){locked=v;if(anchor&&anchor.group.visible)$('arst').textContent=v?'✓ قفل شد — حالا دور مدل بچرخید':'✎ حالت ویرایش — مدل را تنظیم و تثبیت کنید';$('edit').style.display=v?'none':'block';$('eopen').style.display=v?'inline-block':'none';if(gizmo)gizmo.visible=!v;}
+// gestures
+const ptrs=new Map();let g0=null;const ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,0,1),0),inv=new THREE.Matrix4();
+function cardPoint(cx,cy){const cv=mindar.renderer.domElement,r=cv.getBoundingClientRect();
+ ray.setFromCamera(new THREE.Vector2((cx-r.left)/r.width*2-1,-(cy-r.top)/r.height*2+1),mindar.camera);
+ inv.copy(anchor.group.matrixWorld).invert();const rr=ray.ray.clone().applyMatrix4(inv);const p=new THREE.Vector3();return rr.intersectPlane(plane,p)?p:null;}
+function gstate(){const a=[...ptrs.values()];if(a.length>=2){const dx=a[1].x-a[0].x,dy=a[1].y-a[0].y;return {n:2,d:Math.hypot(dx,dy),ang:Math.atan2(dy,dx)};}
+ if(a.length===1){return {n:1,p:cardPoint(a[0].x,a[0].y)};}return null;}
+$('ar').addEventListener('pointerdown',e=>{if(locked||!anchor||!anchor.group.visible)return;ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});g0={...gstate(),E:{...E}};});
+$('ar').addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId)||locked)return;ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});const g=gstate();if(!g||!g0)return;
+ if(g.n===2&&g0.n===2){E.ls=Math.max(-1.6,Math.min(1.6,g0.E.ls+Math.log2(g.d/g0.d)));E.rot=g0.E.rot-THREE.MathUtils.radToDeg(g.ang-g0.ang);}
+ else if(g.n===1&&g0.n===1&&g.p&&g0.p){E.x=g0.E.x+(g.p.x-g0.p.x);E.y=g0.E.y+(g.p.y-g0.p.y);}applyE();});
+const up=e=>{ptrs.delete(e.pointerId);g0=ptrs.size?{...gstate(),E:{...E}}:null;};
+$('ar').addEventListener('pointerup',up);$('ar').addEventListener('pointercancel',up);
+$('esc').oninput=e=>{E.ls=+e.target.value;applyE();};$('erot').oninput=e=>{E.rot=+e.target.value;applyE();};
+$('estand').onclick=()=>{E.stand=!E.stand;normalize();applyE();};
+$('ereset').onclick=()=>{Object.assign(E,{x:0,y:0,rot:0,ls:0});applyE();};
+$('elock').onclick=()=>setLocked(true);$('eopen').onclick=()=>setLocked(false);
 $('go').onclick=async()=>{
  if(!mindURL||!glbURL)return;$('go').disabled=true;$('go').textContent='در حال آماده‌سازی…';
  try{
@@ -184,22 +221,25 @@ $('go').onclick=async()=>{
   mindar=new MindARThree({container:$('ar'),imageTargetSrc:mindURL,uiScanning:'no',uiLoading:'no',filterMinCF:0.0001,filterBeta:0.001});
   const {renderer,scene,camera}=mindar;renderer.outputColorSpace=THREE.SRGBColorSpace;
   scene.add(new THREE.HemisphereLight(0xffffff,0x444444,2.2));const dl=new THREE.DirectionalLight(0xffffff,1.6);dl.position.set(0.5,1,1);scene.add(dl);
-  const anchor=mindar.addAnchor(0);holder=new THREE.Group();anchor.group.add(holder);
-  const g=await new GLTFLoader().loadAsync(glbURL);model=g.scene;holder.add(model);fit();
-  anchor.onTargetFound=()=>{$('arst').textContent='✓ پیدا شد';};anchor.onTargetLost=()=>{$('arst').textContent='دنبال تارگت می‌گردم…';};
+  anchor=mindar.addAnchor(0);pivot=new THREE.Group();holder=new THREE.Group();pivot.add(holder);anchor.group.add(pivot);
+  gizmo=makeGizmo(targets[cur]?targets[cur].asp:null);anchor.group.add(gizmo);
+  const g=await new GLTFLoader().loadAsync(glbURL);model=g.scene;holder.add(model);normalize();applyE();setLocked(false);
+  anchor.onTargetFound=()=>{$('arst').textContent=locked?'✓ قفل شده — دور مدل بچرخید':'✓ پیدا شد — مدل را تنظیم و تثبیت کنید';};
+  anchor.onTargetLost=()=>{$('arst').textContent='دنبال تارگت می‌گردم…';};
   await mindar.start();
-  renderer.setAnimationLoop(()=>renderer.render(scene,camera));
+  renderer.setAnimationLoop(()=>{if(gizmo){const r=gizmo.userData.ring;r.position.copy(pivot.position);r.rotation.copy(pivot.rotation);r.scale.copy(pivot.scale);}renderer.render(scene,camera);});
  }catch(err){alert('شروع AR ممکن نشد: '+err.message+'\nاجازه‌ی دوربین و باز بودن صفحه در Chrome/Safari را چک کنید.');stopAR();}
  $('go').disabled=false;$('go').textContent='▶️ شروع AR';};
-function stopAR(){try{if(mindar){mindar.renderer.setAnimationLoop(null);mindar.stop();}}catch(e){}mindar=null;model=null;$('ar').innerHTML='';$('ar').style.display='none';$('arui').style.display='none';$('arst').style.display='none';document.body.style.overflow='';}
+function stopAR(){try{if(mindar){mindar.renderer.setAnimationLoop(null);mindar.stop();}}catch(e){}mindar=null;model=null;anchor=null;gizmo=null;ptrs.clear();
+ $('ar').innerHTML='';$('ar').style.display='none';$('arui').style.display='none';$('arst').style.display='none';$('edit').style.display='none';document.body.style.overflow='';}
 $('stop').onclick=stopAR;$('newsurf').onclick=()=>{stopAR();setTimeout(openCapture,300);};
-$('shot').onclick=()=>{ // composite camera video + 3D
+$('shot').onclick=()=>{const gv=gizmo&&gizmo.visible;if(gizmo)gizmo.visible=false;
  const v=$('ar').querySelector('video'),cv=mindar.renderer.domElement;mindar.renderer.render(mindar.scene,mindar.camera);
  const c=document.createElement('canvas');c.width=cv.width;c.height=cv.height;const x=c.getContext('2d');
  const r=v.getBoundingClientRect(),cr=cv.getBoundingClientRect(),k=cv.width/cr.width;
- x.drawImage(v,(r.left-cr.left)*k,(r.top-cr.top)*k,r.width*k,r.height*k);x.drawImage(cv,0,0);
+ x.drawImage(v,(r.left-cr.left)*k,(r.top-cr.top)*k,r.width*k,r.height*k);x.drawImage(cv,0,0);if(gizmo)gizmo.visible=gv;
  const a=document.createElement('a');a.download='behrang-ar.png';a.href=c.toDataURL('image/png');a.click();};
-window.__arTest={get mindURL(){return mindURL},fit:()=>fit()};
+window.__arTest={E,applyE:()=>applyE(),get locked(){return locked}};
 </script>
 <script src="site.js?v=7"></script>
 </body>
