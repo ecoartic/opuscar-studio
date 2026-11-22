@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Behrang AR — Bench capture</title>
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;--bad:#ff6b6b;--ok:#5fd38d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.6}
+main{max-width:640px;margin:0 auto;padding:14px}
+h1{font-size:20px;margin:6px 0}.mut{color:var(--mut);font-size:13px}
+input,select{width:100%;padding:9px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit;margin:4px 0}
+.btn{padding:11px 18px;border-radius:10px;border:1px solid var(--line);background:#22252c;color:var(--fg);font:inherit;cursor:pointer;margin:4px 0 4px 6px}
+.btn.p{background:var(--acc);color:#111;font-weight:700;border-color:var(--acc)}.btn.r{background:var(--bad);border-color:var(--bad)}
+video{width:100%;border-radius:12px;background:#000;margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;font-size:13px;direction:ltr}
+.stats div{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px;text-align:center}
+.stats b{display:block;font-size:16px}
+ol{font-size:14px;color:var(--mut);padding-right:20px}
+</style>
+</head>
+<body>
+<main>
+<h1>📏 Behrang AR — ضبط تست (فاز ۰)</h1>
+<p class="mut">بخشی از پروژه‌ی <a href="https://github.com/ecoartic/behrang-ar" style="color:var(--acc)">behrang-ar</a> — ویدیو + داده‌ی IMU (شتاب‌سنج/ژیروسکوپ) + زمان دقیق هر فریم را ضبط می‌کند تا tracker ها روی گوشی‌های مختلف با عدد مقایسه شوند. هیچ چیزی آپلود نمی‌شود؛ دو فایل دانلود می‌شود.</p>
+<label>مدل گوشی<input id="dev" placeholder="مثلاً Samsung A15"></label>
+<label>سطح<select id="surf"><option>card</option><option>book</option><option>wood-table</option><option>rug</option><option>newspaper</option><option>white-table</option><option>other</option></select></label>
+<label>کیفیت<select id="res"><option value="1280x720">720p</option><option value="1920x1080">1080p</option><option value="640x480">480p</option></select></label>
+<ol>
+ <li>۵ ثانیه کاملاً ثابت روی سطح</li>
+ <li>یک دور آرام دور سطح</li>
+ <li>یک تکان سریع</li>
+ <li>دور شدن و برگشتن (از دست دادن و پیدا کردن دوباره)</li>
+</ol>
+<button class="btn" id="open">📷 باز کردن دوربین + سنسورها</button>
+<button class="btn p" id="rec" disabled>⏺ شروع ضبط</button>
+<video id="v" playsinline muted autoplay></video>
+<div class="stats"><div>fps<b id="sfps">–</b></div><div>IMU Hz<b id="simu">–</b></div><div>time<b id="stime">0.0</b></div></div>
+<p class="mut" id="st"></p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let stream=null,rec=null,chunks=[],log=null,t0=0,recording=false,imuCount=0,frameCount=0,lastStat=0;
+function onMotion(e){if(!recording)return;const a=e.acceleration||{},g=e.accelerationIncludingGravity||{},r=e.rotationRate||{};
+ log.imu.push([+(performance.now()-t0).toFixed(3),a.x,a.y,a.z,g.x,g.y,g.z,r.alpha,r.beta,r.gamma,e.interval]);imuCount++;}
+function onOrient(e){if(recording)log.orient.push([+(performance.now()-t0).toFixed(3),e.alpha,e.beta,e.gamma]);}
+function frameLoop(now,meta){const v=$('v');if(recording){log.frames.push([+(now-t0).toFixed(3),meta.mediaTime,meta.presentedFrames,meta.captureTime??null,meta.expectedDisplayTime-t0]);frameCount++;
+  if(now-lastStat>1000){$('sfps').textContent=(frameCount*1000/(now-lastStat)).toFixed(1);$('simu').textContent=(imuCount*1000/(now-lastStat)).toFixed(0);$('stime').textContent=((now-t0)/1000).toFixed(1);frameCount=0;imuCount=0;lastStat=now;}}
+ v.requestVideoFrameCallback(frameLoop);}
+$('open').onclick=async()=>{
+ try{
+  let imuNote='';if(typeof DeviceMotionEvent!=='undefined'&&DeviceMotionEvent.requestPermission){const p=await DeviceMotionEvent.requestPermission().catch(()=>'denied');if(p!=='granted')imuNote=' — ⚠️ اجازه‌ی سنسور حرکت داده نشد؛ فقط ویدیو ضبط می‌شود';}
+  if(typeof DeviceOrientationEvent!=='undefined'&&DeviceOrientationEvent.requestPermission){await DeviceOrientationEvent.requestPermission().catch(()=>{});}
+  const [w,h]=$('res').value.split('x').map(Number);
+  stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:'environment',width:{ideal:w},height:{ideal:h},frameRate:{ideal:30}}});
+  $('v').srcObject=stream;addEventListener('devicemotion',onMotion);addEventListener('deviceorientation',onOrient);
+  $('v').requestVideoFrameCallback(frameLoop);$('rec').disabled=false;
+  const s=stream.getVideoTracks()[0].getSettings();$('st').textContent='دوربین: '+s.width+'×'+s.height+' @'+(s.frameRate||'?')+'fps'+imuNote;
+ }catch(err){$('st').textContent='خطا: '+err.message;}
+};
+$('rec').onclick=()=>{
+ if(recording){recording=false;rec.stop();$('rec').textContent='⏺ شروع ضبط';$('rec').classList.remove('r');return;}
+ const tr=stream.getVideoTracks()[0];
+ log={schema:'behrang-ar/bench@1',created:new Date().toISOString(),device:$('dev').value,surface:$('surf').value,ua:navigator.userAgent,
+  screen:[screen.width,screen.height,devicePixelRatio],camera:{settings:tr.getSettings(),capabilities:tr.getCapabilities?tr.getCapabilities():null,label:tr.label},
+  columns:{imu:['t_ms','ax','ay','az','gx','gy','gz','rot_alpha','rot_beta','rot_gamma','interval'],orient:['t_ms','alpha','beta','gamma'],frames:['t_ms','mediaTime','presentedFrames','captureTime','expectedDisplay_ms']},
+  imu:[],orient:[],frames:[]};
+ const mime=['video/mp4;codecs=avc1','video/webm;codecs=vp9','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'';
+ rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:8e6}:{});chunks=[];
+ rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+ rec.onstop=()=>{const base=`bench_${(log.device||'device').replace(/\W+/g,'-')}_${log.surface}_${Date.now()}`;
+  const ext=(rec.mimeType||'').includes('mp4')?'mp4':'webm';log.video={file:base+'.'+ext,mime:rec.mimeType};
+  dl(new Blob(chunks,{type:rec.mimeType}),base+'.'+ext);dl(new Blob([JSON.stringify(log)],{type:'application/json'}),base+'.json');
+  $('st').textContent=`ذخیره شد: ${log.frames.length} فریم، ${log.imu.length} نمونه‌ی IMU`;};
+ t0=performance.now();lastStat=t0;recording=true;rec.start(1000);$('rec').textContent='⏹ پایان ضبط';$('rec').classList.add('r');
+};
+function dl(b,n){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);}
+</script>
+</body>
+</html>
