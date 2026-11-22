@@ -46,16 +46,20 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
 <main>
 
 <section class="step" id="s1">
-<h2><b>۱</b>عکس از کارت یا سطح</h2>
+<h2><b>۱</b>ثبت کارت یا سطح (میز، کتاب، کارت…)</h2>
 <div class="row">
- <label class="btn p">📷 گرفتن عکس / انتخاب تصویر<input type="file" id="img" accept="image/*" capture="environment" hidden></label>
+ <button class="btn p" id="live">🎯 ثبت سطح با دوربین زنده</button>
+ <label class="btn">🖼️ عکس / تصویر<input type="file" id="img" accept="image/*" capture="environment" hidden></label>
  <label class="btn">📂 فایل ‎.mind‎ قبلی<input type="file" id="mindf" accept=".mind" hidden></label>
 </div>
 <ol class="tips">
+ <li><b>دوربین زنده:</b> گوشی را روی میز، کتاب یا هر سطح بگیرید تا داخل کادر زرد پر از جزئیات باشد و «ثبت این سطح» را بزنید؛ هر بار می‌توانید سطح جدیدی ثبت کنید و بین سطح‌های ثبت‌شده جابه‌جا شوید.</li>
+ <li>میز چوبی با رگه، فرش، روزنامه، جلد کتاب خوب است؛ میز سفید یکدست یا شیشه‌ای کار نمی‌کند.</li>
  <li>شیء را صاف روی میز بگذارید و از بالا، عمود، طوری عکس بگیرید که <b>کل کادر</b> را پر کند (حاشیه‌ی میز نیفتد).</li>
  <li>سطح پرجزئیات و مات بهتر است؛ لوگوی ساده روی زمینه‌ی سفید یا سطح براق ضعیف است.</li>
  <li>نور یکنواخت، بدون سایه‌ی دست و بازتاب.</li>
 </ol>
+<div id="tl" class="row" style="margin-top:6px"></div>
 <img id="prev" alt="">
 <div id="cwrap" style="display:none"><div class="bar"><i id="pb"></i></div><div class="mut" id="cst"></div></div>
 <div id="qual" class="mut"></div>
@@ -83,9 +87,16 @@ footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
 </details>
 </main>
 
+<div id="cap" style="position:fixed;inset:0;z-index:70;background:#000;display:none">
+ <video id="cv" playsinline muted autoplay style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+ <div id="guide" style="position:absolute;left:10%;right:10%;top:22%;bottom:22%;border:3px solid var(--acc);border-radius:12px;box-shadow:0 0 0 9999px rgba(0,0,0,.45)"></div>
+ <div style="position:absolute;top:calc(12px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:14px;padding:0 16px" id="capmsg">سطح را داخل کادر زرد بیاورید (از بالا یا کمی مایل، با نور یکنواخت)</div>
+ <div style="position:absolute;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:8px">
+  <button class="btn" id="capx">✕ لغو</button><button class="btn p" id="capgo">📌 ثبت این سطح</button></div>
+</div>
 <div id="ar"></div>
 <div id="arst">دنبال تارگت می‌گردم…</div>
-<div id="arui"><button class="btn" id="stop">✕ پایان</button><button class="btn" id="shot">📸 عکس</button></div>
+<div id="arui"><button class="btn" id="stop">✕ پایان</button><button class="btn" id="newsurf">🎯 سطح جدید</button><button class="btn" id="shot">📸 عکس</button></div>
 <footer>MindAR (MIT) · three.js (MIT) · مدل‌ها از <a href="https://polyfork.dev">Polyfork</a></footer>
 
 <script type="module">
@@ -102,23 +113,49 @@ async function loadImg(file){
  const c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);
  c.getContext('2d').drawImage(im,0,0,c.width,c.height);
  const out=new Image();out.src=c.toDataURL('image/jpeg',.92);await out.decode();URL.revokeObjectURL(url);return out;}
+const targets=[];let cur=-1;
+async function compileImage(im,label){
+ $('prev').src=im.src;$('prev').style.display='block';
+ $('cwrap').style.display='block';$('qual').textContent='';$('dlmind').style.display='none';$('cst').textContent='در حال بار کردن کامپایلر…';$('pb').style.width='0';
+ const {Compiler}=await import('mindar-image');const comp=new Compiler();
+ $('cst').textContent='در حال ساخت تارگت (چند ثانیه تا یک دقیقه، بسته به گوشی)…';
+ const data=await comp.compileImageTargets([im],p=>{$('pb').style.width=Math.min(100,p).toFixed(0)+'%';setCapMsg('در حال ساخت تارگت… '+fa(Math.min(100,p).toFixed(0))+'٪');});
+ const buf=await comp.exportData();
+ let n=0;(data[0].matchingData||[]).forEach(m=>{n+=(m.maximaPoints||[]).length+(m.minimaPoints||[]).length;});
+ const t={url:URL.createObjectURL(new Blob([buf])),thumb:im.src,n,label:label||('سطح '+fa(targets.length+1))};
+ targets.push(t);selectTarget(targets.length-1);$('pb').style.width='100%';$('cst').textContent='تارگت آماده شد.';return t;}
+function qualHTML(n){const cls=n>=400?'good':n>=150?'mid':'bad',lbl=n>=400?'عالی':n>=150?'قابل استفاده':'ضعیف — احتمالاً پیدا نمی‌شود؛ سطح پرجزئیات‌تر یا نزدیک‌تر';
+ return `کیفیت تارگت: <span class="q ${cls}">${lbl}</span> (${fa(n)} نقطه‌ی مشخصه — معیار تقریبی)`;}
+function selectTarget(i){cur=i;const t=targets[i];mindURL=t.url;$('prev').src=t.thumb;$('prev').style.display='block';
+ $('qual').innerHTML=t.n!=null?qualHTML(t.n):'تارگت از فایل: '+t.label;$('dlmind').href=t.url;$('dlmind').style.display='inline-block';
+ $('tl').innerHTML=targets.length>1?targets.map((x,k)=>`<button class="m${k===i?' on':''}" data-k="${k}" style="width:74px"><img src="${x.thumb||''}" alt=""><span>${x.label}</span></button>`).join(''):'';ready();}
+$('tl').onclick=e=>{const b=e.target.closest('[data-k]');if(b)selectTarget(+b.dataset.k);};
 $('img').onchange=async e=>{const f=e.target.files[0];if(!f)return;
- const im=await loadImg(f);$('prev').src=im.src;$('prev').style.display='block';
- $('cwrap').style.display='block';$('qual').textContent='';$('dlmind').style.display='none';$('cst').textContent='در حال بار کردن کامپایلر…';
- try{
-  const {Compiler}=await import('mindar-image');const comp=new Compiler();
-  $('cst').textContent='در حال ساخت تارگت (چند ثانیه تا یک دقیقه، بسته به گوشی)…';
-  const data=await comp.compileImageTargets([im],p=>{$('pb').style.width=Math.min(100,p).toFixed(0)+'%';});
-  const buf=await comp.exportData();
-  if(mindURL)URL.revokeObjectURL(mindURL);mindURL=URL.createObjectURL(new Blob([buf]));
-  $('pb').style.width='100%';$('cst').textContent='تارگت آماده شد.';
-  let n=0;(data[0].matchingData||[]).forEach(m=>{n+=(m.maximaPoints||[]).length+(m.minimaPoints||[]).length;});
-  const cls=n>=400?'good':n>=150?'mid':'bad',lbl=n>=400?'عالی':n>=150?'قابل استفاده':'ضعیف — احتمالاً پیدا نمی‌شود؛ سطح پرجزئیات‌تر یا عکس نزدیک‌تر';
-  $('qual').innerHTML=`کیفیت تارگت: <span class="q ${cls}">${lbl}</span> (${fa(n)} نقطه‌ی مشخصه — معیار تقریبی)`;
-  $('dlmind').href=mindURL;$('dlmind').style.display='inline-block';ready();
- }catch(err){$('cst').textContent='خطا در ساخت تارگت: '+err.message;console.error(err);}
-};
-$('mindf').onchange=e=>{const f=e.target.files[0];if(!f)return;if(mindURL)URL.revokeObjectURL(mindURL);mindURL=URL.createObjectURL(f);$('qual').textContent='تارگت از فایل بار شد: '+f.name;ready();};
+ try{await compileImage(await loadImg(f),f.name.slice(0,14));}catch(err){$('cst').textContent='خطا در ساخت تارگت: '+err.message;console.error(err);}
+ e.target.value='';};
+// ---- live capture ----
+let capStream=null;const setCapMsg=m=>{if($('cap').style.display==='block')$('capmsg').textContent=m;};
+async function openCapture(){
+ try{capStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:960}},audio:false});}
+ catch(err){alert('دوربین باز نشد: '+err.message+'\nاجازه‌ی دوربین و باز بودن صفحه در Chrome/Safari را چک کنید.');return;}
+ $('cv').srcObject=capStream;$('cap').style.display='block';document.body.style.overflow='hidden';$('capgo').disabled=false;
+ $('capmsg').textContent='سطح را داخل کادر زرد بیاورید (از بالا یا کمی مایل، با نور یکنواخت)';}
+function closeCapture(){if(capStream)capStream.getTracks().forEach(t=>t.stop());capStream=null;$('cv').srcObject=null;$('cap').style.display='none';document.body.style.overflow='';}
+$('live').onclick=openCapture;$('capx').onclick=closeCapture;
+$('capgo').onclick=async()=>{const v=$('cv');if(!v.videoWidth)return;$('capgo').disabled=true;
+ const W=v.clientWidth,H=v.clientHeight,vw=v.videoWidth,vh=v.videoHeight,k=Math.max(W/vw,H/vh),ox=(W-vw*k)/2,oy=(H-vh*k)/2;
+ const g=$('guide').getBoundingClientRect(),r=v.getBoundingClientRect();
+ let sx=(g.left-r.left-ox)/k,sy=(g.top-r.top-oy)/k,sw=g.width/k,sh=g.height/k;
+ sx=Math.max(0,sx);sy=Math.max(0,sy);sw=Math.min(vw-sx,sw);sh=Math.min(vh-sy,sh);
+ const M=1024,f=Math.min(1,M/Math.max(sw,sh)),c=document.createElement('canvas');c.width=Math.round(sw*f);c.height=Math.round(sh*f);
+ c.getContext('2d').drawImage(v,sx,sy,sw,sh,0,0,c.width,c.height);
+ const im=new Image();im.src=c.toDataURL('image/jpeg',.92);await im.decode();
+ setCapMsg('در حال ساخت تارگت…');
+ try{const t=await compileImage(im);closeCapture();
+  if(t.n<150&&!confirm('کیفیت این سطح ضعیف است ('+fa(t.n)+' نقطه). احتمالاً پیدا نمی‌شود. باز هم AR شروع شود؟')){openCapture();return;}
+  if(glbURL)$('go').click();else{$('s2').scrollIntoView({behavior:'smooth'});}
+ }catch(err){setCapMsg('خطا: '+err.message);$('capgo').disabled=false;}};
+$('mindf').onchange=e=>{const f=e.target.files[0];if(!f)return;targets.push({url:URL.createObjectURL(f),thumb:'',n:null,label:f.name.slice(0,14)});selectTarget(targets.length-1);e.target.value='';};
 function ready(){$('s2').classList.remove('off');if(glbURL)$('s3').classList.remove('off');}
 
 // ---------- Step 2: model ----------
@@ -155,7 +192,7 @@ $('go').onclick=async()=>{
  }catch(err){alert('شروع AR ممکن نشد: '+err.message+'\nاجازه‌ی دوربین و باز بودن صفحه در Chrome/Safari را چک کنید.');stopAR();}
  $('go').disabled=false;$('go').textContent='▶️ شروع AR';};
 function stopAR(){try{if(mindar){mindar.renderer.setAnimationLoop(null);mindar.stop();}}catch(e){}mindar=null;model=null;$('ar').innerHTML='';$('ar').style.display='none';$('arui').style.display='none';$('arst').style.display='none';document.body.style.overflow='';}
-$('stop').onclick=stopAR;
+$('stop').onclick=stopAR;$('newsurf').onclick=()=>{stopAR();setTimeout(openCapture,300);};
 $('shot').onclick=()=>{ // composite camera video + 3D
  const v=$('ar').querySelector('video'),cv=mindar.renderer.domElement;mindar.renderer.render(mindar.scene,mindar.camera);
  const c=document.createElement('canvas');c.width=cv.width;c.height=cv.height;const x=c.getContext('2d');
