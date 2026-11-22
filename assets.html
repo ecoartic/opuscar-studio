@@ -53,7 +53,7 @@ footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;colo
   <div class="dh"><h2 id="dt"></h2><button class="x" onclick="dlg.close()" aria-label="بستن">×</button></div>
   <model-viewer id="mv" camera-controls auto-rotate shadow-intensity="1" exposure="1" environment-image="neutral" touch-action="pan-y" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor"><button slot="ar-button" class="arb">📱 دیدن در اتاق (AR)</button></model-viewer>
   <div class="acts"><a class="btn" id="dl" download>دانلود GLB</a><a id="pg" target="_blank" rel="noopener">صفحه‌ی مدل در Polyfork</a><span class="meta" id="dm"></span></div>
-  <p class="meta" id="arh" style="margin:6px 0 0">AR: روی گوشی اندروید (Scene Viewer / WebXR)، آیفون (Quick Look، USDZ خودکار) یا Quest 3 (WebXR passthrough) دکمه‌ی «دیدن در اتاق» ظاهر می‌شود. روی دسکتاپ این دکمه نیست.</p>
+  <p class="meta" id="arh" style="margin:6px 0 0">AR: روی گوشی اندروید (Scene Viewer / WebXR)، آیفون (Quick Look، USDZ خودکار) یا Quest 3 (WebXR passthrough) دکمه‌ی «دیدن در اتاق» ظاهر می‌شود. روی دسکتاپ این دکمه نیست. گوشی‌تان پشتیبانی نمی‌کند؟ <a href="artarget.html">AR روی کارت</a> روی تقریباً هر گوشی کار می‌کند.</p>
 </dialog>
 <footer>مدل‌ها از <a href="https://polyfork.dev">Polyfork</a> — استفاده‌ی شخصی و تجاری آزاد؛ <a href="https://polyfork.dev/licensing">شرایط مجوز</a>. فهرست از <a href="https://github.com/lucas-martinic/polyfork-catalog">polyfork-catalog</a>.</footer>
 <script>
@@ -70,6 +70,6 @@ dlg.addEventListener('close',()=>{$('mv').removeAttribute('src');});
 $('q').oninput=$('kit').onchange=()=>{shown=60;render();};$('more').onclick=()=>{shown+=60;render();};
 fetch('assets.json?v=1').then(r=>r.json()).then(j=>{D=j;$('kit').innerHTML+=Object.entries(D.kits).sort((a,b)=>a[1].localeCompare(b[1])).map(([k,v])=>`<option value="${esc(k)}">${esc(v)}</option>`).join('');chips();render();}).catch(()=>$('count').textContent='بارگذاری ناموفق بود.');
 </script>
-<script src="site.js?v=6"></script>
+<script src="site.js?v=7"></script>
 </body>
 </html>

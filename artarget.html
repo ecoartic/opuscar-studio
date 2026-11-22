@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AR روی کارت خودت — Behrang Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<script type="importmap">{"imports":{
+ "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+ "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+ "mindar-image":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image.prod.js",
+ "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"}}</script>
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;--ok:#5fd38d;--bad:#ff6b6b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}a{color:var(--acc)}
+header{padding:36px 18px 14px;text-align:center;background:radial-gradient(ellipse at top,#14262a 0%,var(--bg) 70%)}
+header h1{margin:0 0 6px;font-size:clamp(22px,4.5vw,34px);font-weight:800}header p{margin:0 auto;max-width:680px;color:var(--mut)}
+main{max-width:760px;margin:0 auto;padding:10px 14px 70px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:14px 0}
+.step h2{margin:0 0 8px;font-size:18px}.step h2 b{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#111;margin-left:8px;font-size:15px}
+.step.off{opacity:.45;pointer-events:none}
+.btn{display:inline-block;padding:10px 16px;border-radius:10px;border:1px solid var(--line);background:#22252c;color:var(--fg);font:inherit;cursor:pointer;margin:4px 0 4px 6px}
+.btn.p{background:var(--acc);color:#111;border-color:var(--acc);font-weight:700}
+.mut{color:var(--mut);font-size:14px}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#prev{max-width:100%;max-height:260px;border-radius:10px;display:none;margin-top:8px;border:1px solid var(--line)}
+.bar{height:8px;background:#22252c;border-radius:6px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+.q{font-weight:700}.q.good{color:var(--ok)}.q.mid{color:var(--acc)}.q.bad{color:var(--bad)}
+input[type=search]{width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:#111317;color:var(--fg);font:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin-top:8px;max-height:300px;overflow:auto}
+.m{background:#fff;border:2px solid transparent;border-radius:10px;overflow:hidden;cursor:pointer;padding:0}.m img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.m.on{border-color:var(--acc)}.m span{display:block;background:var(--panel);color:var(--fg);font-size:11px;direction:ltr;padding:2px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+label.s{display:flex;gap:8px;align-items:center;font-size:14px;margin:6px 0}label.s input{flex:1}
+#ar{position:fixed;inset:0;z-index:50;background:#000;display:none}
+#arui{position:fixed;z-index:60;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));display:none;justify-content:center;gap:8px}
+#arst{position:fixed;z-index:60;top:calc(10px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:none;background:rgba(0,0,0,.6);padding:4px 14px;border-radius:20px;font-size:14px}
+ol.tips{margin:6px 0;padding-right:20px;font-size:14px;color:var(--mut)}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>📇 AR روی کارت یا سطح دلخواه</h1>
+<p>از هر سطح صاف و پرجزئیات (کارت ویزیت، جلد کتاب، بسته‌بندی، پوستر) عکس بگیرید؛ همین‌جا در مرورگر به تارگت تبدیل می‌شود و مدل سه‌بعدی روی همان شیء می‌نشیند. بدون نیاز به ARCore؛ روی تقریباً هر گوشی با دوربین کار می‌کند. هیچ عکسی به سرور فرستاده نمی‌شود.</p>
+</header>
+<main>
+
+<section class="step" id="s1">
+<h2><b>۱</b>عکس از کارت یا سطح</h2>
+<div class="row">
+ <label class="btn p">📷 گرفتن عکس / انتخاب تصویر<input type="file" id="img" accept="image/*" capture="environment" hidden></label>
+ <label class="btn">📂 فایل ‎.mind‎ قبلی<input type="file" id="mindf" accept=".mind" hidden></label>
+</div>
+<ol class="tips">
+ <li>شیء را صاف روی میز بگذارید و از بالا، عمود، طوری عکس بگیرید که <b>کل کادر</b> را پر کند (حاشیه‌ی میز نیفتد).</li>
+ <li>سطح پرجزئیات و مات بهتر است؛ لوگوی ساده روی زمینه‌ی سفید یا سطح براق ضعیف است.</li>
+ <li>نور یکنواخت، بدون سایه‌ی دست و بازتاب.</li>
+</ol>
+<img id="prev" alt="">
+<div id="cwrap" style="display:none"><div class="bar"><i id="pb"></i></div><div class="mut" id="cst"></div></div>
+<div id="qual" class="mut"></div>
+<a class="btn" id="dlmind" style="display:none" download="behrang-target.mind">⬇️ ذخیره‌ی تارگت (‎.mind‎) برای دفعه‌ی بعد</a>
+</section>
+
+<section class="step off" id="s2">
+<h2><b>۲</b>مدل سه‌بعدی</h2>
+<input type="search" id="q" placeholder="جستجو در ۳۴۸۹ مدل Polyfork (انگلیسی: chair, tree, car…)">
+<div class="grid" id="grid"></div>
+<div class="row" style="margin-top:8px"><label class="btn">📦 GLB خودتان<input type="file" id="glbf" accept=".glb,.gltf" hidden></label><span class="mut" id="msel">مدلی انتخاب نشده</span></div>
+<label class="s">اندازه نسبت به عرض کارت <input type="range" id="sc" min="0.2" max="3" step="0.05" value="1"><span id="scv">۱×</span></label>
+<label class="s">چرخش <input type="range" id="rot" min="0" max="360" step="5" value="0"></label>
+<label class="s"><input type="checkbox" id="stand" checked style="flex:0"> ایستاده روی کارت (کارت = زمین)</label>
+</section>
+
+<section class="step off" id="s3">
+<h2><b>۳</b>شروع AR</h2>
+<p class="mut">دوربین پشت باز می‌شود. گوشی را به سمت همان شیء بگیرید؛ وقتی پیدا شد مدل ظاهر می‌شود. صفحه باید از HTTPS باز شود و در مرورگر اصلی (Chrome/Safari)، نه داخل اینستاگرام یا تلگرام.</p>
+<button class="btn p" id="go">▶️ شروع AR</button>
+</section>
+
+<details class="step"><summary><b>چطور کار می‌کند؟</b></summary>
+<p class="mut">کتابخانه‌ی متن‌باز <a href="https://github.com/hiukim/mind-ar-js" target="_blank" rel="noopener">MindAR</a> (MIT) از عکس شما نقاط مشخصه (feature points) در چند مقیاس استخراج می‌کند و فایل تارگت می‌سازد. هنگام اجرا، هر فریم دوربین با این نقاط مقایسه و ژست (pose) شیء تخمین زده می‌شود؛ مدل با <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> روی آن رندر می‌شود. چون مقیاس از اندازه‌ی خود کارت می‌آید، به SLAM و ARCore نیازی نیست. محدودیت: مدل فقط تا وقتی کارت در کادر است دیده می‌شود.</p>
+</details>
+</main>
+
+<div id="ar"></div>
+<div id="arst">دنبال تارگت می‌گردم…</div>
+<div id="arui"><button class="btn" id="stop">✕ پایان</button><button class="btn" id="shot">📸 عکس</button></div>
+<footer>MindAR (MIT) · three.js (MIT) · مدل‌ها از <a href="https://polyfork.dev">Polyfork</a></footer>
+
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+const $=id=>document.getElementById(id);
+const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+let mindURL=null,glbURL=null,assets=[];
+
+// ---------- Step 1: compile target ----------
+async function loadImg(file){
+ const url=URL.createObjectURL(file);const im=new Image();im.src=url;await im.decode();
+ const M=1024,s=Math.min(1,M/Math.max(im.naturalWidth,im.naturalHeight));
+ const c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);
+ c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+ const out=new Image();out.src=c.toDataURL('image/jpeg',.92);await out.decode();URL.revokeObjectURL(url);return out;}
+$('img').onchange=async e=>{const f=e.target.files[0];if(!f)return;
+ const im=await loadImg(f);$('prev').src=im.src;$('prev').style.display='block';
+ $('cwrap').style.display='block';$('qual').textContent='';$('dlmind').style.display='none';$('cst').textContent='در حال بار کردن کامپایلر…';
+ try{
+  const {Compiler}=await import('mindar-image');const comp=new Compiler();
+  $('cst').textContent='در حال ساخت تارگت (چند ثانیه تا یک دقیقه، بسته به گوشی)…';
+  const data=await comp.compileImageTargets([im],p=>{$('pb').style.width=Math.min(100,p).toFixed(0)+'%';});
+  const buf=await comp.exportData();
+  if(mindURL)URL.revokeObjectURL(mindURL);mindURL=URL.createObjectURL(new Blob([buf]));
+  $('pb').style.width='100%';$('cst').textContent='تارگت آماده شد.';
+  let n=0;(data[0].matchingData||[]).forEach(m=>{n+=(m.maximaPoints||[]).length+(m.minimaPoints||[]).length;});
+  const cls=n>=400?'good':n>=150?'mid':'bad',lbl=n>=400?'عالی':n>=150?'قابل استفاده':'ضعیف — احتمالاً پیدا نمی‌شود؛ سطح پرجزئیات‌تر یا عکس نزدیک‌تر';
+  $('qual').innerHTML=`کیفیت تارگت: <span class="q ${cls}">${lbl}</span> (${fa(n)} نقطه‌ی مشخصه — معیار تقریبی)`;
+  $('dlmind').href=mindURL;$('dlmind').style.display='inline-block';ready();
+ }catch(err){$('cst').textContent='خطا در ساخت تارگت: '+err.message;console.error(err);}
+};
+$('mindf').onchange=e=>{const f=e.target.files[0];if(!f)return;if(mindURL)URL.revokeObjectURL(mindURL);mindURL=URL.createObjectURL(f);$('qual').textContent='تارگت از فایل بار شد: '+f.name;ready();};
+function ready(){$('s2').classList.remove('off');if(glbURL)$('s3').classList.remove('off');}
+
+// ---------- Step 2: model ----------
+fetch('assets.json?v=1').then(r=>r.json()).then(j=>{assets=j.assets;render('');});
+function render(q){q=q.trim().toLowerCase();const L=(q?assets.filter(a=>a.t.toLowerCase().includes(q)||(a.y||'').includes(q)):assets).slice(0,48);
+ $('grid').innerHTML=L.map(a=>`<button class="m" data-g="${a.g}" data-t="${a.t.replace(/"/g,'')}"><img loading="lazy" src="${a.th}" alt=""><span>${a.t}</span></button>`).join('');}
+$('q').oninput=e=>render(e.target.value);
+$('grid').onclick=e=>{const b=e.target.closest('.m');if(!b)return;document.querySelectorAll('.m.on').forEach(x=>x.classList.remove('on'));b.classList.add('on');glbURL=b.dataset.g;$('msel').textContent='انتخاب: '+b.dataset.t;if(mindURL)$('s3').classList.remove('off');};
+$('glbf').onchange=e=>{const f=e.target.files[0];if(!f)return;glbURL=URL.createObjectURL(f);$('msel').textContent='GLB شما: '+f.name;if(mindURL)$('s3').classList.remove('off');};
+$('sc').oninput=e=>{$('scv').textContent=fa(e.target.value)+'×';if(model)fit();};
+$('rot').oninput=()=>{if(model)fit();};$('stand').onchange=()=>{if(model)fit();};
+
+// ---------- Step 3: AR ----------
+let mindar=null,model=null,holder=null;
+function fit(){ // card width = 1 unit in MindAR anchor space; plane = XY, +Z toward camera
+ const s=+$('sc').value;holder.rotation.set($('stand').checked?Math.PI/2:0,0,0);
+ model.rotation.set(0,THREE.MathUtils.degToRad(+$('rot').value),0);model.scale.setScalar(1);model.position.set(0,0,0);
+ const b=new THREE.Box3().setFromObject(model),sz=b.getSize(new THREE.Vector3()),k=s/Math.max(sz.x,sz.z,$('stand').checked?0.0001:sz.y,1e-6);
+ model.scale.setScalar(k);const b2=new THREE.Box3().setFromObject(model),c=b2.getCenter(new THREE.Vector3());
+ model.position.set(-c.x,$('stand').checked?-b2.min.y:-c.y,-c.z);}
+$('go').onclick=async()=>{
+ if(!mindURL||!glbURL)return;$('go').disabled=true;$('go').textContent='در حال آماده‌سازی…';
+ try{
+  const {MindARThree}=await import('mindar-image-three');
+  $('ar').style.display='block';$('arui').style.display='flex';$('arst').style.display='block';document.body.style.overflow='hidden';
+  mindar=new MindARThree({container:$('ar'),imageTargetSrc:mindURL,uiScanning:'no',uiLoading:'no',filterMinCF:0.0001,filterBeta:0.001});
+  const {renderer,scene,camera}=mindar;renderer.outputColorSpace=THREE.SRGBColorSpace;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x444444,2.2));const dl=new THREE.DirectionalLight(0xffffff,1.6);dl.position.set(0.5,1,1);scene.add(dl);
+  const anchor=mindar.addAnchor(0);holder=new THREE.Group();anchor.group.add(holder);
+  const g=await new GLTFLoader().loadAsync(glbURL);model=g.scene;holder.add(model);fit();
+  anchor.onTargetFound=()=>{$('arst').textContent='✓ پیدا شد';};anchor.onTargetLost=()=>{$('arst').textContent='دنبال تارگت می‌گردم…';};
+  await mindar.start();
+  renderer.setAnimationLoop(()=>renderer.render(scene,camera));
+ }catch(err){alert('شروع AR ممکن نشد: '+err.message+'\nاجازه‌ی دوربین و باز بودن صفحه در Chrome/Safari را چک کنید.');stopAR();}
+ $('go').disabled=false;$('go').textContent='▶️ شروع AR';};
+function stopAR(){try{if(mindar){mindar.renderer.setAnimationLoop(null);mindar.stop();}}catch(e){}mindar=null;model=null;$('ar').innerHTML='';$('ar').style.display='none';$('arui').style.display='none';$('arst').style.display='none';document.body.style.overflow='';}
+$('stop').onclick=stopAR;
+$('shot').onclick=()=>{ // composite camera video + 3D
+ const v=$('ar').querySelector('video'),cv=mindar.renderer.domElement;mindar.renderer.render(mindar.scene,mindar.camera);
+ const c=document.createElement('canvas');c.width=cv.width;c.height=cv.height;const x=c.getContext('2d');
+ const r=v.getBoundingClientRect(),cr=cv.getBoundingClientRect(),k=cv.width/cr.width;
+ x.drawImage(v,(r.left-cr.left)*k,(r.top-cr.top)*k,r.width*k,r.height*k);x.drawImage(cv,0,0);
+ const a=document.createElement('a');a.download='behrang-ar.png';a.href=c.toDataURL('image/png');a.click();};
+window.__arTest={get mindURL(){return mindURL},fit:()=>fit()};
+</script>
+<script src="site.js?v=7"></script>
+</body>
+</html>
