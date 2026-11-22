@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>آزمایشگاه انیمیشن — Behrang Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0f12;--panel:#17191e;--line:#2a2d35;--fg:#ececec;--mut:#9aa0ab;--acc:#e8b04b;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.7}a{color:var(--acc)}
+header{padding:36px 20px 14px;text-align:center;background:radial-gradient(ellipse at top,#2a2214 0%,var(--bg) 70%)}
+header h1{margin:0 0 6px;font-size:clamp(24px,4.5vw,38px);font-weight:800}header p{margin:0 auto;max-width:720px;color:var(--mut)}
+.nav{margin-top:10px;font-size:14px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+main{max-width:1280px;margin:0 auto;padding:14px;display:grid;grid-template-columns:300px 1fr;gap:16px}
+@media(max-width:820px){main{grid-template-columns:1fr}.stage{order:-1;position:static}}
+.pan{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;align-self:start}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 3px}
+select,input[type=number],input[type=text]{width:100%;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:#101216;color:var(--fg);font:inherit}
+input[type=range]{width:100%}
+.pal{display:flex;gap:6px;flex-wrap:wrap}.pal button{border:1px solid var(--line);border-radius:8px;padding:3px;background:#101216;cursor:pointer;display:flex}.pal button.on{border-color:var(--acc)}.pal i{width:14px;height:22px;display:block}
+.sw{display:flex;gap:6px;margin-top:6px}.sw input{width:36px;height:30px;border:0;padding:0;background:none}
+.btn{width:100%;margin-top:10px;padding:10px;border:0;border-radius:10px;background:var(--acc);color:#1a1300;font:inherit;font-weight:800;cursor:pointer}
+.btn.s{background:#26282d;color:var(--fg);font-weight:600}
+.stage{background:#08090b;border:1px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:10px;align-self:start;position:sticky;top:10px}
+.stage canvas{max-width:100%;max-height:75vh;width:auto!important;height:auto!important;border-radius:6px}
+.msg{font-size:13px;color:var(--mut);margin-top:8px;min-height:1.5em}
+footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;color:var(--mut);font-size:13px}
+
+.stage canvas#out{width:100%!important;max-height:none;aspect-ratio:16/9;background:#F3EBDC}
+.p5Canvas{display:none!important}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips button{padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:#101216;color:var(--mut);font:inherit;font-size:13px;cursor:pointer}.chips button.on{background:var(--acc);color:#1a1300;border-color:var(--acc)}
+.bar2{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:12px;color:var(--mut)}.bar2 input{flex:1}
+.prog{height:6px;background:#26282d;border-radius:4px;overflow:hidden;margin-top:8px}.prog i{display:block;height:100%;width:0;background:var(--acc)}
+.stagewrap{align-self:start;position:sticky;top:64px}
+@media(max-width:820px){.stagewrap{order:-1;position:static}}
+.note{font-size:12.5px;color:var(--mut);margin-top:10px}
+</style>
+<link rel="stylesheet" href="common.css?v=2">
+</head>
+<body>
+<header>
+  <h1>آزمایشگاه انیمیشن آبرنگی</h1>
+  <p>لنزو، شخصیت خود Behrang Lab: یک ربات‌دوربین کوچک که با آبرنگ و جوهر نقاشی می‌شود. حالت احساسی، رنگ، پس‌زمینه و ریتم را انتخاب کن و خروجی PNG یا MP4 بگیر؛ همه‌چیز با کد و داخل مرورگر.</p>
+</header>
+<main>
+  <div class="pan">
+    <label>حالت</label><div class="chips" id="emo"></div>
+    <label>رنگ بدن</label><div class="chips" id="tint"></div>
+    <label>پس‌زمینه</label><div class="chips" id="bg"></div>
+    <label>اندازه</label><input type="range" id="size" min="14" max="50" value="34">
+    <label>متن زیر تصویر (اختیاری)</label><input type="text" id="cap" placeholder="مثلاً Behrang Lab" maxlength="40">
+    <label>ریتم (BPM) — بعد از تغییر صفحه دوباره بارگذاری می‌شود</label><input type="number" id="bpm" min="60" max="180" step="1">
+    <button class="btn" id="play">▶ پخش</button>
+    <button class="btn s" id="png">ذخیره‌ی فریم PNG</button>
+    <label>مدت خروجی ویدیو</label><div class="chips" id="dur"></div>
+    <button class="btn s" id="mp4">ساخت ویدیوی MP4 (۲۴fps)</button>
+    <div class="prog"><i id="pg"></i></div>
+    <div class="msg" id="msg">در حال آماده‌سازی موتور…</div>
+    <p class="note">هر فریم آبرنگ واقعی است (p5.brush)، پس روی سیستم بدون GPU پخش کند است ولی خروجی MP4 همیشه دقیق و روان است چون فریم‌به‌فریم رندر می‌شود. MP4 در Chrome و Edge (WebCodecs) کار می‌کند.</p>
+  </div>
+  <div class="stagewrap">
+    <div class="stage"><canvas id="out" width="1920" height="1080"></canvas></div>
+    <div class="bar2"><input type="range" id="scrub" min="0" max="4" step="0.0417" value="0"><span id="tt">0.00s</span></div>
+  </div>
+</main>
+<footer>موتور نقاشی: <a href="https://github.com/JohnHeibel/ClaudeAnimationBase" target="_blank" rel="noopener">ClaudeAnimationBase</a> از John Heibel (MIT) با <a href="https://github.com/acamposuribe/p5.brush" target="_blank" rel="noopener">p5.brush</a>؛ شخصیت لنزو طراحی اختصاصی Behrang Lab است. برای ساختن فیلم کامل با همین موتور، راهنمای <code>ANIMATION_GUIDE.md</code> آن ریپو را به Claude بده.</footer>
+<script src="site.js?v=5"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@2.3.3/lib/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5.brush@2.2.3/dist/p5.brush.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mp4-muxer@5/build/mp4-muxer.js"></script>
+<script src="anim/config.js?v=1"></script>
+<script src="anim/core.js?v=1"></script>
+<script src="anim/lenzo.js?v=2"></script>
+<script src="anim/timeline.js?v=1"></script>
+<script>
+const ST={emo:'happy',tint:'',bg:'paper',u:34,cap:'',len:4};
+const TINTS=[['','آبی لنزو','#5E8DB8'],['#D97757','سفالی','#D97757'],['#3A9C98','فیروزه‌ای','#3A9C98'],['#7B5CA8','بنفش','#7B5CA8'],['#E8AA38','خردلی','#E8AA38'],['#6E9F58','سبز','#6E9F58']];
+const BGS=[['paper','کاغذ'],['sky','آسمان'],['night','شب'],['stage','صحنه']];
+LOOPS.lab = t => {
+  if (ST.bg==='sky') { paint(rectPts(-40,-40,W+80,H*.72,0),{wash:'#BFDDF0',washOp:255,fill:PAL.sky,fillOp:80,bleed:.2,ink:null}); paint(ellPts(W*.22,H*.24,160,60,18,8),{wash:PAL.cream,washOp:230,ink:null}); paint(ellPts(W*.78,H*.18,200,70,18,8),{wash:PAL.cream,washOp:230,ink:null}); paint(rectPts(-40,H*.72,W+80,H*.32,4),{wash:'#B9CF8E',washOp:255,fill:PAL.sap,fillOp:70,ink:null}); }
+  else if (ST.bg==='night') { paint(rectPts(-40,-40,W+80,H+80,0),{wash:PAL.night,washOp:255,fill:PAL.indigo,fillOp:90,bleed:.2,ink:null}); for(let i=0;i<40;i++) paint(starPts(hash(i)*W,hash(i+50)*H*.6,6+hash(i+9)*8,.35,4,wob(T,.3,i)*.4),{wash:PAL.cream,washOp:200+40*Math.sin(T*3+i),ink:null}); paint(ellPts(W*.82,H*.2,70,70,24),{wash:PAL.cream,washOp:255,ink:null}); }
+  else if (ST.bg==='stage') { paint(rectPts(-40,-40,W+80,H+80,0),{wash:'#3B2430',washOp:255,fill:'#5B2C3A',fillOp:80,ink:null}); paint([[W/2-140,-40],[W/2+140,-40],[W/2+520,H*.9],[W/2-520,H*.9]],{fill:'#FFE6A8',fillOp:90,bleed:.3,ink:null}); paint(ellPts(W/2,H*.86,600,90,30),{wash:'#C9A36A',washOp:255,ink:null}); }
+  const gy = ST.cap ? H*.74 : H*.84;
+  inkLine([[160,gy+8],[W/2,gy+4],[W-160,gy+9]], .6, mixCol(PAL.paper, PAL.ink, .35), 'inkfine', .5);
+  lenzo(W/2, gy, ST.u, feel(ST.emo, t, ST.tint ? {tint: ST.tint, tintK: .9} : {}));
+  if (ST.cap) letter(ST.cap, W/2, H*.88, 84, ST.bg==='night'||ST.bg==='stage'?PAL.cream:PAL.clay, {stroke: PAL.ink});
+};
+LOOPS.lab.len = 4;
+window.LOOP = LOOPS.lab;
+const $=id=>document.getElementById(id), msg=s=>$('msg').textContent=s;
+function chips(el, list, key, after){ el.innerHTML=''; list.forEach(([v,l,c])=>{ const b=document.createElement('button'); b.textContent=l; if(c){b.style.borderColor=c;} b.className=ST[key]===v?'on':''; b.onclick=()=>{ST[key]=v; chips(el,list,key,after); (after||showFrame)();}; el.appendChild(b); }); }
+let playing=false, busy=false, want=null, cur=0;
+async function showFrame(t){ if(t!=null) cur=t; want=cur; if(busy) return; busy=true; while(want!=null){ const tt=want; want=null; const t0=performance.now(); await window.renderAt(tt); $('tt').textContent=`${tt.toFixed(2)}s · ${Math.round(performance.now()-t0)}ms`; $('scrub').value=tt; } busy=false; }
+async function playLoop(){ const s0=performance.now()-cur*1000; while(playing){ const t=((performance.now()-s0)/1000)%ST.len; cur=t; const t0=performance.now(); await window.renderAt(t); $('tt').textContent=`${t.toFixed(2)}s · ${Math.round(1000/Math.max(1,performance.now()-t0))} fps`; $('scrub').value=t; } }
+window.onEngineReady=()=>{
+  chips($('emo'), Object.entries(LZ_EMO).map(([k,v])=>[k,v.fa]), 'emo');
+  chips($('tint'), TINTS, 'tint'); chips($('bg'), BGS, 'bg');
+  chips($('dur'), [[2,'۲ ثانیه'],[4,'۴ ثانیه'],[8,'۸ ثانیه']], 'len', ()=>{ LOOPS.lab.len=ST.len; $('scrub').max=ST.len; });
+  $('bpm').value=PROJECT.bpm; $('bpm').onchange=()=>{ const v=Math.max(60,Math.min(180,+$('bpm').value||120)); location.search='?bpm='+v; };
+  $('size').oninput=()=>{ ST.u=+$('size').value; showFrame(); };
+  $('cap').oninput=()=>{ ST.cap=$('cap').value.trim(); showFrame(); };
+  $('scrub').oninput=()=>{ playing=false; $('play').textContent='▶ پخش'; showFrame(+$('scrub').value); };
+  $('play').onclick=()=>{ playing=!playing; $('play').textContent=playing?'❚❚ توقف':'▶ پخش'; if(playing) playLoop(); };
+  $('png').onclick=async()=>{ await window.renderAt(cur); const a=document.createElement('a'); a.download=`lenzo-${ST.emo}.png`; a.href=$('out').toDataURL('image/png'); a.click(); };
+  $('mp4').onclick=exportMP4;
+  msg(`آماده · GPU: ${window.gpuInfo ? window.gpuInfo() : '?'}`); showFrame(0);
+};
+async function exportMP4(){
+  if(!('VideoEncoder' in window) || !window.Mp4Muxer){ msg('این مرورگر WebCodecs ندارد؛ از Chrome یا Edge استفاده کن.'); return; }
+  playing=false; $('play').textContent='▶ پخش';
+  const fps=24, n=Math.round(ST.len*fps), Wd=1920, Ht=1080;
+  const muxer=new Mp4Muxer.Muxer({target:new Mp4Muxer.ArrayBufferTarget(), video:{codec:'avc', width:Wd, height:Ht}, fastStart:'in-memory'});
+  const enc=new VideoEncoder({output:(c,m)=>muxer.addVideoChunk(c,m), error:e=>msg('خطا: '+e.message)});
+  enc.configure({codec:'avc1.640028', width:Wd, height:Ht, bitrate:12e6, framerate:fps});
+  const t0=performance.now();
+  for(let i=0;i<n;i++){
+    await window.renderAt(i/fps);
+    const vf=new VideoFrame($('out'),{timestamp:Math.round(i*1e6/fps), duration:Math.round(1e6/fps)});
+    enc.encode(vf,{keyFrame:i%48===0}); vf.close();
+    $('pg').style.width=((i+1)/n*100)+'%';
+    const el=(performance.now()-t0)/1000, eta=el/(i+1)*(n-i-1); msg(`فریم ${i+1} از ${n} · حدود ${Math.ceil(eta)} ثانیه مانده`);
+    if(enc.encodeQueueSize>8) await new Promise(r=>setTimeout(r,20));
+  }
+  await enc.flush(); muxer.finalize();
+  const blob=new Blob([muxer.target.buffer],{type:'video/mp4'}), a=document.createElement('a');
+  a.download=`lenzo-${ST.emo}-${ST.len}s.mp4`; a.href=URL.createObjectURL(blob); a.click();
+  msg(`ویدیو آماده شد (${(blob.size/1e6).toFixed(1)}MB، ${Math.round((performance.now()-t0)/1000)} ثانیه رندر).`);
+}
+</script>
+</body>
+</html>

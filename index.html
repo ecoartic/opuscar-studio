@@ -63,6 +63,7 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
     <a class="card" href="assets.html"><img src="img/hub/assets.webp" alt=""><div><b>دارایی‌های سه‌بعدی</b><span>۳۴۸۹ مدل GLB رایگان؛ جستجو، پیش‌نمایش و دانلود برای blockout و previs.</span></div></a>
     <a class="card" href="splat.html"><img src="img/hub/splat.webp" alt=""><div><b>نمایشگر Gaussian Splat</b><span>PLY/SPZ/SPLAT خودتان؛ حالت pixel-art و پس‌زمینه‌ی کروما.</span></div></a>
     <a class="card" href="brush.html"><img src="img/hub/brush.webp" alt=""><div><b>آزمایشگاه قلم‌مو</b><span>پس‌زمینه و loop آبرنگی برای تیتراژ و LED wall؛ PNG و WebM.</span></div></a>
+    <a class="card" href="animation.html"><img src="img/hub/animation.webp" alt=""><div><span class="tag">جدید</span><b>آزمایشگاه انیمیشن</b><span>لنزو، ربات‌دوربین آبرنگی Behrang Lab؛ ۱۵ حالت احساسی، پس‌زمینه، و خروجی PNG/MP4.</span></div></a>
     <a class="card" href="codevember.html"><img src="img/cv/06-orrery.webp" alt=""><div><b>گالری زنده‌ی Codevember</b><span>۲۱ صحنه‌ی تعاملی three.js به‌عنوان مرجع تکنیک.</span></div></a>
   </div>
 
@@ -71,11 +72,11 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
 </main>
 <script>
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-fetch('library.json?v=41').then(r=>r.json()).then(L=>{
+fetch('library.json?v=42').then(r=>r.json()).then(L=>{
   const n=L.items.length,act=L.items.filter(x=>x.st==='active').length,bench=L.items.filter(x=>x.st==='bench').length;
   document.getElementById('stats').innerHTML=[[n,'ابزار و تکنیک بررسی‌شده'],[98,'سبک فیلم با کد'],[703,'پرامپت واقعی'],[act,'در استفاده'],[bench,'در صف تست']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
 }).catch(()=>{});
 </script>
-<script src="site.js?v=4"></script>
+<script src="site.js?v=5"></script>
 </body>
 </html>

@@ -304,17 +304,18 @@
     "motion",
     "motion-gfx"
    ],
-   "st": "ready",
+   "st": "active",
    "repo": "JohnHeibel/ClaudeAnimationBase",
    "img": "img/lib/claude-animation-base.webp",
    "lic": "MIT",
    "req": "Node.js · Google Chrome · ffmpeg · GPU مستقل برای سرعت (بدون آن چند ثانیه برای هر فریم)",
    "s": "کیت شروع کارتون دست‌نقاشی با p5.js و p5.brush: یک کاراکتر آماده با ۳۱ حالت احساسی و چند زاویه، و ANIMATION_GUIDE.md که قواعد ساخت را به Claude می‌دهد. مدل اول استوری‌بورد می‌کشد، شات‌به‌شات می‌سازد، با contact sheet کارش را چک می‌کند و out/video.mp4 می‌دهد.",
-   "v": "مستقیم مکمل Brush Lab خود سایت (p5.brush): همین راهنمای انیمیشن را برای کاراکتر خودت (مثلاً شخصیت میکرو دراما یا ماسکوت Behrang Lab) بازنویسی کن. روی سیستم بدون GPU از پرکردن آبرنگی پرهیز کن. آخرین commit: ۲۴ سپتامبر ۲۰۲۶.",
+   "v": "حالا در سایت: صفحه‌ی «آزمایشگاه انیمیشن» موتور همین کیت (core.js و timeline.js، MIT) را با شخصیت اختصاصی Behrang Lab به اسم «لنزو» (ربات‌دوربین با لنز به‌جای چشم و دو حلقه‌ی فیلم) اجرا می‌کند: ۱۵ حالت احساسی، رنگ، پس‌زمینه، ریتم، و خروجی PNG و MP4 فریم‌به‌فریم. کاراکتر اصلی کیت (Clawd، ماسکوت Anthropic) عمداً در سایت استفاده نشده. برای فیلم کامل، ANIMATION_GUIDE.md ریپو را به Claude بده. مستقیم مکمل Brush Lab خود سایت (p5.brush): همین راهنمای انیمیشن را برای کاراکتر خودت (مثلاً شخصیت میکرو دراما یا ماسکوت Behrang Lab) بازنویسی کن. روی سیستم بدون GPU از پرکردن آبرنگی پرهیز کن. آخرین commit: ۲۴ سپتامبر ۲۰۲۶.",
    "reel": "https://www.instagram.com/reel/Df0tBwHAQF2/",
    "added": "2026-11-22T03:20",
    "chk": "2026-11-22",
-   "n": 105
+   "n": 105,
+   "in": "animation.html"
   },
   {
    "id": "awesome-claude-videos",
