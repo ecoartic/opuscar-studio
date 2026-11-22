@@ -99,7 +99,7 @@ function drawKinds(){const t=L.items.filter(x=>x.kind==='technique').length;$('k
 const COLX=[820,565,310,55],NW=150,NH=30,COLH=['ورودی / ساخت دارایی','پردازش','موتور','خروجی'];
 function layout(){
   const cols=[[],[],[],[]];L.categories.filter(c=>c.col>=0).forEach(c=>cols[c.col].push(c));
-  cols.forEach((list,ci)=>{const gap=42,top=40+(6-list.length)*gap/2;list.forEach((c,i)=>{c.x=COLX[ci];c.y=top+i*gap;});});
+  cols.forEach((list,ci)=>{const gap=list.length>6?37:42,top=Math.max(34,40+(6-list.length)*gap/2);list.forEach((c,i)=>{c.x=COLX[ci];c.y=top+i*gap;});});
 }
 function count(id){return L.items.filter(x=>x.cats.includes(id)).length;}
 function drawMap(){
@@ -138,7 +138,7 @@ function apply(){
     <p class="s">${esc(x.s)}</p><div class="meta">${x.req?`<span><b>نیاز:</b> ${esc(x.req)}</span>`:''}${x.lic?`<span><b>مجوز:</b> ${esc(x.lic)}</span>`:''}${x.chk?`<span><b>بررسی:</b> ${esc(x.chk)}</span>`:''}</div>${x.v?`<p class="v">${esc(x.v)}</p>`:''}
     <div class="lk">${x.in?`<a href="${esc(x.in)}">باز کردن در این سایت</a>`:''}${x.repo?`<a href="https://github.com/${esc(x.repo)}" target="_blank" rel="noopener">GitHub</a>`:''}${x.site?`<a href="${esc(x.site)}" target="_blank" rel="noopener">سایت</a>`:''}${x.reel?`<a href="${esc(x.reel)}" target="_blank" rel="noopener">ریل</a>`:''}${x.src?`<a href="${esc(x.src)}" target="_blank" rel="noopener">منبع فید</a>`:''}</div></div></div>`;}).join('');
 }
-fetch('library.json?v=46').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();drawKinds();apply();$('lq').oninput=apply;});
+fetch('library.json?v=47').then(r=>r.json()).then(j=>{L=j;LATEST=L.items.reduce((m,x)=>x.added>m?x.added:m,'');L.categories.forEach(c=>C[c.id]=c);$('upd').textContent=L.updated;layout();drawWfs();drawMap();drawTiles();drawKinds();apply();$('lq').oninput=apply;});
 </script>
 <script src="site.js?v=6"></script>
 </body>

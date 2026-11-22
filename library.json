@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "categories": [
   {
    "id": "concept-3d",
@@ -128,6 +128,34 @@
    "d": "تجربه‌ی تعاملی، بازی، تور مجازی"
   },
   {
+   "id": "spatial",
+   "fa": "Spatial AI (متریک)",
+   "g": "📐",
+   "col": 0,
+   "d": "فاصله و مقیاس واقعی (متر)، پوز دوربین، point map و چیدمان فضا از عکس یا ویدیو"
+  },
+  {
+   "id": "stereo",
+   "fa": "استریو و DoF",
+   "g": "👓",
+   "col": 1,
+   "d": "تبدیل 2D به استریو برای هدست، bokeh/DoF از روی depth، پارالاکس 2.5D"
+  },
+  {
+   "id": "xr",
+   "fa": "VR / MR",
+   "g": "🥽",
+   "col": 2,
+   "d": "OpenXR در Unity/Unreal، Quest و Android XR، passthrough، WebXR"
+  },
+  {
+   "id": "ar",
+   "fa": "AR",
+   "g": "📱",
+   "col": 3,
+   "d": "AR در مرورگر و موبایل: image/face tracking، مدل در اتاق، Quest passthrough"
+  },
+  {
    "id": "agent",
    "fa": "Claude / Agent",
    "g": "🤖",
@@ -168,6 +196,10 @@
     [
      "unreal",
      "aximmetry"
+    ],
+    [
+     "spatial",
+     "unreal"
     ]
    ]
   },
@@ -253,6 +285,49 @@
     [
      "depth",
      "film-3d"
+    ]
+   ]
+  },
+  {
+   "id": "xr",
+   "fa": "XR و AR: از اسکن و عمق تا هدست و موبایل",
+   "c": "#5ec8f0",
+   "edges": [
+    [
+     "image-3d",
+     "gaussian"
+    ],
+    [
+     "spatial",
+     "gaussian"
+    ],
+    [
+     "gaussian",
+     "threejs"
+    ],
+    [
+     "threejs",
+     "xr"
+    ],
+    [
+     "threejs",
+     "ar"
+    ],
+    [
+     "blender",
+     "unreal"
+    ],
+    [
+     "unreal",
+     "xr"
+    ],
+    [
+     "depth",
+     "stereo"
+    ],
+    [
+     "stereo",
+     "xr"
     ]
    ]
   }
@@ -599,7 +674,8 @@
     "gaussian",
     "threejs",
     "web-3d",
-    "worldlabs"
+    "worldlabs",
+    "xr"
    ],
    "st": "active",
    "repo": "sparkjsdev/spark",
@@ -609,7 +685,7 @@
    "lic": "MIT",
    "req": "مرورگر (three.js + WebGL2)",
    "s": "رندرکننده‌ی متن‌باز Gaussian splat برای three.js از World Labs: PLY/SPZ/SPLAT، ترکیب splat با مش، و از نسخه‌ی ۲ استریم LoD برای جهان‌های خیلی بزرگ روی موبایل و VR.",
-   "v": "همین الان در Behrang Lab استفاده می‌شود (صفحه‌ی Splat Lab با Spark 2.4). مسیر نمایش خروجی Marble/Brush روی وب. فعال: آخرین commit ۱۹ نوامبر ۲۰۲۶.",
+   "v": "همین الان در Behrang Lab استفاده می‌شود (صفحه‌ی Splat Lab با Spark 2.4). مسیر نمایش خروجی Marble/Brush روی وب. فعال: آخرین commit ۱۹ نوامبر ۲۰۲۶. به‌روزرسانی ۲۲ نوامبر: نمایشگر Splat سایت حالا WebXR دارد؛ روی Quest Browser دکمه‌ی ENTER VR / START AR (passthrough) و دو حالت «روی میز» یا «مقیاس واقعی ۱:۱».",
    "added": "2026-11-21T20:40",
    "chk": "2026-11-21",
    "n": 92
@@ -697,7 +773,8 @@
    "cats": [
     "depth",
     "image-3d",
-    "gaussian"
+    "gaussian",
+    "spatial"
    ],
    "st": "bench",
    "repo": "ByteDance-Seed/Depth-Anything-3",
@@ -2286,6 +2363,378 @@
    "added": "2026-11-21T12:00",
    "img": "img/lib/gfx-toys.webp",
    "chk": "2026-11-21"
+  },
+  {
+   "id": "iwer",
+   "t": "IWER / Immersive Web Emulator (Meta)",
+   "cats": [
+    "xr",
+    "web-3d"
+   ],
+   "st": "active",
+   "repo": "meta-quest/immersive-web-emulator",
+   "site": "https://meta-quest.github.io/immersive-web-emulation-runtime",
+   "img": "img/lib/iwer.webp",
+   "lic": "MIT",
+   "req": "مرورگر دسکتاپ (Chrome/Edge)",
+   "n": 96,
+   "s": "شبیه‌ساز WebXR از Meta: هدست Quest و کنترلرها و دست‌ها را در مرورگر دسکتاپ می‌سازد تا تجربه‌ی VR/MR را بدون هدست تست کنید. نسخه‌ی افزونه (IWE 2.0) و نسخه‌ی کتابخانه (IWER، npm iwer 2.8.0) دارد؛ ماژول SEM اتاق مجازی برای plane/mesh/hit-test می‌دهد.",
+   "v": "روی سایت: در نمایشگر Splat تیک «شبیه‌ساز Quest 3» را بزنید؛ IWER + DevUI بار می‌شود و دکمه‌ی ENTER VR / START AR کار می‌کند (تست شده در Chrome headless). برای Quest 2 شما: قبل از گذاشتن هدست، صحنه را این‌جا چک کنید. IWSDK جدید Meta هم همین را خودکار تزریق می‌کند.",
+   "in": "splat.html?emulate=1",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "aframe",
+   "t": "A-Frame",
+   "cats": [
+    "xr",
+    "ar",
+    "web-3d",
+    "threejs"
+   ],
+   "st": "ready",
+   "repo": "aframevr/aframe",
+   "site": "https://aframe.io",
+   "img": "img/lib/aframe.webp",
+   "lic": "MIT",
+   "req": "مرورگر؛ برای VR هدست با WebXR",
+   "n": 80,
+   "s": "فریم‌ورک HTML برای VR/AR روی three.js: صحنه با تگ‌های <a-scene> ساخته می‌شود؛ دست، کنترلر، hand-tracking، UI منحنی و AR hit-test دارد. پشتوانه‌ی خیلی از نمونه‌های WebAR (مثل MindAR و AR.js).",
+   "v": "سریع‌ترین راه برای prototype یک فضای VR/MR وب بدون build؛ Claude Code می‌تواند صحنه را مستقیم با HTML بنویسد. تصویر: نمونه‌ی curved-mockups خود ریپو که در Chrome رندر شد. فعال: آخرین commit ژوئیه ۲۰۲۶.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "model-viewer-ar",
+   "t": "<model-viewer> AR (Google)",
+   "cats": [
+    "ar",
+    "web-3d"
+   ],
+   "st": "active",
+   "repo": "google/model-viewer",
+   "site": "https://modelviewer.dev",
+   "img": "img/lib/model-viewer-ar.webp",
+   "lic": "Apache-2.0",
+   "req": "گوشی اندروید/آیفون یا Quest 3",
+   "n": 90,
+   "s": "وب‌کامپوننت نمایش GLB با AR داخلی: WebXR، Scene Viewer اندروید و Quick Look آیفون (USDZ را خودش می‌سازد). مدل را روی زمین اتاق با مقیاس واقعی می‌گذارد.",
+   "v": "روی سایت فعال شد: در کتابخانه‌ی دارایی‌های سه‌بعدی (assets.html) هر مدل Polyfork روی موبایل دکمه‌ی «دیدن در اتاق (AR)» دارد. برای پیش‌نمایش پراپ ست قبل از ساخت فیزیکی، یا نشان دادن دکور به کارگردان روی گوشی. فعال: commit ۱۸ نوامبر ۲۰۲۶.",
+   "in": "assets.html",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "8thwall-oss",
+   "t": "8th Wall (متن‌باز)",
+   "cats": [
+    "ar",
+    "web-3d"
+   ],
+   "st": "watch",
+   "repo": "8thwall/8thwall",
+   "site": "https://8thwall.org",
+   "img": "img/lib/8thwall-oss.webp",
+   "lic": "MIT (فریم‌ورک موتور، بدون SLAM) · موتور باینری SLAM با لایسنس توزیع محدود",
+   "req": "مرورگر موبایل",
+   "n": 70,
+   "s": "پلتفرم WebAR شرکت Niantic که سرویس میزبانی‌اش ۲۸ فوریه‌ی ۲۰۲۶ بسته شد و به پروژه‌ی متن‌باز 8thwall.org تبدیل شد: فریم‌ورک موتور، face effects، image targets، sky effects و ابزارها با MIT؛ SLAM فقط به‌صورت باینری. VPS، Maps و Hand Tracking حذف شده‌اند.",
+   "v": "برای WebAR حرفه‌ای (world tracking بدون اپ) هنوز قوی‌ترین گزینه، ولی دیگر سرویس ابری نیست و باید خودتان میزبانی کنید. تحت نظر تا ثبات نسخه‌ی community. تصویر: نمونه‌ی Portal از ریپوی 8thwall/web. فعال: commit ۱۰ نوامبر ۲۰۲۶.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "mindar",
+   "t": "MindAR",
+   "cats": [
+    "ar",
+    "web-3d"
+   ],
+   "st": "ready",
+   "repo": "hiukim/mind-ar-js",
+   "site": "https://hiukim.github.io/mind-ar-js-doc/",
+   "img": "img/lib/mindar.webp",
+   "lic": "MIT",
+   "req": "مرورگر موبایل + دوربین",
+   "n": 60,
+   "s": "WebAR سبک و متن‌باز: image tracking (چند تارگت) و face tracking (مش ۴۶۸ نقطه‌ای) با A-Frame یا three.js؛ ابزار کامپایل تارگت در مرورگر.",
+   "v": "برای پوستر/بروشور زنده یا فیلتر صورت برندینگ برنامه، بدون هزینه‌ی پلتفرم. ریسک: آخرین commit ژانویه‌ی ۲۰۲۴؛ کار می‌کند ولی نگه‌داری فعال ندارد. تصویر: مش صورت و عینک از نمونه‌ی face-tracking خود ریپو.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "arjs",
+   "t": "AR.js",
+   "cats": [
+    "ar",
+    "web-3d"
+   ],
+   "st": "ready",
+   "repo": "AR-js-org/AR.js",
+   "site": "https://ar-js-org.github.io/AR.js-Docs/",
+   "img": "img/lib/arjs.webp",
+   "lic": "MIT",
+   "req": "مرورگر موبایل",
+   "n": 50,
+   "s": "WebAR کلاسیک: marker (Hiro/بارکد)، تصویر طبیعی (NFT) و AR مبتنی بر موقعیت GPS؛ روی A-Frame یا three.js.",
+   "v": "جایگزین MindAR وقتی marker چاپی یا AR مکانی لازم است. فعال‌تر از MindAR (commit مارس ۲۰۲۶).",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "needle-engine",
+   "t": "Needle Engine",
+   "cats": [
+    "xr",
+    "ar",
+    "web-3d",
+    "threejs"
+   ],
+   "st": "watch",
+   "repo": "needle-tools/needle-engine-support",
+   "site": "https://engine.needle.tools",
+   "img": "img/lib/needle-engine.webp",
+   "lic": "تجاری/آموزشی جداگانه (npm: @needle-tools/engine)؛ شرایط و قیمت را قبل از پروژه‌ی تجاری روی سایت چک کنید",
+   "req": "Unity یا Blender 4.2–5.1 یا فقط npm",
+   "n": 75,
+   "s": "موتور وب روی three.js با یکپارچه‌سازی Unity و Blender: صحنه را در ادیتور می‌چینید و با lightmap، انیمیشن و فیزیک به وب می‌رود؛ WebXR روی Quest و Vision Pro، AR روی اندروید و حتی iOS (App Clip). نسخه‌ی 6 آلفا کامپوننت GaussianSplat (بر پایه‌ی Spark) دارد.",
+   "v": "پل مستقیم از Blender شما به وب/XR بدون کدنویسی سنگین؛ Needle for Blender 1.0 در آوریل ۲۰۲۶ آمد. قبل از استفاده‌ی تجاری لایسنس را چک کنید. فعال: release نوامبر ۲۰۲۶.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "quest-pca",
+   "t": "Quest Passthrough Camera API (نمونه‌های Unity)",
+   "cats": [
+    "xr",
+    "ar"
+   ],
+   "st": "bench",
+   "repo": "oculus-samples/Unity-PassthroughCameraApiSamples",
+   "site": "https://developers.meta.com/horizon/documentation/unity/unity-pca-overview/",
+   "img": "img/lib/quest-pca.webp",
+   "lic": "Oculus SDK License",
+   "req": "Quest 3/3S با Horizon OS v74+ · Unity",
+   "n": 78,
+   "s": "دسترسی برنامه به دوربین‌های جلوی Quest 3 برای بینایی ماشین: تشخیص شیء با Unity Sentis، تخمین نور، shader روی تصویر دوربین. از v76 عمومی است و اپ‌ها می‌توانند در فروشگاه منتشر شوند.",
+   "v": "برای MR آگاه از محیط (مثلاً شناسایی تجهیزات استودیو یا کالیبره کردن نور). محدودیت: Quest 2 شما پشتیبانی نمی‌شود؛ فقط Quest 3/3S. در XR Simulator هم کار نمی‌کند.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "openxr-stack",
+   "t": "OpenXR برای Quest و Android XR (Unity/Unreal/Godot)",
+   "cats": [
+    "xr",
+    "unreal"
+   ],
+   "st": "bench",
+   "kind": "technique",
+   "repo": "android/android-xr-unity-package",
+   "site": "https://developer.android.com/develop/xr",
+   "img": "img/lib/openxr-stack.webp",
+   "lic": "Apache-2.0 (پکیج Android XR)",
+   "req": "Unity 6 یا Unreal 5.6+ · Quest یا Galaxy XR",
+   "n": 72,
+   "s": "مسیر استاندارد ۲۰۲۶ برای ساخت یک بار و اجرا روی چند هدست: Unity OpenXR + پکیج Android XR (passthrough، scene mesh، image/body tracking)، Unreal 5.6.1 (Developer Preview Android XR) و Godot 4.6.2. پلاگین MetaXR برای UE 5.7 پیش‌فرضش را به OpenXR بومی می‌برد.",
+   "v": "ریسک شناخته‌شده: passthrough در PCVR با OpenXR روی UE 5.7 و Quest هنوز گزارش خرابی دارد (فروم Epic)؛ برای MR روی Quest فعلاً build اندرویدی یا پلاگین Meta مطمئن‌تر است. تصویر: Composition Layer نوع Passthrough در پکیج Android XR.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "unity-gs",
+   "t": "Unity Gaussian Splatting (aras-p)",
+   "cats": [
+    "gaussian",
+    "xr"
+   ],
+   "st": "ready",
+   "repo": "aras-p/UnityGaussianSplatting",
+   "img": "img/lib/unity-gs.webp",
+   "lic": "MIT",
+   "req": "Unity 2022+ · GPU DX12/Vulkan/Metal",
+   "n": 74,
+   "s": "نمایش و ویرایش 3DGS داخل Unity (انتخاب، حذف، برش، فشرده‌سازی). طبق README روی بعضی هدست‌ها (Quest 3، Quest Pro، Vive، Varjo) در VR کار می‌کند.",
+   "v": "اگر مسیر VR شما Unity است، splat های Marble/Brush را این‌جا وارد کنید. روی RTX 4080 SUPER مشکل حافظه ندارد (مرجع ریپو: ۴٫۸ گیگ VRAM برای صحنه‌ی بزرگ). فعال: commit ۲ نوامبر ۲۰۲۶.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "iw3",
+   "t": "iw3 (nunif): تبدیل 2D به 3D استریو برای VR",
+   "cats": [
+    "stereo",
+    "depth",
+    "xr"
+   ],
+   "st": "bench",
+   "repo": "nagadomi/nunif",
+   "site": "https://github.com/nagadomi/nunif/blob/master/iw3/README.md",
+   "img": "img/lib/iw3.webp",
+   "lic": "MIT",
+   "req": "ویندوز + GPU انویدیا (CUDA)",
+   "n": 82,
+   "s": "تصویر/ویدیو معمولی را با مدل عمق (Depth Anything و…) به SBS/Top-Bottom/anaglyph یا VR180 تبدیل می‌کند؛ GUI ویندوز دارد، و حالت پخش زنده‌ی دسکتاپ به هدست. کنترل convergence/divergence برای راحتی چشم.",
+   "v": "برای پیش‌نمایش استریو خروجی‌های AI یا فیلم‌های برنامه روی Quest، و تست خطاهای عمق که در کامپوزیت دیده نمی‌شوند. روی RTX 4080 SUPER شما مناسب. تصویر: شکل convergence از خود ریپو. فعال: commit ۱۹ نوامبر ۲۰۲۶.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "bokehdepth",
+   "t": "BokehDepth",
+   "cats": [
+    "stereo",
+    "depth",
+    "spatial"
+   ],
+   "st": "watch",
+   "repo": "fogradio/BokehDepth",
+   "site": "https://fogradio.github.io/BokehDepth_Project/",
+   "img": "img/lib/bokehdepth.webp",
+   "lic": "MIT (کد) · وزن‌ها بر پایه‌ی FLUX.1-Kontext — شرایط آن را جدا چک کنید",
+   "req": "GPU پرحافظه (FLUX)",
+   "n": 55,
+   "s": "مقاله‌ی ICML 2026: از یک عکس، پشته‌ی bokeh کالیبره‌شده می‌سازد و از سرنخ defocus برای عمق متریک دقیق‌تر استفاده می‌کند (روی UniDepthV2)؛ هم رندر عمق میدان، هم عمق بهتر.",
+   "v": "مرجع برای ارتباط عمق میدان و فاصله: هم شبیه‌سازی DoF لنز برای پلیت‌های AI، هم بهبود depth برای کامپوزیت. سنگین و پژوهشی؛ تحت نظر.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "depth-pro",
+   "t": "Apple Depth Pro",
+   "cats": [
+    "spatial",
+    "depth"
+   ],
+   "st": "bench",
+   "repo": "apple/ml-depth-pro",
+   "site": "https://arxiv.org/abs/2410.02073",
+   "img": "img/lib/depth-pro.webp",
+   "lic": "Apple Sample Code License (کد و وزن)",
+   "req": "GPU · Python",
+   "n": 84,
+   "s": "عمق متریک تک‌تصویر با جزئیات لبه‌ی تیز (مو، شاخ و برگ) و تخمین فاصله‌ی کانونی بدون متادیتای دوربین؛ زیر یک ثانیه برای ۲٫۲۵ مگاپیکسل.",
+   "v": "وقتی focal length فریم AI یا آرشیوی معلوم نیست: هم عمق به متر می‌دهد هم FOV، برای match کردن دوربین مجازی Aximmetry/Unreal. فعال: commit سپتامبر ۲۰۲۶.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "moge2",
+   "t": "MoGe-2 (Microsoft)",
+   "cats": [
+    "spatial",
+    "depth",
+    "image-3d"
+   ],
+   "st": "bench",
+   "repo": "microsoft/MoGe",
+   "img": "img/lib/moge2.webp",
+   "lic": "MIT",
+   "req": "GPU · Python",
+   "n": 86,
+   "s": "هندسه‌ی تک‌تصویر با مقیاس متریک: point map سه‌بعدی، depth، normal و FOV دوربین؛ پایپ‌لاین پانوراما هم دارد.",
+   "v": "برای ساخت پروکسی هندسی از یک فریم (سایه‌گیر، occlusion و برخورد در Unreal). MIT و فعال (commit اوت ۲۰۲۶)؛ InfiniDepth جدید هم روی آن ساخته شده.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "mapanything",
+   "t": "MapAnything (Meta)",
+   "cats": [
+    "spatial",
+    "image-3d",
+    "gaussian"
+   ],
+   "st": "bench",
+   "repo": "facebookresearch/map-anything",
+   "site": "https://map-anything.github.io",
+   "img": "img/lib/mapanything.webp",
+   "lic": "Apache-2.0 (مدل map-anything-apache) · نسخه‌ی دیگر CC BY-NC",
+   "req": "GPU · Python 3.12",
+   "n": 92,
+   "s": "بازسازی متریک feed-forward از یک تا چند عکس، با ورودی اختیاری کالیبراسیون، پوز یا depth: بیش از ۱۲ کار (SfM بدون کالیبراسیون، MVS، depth completion، مکان‌یابی دوربین) در یک مدل. 3DV 2026.",
+   "v": "مهم‌ترین گزینه برای «درک فاصله» تجاری: از عکس‌های لوکیشن یا ست واقعی، صحنه و دوربین‌ها را به متر می‌دهد؛ ورودی خوب برای splat و align کردن ست مجازی با ست فیزیکی. نسخه‌ی Apache ژانویه‌ی ۲۰۲۶ به‌روز شد.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "vggt",
+   "t": "VGGT",
+   "cats": [
+    "spatial",
+    "image-3d",
+    "gaussian"
+   ],
+   "st": "bench",
+   "repo": "facebookresearch/vggt",
+   "site": "https://vgg-t.github.io",
+   "img": "img/lib/vggt.webp",
+   "lic": "VGGT License — فقط چک‌پوینت VGGT-1B-Commercial تجاری است (با فرم)",
+   "req": "GPU · Python",
+   "n": 80,
+   "s": "مدل پایه‌ی بینایی سه‌بعدی (CVPR 2025 best paper): از یک تا صدها نما، پارامتر دوربین، depth، point map و track را در چند ثانیه می‌دهد؛ جایگزین سریع COLMAP.",
+   "v": "برای پوز دوربین و point cloud اولیه قبل از آموزش splat. برای کار تجاری فقط چک‌پوینت Commercial مجاز است. تصویر: فریم‌های ورودی نمونه‌ی ریپو.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "video-depth-anything",
+   "t": "Video Depth Anything",
+   "cats": [
+    "depth",
+    "spatial",
+    "stereo"
+   ],
+   "st": "bench",
+   "repo": "DepthAnything/Video-Depth-Anything",
+   "site": "https://videodepthanything.github.io",
+   "img": "img/lib/video-depth-anything.webp",
+   "lic": "Apache-2.0 (Small) · CC BY-NC 4.0 (Base/Large)",
+   "req": "GPU · Python",
+   "n": 83,
+   "s": "عمق پایدار زمانی برای ویدیوهای خیلی بلند (بدون پرش بین فریم‌ها)، با نسخه‌ی متریک و streaming.",
+   "v": "برای پاس depth روی ویدیو (DoF، fog، relight، استریو) جایی که depth فریم‌به‌فریم چشمک می‌زند. فقط Small تجاری است.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "spatiallm",
+   "t": "SpatialLM",
+   "cats": [
+    "spatial",
+    "agent"
+   ],
+   "st": "watch",
+   "repo": "manycore-research/SpatialLM",
+   "site": "https://manycore-research.github.io/SpatialLM",
+   "img": "img/lib/spatiallm.webp",
+   "lic": "Llama 3.2 Community License (مدل) — شرایط Llama",
+   "req": "GPU · point cloud (از ویدیو یا اسکنر)",
+   "n": 62,
+   "s": "LLM سه‌بعدی که point cloud اتاق را به چیدمان ساخت‌یافته تبدیل می‌کند: دیوار، در، پنجره و جعبه‌های اشیا با کلاس و ابعاد.",
+   "v": "پل بین اسکن LiDAR/فتوگرامتری استودیو و یک layout قابل ویرایش برای Set Builder (ایده‌ی چیدمان با پرامپت). تحت نظر.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "sam3d",
+   "t": "SAM 3D Objects (Meta)",
+   "cats": [
+    "image-3d",
+    "spatial"
+   ],
+   "st": "bench",
+   "repo": "facebookresearch/sam-3d-objects",
+   "site": "https://ai.meta.com/sam3d/",
+   "img": "img/lib/sam3d.webp",
+   "lic": "SAM License (Meta)",
+   "req": "GPU پرحافظه · Python",
+   "n": 79,
+   "s": "از یک عکس، هر شیء را جدا به مدل سه‌بعدی با بافت تبدیل می‌کند و چیدمان (layout) آن‌ها در صحنه را هم می‌دهد؛ کل صحنه قابل ترکیب می‌شود.",
+   "v": "برای ساخت سریع پراپ و چیدمان ست از عکس رفرنس؛ مکمل Polyfork و Set Builder. لایسنس SAM را قبل از تجاری چک کنید. آخرین commit ژوئن ۲۰۲۶.",
+   "added": "2026-11-22T04:10",
+   "chk": "2026-11-22"
   }
  ],
  "changelog": [

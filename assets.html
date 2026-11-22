@@ -27,6 +27,7 @@ main{max-width:1280px;margin:0 auto;padding:14px 14px 60px}.count{color:var(--mu
 dialog{width:min(900px,96vw);border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--fg);padding:0}dialog::backdrop{background:rgba(0,0,0,.75)}
 .dh{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}.dh h2{margin:0;font-size:18px;direction:ltr}
 .x{background:none;border:0;color:var(--fg);font-size:26px;cursor:pointer}
+.arb{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:#e8b04b;color:#111;border:0;border-radius:20px;padding:8px 16px;font:600 14px Vazirmatn,sans-serif}
 model-viewer{width:100%;height:min(60vh,520px);background:radial-gradient(#3a3d45,#16181d)}
 .acts{display:flex;gap:10px;flex-wrap:wrap;padding:12px 14px;align-items:center}.btn{padding:8px 16px;border-radius:9px;background:var(--acc);color:#1a1300;font-weight:800;text-decoration:none}
 .meta{color:var(--mut);font-size:13px}
@@ -50,8 +51,9 @@ footer{border-top:1px solid var(--line);padding:20px 16px;text-align:center;colo
 </main>
 <dialog id="dlg">
   <div class="dh"><h2 id="dt"></h2><button class="x" onclick="dlg.close()" aria-label="بستن">×</button></div>
-  <model-viewer id="mv" camera-controls auto-rotate shadow-intensity="1" exposure="1" environment-image="neutral" touch-action="pan-y"></model-viewer>
+  <model-viewer id="mv" camera-controls auto-rotate shadow-intensity="1" exposure="1" environment-image="neutral" touch-action="pan-y" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor"><button slot="ar-button" class="arb">📱 دیدن در اتاق (AR)</button></model-viewer>
   <div class="acts"><a class="btn" id="dl" download>دانلود GLB</a><a id="pg" target="_blank" rel="noopener">صفحه‌ی مدل در Polyfork</a><span class="meta" id="dm"></span></div>
+  <p class="meta" id="arh" style="margin:6px 0 0">AR: روی گوشی اندروید (Scene Viewer / WebXR)، آیفون (Quick Look، USDZ خودکار) یا Quest 3 (WebXR passthrough) دکمه‌ی «دیدن در اتاق» ظاهر می‌شود. روی دسکتاپ این دکمه نیست.</p>
 </dialog>
 <footer>مدل‌ها از <a href="https://polyfork.dev">Polyfork</a> — استفاده‌ی شخصی و تجاری آزاد؛ <a href="https://polyfork.dev/licensing">شرایط مجوز</a>. فهرست از <a href="https://github.com/lucas-martinic/polyfork-catalog">polyfork-catalog</a>.</footer>
 <script>

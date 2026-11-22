@@ -60,8 +60,8 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
   <h2 id="tools">ابزارهای داخل مرورگر</h2>
   <p class="sub">بدون نصب و بدون سرور؛ فایل‌های شما از مرورگر خارج نمی‌شوند.</p>
   <div class="grid">
-    <a class="card" href="assets.html"><img src="img/hub/assets.webp" alt=""><div><b>دارایی‌های سه‌بعدی</b><span>۳۴۸۹ مدل GLB رایگان؛ جستجو، پیش‌نمایش و دانلود برای blockout و previs.</span></div></a>
-    <a class="card" href="splat.html"><img src="img/hub/splat.webp" alt=""><div><b>نمایشگر Gaussian Splat</b><span>PLY/SPZ/SPLAT خودتان؛ حالت pixel-art و پس‌زمینه‌ی کروما.</span></div></a>
+    <a class="card" href="assets.html"><img src="img/hub/assets.webp" alt=""><div><b>دارایی‌های سه‌بعدی</b><span>۳۴۸۹ مدل GLB رایگان؛ پیش‌نمایش، دانلود و دیدن در اتاق با AR روی گوشی.</span></div></a>
+    <a class="card" href="splat.html"><img src="img/hub/splat.webp" alt=""><div><b>نمایشگر Gaussian Splat</b><span>PLY/SPZ/SPLAT خودتان؛ pixel-art، کروما، و ورود به VR/AR روی Quest (+ شبیه‌ساز).</span></div></a>
     <a class="card" href="gsbrush.html"><img src="img/lib/brush-gs.webp" alt=""><div><span class="tag">جدید</span><b>ساخت Gaussian Splat (Brush)</b><span>آموزش splat از عکس یا دیتاست، در مرورگر و روی هر GPU.</span></div></a>
     <a class="card" href="supersplat/" target="_blank"><img src="img/lib/supersplat.webp" alt=""><div><span class="tag">جدید</span><b>ویرایشگر SuperSplat ↗</b><span>تمیزکاری، برش، ترکیب و خروجی splat؛ نسخه‌ی میزبانی‌شده روی همین سایت.</span></div></a>
     <a class="card" href="brush.html"><img src="img/hub/brush.webp" alt=""><div><b>آزمایشگاه قلم‌مو</b><span>پس‌زمینه و loop آبرنگی برای تیتراژ و LED wall؛ PNG و WebM.</span></div></a>
@@ -81,7 +81,7 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
 </main>
 <script>
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-fetch('library.json?v=46').then(r=>r.json()).then(L=>{
+fetch('library.json?v=47').then(r=>r.json()).then(L=>{
   const n=L.items.length,act=L.items.filter(x=>x.st==='active').length,bench=L.items.filter(x=>x.st==='bench').length;
   document.getElementById('stats').innerHTML=[[n,'ابزار و تکنیک بررسی‌شده'],[98,'سبک فیلم با کد'],[703,'پرامپت واقعی'],[act,'در استفاده'],[bench,'در صف تست']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
 }).catch(()=>{});
