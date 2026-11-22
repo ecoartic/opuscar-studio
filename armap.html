@@ -40,6 +40,19 @@ table{border-collapse:collapse;width:100%;font-size:13px}td{border-bottom:1px so
  <button class="btn p" id="go">▶️ شروع</button>
  <p class="mut" id="st"></p>
 </section>
+<section class="panel">
+ <h2 style="margin:0 0 6px;font-size:18px">📐 نقشه‌ی سریع برای فضای خودتان (۴ گوشه‌ی میز)</h2>
+ <p class="mut">در ۳ نما یا بیشتر، ۴ گوشه‌ی صفحه‌ی میز را روی تصویر بزنید (هر گوشه رنگ ثابت خودش را دارد). از روی همین گوشه‌ها و ابعاد واقعی، زاویه‌ی دید دوربین، جای دقیق گوشی در هر نما و یک نقشه‌ی ابرنقاط در چند ثانیه داخل مرورگر ساخته می‌شود — بدون فیلم و بدون سرور. حداقل یک نما باید هر ۴ گوشه را داشته باشد؛ گوشه‌ی بیرون از کادر را می‌توانید در حاشیه‌ی خاکستری، روی امتداد لبه‌ها بگذارید.</p>
+ <div class="row" style="display:flex;gap:10px;flex-wrap:wrap">
+  <label class="s" style="flex:1 1 200px">لبه‌ی جلو (سانتی‌متر) <input type="number" id="qW" value="120" style="width:80px;flex:0 0 80px;padding:6px;border-radius:8px;border:1px solid var(--line);background:#111317;color:var(--fg)"></label>
+  <label class="s" style="flex:1 1 200px">عمق میز (سانتی‌متر) <input type="number" id="qD" value="60" style="width:80px;flex:0 0 80px;padding:6px;border-radius:8px;border:1px solid var(--line);background:#111317;color:var(--fg)"></label>
+ </div>
+ <p class="mut">ترتیب گوشه‌ها (از جایی که رو به لبه‌ی جلو ایستاده‌اید): <b style="color:#ff5b5b">۱ جلو-چپ</b> · <b style="color:#4fd06b">۲ جلو-راست</b> · <b style="color:#4aa3ff">۳ عقب-راست</b> · <b style="color:#ffd23f">۴ عقب-چپ</b>. در نماهای بعدی همان گوشه‌ی فیزیکی همان رنگ را می‌گیرد.</p>
+ <button class="btn p" id="qstart">📐 شروع ثبت نماها</button> <span class="mut" id="qinfo"></span>
+ <div id="qthumbs" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"></div>
+ <div id="qres" class="mut"></div>
+ <button class="btn p" id="qbuild" style="display:none">🛠️ ساخت نقشه</button> <button class="btn p" id="qgo" style="display:none">▶️ AR روی این نقشه</button>
+</section>
 <details class="panel"><summary><b>چطور کار می‌کند؟</b></summary>
 <ol class="mut">
  <li><b>نقشه (آفلاین):</b> ۱۲۷ فریم تیز از ویدیو → COLMAP: پوز هر فریم + ۲۰٬۵۷۵ نقطه‌ی سه‌بعدی (خطای بازتصویر ۰٫۷۸ پیکسل). جهت «بالا» از شتاب‌سنج گوشی (هم‌خوانی ۹۹٫۹۸٪ با چرخش‌های COLMAP). مقیاس از ارتفاع میز (۷۵ سانتی‌متر، فرض).</li>
@@ -49,6 +62,15 @@ table{border-collapse:collapse;width:100%;font-size:13px}td{border-bottom:1px so
 </ol></details>
 </main>
 <div id="ar"><video id="v" playsinline muted autoplay></video></div>
+<div id="qc" style="position:fixed;inset:0;z-index:70;background:#2a2d35;display:none;touch-action:none">
+ <video id="qv" playsinline muted autoplay style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain"></video>
+ <canvas id="qcv" style="position:absolute;inset:0;width:100%;height:100%;display:none"></canvas>
+ <canvas id="loupe" width="140" height="140" style="position:absolute;display:none;border:2px solid #fff;border-radius:50%;pointer-events:none"></canvas>
+ <div id="qmsg" style="position:absolute;top:calc(8px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:14px;padding:0 12px;text-shadow:0 0 4px #000"></div>
+ <div style="position:absolute;left:0;right:0;bottom:calc(12px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:6px;flex-wrap:wrap;padding:0 8px">
+  <button class="btn" id="qx">✕ بستن</button><button class="btn p" id="qsnap">📸 ثابت کن</button>
+  <button class="btn" id="qskip" style="display:none">این گوشه دیده نمی‌شود</button><button class="btn" id="qredo" style="display:none">↺ از نو</button><button class="btn p" id="qok" style="display:none">✓ ثبت نما</button></div>
+</div>
 <div id="hud">…</div>
 <div id="ctl"><button class="btn" id="stop">✕ پایان</button><button class="btn" id="pcb">ابرنقاط</button><span class="mut" style="align-self:center;background:rgba(0,0,0,.5);padding:2px 8px;border-radius:8px">روی میز بزنید تا مدل آن‌جا برود</span></div>
 
@@ -56,6 +78,7 @@ table{border-collapse:collapse;width:100%;font-size:13px}td{border-bottom:1px so
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {loadCV} from './ar/mosaic.js';
+import {buildMap as buildQuickMap} from './ar/quickmap.js';
 const $=id=>document.getElementById(id);const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
 const MAP_URL='maps/m13-desk.bin',MODEL='https://polyfork.dev/cdn/a-frame-cabin-6cb550.glb';
 let map=null;
@@ -65,7 +88,7 @@ async function loadMap(){const b=await (await fetch(MAP_URL)).arrayBuffer();cons
  const np=new DataView(b,o,4).getUint32(0,true);o+=4;const pc=new Float32Array(b.slice(o,o+np*12));o+=np*12;const pcc=new Uint8Array(b.slice(o,o+np*3));
  const byKF=new Map();for(let i=0;i<n;i++){const k=kf[i];if(!byKF.has(k))byKF.set(k,[]);byKF.get(k).push(i);}
  return {meta,xyz,des,kf,pc,pcc,byKF,n};}
-loadMap().then(m=>{map=m;const M=m.meta;$('mname').textContent=M.name;
+let baseMap=null;loadMap().then(m=>{map=m;baseMap=m;const M=m.meta;$('mname').textContent=M.name;
  $('mstat').innerHTML=[['نقاط نقشه',fa(m.n)+' توصیف‌گر'],['نماهای مرجع',fa(M.keyframes.length)],['مقیاس',(M.scale_m_per_unit*100).toFixed(1)+' سانتی‌متر در هر واحد ('+M.assumption+')'],['حجم','۱٫۵ مگابایت']].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');});
 $('mh').oninput=e=>{$('mhv').textContent=e.target.value;if(model)fitModel();};
 
@@ -115,9 +138,12 @@ function setProjection(){const W=innerWidth,H=innerHeight,k=Math.max(W/proc.widt
 function fitModel(){const u=map.meta.scale_m_per_unit,hm=+$('mh').value/100/u;model.scale.setScalar(1);model.position.set(0,0,0);model.updateMatrixWorld(true);
  const b=new THREE.Box3().setFromObject(model),sz=b.getSize(new THREE.Vector3());model.scale.setScalar(hm/Math.max(sz.y,1e-6));model.updateMatrixWorld(true);
  const b2=new THREE.Box3().setFromObject(model),c=b2.getCenter(new THREE.Vector3());model.position.set(-c.x,-b2.min.y,-c.z);}
-$('go').onclick=async()=>{if(!map)return;$('go').disabled=true;$('st').textContent='در حال بار کردن OpenCV…';
+$('go').onclick=()=>{if(baseMap)startAR(baseMap);};
+let activeMap=null;
+const camStream=()=>navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:false});
+async function startAR(M0){activeMap=M0;map=M0;$('go').disabled=true;$('st').textContent='در حال بار کردن OpenCV…';
  try{cv=await loadCV(t=>$('st').textContent=t);
-  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:false});
+  stream=await camStream();
   const v=$('v');v.srcObject=stream;await new Promise(r=>{if(v.videoWidth)r();else v.onloadedmetadata=r;});await v.play().catch(()=>{});
   const vw=v.videoWidth,vh=v.videoHeight,s=480/Math.max(vw,vh);proc=document.createElement('canvas');proc.width=Math.round(vw*s);proc.height=Math.round(vh*s);pctx=proc.getContext('2d',{willReadFrequently:true});
   const M=map.meta,fs=M.K[0]*Math.max(proc.width,proc.height)/Math.max(M.size[0],M.size[1]);
@@ -135,14 +161,62 @@ $('go').onclick=async()=>{if(!map)return;$('go').disabled=true;$('st').textConte
   holder.position.addScaledVector(up,M.deskH-holder.position.dot(up));scene.add(holder);
   const glb=await new GLTFLoader().loadAsync(MODEL);model=glb.scene;holder.add(model);fitModel();
   $('ar').style.display='block';$('hud').style.display='block';$('ctl').style.display='flex';document.body.style.overflow='hidden';
+  if(M.desk){const [W,D]=M.desk,pts=[[0,0,0],[W,0,0],[W,D,0],[0,D,0],[0,0,0]].map(p=>new THREE.Vector3(...p));scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0xe8b04b})));}
   setProjection();addEventListener('resize',setProjection);running=true;$('st').textContent='';step();
- }catch(e){console.error(e);$('st').textContent='خطا: '+e.message;stop();}$('go').disabled=false;};
+ }catch(e){console.error(e);$('st').textContent='خطا: '+e.message;stop();}$('go').disabled=false;}
 // tap to place on the desk plane
 $('ar').addEventListener('pointerdown',e=>{if(!pose)return;const r=renderer.domElement.getBoundingClientRect();const nd=new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);
  const ray=new THREE.Raycaster();ray.setFromCamera(nd,camera);const pl=new THREE.Plane(up.clone(),-map.meta.deskH),p=new THREE.Vector3();if(ray.ray.intersectPlane(pl,p))holder.position.copy(p);});
 function stop(){running=false;if(stream)stream.getTracks().forEach(t=>t.stop());$('ar').style.display='none';$('hud').style.display='none';$('ctl').style.display='none';document.body.style.overflow='';
  if(renderer){renderer.domElement.remove();renderer.dispose();renderer=null;}track=null;pose=null;}
 $('stop').onclick=stop;$('pcb').onclick=()=>{$('pcv').checked=!$('pcv').checked;};
+
+// ---------------- quick map from 4 marked corners ----------------
+const QC=['#ff5b5b','#4fd06b','#4aa3ff','#ffd23f'],QL=['جلو-چپ','جلو-راست','عقب-راست','عقب-چپ'];
+let qStream=null,qViews=[],qFrame=null,qCorners=[null,null,null,null],qNext=0,qDrag=-1,qGeom=null,qBuilt=null;
+$('qstart').onclick=async()=>{try{$('qinfo').textContent='در حال بار کردن OpenCV…';cv=await loadCV(t=>$('qinfo').textContent=t);$('qinfo').textContent='';
+ qStream=await camStream();$('qv').srcObject=qStream;await $('qv').play().catch(()=>{});$('qc').style.display='block';document.body.style.overflow='hidden';qLive();}catch(e){$('qinfo').textContent='خطا: '+e.message;}};
+function qLive(){$('qv').style.display='block';$('qcv').style.display='none';['qskip','qredo','qok'].forEach(i=>$(i).style.display='none');$('qsnap').style.display='';
+ $('qmsg').textContent=`نمای ${qViews.length+1}: میز را در کادر بیاورید (از زاویه‌ای متفاوت با نماهای قبلی) و «ثابت کن» بزنید`;}
+function qClose(){if(qStream)qStream.getTracks().forEach(t=>t.stop());qStream=null;$('qc').style.display='none';document.body.style.overflow='';}
+$('qx').onclick=qClose;
+$('qsnap').onclick=()=>{const v=$('qv');if(!v.videoWidth)return;const s=480/Math.max(v.videoWidth,v.videoHeight);const c=document.createElement('canvas');c.width=Math.round(v.videoWidth*s);c.height=Math.round(v.videoHeight*s);
+ c.getContext('2d').drawImage(v,0,0,c.width,c.height);qFrame=c;qCorners=[null,null,null,null];qNext=0;$('qv').style.display='none';$('qcv').style.display='block';
+ ['qskip','qredo','qok'].forEach(i=>$(i).style.display='');$('qsnap').style.display='none';qLayout();qDraw();};
+function qLayout(){const cv2=$('qcv'),W=cv2.clientWidth,H=cv2.clientHeight;cv2.width=W*devicePixelRatio;cv2.height=H*devicePixelRatio;
+ const m=0.16,k=Math.min(W*(1-2*m)/qFrame.width,H*(1-2*m)/qFrame.height);qGeom={k,ox:(W-qFrame.width*k)/2,oy:(H-qFrame.height*k)/2,W,H};}
+const toImg=(x,y)=>[(x-qGeom.ox)/qGeom.k,(y-qGeom.oy)/qGeom.k],toScr=p=>[qGeom.ox+p[0]*qGeom.k,qGeom.oy+p[1]*qGeom.k];
+function qDraw(){const c=$('qcv'),x=c.getContext('2d'),d=devicePixelRatio;x.setTransform(d,0,0,d,0,0);x.fillStyle='#2a2d35';x.fillRect(0,0,qGeom.W,qGeom.H);
+ x.drawImage(qFrame,qGeom.ox,qGeom.oy,qFrame.width*qGeom.k,qFrame.height*qGeom.k);x.strokeStyle='rgba(255,255,255,.35)';x.setLineDash([4,4]);x.strokeRect(qGeom.ox,qGeom.oy,qFrame.width*qGeom.k,qFrame.height*qGeom.k);x.setLineDash([]);
+ x.lineWidth=2;for(let i=0;i<4;i++){const a=qCorners[i],b=qCorners[(i+1)%4];if(a&&b){const A=toScr(a),B=toScr(b);x.strokeStyle='#e8b04b';x.beginPath();x.moveTo(...A);x.lineTo(...B);x.stroke();}}
+ qCorners.forEach((p,i)=>{if(!p)return;const [X,Y]=toScr(p);x.fillStyle=QC[i];x.beginPath();x.arc(X,Y,9,0,7);x.fill();x.strokeStyle='#000';x.stroke();x.fillStyle='#000';x.font='bold 11px sans-serif';x.fillText(i+1,X-3,Y+4);});
+ const done=qCorners.filter(Boolean).length;$('qmsg').innerHTML=qNext<4?`گوشه‌ی <b style="color:${QC[qNext]}">${qNext+1} (${QL[qNext]})</b> را بزنید — برای دقت، نقطه را بکشید`:`${done} گوشه ثبت شد؛ با کشیدن دقیقش کنید، بعد «ثبت نما»`;
+ $('qok').disabled=done<3;$('qskip').style.display=qNext<4?'':'none';}
+function nearest(x,y){let b=-1,bd=30;qCorners.forEach((p,i)=>{if(!p)return;const [X,Y]=toScr(p),d=Math.hypot(X-x,Y-y);if(d<bd){bd=d;b=i;}});return b;}
+function loupe(x,y){const L=$('loupe'),g=L.getContext('2d'),[ix,iy]=toImg(x,y),z=4,r=70/(z*qGeom.k)*qGeom.k;L.style.display='block';L.style.left=(x-70)+'px';L.style.top=(y-170)+'px';
+ g.fillStyle='#2a2d35';g.fillRect(0,0,140,140);g.imageSmoothingEnabled=false;const sw=140/(z*qGeom.k)*qGeom.k/qGeom.k;g.drawImage(qFrame,ix-sw/2,iy-sw/2,sw,sw,0,0,140,140);g.strokeStyle='#e8b04b';g.beginPath();g.moveTo(70,55);g.lineTo(70,85);g.moveTo(55,70);g.lineTo(85,70);g.stroke();}
+$('qcv').addEventListener('pointerdown',e=>{const r=$('qcv').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;qDrag=nearest(x,y);
+ if(qDrag<0&&qNext<4){qCorners[qNext]=toImg(x,y);qDrag=qNext;qNext++;while(qNext<4&&qCorners[qNext])qNext++;}loupe(x,y);qDraw();});
+$('qcv').addEventListener('pointermove',e=>{if(qDrag<0)return;const r=$('qcv').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;qCorners[qDrag]=toImg(x,y);loupe(x,y);qDraw();});
+addEventListener('pointerup',()=>{qDrag=-1;$('loupe').style.display='none';});
+$('qskip').onclick=()=>{if(qNext<4){qNext++;while(qNext<4&&qCorners[qNext])qNext++;qDraw();}};
+$('qredo').onclick=()=>{qCorners=[null,null,null,null];qNext=0;qDraw();};
+$('qok').onclick=()=>{const g0=cv.imread(qFrame),g1=new cv.Mat(),g2=new cv.Mat();cv.cvtColor(g0,g1,cv.COLOR_RGBA2GRAY);const cl=new cv.CLAHE(2.5,new cv.Size(8,8));cl.apply(g1,g2);cl.delete();
+ const rgba=qFrame.getContext('2d').getImageData(0,0,qFrame.width,qFrame.height).data;g0.delete();g1.delete();
+ qViews.push({gray:g2,rgba,corners:qCorners.map(p=>p?[p[0],p[1]]:null),w:qFrame.width,h:qFrame.height,thumb:qFrame.toDataURL('image/jpeg',.6)});
+ $('qthumbs').innerHTML=qViews.map((v,i)=>`<img src="${v.thumb}" style="height:64px;border-radius:6px;border:2px solid ${v.corners.filter(Boolean).length===4?'#e8b04b':'#666'}" title="نمای ${i+1}">`).join('');
+ const four=qViews.filter(v=>v.corners.filter(Boolean).length===4).length;$('qinfo').textContent=`${qViews.length} نما (${four} نما با هر ۴ گوشه)`;
+ $('qbuild').style.display=qViews.length>=2&&four>=1?'':'none';if(qViews.length>=3&&four>=1){qClose();$('qbuild').scrollIntoView({behavior:'smooth'});}else qLive();};
+$('qbuild').onclick=async()=>{$('qres').textContent='در حال ساخت نقشه…';await new Promise(r=>setTimeout(r,50));
+ try{const W=+$('qW').value/100,D=+$('qD').value/100,{w,h}=qViews[0];const t0=performance.now();
+  const {map:M,stats}=buildQuickMap(cv,qViews,W,D,w,h,{n:1500,scale:1.2,levels:8,edge:19,fast:10});qBuilt=M;
+  const fov=2*Math.atan(Math.max(w,h)/2/stats.f)*180/Math.PI;
+  $('qres').innerHTML=`✓ نقشه در ${((performance.now()-t0)/1000).toFixed(1)} ثانیه: <b>${fa(stats.points)}</b> نقطه‌ی سه‌بعدی از ${fa(stats.views)} نما · زاویه‌ی دید محاسبه‌شده ${fov.toFixed(0)}° · خطای گوشه‌ها ${stats.cornerRms.toFixed(1)} پیکسل `+
+   stats.perView.map((p,i)=>`<br>نمای ${fa(i+1)}: ${fa(p.n)} گوشه، خطا ${p.rms.toFixed(1)} px`).join('')+(stats.points<150?'<br>⚠️ نقاط کم است؛ یک یا دو نمای دیگر بین نماهای فعلی اضافه کنید.':'');
+  $('qgo').style.display='';}catch(e){$('qres').textContent='خطا: '+e.message;console.error(e);}};
+$('qgo').onclick=()=>{if(qBuilt){$('mh').value=Math.min(60,+$('mh').value);startAR(qBuilt);}};
+
+window.__qTest={async add(url,corners){cv=cv||await loadCV();const im=new Image();im.src=url;await im.decode();const c=document.createElement('canvas');c.width=270;c.height=480;c.getContext('2d').drawImage(im,0,0,270,480);qFrame=c;qCorners=corners;$('qok').onclick();},closeCap:()=>qClose()};
 window.__mapTest={get pose(){return pose},get stats(){return stats},get lost(){return performance.now()-lastOK>700}};
 </script>
 <script src="site.js?v=9"></script>
