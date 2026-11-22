@@ -2735,6 +2735,85 @@
    "v": "برای ساخت سریع پراپ و چیدمان ست از عکس رفرنس؛ مکمل Polyfork و Set Builder. لایسنس SAM را قبل از تجاری چک کنید. آخرین commit ژوئن ۲۰۲۶.",
    "added": "2026-11-22T04:10",
    "chk": "2026-11-22"
+  },
+  {
+   "id": "vork",
+   "t": "vork (Voyager): موتور 3D/VFX برای Agent",
+   "cats": [
+    "film-3d",
+    "motion",
+    "agent"
+   ],
+   "st": "bench",
+   "repo": "voyager-so/vork",
+   "img": "img/lib/vork.webp",
+   "reel": "https://www.instagram.com/reel/DftZ5MXBiZ2/",
+   "lic": "vork Preview License — source-available (نه open source)؛ در دوره‌ی research preview رایگان حتی تجاری؛ فروش/میزبانی به‌عنوان سرویس ممنوع",
+   "req": "Windows/Linux/macOS · GPU انویدیا/AMD با Vulkan ray query یا Apple Silicon",
+   "n": 88,
+   "s": "موتور سه‌بعدی headless به Rust و Slang که Agent (Claude Code/Codex) صحنه را کامل با کد می‌نویسد: هندسه، متریال، shader، دوربین، نور و فیزیک (آب، ذرات) و روی GPU رندر می‌کند؛ ویدیو با مدل تولیدی ساخته نمی‌شود. Skill آماده برای Agent داخل ریپو است؛ ترکیب با فوتیج واقعی هم دارد.",
+   "v": "مستقیم به Set Builder و پلیت‌های VFX شما می‌خورد: Claude صحنه را می‌چیند و فریم دقیق و قابل تکرار می‌دهد، بعد می‌شود همان را به مدل ویدیویی داد. RTX 4080 SUPER شما کافی است. ریسک: لایسنس پیش‌نمایش است و بعد از preview ممکن است تغییر کند. آخرین commit ۱۸ نوامبر ۲۰۲۶.",
+   "added": "2026-11-22T04:40",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "open-generative-ai",
+   "t": "Open Generative AI",
+   "cats": [
+    "agent",
+    "motion"
+   ],
+   "st": "watch",
+   "repo": "Anil-matcha/Open-Generative-AI",
+   "site": "https://muapi.ai/open-generative-ai",
+   "img": "img/lib/open-generative-ai.webp",
+   "reel": "https://www.instagram.com/reel/Dfw0sqDyeVf/",
+   "lic": "MIT (اپ) — هر تولید از API پولی MuAPI می‌گذرد",
+   "req": "Node 18+ یا اپ دسکتاپ + کلید MuAPI",
+   "n": 45,
+   "s": "اپ متن‌باز (دسکتاپ/وب) که چند صد مدل تصویر، ویدیو، lip sync و «Cinema Studio» (لنز، فاصله‌ی کانونی، زاویه) را در یک رابط جمع می‌کند؛ عملاً فرانت‌اند برای MuAPI.",
+   "v": "«رایگان» فقط خود رابط است؛ هزینه‌ی هر تولید از MuAPI می‌آید و فیلتر محتوا ندارد. شما Higgsfield را با همین مدل‌ها دارید، پس فقط تحت نظر برای ایده‌ی رابط Cinema Studio. فعال: commit ۲۱ نوامبر ۲۰۲۶.",
+   "added": "2026-11-22T04:40",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "beeble-switchx",
+   "t": "Beeble SwitchX 3.0",
+   "cats": [
+    "relight",
+    "chroma",
+    "matte"
+   ],
+   "st": "watch",
+   "site": "https://beeble.ai",
+   "img": "img/lib/beeble-switchx.webp",
+   "reel": "https://www.instagram.com/reel/DfmAmauT1dF/",
+   "lic": "سرویس تجاری پولی (لایسنس تجاری کامل روی پلن‌ها؛ پلن‌های ۱۹ و ۷۵ دلار ماهانه در صفحه‌ی قیمت، اعتباری)",
+   "req": "ابری / اپ Beeble",
+   "n": 84,
+   "s": "تعویض پس‌زمینه و نورپردازی مجدد ویدیو با حفظ سوژه: نسخه‌ی 3.0 تا ۴ تصویر رفرنس، پس‌زمینه‌ی متحرک، camera tracking قفل‌شده به دنیا و کنترل با پرامپت؛ تا 4K، 10-bit و ۳۶۰ فریم. همان پلتفرم Reframe، Background Remover، VFX Pass Generator و SwitchLight relight را دارد.",
+   "v": "مستقیم مربوط به استودیوی کرومای آنتالیا: شات کروما یا حتی بدون کروما → محیط و نور جدید بدون Unreal. برای مقایسه با CorridorKey + relight محلی ارزش یک تست پولی کوتاه دارد؛ قبل از خرید، credit هر شات را بسنجید.",
+   "added": "2026-11-22T04:40",
+   "chk": "2026-11-22"
+  },
+  {
+   "id": "moving-image-archive",
+   "t": "Moving Image Archive",
+   "cats": [
+    "film-3d"
+   ],
+   "st": "active",
+   "kind": "technique",
+   "site": "https://www.movingimagearchive.com",
+   "img": "img/lib/moving-image-archive.webp",
+   "reel": "https://www.instagram.com/reel/DeK0Ne_on12/",
+   "lic": "طبق صفحه‌ی About: از مجموعه‌های public domain، آزاد برای استفاده‌ی مجدد (برای هر کلیپ منبع را چک کنید)",
+   "req": "مرورگر",
+   "n": 60,
+   "s": "کتابخانه‌ی قابل جستجوی فیلم‌های آرشیوی کوتاه (دهه‌ی ۱۹۱۰ تا ۲۰۰۰)؛ جستجو با توصیف شات به زبان طبیعی، گالری و کالکشن.",
+   "v": "منبع پلیت و رفرنس واقعی: پس‌زمینه‌ی آرشیوی برای کامپوزیت، رفرنس حرکت و نور دوره‌ای، یا ورودی واقعی برای مدل‌های ویدیو. تصویر: چهار کلیپ از خود سایت.",
+   "added": "2026-11-22T04:40",
+   "chk": "2026-11-22"
   }
  ],
  "changelog": [
