@@ -3166,9 +3166,165 @@
    "n": 123,
    "added": "2026-11-23T22:55",
    "chk": "2026-11-23"
+  },
+  {
+   "id": "veyra",
+   "t": "Veyra 2.2 (بهبود ویدیوی زنده روی GPU: SR، نویزگیری، HDR، frame gen)",
+   "cats": [
+    "aximmetry"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "Likely7/Veyra-NRVideo",
+   "reel": "https://www.instagram.com/reel/DgASr6Qj0c2/",
+   "img": "img/lib/veyra.webp",
+   "lic": "GPL-3.0 (بخش Remote Play زیر AGPL-3.0)",
+   "req": "Windows 11 x64، DirectX 12؛ NVIDIA RTX20–50 یا AMD RX 7000/9000",
+   "s": "پایپ‌لاین real-time که ورودی کارت کپچر، PS5 Remote Play، استریم PC، اسکرین یا فایل را می‌گیرد و روی GPU سوپررزولوشن، نویزگیری چندلایه، RTX Video HDR و frame generation (DLSS/XeSS/FSR) اعمال می‌کند. خروجی virtual camera و حالت سازگار با OBS Game Capture دارد؛ Magewell Pro Capture گزینه‌ی low-latency دارد. نسخه‌ی 2.2.0، آخرین commit ۲۲ نوامبر ۲۰۲۶.",
+   "v": "برای استودیو: تمیز کردن سیگنال یک دوربین ارزان یا کم‌نور از کارت کپچر و فرستادن آن به‌صورت virtual camera به Aximmetry/vMix قابل تست است. ریسک: latency اضافه و artifact در frame generation روی کار پخش زنده؛ frame gen برای پخش مناسب نیست. توجه: README یک «توکن رمزارز ساخته‌ی جامعه» را تبلیغ می‌کند؛ ربطی به نرم‌افزار ندارد و توصیه نمی‌شود.",
+   "n": 124,
+   "added": "2026-11-24T01:50",
+   "chk": "2026-11-24"
+  },
+  {
+   "id": "tamserve",
+   "t": "tamserve (ترکینگ چنددوربینه‌ی زنده با SAM 2 / EdgeTAM)",
+   "cats": [
+    "matte"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "aryamandarda/tamserve",
+   "reel": "https://www.instagram.com/reel/DgFcFCNjWgR/",
+   "img": "img/lib/tamserve.webp",
+   "lic": "Apache-2.0",
+   "req": "Python 3.10+، PyTorch 2.6+، GPU انویدیا",
+   "s": "موتور serving برای SAM 2.1 و EdgeTAM: یک نسخه‌ی مدل همه‌ی اشیا را روی همه‌ی دوربین‌ها track می‌کند، مثل vLLM برای ویدیو. طبق README: ۸ دوربین با ۲٫۲GB به‌جای ۸٫۶GB، شش دوربین زنده هر کدام ۳۰fps روی یک RTX 4090، و ردیابی با اسم شیء («the red mug»).",
+   "v": "برای استودیو: ماسک زنده‌ی سوژه یا شیء از چند دوربین هم‌زمان (مثلاً ماسک garbage، occlusion یا جدا کردن مجری بدون پرده‌ی سبز در کارهای ساده) روی یک GPU. خروجی ماسک باید به Aximmetry برسد (NDI یا Spout)؛ این بخش آماده نیست و باید ساخت.",
+   "n": 125,
+   "added": "2026-11-24T01:50",
+   "chk": "2026-11-24"
+  },
+  {
+   "id": "ffmpeg-skill",
+   "t": "ffmpeg-skill (تدوین ویدیو برای Claude Code با ۴۲ ابزار FFmpeg + MCP)",
+   "cats": [
+    "motion",
+    "agent"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "kajisho5/ffmpeg-skill",
+   "reel": "https://www.instagram.com/reel/DgCD2hLleOu/",
+   "img": "img/lib/ffmpeg-skill.webp",
+   "lic": "MIT",
+   "req": "ffmpeg و python3 روی PATH؛ نصب: npx ffmpeg-skill",
+   "s": "Agent Skill و سرور MCP: کات، زیرنویس karaoke، تبدیل ۱۶:۹ به ۹:۱۶، حذف سکوت، نرمال کردن loudness، composite پرده‌ی سبز و … با ابزارهای تایپ‌شده به‌جای دستور خام FFmpeg. فایل مبدأ را بازنویسی نمی‌کند، خروجی را با probe بررسی می‌کند و صفحه‌ی review قبل/بعد می‌سازد. آخرین commit ۲۳ نوامبر ۲۰۲۶.",
+   "v": "مکمل skill motion-storyboard: آن گرافیک می‌سازد، این تدوین و خروجی نهایی (loudness −14 LUFS برای سوشال، ۹:۱۶) را انجام می‌دهد. برای برش هایلایت خودکار هم قابل استفاده است. کاملاً محلی و بدون API key.",
+   "n": 126,
+   "added": "2026-11-24T01:50",
+   "chk": "2026-11-24"
+  },
+  {
+   "id": "fluidx3d",
+   "t": "FluidX3D (شبیه‌سازی سیال Lattice Boltzmann روی GPU)",
+   "cats": [
+    "blender"
+   ],
+   "st": "watch",
+   "kind": "tool",
+   "repo": "ProjectPhysX/FluidX3D",
+   "reel": "https://www.instagram.com/reel/DgC3fpdjWyA/",
+   "img": "img/lib/fluidx3d.webp",
+   "lic": "لایسنس اختصاصی: فقط پژوهش، آموزش و استفاده‌ی شخصی؛ استفاده‌ی تجاری و نظامی ممنوع، آموزش AI روی کد ممنوع",
+   "req": "هر GPU با OpenCL (یا CPU)؛ C++",
+   "s": "سریع‌ترین و کم‌مصرف‌ترین شبیه‌ساز CFD به روش Lattice Boltzmann، روی همه‌ی GPUها از طریق OpenCL، با رندر raytrace داخلی و benchmarkهای منتشرشده. همان موتوری که ویدیوهای سیال خیره‌کننده‌ی شبکه‌های اجتماعی پشتش است. آخرین commit ۱۵ نوامبر ۲۰۲۶.",
+   "v": "برای VFX شخصی و آموزش جذاب است (آب، دود، جریان هوا دور مدل)، ولی لایسنس هر استفاده‌ی تجاری را ممنوع می‌کند؛ پس در کار GEM TV قابل استفاده نیست مگر با اجازه‌ی صاحب اثر.",
+   "n": 127,
+   "added": "2026-11-24T01:50",
+   "chk": "2026-11-24"
+  },
+  {
+   "id": "cam2hologram",
+   "t": "Cam2Hologram (پنجره‌ی سه‌بعدی با head-tracking وب‌کم)",
+   "cats": [
+    "threejs",
+    "xr"
+   ],
+   "st": "active",
+   "kind": "tool",
+   "repo": "RmaNMetaverse/Cam2Hologram-Window-into-3D-reality-",
+   "site": "https://rmanmetaverse.github.io/Cam2Hologram-Window-into-3D-reality-/",
+   "img": "img/lib/cam2hologram.webp",
+   "lic": "MIT",
+   "req": "مرورگر و وب‌کم؛ آفلاین بعد از بار اول",
+   "s": "MediaPipe Face Mesh جای چشم را در فضای واقعی دنبال می‌کند و صحنه‌ی three.js با projection غیرمتقارن (off-axis) نسبت به چشم رندر می‌شود؛ صفحه مثل پنجره‌ای به فضای سه‌بعدی دیده می‌شود. روی گوشی، حالت AR passthrough و محیط‌های نورپردازی مختلف دارد. همه‌چیز محلی است. از Arman Jangmiri (RmaN).",
+   "v": "روی وب اجراست (لینک سایت). این همان اصل parallax دیوار LED در استودیوی مجازی است (frustum وابسته به جای دوربین)، فقط با چشم بیننده به‌جای دوربین ردیابی‌شده؛ برای توضیح و دموی آموزشی virtual production عالی است.",
+   "n": 128,
+   "added": "2026-11-24T01:50",
+   "chk": "2026-11-24"
+  },
+  {
+   "id": "videocomparema",
+   "t": "VideoCompareMa (مقایسه‌ی دو ویدیو در مرورگر)",
+   "cats": [
+    "motion"
+   ],
+   "st": "active",
+   "kind": "tool",
+   "repo": "RmaNMetaverse/VideoCompareMa",
+   "site": "https://RmaNMetaverse.github.io/VideoCompareMa/",
+   "img": "img/lib/videocomparema.webp",
+   "lic": "بدون فایل لایسنس در repo (یعنی همه‌ی حقوق محفوظ؛ استفاده‌ی شخصی بله، کپی روی سایت خودمان نه)",
+   "req": "مرورگر؛ فایل‌ها محلی می‌مانند",
+   "s": "مقایسه‌ی دو ویدیوی محلی: کنار هم افقی/عمودی، wipe A/B قابل‌کشیدن، شفافیت و تفاضل RGB با gain، پخش و seek مشترک. بدون آپلود و بدون backend.",
+   "v": "روی وب اجراست (لینک سایت). کاربرد: مقایسه‌ی قبل/بعد رندر، نسخه‌های grading، یا خروجی skill انیمیشن با رفرنس. هم‌زمانی پخش تقریبی است (طبق README)؛ برای مقایسه‌ی دقیق فریم‌به‌فریم از reanimate استفاده شود.",
+   "n": 129,
+   "added": "2026-11-24T01:50",
+   "chk": "2026-11-24"
+  },
+  {
+   "id": "comfyfleet",
+   "t": "ComfyFleet (اجرای ComfyUI روی چند GPU در شبکه‌ی LAN)",
+   "cats": [
+    "agent"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "RmaNMetaverse/ComfyUI-Orchestrator-LAN",
+   "img": "img/lib/comfyfleet.webp",
+   "lic": "بدون فایل لایسنس در repo (یعنی همه‌ی حقوق محفوظ؛ استفاده‌ی شخصی بله، کپی روی سایت خودمان نه)",
+   "req": "Node 20+ روی یک سیستم؛ روی سیستم‌های GPU فقط ComfyUI با --listen",
+   "s": "از یک تب مرورگر، workflowهای ComfyUI را روی همه‌ی ورک‌استیشن‌های GPU شبکه پخش می‌کند و خروجی‌ها را در یک پوشه‌ی مشترک جمع می‌کند. فقط از HTTP API خود ComfyUI استفاده می‌کند؛ روی ماشین‌های GPU چیزی نصب نمی‌شود. بدون npm dependency.",
+   "v": "برای GEM TV کاربردی: چند سیستم استودیو در ساعات خالی می‌توانند batch تصویر/ویدیو بسازند. قبل از استفاده‌ی سازمانی، نبود لایسنس را با سازنده روشن کنید.",
+   "n": 130,
+   "added": "2026-11-24T01:50",
+   "chk": "2026-11-24"
+  },
+  {
+   "id": "rman-ai-hub",
+   "t": "AI Hub (مدیریت شات، پرامپت و تأیید خروجی‌های AI)",
+   "cats": [
+    "film-3d"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "RmaNMetaverse/AI-Hub",
+   "img": "img/lib/rman-ai-hub.webp",
+   "lic": "بدون فایل لایسنس در repo (یعنی همه‌ی حقوق محفوظ؛ استفاده‌ی شخصی بله، کپی روی سایت خودمان نه)",
+   "req": "Docker؛ SQLite محلی",
+   "s": "فضای کاری local-first برای تولید سینمایی با AI: برنامه‌ریزی شات و سکانس، نسخه‌های پرامپت و generationها، بازبینی و تأیید نسخه‌ی نهایی. اجرا با docker compose روی پورت 4310. آخرین commit ۱ نوامبر ۲۰۲۶.",
+   "v": "مستقیماً به پروژه‌ی میکرودراما مربوط است: جای جدول دستی شات‌ها و پرامپت‌ها. با score.yaml skill motion-storyboard هم هم‌خوان است (هر دو شات‌محور).",
+   "n": 131,
+   "added": "2026-11-24T01:50",
+   "chk": "2026-11-24"
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-24 01:50",
+   "t": "به کتابخانه اضافه شد: Veyra، tamserve، ffmpeg-skill، FluidX3D (از کانال fork.cast_) و چهار ابزار RmaN (Cam2Hologram، VideoCompareMa، ComfyFleet، AI Hub)."
+  },
   {
    "d": "2026-11-23 22:55",
    "t": "به کتابخانه اضافه شد: Animation Handbook (۱۷۶ تکنیک، اجرا روی وب) و motion2code. ریل دوم reanimate ثبت شد."
