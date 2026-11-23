@@ -3318,9 +3318,34 @@
    "n": 131,
    "added": "2026-11-24T01:50",
    "chk": "2026-11-24"
+  },
+  {
+   "id": "spirula-studio",
+   "t": "Spirula Studio (آموزش 3DGS بدون Python، روی هر GPU)",
+   "cats": [
+    "gaussian",
+    "360-3d"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "n": 132,
+   "repo": "harry7557558/spirula-studio",
+   "site": "https://harry7557558.github.io/spirula-studio/viewer/",
+   "reel": "https://www.youtube.com/watch?v=iUB1Fcrrpeg",
+   "img": "img/lib/spirula-studio.webp",
+   "lic": "GPL-3.0",
+   "req": "Windows / Linux / macOS؛ هر GPU با Vulkan (NVIDIA، AMD، Intel، Apple)؛ نسخه‌ی CUDA هم دارد",
+   "added": "2026-11-24T02:20",
+   "chk": "2026-11-24",
+   "s": "یک فایل اجرایی واحد از عکس یا ویدیو تا splat و mesh تکسچردار: SfM سریع داخلی (بدون COLMAP جدا)، استخراج فریم از ویدیو، ماسک AI (SAM 2.1 + Grounding DINO با پرامپت متنی، SAM 3، BiRefNet) و ویرایشگر دستی ماسک با propagate روی بازه‌ای از فریم‌ها. دوربین ۳۶۰ و equirectangular را مستقیم می‌خواند (حتی فایل خام دوعدسی Insta360/DJI Osmo 360 با GPS و IMU). تا ۱۰ میلیون Gaussian در 8GB VRAM. از سپتامبر ۲۰۲۶ مقیاس متریک از تله‌متری فایل، ویژگی LoMa در SfM، ویرایش splat و سرور MCP دارد؛ نسخه‌ی v2026.11.12 تصحیح rolling shutter اضافه کرد.",
+   "v": "ویدیوی Olli Huttunen (قسمت ۲، ۲۲ نوامبر ۲۰۲۶): ورود فوتیج ۳۶۰، تبدیل خودکار equirect به cubemap، ماسک کردن اپراتور دوربین با AI و اصلاح دستی؛ رد سیاه مسیر فیلمبردار در splat یعنی ماسک ناقص است. برای ما: (۱) ساخت محیط 3DGS استودیو از یک دوربین ۳۶۰ بدون نصب COLMAP/Python روی سیستم‌های GEM TV، (۲) همان LoMa که در تست ما در نور کم ۲۱ برابر تطبیق بیشتر داد اینجا داخلی است، (۳) MCP آن اجازه می‌دهد Claude پایپ‌لاین را خودکار کند. Web Viewer روی GitHub Pages اجراست."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-24 02:20",
+   "t": "Spirula Studio (3DGS کامل در یک فایل اجرایی، پشتیبانی ۳۶۰، LoMa، MCP) به کتابخانه اضافه شد."
+  },
   {
    "d": "2026-11-24 01:50",
    "t": "به کتابخانه اضافه شد: Veyra، tamserve، ffmpeg-skill، FluidX3D (از کانال fork.cast_) و چهار ابزار RmaN (Cam2Hologram، VideoCompareMa، ComfyFleet، AI Hub)."
