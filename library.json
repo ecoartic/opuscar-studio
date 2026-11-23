@@ -902,11 +902,11 @@
    "img": "img/lib/reanimate.webp",
    "added": "2026-11-21T20:05",
    "n": 82,
-   "chk": "2026-11-21",
+   "chk": "2026-11-23",
    "lic": "MIT",
    "req": "Claude Code · Bun 1.1+ · macOS/Linux (Windows تست‌نشده؛ WSL) · ffmpeg و Chromium را خودش نصب می‌کند",
    "s": "Skill برای Claude Code که انیمیشن را از سایت زنده، اسکرین‌رکورد، mp4، gif یا Lottie مهندسی معکوس می‌کند: اول اصل را با Playwright ضبط می‌کند، بعد در کد تو بازسازی‌اش می‌کند، کپی را هم همان‌طور ضبط و فریم‌به‌فریم مقایسه می‌کند تا timing، easing و layout یکی شوند. نمونه‌ها: ویجت‌های stripe.com، resend.com و clerk.com.",
-   "v": "برای تو: موشن‌هایی که در ریل‌ها/سایت‌ها می‌بینی را به کد قابل‌ویرایش تبدیل کن (برای Behrang Lab، Brand tool یا گرافیک پخش). روی ویندوز تست نشده؛ در WSL اجرا کن. خروجی را مرجع یادگیری بگیر، نه کپی تحویلی برای مشتری (کپی دقیق طراحی سایت دیگران مسئله‌ی حقوقی دارد). ‖ ریل اسم ابزار را نگفته بود (فقط «کامنت Animate»)؛ از روی فریم‌ها (Stripe original/copy، TIMING ✓ EASING ✓) با ریپو تطبیق داده شد. هم‌دسته‌ها: motiscope (تحلیل اسکرین‌رکورد)، mblode ui-animation، dididy transition-reverse-engineering."
+   "v": "برای تو: موشن‌هایی که در ریل‌ها/سایت‌ها می‌بینی را به کد قابل‌ویرایش تبدیل کن (برای Behrang Lab، Brand tool یا گرافیک پخش). روی ویندوز تست نشده؛ در WSL اجرا کن. خروجی را مرجع یادگیری بگیر، نه کپی تحویلی برای مشتری (کپی دقیق طراحی سایت دیگران مسئله‌ی حقوقی دارد). ‖ ریل اسم ابزار را نگفته بود (فقط «کامنت Animate»)؛ از روی فریم‌ها (Stripe original/copy، TIMING ✓ EASING ✓) با ریپو تطبیق داده شد. هم‌دسته‌ها: motiscope (تحلیل اسکرین‌رکورد)، mblode ui-animation، dididy transition-reverse-engineering. ریل دوم: DgDeUtvsTqo (۲۳ نوامبر ۲۰۲۶). کاربرد تازه: حلقه‌ی ضبط ← مقایسه ← اصلاح آن به‌عنوان QA در skill motion-storyboard وقتی رفرنس داریم."
   },
   {
    "id": "designer-hq",
@@ -3126,9 +3126,53 @@
    "chk": "2026-11-23",
    "s": "Taruma Sakti برای یک صحنه‌ی ۴۵ ثانیه‌ای ۱۶ شاتی (Seedance 2.0) همه‌چیز را در یک فایل YAML نگه می‌دارد: برای هر شات لنز، دیافراگم، فاصله‌ی فوکوس، پوز دوربین، چیدمان بازیگرها و توضیح. از همین فایل یک دیوراما‌ی سه‌بعدی ایزومتریک، رادار بالا به پایین و تایم‌لاین با منحنی لنز و فاصله ساخته می‌شود. YAML را Gemini 4 Argon نوشته و بخش‌به‌بخش اصلاح شده.",
    "v": "ایده‌ی کلیدی: «score» قابل‌خواندن برای ماشین به‌جای استوری‌برد تصویری؛ هم LLM خوب ویرایشش می‌کند هم می‌شود از آن previz، داده‌ی دوربین برای Blender/Unreal یا تایم‌لاین انیمیشن ساخت. همین ساختار در skill «motion-storyboard» خودمان استفاده شد. ابزار نمایش خودش منتشر نشده؛ ساخت نسخه‌ی three.js آن روی سایت ممکن است (Proposed)."
+  },
+  {
+   "id": "animation-handbook",
+   "t": "Animation Handbook (۱۷۶ تکنیک انیمیشن وب)",
+   "cats": [
+    "motion-gfx",
+    "interactive"
+   ],
+   "st": "active",
+   "kind": "tool",
+   "repo": "matinmonshizadeh/animation-handbook",
+   "site": "https://matinmonshizadeh.github.io/animation-handbook/",
+   "reel": "https://www.instagram.com/reel/DgE0rP5iQ5l/",
+   "img": "img/lib/animation-handbook.webp",
+   "lic": "MIT",
+   "req": "مرورگر؛ بدون نصب و بدون وابستگی",
+   "s": "مرجع تصویری ۱۷۶ افکت انیمیشن وب با HTML/CSS/JS خالص: هر صفحه افکت را زنده اجرا می‌کند، چند تنظیم ساده دارد و یک پرامپت آماده برای دستیار AI می‌دهد. دسته‌ها: اسکرول، ورود و خروج، تغییر صفحه، میکرواینترکشن، تایپوگرافی، سه‌بعدی، پس‌زمینه‌ی متحرک. README هر پوشه مقادیر کلیدی و دام‌های production را توضیح می‌دهد.",
+   "v": "روی وب اجراست (لینک سایت). منبع خوبی برای مرحله‌ی «motion» در skill motion-storyboard: اسم تکنیک را در YAML می‌نویسیم و کد مرجعش را از اینجا برمی‌داریم. آخرین commit ۲۱ نوامبر ۲۰۲۶.",
+   "n": 122,
+   "added": "2026-11-23T22:55",
+   "chk": "2026-11-23"
+  },
+  {
+   "id": "motion2code",
+   "t": "motion2code (ویدیوی موشن ← SVG + GSAP)",
+   "cats": [
+    "motion-gfx",
+    "agent"
+   ],
+   "st": "watch",
+   "kind": "tool",
+   "repo": "lovisdotio/motion2code",
+   "img": "img/lib/motion2code.webp",
+   "lic": "MIT",
+   "req": "Claude Code یا agent دیگری که SKILL.md می‌خواند؛ مرورگر",
+   "s": "skill برای بازسازی یک ویدیوی موشن‌دیزاین به‌صورت SVG درون‌خطی با یک timeline GSAP، قابل seek فریم‌به‌فریم و loop بی‌درز، با صفحه‌ی compare.html که منبع و کد را کنار هم همگام نشان می‌دهد. مثال گالری: نسخه‌ی کد یک loop ساخته‌شده با MiniMax H3 در ۳۹KB.",
+   "v": "هم‌خانواده‌ی reanimate ولی برای ویدیو به‌جای سایت. خروجی سبک و برداری است: برای گرافیک پخش که باید در هر رزولوشن تیز بماند (LED wall) مناسب است. پیدا شده هنگام بررسی ریل reanimate.",
+   "n": 123,
+   "added": "2026-11-23T22:55",
+   "chk": "2026-11-23"
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-23 22:55",
+   "t": "به کتابخانه اضافه شد: Animation Handbook (۱۷۶ تکنیک، اجرا روی وب) و motion2code. ریل دوم reanimate ثبت شد."
+  },
   {
    "d": "2026-11-23 22:45",
    "t": "تکنیک StageFlow Score (YAML شات/دوربین/چیدمان) به کتابخانه اضافه شد."
