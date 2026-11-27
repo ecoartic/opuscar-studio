@@ -86,7 +86,7 @@ h2{font-size:21px;margin:34px 0 4px}.sub{color:var(--mut);font-size:14px;margin:
 </main>
 <script>
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-fetch('library.json?v=66').then(r=>r.json()).then(L=>{
+fetch('library.json?v=67').then(r=>r.json()).then(L=>{
   const n=L.items.length,act=L.items.filter(x=>x.st==='active').length,bench=L.items.filter(x=>x.st==='bench').length;
   document.getElementById('stats').innerHTML=[[n,'ابزار و تکنیک بررسی‌شده'],[98,'سبک فیلم با کد'],[703,'پرامپت واقعی'],[act,'در استفاده'],[bench,'در صف تست']].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
 }).catch(()=>{});
