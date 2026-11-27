@@ -572,7 +572,7 @@
    "lic": "MIT (کد) · مدل MiniMax H3: Community License با محدودیت منطقه‌ای (US/EU/UK/کره مستثنا)",
    "req": "GPU NVIDIA (تست‌شده: RTX 4060 Ti 16GB + 64GB RAM) · ComfyUI 0.41.2+ · Node 22.6+ · Python · ۱۲ پک custom node · مدل‌های H3 int8، SAM 3.1، Qwen3-VL",
    "s": "نسخه‌ی متن‌باز و محلی Genjutsu در Higgsfield: یک ویدیو و یک عکس کاراکتر → شخص اصلی ویدیو با کاراکتر عوض می‌شود. حالت پیشرفته تا ۴ نفر با نقش، تعویض/حذف شیء یا پس‌زمینه با ماسک SAM، «From picture» با relight (۱۷ حالت نور) و Fix faces. یک رابط Next.js روی ورک‌فلوی ComfyUI.",
-   "v": "جایگزین رایگان Genjutsu در Higgsfield (که کردیت می‌خورد) — اگر سیستمت ۱۶GB VRAM و ۶۴GB RAM دارد. برای میکرو دراما (تعویض کاراکتر روی بازی بازیگر) مهم است. هشدارها: ۱) مجوز وزن‌های H3 در آمریکا، اتحادیه‌ی اروپا، بریتانیا و کره اعمال نمی‌شود؛ در ترکیه مجاز است، در آلمان/اتریش نه. ۲) فقط با رضایت افرادی که در ویدیو هستند و برای کاراکترهای خودت استفاده شود. آخرین commit: ۳۰ اکتبر ۲۰۲۶؛ لانچر start_openjutsu.bat را قبل از اجرا بخوان (پراکسی pip نصب می‌کند)."
+   "v": "جایگزین رایگان Genjutsu در Higgsfield (که کردیت می‌خورد) — اگر سیستمت ۱۶GB VRAM و ۶۴GB RAM دارد. برای میکرو دراما (تعویض کاراکتر روی بازی بازیگر) مهم است. هشدارها: ۱) مجوز وزن‌های H3 در آمریکا، اتحادیه‌ی اروپا، بریتانیا و کره اعمال نمی‌شود؛ در ترکیه مجاز است، در آلمان/اتریش نه. ۲) فقط با رضایت افرادی که در ویدیو هستند و برای کاراکترهای خودت استفاده شود. آخرین commit: ۳۰ اکتبر ۲۰۲۶؛ لانچر start_openjutsu.bat را قبل از اجرا بخوان (پراکسی pip نصب می‌کند). ریل دوم (alimir.ai، ۲۳ نوامبر ۲۰۲۶) همین را «جایگزین رایگان Genjutsu» معرفی کرد؛ کامنت‌ها هم تأیید می‌کنند زیر ~۶۴–۹۰GB RAM عملاً جواب نمی‌دهد. ورک‌فلوی دومی که در همان ریل آمد (Genjustsu از TEIN) لوکال نیست؛ کارت genjustsu-tein را ببین."
   },
   {
    "id": "corridorkey",
@@ -3583,9 +3583,34 @@
    "chk": "2026-11-27",
    "s": "ادیتور ویدیوی تحت وب: کلیپ‌های خام را آپلود می‌کنی و یک ریل رفرنس یا brief متنی می‌دهی؛ Shorty ریتم کات، کپشن، ترنزیشن، رنگ و نسبت تصویر رفرنس را تحلیل می‌کند و از فوتیج خودت MP4 می‌سازد. MCP ریموت (Streamable HTTP) برای Claude، ChatGPT، Cursor، Claude Code و Codex؛ رندر به‌صورت job پایدار با run ID. محدودیت: ۱۵۰ کلیپ، ۱GB برای هر فایل، ۸GB کل؛ رفرنس تا ۲۵۶MB. پردازش با Gemini و Anthropic.",
    "v": "ریل اصلی (gptsev) تبلیغاتی و comment-gated است و مثال آن ویدیوی آگهی ملک از کلیپ‌های موبایل است. برای ما: سریع‌ترین راه «ریل رفرنس ← تدوین مشابه» از داخل Claude بدون نصب، برای پرومو و نسخه‌های شبکه‌های اجتماعی GEM TV. ولی فوتیج روی سرور ثالث می‌رود (حقوق پخش را چک کن) و قیمت پلن‌ها روی سایت نیامده. جایگزین‌های لوکال/باز: Kinocut (mcp-video) و ghost-editor در همین کتابخانه، OpenEdit (Premiere/Resolve/ffmpeg، بدون آپلود). خودمان تست نکرده‌ایم."
+  },
+  {
+   "id": "genjustsu-tein",
+   "t": "Genjustsu Open Source Workflow (TEIN؛ تعویض کاراکتر با depth + SAM 3 + Seedance)",
+   "cats": [
+    "film-3d",
+    "matte",
+    "avatar"
+   ],
+   "st": "watch",
+   "kind": "tool",
+   "n": 145,
+   "repo": "sirioberati/Genjustsu-Open-Source-Workflow",
+   "reel": "https://www.instagram.com/reel/DgHaBaIKVZP/",
+   "img": "img/lib/genjustsu-tein.webp",
+   "lic": "کد MIT؛ برندینگ TEIN و ویدیوهای نمونه خارج از MIT؛ مدل‌ها تابع شرایط Replicate و Enhancor",
+   "req": "Python 3.12+، Rubber Band، cloudflared (تونل webhook)؛ کلید پولی ENHANCOR_API_KEY و REPLICATE_API_TOKEN؛ GPU لوکال لازم نیست. ویندوز فقط با WSL2",
+   "added": "2026-11-27T09:55",
+   "chk": "2026-11-27",
+   "s": "UI لوکال (پورت 8770) و ورک‌فلوی agent‌محور برای عوض کردن شخص/شیء در ویدیو: صدا با Demucs جدا و vocal با Rubber Band سه نیم‌پرده بالا برده می‌شود، ویدیو به ۲۴fps و حداکثر ۹۶۰px، depth رنگی با depth-anything-video، ماسک SAM 3 روی depth، composite سوژه‌ی depth روی پس‌زمینه‌ی اصلی، بازبینی اجباری ماسک کل کلیپ (تأیید به hash فایل‌ها بسته است)، بعد Seedance Edit یا Omni از طریق Enhancor؛ اول draft، بعد از تأیید ۱۰۸۰p؛ صدای اصلی کامل برگردانده می‌شود. حالت face mesh هم دارد. ۱٬۶۹۱ ستاره، آخرین commit ۸ اکتبر ۲۰۲۶.",
+   "v": "ادعای ریل (alimir.ai) که «رایگان و روی سخت‌افزار خودت» است برای این یکی درست نیست: همه‌ی مدل‌ها hosted و پولی‌اند (Replicate + Seedance روی Enhancor) و README خودش می‌گوید ادعای inference رایگان ندارد. ارزش برای ما خود ورک‌فلو است: «depth رنگی + ماسک SAM 3 → composite → مدل ویدیو» و گیت بازبینی ماسک با hash، الگوی خوبی برای pipeline تعویض کاراکتر میکرو دراما و Openjutsu لوکال. ریسک: README تبلیغ TEIN/Enhancor است؛ کلیدها را فقط در .env بگذار و رضایت چهره‌ها را داشته باش. جایگزین لوکال واقعی: Openjutsu."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-27 09:55",
+   "t": "Genjustsu Open Source Workflow (TEIN، تعویض کاراکتر با depth + SAM 3 + Seedance، hosted و پولی) اضافه شد؛ یادداشت ریل دوم به Openjutsu."
+  },
   {
    "d": "2026-11-27 09:50",
    "t": "Shorty (تدوین ریل بر اساس رفرنس از طریق MCP ریموت در Claude) اضافه شد."
