@@ -3421,9 +3421,95 @@
    "chk": "2026-11-27",
    "s": "OpenAI در ۱۷ نوامبر ۲۰۲۶ دو مدل GPT-6.2 Astra (پروژه‌های سخت) و Sol (کار روزمره) را منتشر کرد؛ قیمت API برای Astra ۲۰٪ کمتر از GPT-6 Astra. در بنچمارک AA-3D (Artificial Analysis؛ داوری انسانی کور برای تجربه‌ی سه‌بعدی تعاملی) Astra با ۱۳۱۸ Elo اول است، Claude Fable 5.2 با ۱۲۷۱ و GPT-6.2 Sol با ۱۲۵۹. نمونه‌های OpenAI: مدل‌سازی ماشین + حل‌کننده‌ی فیزیک Python + انیمیشن در Blender، کانفیگوراتور سه‌بعدی، بازی‌های مرورگری. اسلاید ۸ کاروسل: روستای سه‌بعدی «Saffron Reach» با چرخه‌ی روز و شب از Danny Postma.",
    "v": "روی وب اجراست: Showcase رسمی OpenAI ده‌ها پروژه‌ی سه‌بعدی قابل اجرا در مرورگر دارد (Notre-Dame، موزه‌ی نور و متریال، Clockwork Observatory و …) که بیشترشان با «Build process» همراه‌اند؛ مرجع خوبی برای مقایسه با کار Claude روی همین نوع خروجی (کارت «مدل CAD لنز سینمایی»). احتیاط: نرخ hallucination گزارش‌شده بالای ۵۰٪ است و خروجی‌ها دموی سریع‌اند، نه asset آماده‌ی production."
+  },
+  {
+   "id": "ghost-editor",
+   "t": "ghost-editor (تدوین ریل talking-head با Claude Code، ۱۹ استایل)",
+   "cats": [
+    "motion",
+    "agent"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "kurbaitaev/ghost-editor",
+   "img": "img/lib/ghost-editor.webp",
+   "lic": "MIT",
+   "req": "Claude Code؛ macOS (رندر روی Mac)",
+   "s": "skill که از یک برداشت خام جلوی دوربین (با تپق و تکرار) ریل آماده می‌سازد: بهترین برداشت هر جمله را انتخاب می‌کند، کات، زیرنویس، افکت و یکی از ۱۹ استایل را اعمال می‌کند؛ می‌تواند استایل یک ریل نمونه را هم کپی کند. ادعای سازنده: ۲۱ ریل در ۳ ساعت و ۴۰ دقیقه روی یک Mac mini. آخرین commit ۱۸ نوامبر ۲۰۲۶.",
+   "v": "برای محتوای آموزشی و پشت‌صحنه‌ی خودتان: یک بار ضبط، چند ریل خروجی. محدودیت: فقط macOS؛ روی ویندوز تست نشده.",
+   "n": 137,
+   "added": "2026-11-27T09:40",
+   "chk": "2026-11-27",
+   "reel": "https://www.instagram.com/p/DgLF7HxP1PE/"
+  },
+  {
+   "id": "claude-motion-design",
+   "t": "claude-motion-design (موشن‌دیزاین با HTML + Playwright + ffmpeg)",
+   "cats": [
+    "motion",
+    "motion-gfx"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "howseen-ai/claude-motion-design",
+   "img": "img/lib/claude-motion-design.webp",
+   "lic": "MIT",
+   "req": "Claude Code؛ Python + Playwright Chromium + ffmpeg؛ رایگان",
+   "s": "skill موشن‌دیزاین کاملاً با کد: کل فیلم یک تابع seek(t) است، فریم‌به‌فریم رندر می‌شود، motion blur با ترکیب زیرفریم‌ها، صحنه‌ها روی beat map موزیک چیده می‌شوند و هر SFX روی peak اندازه‌گیری‌شده‌اش می‌نشیند. نمونه: ویدیوی معرفی Howseen در ۵ دور اصلاح با Claude Opus 5.5.",
+   "v": "تقریباً همان معماری skill «motion-storyboard» خودمان است و سه چیز دارد که ما نداریم: beat map، motion blur با blend زیرفریم، و جاگذاری SFX روی peak. پیشنهاد: این سه را به skill خودمان اضافه کنیم (Proposed).",
+   "n": 138,
+   "added": "2026-11-27T09:40",
+   "chk": "2026-11-27",
+   "reel": "https://www.instagram.com/p/DgLF7HxP1PE/"
+  },
+  {
+   "id": "claude-animation-skills",
+   "t": "claude-animation-skills (۱۱+ استایل انیمیشن ریل، بدون فوتیج)",
+   "cats": [
+    "motion",
+    "threejs"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "repo": "artemnovitckii/claude-animation-skills",
+   "site": "https://novitckii.com/resources/animation-skills/",
+   "img": "img/lib/claude-animation-skills.webp",
+   "lic": "MIT",
+   "req": "Claude Code؛ رندر محلی (three.js و کد)",
+   "s": "مجموعه‌ی skill برای ریل انیمیشنی بدون فوتیج: توضیح سه‌بعدی کارتونی به سبک «what if» (zach-d-films)، stick-figure، مسیر روی نقشه‌ی سه‌بعدی، نمای انفجاری با برچسب، نمودار، و پنج استایل تازه: low-poly سبک PS1، ساختمان voxel، Kurzgesagt، zach-3d-films و dan-koe. Claude اول spec می‌نویسد، روی کامپیوتر خودتان رندر می‌کند و خروجی را با مشخصات اینستاگرام چک می‌کند. آخرین commit ۱۷ نوامبر ۲۰۲۶.",
+   "v": "احتمالاً همان «skill انیمیشن» که در ریل‌های قبلی (Sanjar، mr.pynk) پشت کامنت بود؛ اینجا رایگان و MIT است. استایل breakdown (نمای انفجاری با برچسب) برای معرفی تجهیزات استودیو مستقیماً قابل استفاده است.",
+   "n": 139,
+   "added": "2026-11-27T09:40",
+   "chk": "2026-11-27",
+   "reel": "https://www.instagram.com/p/DgLF7HxP1PE/"
+  },
+  {
+   "id": "awesome-claude-video-skills",
+   "t": "Awesome Claude Video Skills (۵۶۱ repo، ۱۶ تای آن تست‌شده)",
+   "cats": [
+    "motion",
+    "agent"
+   ],
+   "st": "active",
+   "kind": "tool",
+   "repo": "zhuyansen/awesome-claude-video-skills",
+   "site": "https://agentskillshub.top/best/claude-video-skills/",
+   "img": "img/lib/awesome-claude-video-skills.webp",
+   "lic": "CC0",
+   "req": "مرورگر (فهرست)",
+   "s": "فهرست به‌روز (هر ۸ ساعت) skillها و ابزارهای ساخت ویدیو برای Claude Code و Codex: HyperFrames، Remotion، موشن‌گرافیک، تدوین، explainer، آواتار؛ هر repo خوانده و از نظر امنیتی درجه‌بندی شده. ۱۶ تا با یک بریف یکسان end-to-end تست شده‌اند: سریع‌ترین explainroo (حدود ۲ دقیقه)، Remotion skills ‏۴٫۵ دقیقه، HyperFrames ‏۲۳٫۵ دقیقه؛ و Claude Code بدون هیچ skill در ۴٫۴ دقیقه همه‌ی چک‌ها را پاس کرد.",
+   "v": "روی وب اجراست (صفحه‌ی فیلتردار). نکته‌ی مهم تست آن‌ها: skill فقط وقتی ارزش دارد که ظاهر خاص، ورک‌فلو یا فوتیج برای تدوین بیاورد؛ برای پرومو ساده Claude Code خالی کافی است. قبل از نصب هر skill، درجه‌ی امنیتی آن را اینجا چک کنید.",
+   "n": 140,
+   "added": "2026-11-27T09:40",
+   "chk": "2026-11-27",
+   "reel": "https://www.instagram.com/p/DgLF7HxP1PE/"
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-27 09:40",
+   "t": "از پست «۱۰ ابزار ادیتور ویدیو برای Claude»: ghost-editor، claude-motion-design، claude-animation-skills و Awesome Claude Video Skills اضافه شدند."
+  },
   {
    "d": "2026-11-27 09:20",
    "t": "GPT-6.2 Astra برای 3D (کاروسل OpenAI Developers، Showcase مرورگری) به کتابخانه اضافه شد."
