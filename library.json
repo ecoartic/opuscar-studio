@@ -3604,9 +3604,32 @@
    "chk": "2026-11-27",
    "s": "UI لوکال (پورت 8770) و ورک‌فلوی agent‌محور برای عوض کردن شخص/شیء در ویدیو: صدا با Demucs جدا و vocal با Rubber Band سه نیم‌پرده بالا برده می‌شود، ویدیو به ۲۴fps و حداکثر ۹۶۰px، depth رنگی با depth-anything-video، ماسک SAM 3 روی depth، composite سوژه‌ی depth روی پس‌زمینه‌ی اصلی، بازبینی اجباری ماسک کل کلیپ (تأیید به hash فایل‌ها بسته است)، بعد Seedance Edit یا Omni از طریق Enhancor؛ اول draft، بعد از تأیید ۱۰۸۰p؛ صدای اصلی کامل برگردانده می‌شود. حالت face mesh هم دارد. ۱٬۶۹۱ ستاره، آخرین commit ۸ اکتبر ۲۰۲۶.",
    "v": "ادعای ریل (alimir.ai) که «رایگان و روی سخت‌افزار خودت» است برای این یکی درست نیست: همه‌ی مدل‌ها hosted و پولی‌اند (Replicate + Seedance روی Enhancor) و README خودش می‌گوید ادعای inference رایگان ندارد. ارزش برای ما خود ورک‌فلو است: «depth رنگی + ماسک SAM 3 → composite → مدل ویدیو» و گیت بازبینی ماسک با hash، الگوی خوبی برای pipeline تعویض کاراکتر میکرو دراما و Openjutsu لوکال. ریسک: README تبلیغ TEIN/Enhancor است؛ کلیدها را فقط در .env بگذار و رضایت چهره‌ها را داشته باش. جایگزین لوکال واقعی: Openjutsu."
+  },
+  {
+   "id": "grainrad",
+   "t": "Grainrad (افکت ASCII، dither و رترو با WebGPU، ورودی GLB و خروجی three.js)",
+   "cats": [
+    "motion-gfx"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "n": 146,
+   "site": "https://grainrad.com",
+   "reel": "https://www.instagram.com/reel/DgKlpeizP9L/",
+   "img": "img/lib/grainrad.webp",
+   "lic": "سرویس رایگان تحت وب؛ کد باز نیست",
+   "req": "مرورگر با WebGPU (Chrome/Edge جدید)؛ بدون نصب و حساب",
+   "added": "2026-11-27T10:00",
+   "chk": "2026-11-27",
+   "s": "ابزار مرورگری که عکس، GIF، ویدیو (MP4/WebM) و حتی مدل سه‌بعدی GLB را با WebGPU و ۶۰fps به ASCII، dithering، halftone، Matrix Rain، dots، contour، pixel sort، blockify، threshold، edge detection، crosshatch، wave lines، noise field، voronoi و VHS تبدیل می‌کند. تنظیمات charset، رنگ، post-processing و preset. خروجی PNG/JPEG/GIF/MP4/SVG/TXT و Three.js (.html).",
+   "v": "ریل ztryfu (ساخت بازی ASCII «Dokkaebi»، بخش ۲ از ۲) نشان داد که الهامش همین سایت بوده؛ ابزارهای خودش را «به‌زودی» open-source می‌کند (هنوز منتشر نشده و یکی از کامنت‌ها به ادعاهای GitHub‌اش شک دارد). برای ما: نسبت به ASCII Magic، ورودی GLB و خروجی three.js/SVG دارد؛ برای لوک گرافیک پخش (bumper، تایتل، پس‌زمینه‌ی LED) و تست سریع استایل روی رندر Blender/Unreal مفید است. نکته: سرور یا ورک‌فلوی لوکال ندارد، برای batch باید shader خودمان را بنویسیم."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-27 10:00",
+   "t": "Grainrad (افکت ASCII/dither/رترو با WebGPU، ورودی GLB و خروجی three.js) اضافه شد."
+  },
   {
    "d": "2026-11-27 09:55",
    "t": "Genjustsu Open Source Workflow (TEIN، تعویض کاراکتر با depth + SAM 3 + Seedance، hosted و پولی) اضافه شد؛ یادداشت ریل دوم به Openjutsu."
