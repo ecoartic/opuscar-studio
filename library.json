@@ -3503,9 +3503,32 @@
    "added": "2026-11-27T09:40",
    "chk": "2026-11-27",
    "reel": "https://www.instagram.com/p/DgLF7HxP1PE/"
+  },
+  {
+   "id": "tesla-reality-view-diy",
+   "t": "بازسازی Tesla «Reality View» از ویدیوی دش‌کم (Ryan Vogel، قسمت ۶)",
+   "cats": [
+    "gaussian",
+    "spatial"
+   ],
+   "st": "watch",
+   "kind": "technique",
+   "n": 141,
+   "reel": "https://www.instagram.com/reel/DgFlZ9TDV9r/",
+   "img": "img/lib/tesla-reality-view-diy.webp",
+   "lic": "کد منتشر نشده (build in public در X با @ryanvogel)",
+   "req": "—",
+   "added": "2026-11-27T09:55",
+   "chk": "2026-11-27",
+   "s": "Tesla در FSD V15 نمای «Reality View» را آورد: دوربین مجازی بالای ماشین، بدون دوربین واقعی آنجا، که صحنه‌ی سه‌بعدی را زنده از دوربین‌های خودرو می‌سازد. Ryan Vogel همین را از فوتیج دش‌کم خودش بازسازی می‌کند؛ در قسمت ۶ لایه‌ی زمین (جاده و خط‌کشی) با Gaussian splatting «تقریباً real-time» ساخته شده و ماشین، مسیر آبی و جعبه‌های اشیا روی آن نشسته‌اند.",
+   "v": "همان مسئله‌ی ما در AR و استودیو: صحنه‌ی سه‌بعدی زنده از یک دوربین متحرک و رندر از زاویه‌ای که دوربین نیست. ترکیب «زمین با splat + اشیای متحرک جدا» شبیه ایده‌ی ماسک اشیای متحرک در Pi4 است. فعلاً فقط برای پیگیری روند؛ کد و جزئیات فنی منتشر نشده. ریل قبلی Tesla FSD V15 (DgDHRghutr_) هم به همین کارت مربوط است."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-27 09:55",
+   "t": "تکنیک بازسازی Tesla Reality View از دش‌کم با Gaussian splatting (vogel.dev) اضافه شد."
+  },
   {
    "d": "2026-11-27 09:40",
    "t": "از پست «۱۰ ابزار ادیتور ویدیو برای Claude»: ghost-editor، claude-motion-design، claude-animation-skills و Awesome Claude Video Skills اضافه شدند."
