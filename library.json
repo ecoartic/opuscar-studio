@@ -3623,9 +3623,33 @@
    "chk": "2026-11-27",
    "s": "ابزار مرورگری که عکس، GIF، ویدیو (MP4/WebM) و حتی مدل سه‌بعدی GLB را با WebGPU و ۶۰fps به ASCII، dithering، halftone، Matrix Rain، dots، contour، pixel sort، blockify، threshold، edge detection، crosshatch، wave lines، noise field، voronoi و VHS تبدیل می‌کند. تنظیمات charset، رنگ، post-processing و preset. خروجی PNG/JPEG/GIF/MP4/SVG/TXT و Three.js (.html).",
    "v": "ریل ztryfu (ساخت بازی ASCII «Dokkaebi»، بخش ۲ از ۲) نشان داد که الهامش همین سایت بوده؛ ابزارهای خودش را «به‌زودی» open-source می‌کند (هنوز منتشر نشده و یکی از کامنت‌ها به ادعاهای GitHub‌اش شک دارد). برای ما: نسبت به ASCII Magic، ورودی GLB و خروجی three.js/SVG دارد؛ برای لوک گرافیک پخش (bumper، تایتل، پس‌زمینه‌ی LED) و تست سریع استایل روی رندر Blender/Unreal مفید است. نکته: سرور یا ورک‌فلوی لوکال ندارد، برای batch باید shader خودمان را بنویسیم."
+  },
+  {
+   "id": "handy",
+   "t": "Handy (دیکته‌ی صوتی آفلاین با میان‌بر، Whisper/Parakeet/Qwen3-ASR)",
+   "cats": [
+    "agent"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "n": 147,
+   "repo": "cjpais/Handy",
+   "site": "https://handy.computer",
+   "reel": "https://www.instagram.com/reel/DfIM7fyIZXI/",
+   "img": "img/lib/handy.webp",
+   "lic": "MIT",
+   "req": "Windows/macOS/Linux؛ دانلود از releases یا winget install cjpais.Handy؛ اجازه‌ی میکروفن و accessibility؛ GPU اختیاری برای Whisper",
+   "added": "2026-11-27T10:05",
+   "chk": "2026-11-27",
+   "s": "اپ دسکتاپ Tauri: میان‌بر را نگه دار یا toggle کن، حرف بزن، متن در هر فیلد متنی paste می‌شود؛ کاملاً محلی و بدون ابر. VAD با Silero؛ مدل‌ها: Whisper (Small تا Large، با GPU)، Parakeet V3 (روی CPU، تشخیص خودکار زبان)، و در نسخه‌ی ۰٫۱۰ انتخابگر مدل با Qwen3-ASR، Fun-ASR و Cohere Transcribe، پیش‌نمایش زنده، ترجمه و Transcribe file. نسخه‌ی 0.10.2، آخرین commit ۲۷ نوامبر ۲۰۲۶.",
+   "v": "برای تو: دیکته‌ی سریع پرامپت به Claude/ComfyUI و یادداشت حین کار در استودیو، بدون ارسال صدا به سرور. فارسی و ترکی در لیست زبان‌ها هست (از طریق Whisper/Qwen3-ASR)؛ کیفیت فارسی را باید خودمان تست کنیم. Transcribe file هم برای زیرنویس سریع کلیپ‌های GEM TV به‌درد می‌خورد. ریل اصلی (itstundeanthony) comment-gated است ولی ابزار واقعی و MIT است."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-27 10:05",
+   "t": "Handy (دیکته‌ی صوتی آفلاین متن‌باز با Whisper/Parakeet/Qwen3-ASR) اضافه شد."
+  },
   {
    "d": "2026-11-27 10:00",
    "t": "Grainrad (افکت ASCII/dither/رترو با WebGPU، ورودی GLB و خروجی three.js) اضافه شد."
