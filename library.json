@@ -3725,9 +3725,74 @@
    "chk": "2026-11-28",
    "s": "پنج ریپو از ریل bernardrb_: ۱) ahujasid/ableton-mcp: Claude ترک و نت را در Ableton Live می‌سازد (آخرین commit سپتامبر ۲۰۲۶). ۲) ACE-Step 1.5: آهنگ کامل لوکال ۱۰ ثانیه تا ۱۰ دقیقه، اشعار ۵۰+ زبان، cover، repaint، vocal→BGM، نسخه‌ی XL 4B، نود ComfyUI. ۳) YuE2 (multimodal-art-projection/YuE): از شعر و سبک، ملودی و آکورد و آهنگ کامل (ریلیز yue2-v0.1.6، آخرین commit ۱ نوامبر ۲۰۲۶). ۴) Ultimate Vocal Remover GUI: جدا کردن وکال و stem. ۵) Spotify Basic Pitch: صدا/ساز → MIDI با pitch bend.",
    "v": "برای GEM TV و پروژه‌ها: موزیک زمینه و jingle لوکال با ACE-Step (MIT، قابل استفاده‌ی تجاری با بررسی)، جدا کردن صدا از آرشیو با UVR، و تبدیل ملودی زمزمه‌شده به MIDI با Basic Pitch برای آهنگساز. YuE2 به‌خاطر وزن‌های CC BY-NC فقط برای تست/پیش‌نمایش. ریسک: حقوق داده‌ی آموزشی مدل‌های موسیقی هنوز محل بحث است؛ برای پخش، قبلش با واحد حقوقی شبکه هماهنگ کن. فارسی در لیست زبان‌های ACE-Step را باید تست کنیم."
+  },
+  {
+   "id": "video-use",
+   "t": "video-use (browser-use؛ تدوین ویدیو با Claude Code بر پایه‌ی ترنسکریپت)",
+   "cats": [
+    "agent",
+    "motion"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "n": 152,
+   "repo": "browser-use/video-use",
+   "reel": "https://www.instagram.com/p/DgHHkIFOStR/",
+   "img": "img/lib/video-use.webp",
+   "lic": "MIT",
+   "req": "Python + uv، ffmpeg/ffprobe؛ کلید ElevenLabs (Scribe) برای ترنسکریپت؛ نسخه‌ی fork بدون کلید: Moh4696/freecut",
+   "added": "2026-11-28T12:10",
+   "chk": "2026-11-28",
+   "s": "Skill برای Claude Code/Codex: فوتیج خام در یک پوشه → final.mp4. ترنسکریپت word-level با diarization و رویدادهای صوتی، فشرده به Markdown در سطح عبارت؛ LLM از متن استدلال می‌کند و فقط در صورت نیاز تصویر می‌خواهد؛ کات روی مرز گفتار و سکوت؛ EDL → رندر → خودارزیابی. زیرنویس، رنگ، تکنیک‌های آزاد (L-cut، J-cut، PiP). آخرین commit ۸ اکتبر ۲۰۲۶.",
+   "v": "برای مصاحبه و گزارش‌های گفتاری GEM TV: رافکات خودکار از روی گفتار. ترکیب پیشنهادی: crv برای دیدن تصویر + video-use برای کات. ریسک: ترنسکریپت پیش‌فرض با ElevenLabs روی ابر است؛ برای فوتیج حساس freecut یا Whisper لوکال."
+  },
+  {
+   "id": "herk-edit-kit",
+   "t": "Herk Edit Kit (Nate Herk؛ ۱۵ Skill تدوین + ۴۰۶ کارت موشن روی HyperFrames)",
+   "cats": [
+    "motion-gfx",
+    "motion",
+    "agent"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "n": 153,
+   "repo": "nateherkai/herk-edit-kit",
+   "reel": "https://www.instagram.com/p/DgHHkIFOStR/",
+   "img": "img/lib/herk-edit-kit.webp",
+   "lic": "MIT (با THIRD_PARTY_NOTICES)",
+   "req": "Node.js، ffmpeg، Claude Code یا Codex؛ اختیاری: ElevenLabs Scribe و Kie.ai (پولی)؛ Whisper لوکال به‌جای آن ممکن است",
+   "added": "2026-11-28T12:10",
+   "chk": "2026-11-28",
+   "s": "کیت تدوین شخصی Nate Herk (قبلاً HyperFrames Student Kit): حذف سکوت، تشخیص و بازبینی اشتباه قبل از حذف، برنامه‌ی داستان، کپشن دقیق، B-roll متحرک، موسیقی و SFX، اعتبارسنجی beat-sync، EDL review. ۴۰۶ کارت موشن‌گرافیک با slot قابل‌ویرایش در دو استایل، دو تمپلیت صحنه، Editing Playbook و MOTION_PHILOSOPHY. آخرین commit ۱۴ اکتبر ۲۰۲۶.",
+   "v": "مکمل motion-storyboard ما: playbook و قواعد سبک (کپشن، B-roll، صدا) را می‌شود به style bible قابل‌اندازه‌گیری تبدیل کرد. کارت‌های موشن برای lower-third و اینفوگرافیک برنامه‌ها مفیدند؛ قبل از استفاده‌ی پخش، فونت/برند را عوض کن."
+  },
+  {
+   "id": "claude-shorts",
+   "t": "claude-shorts (ویدیوی بلند ← کلیپ عمودی با کپشن Remotion)",
+   "cats": [
+    "motion",
+    "agent"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "n": 154,
+   "repo": "AgriciDaniel/claude-shorts",
+   "reel": "https://www.instagram.com/p/DgHHkIFOStR/",
+   "img": "img/lib/claude-shorts.webp",
+   "lic": "MIT",
+   "req": "Python + Node.js، FFmpeg، jq؛ GPU NVIDIA پیشنهادی (faster-whisper روی CUDA + NVENC)؛ ویندوز فقط با WSL2",
+   "added": "2026-11-28T12:10",
+   "chk": "2026-11-28",
+   "s": "Skill /shorts: پایپلاین ۱۰ مرحله‌ای تعاملی؛ preflight، ترنسکریپت word-level با faster-whisper، امتیازدهی سگمنت‌ها توسط Claude، snap مرزها به صدا، ردیابی چهره/کرسر، رندر 1080×1920 با Remotion (کپشن کارائوکه، hook، progress bar) و خروجی جدا برای Shorts/TikTok/Reels. آخرین commit ۱۰ آوریل ۲۰۲۶.",
+   "v": "برای نسخه‌های سوشال برنامه‌های GEM TV کاملاً لوکال روی 4080 SUPER؛ با Edit Ready که قبلاً برای هایلایت فوتبال استفاده کردی مقایسه شود. ریسک: یک سال تقریباً بدون commit جدید؛ کپشن فارسی/RTL در Remotion باید تست شود."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-28 12:10",
+   "t": "از پست ۱۵ ریپوی تدوین با Claude (aipreneur_academy): video-use، Herk Edit Kit و claude-shorts اضافه شدند؛ بقیه (yt-dlp، Whisper/WhisperX، FFmpeg Skill، PySceneDetect، HyperFrames، OpenMontage، awesome-claude-video-skills) یا پایه‌اند یا از قبل در کتابخانه هستند."
+  },
   {
    "d": "2026-11-28 12:05",
    "t": "جعبه‌ابزار موسیقی AI لوکال (ACE-Step 1.5، YuE2، UVR، Basic Pitch، Ableton MCP) اضافه شد."
