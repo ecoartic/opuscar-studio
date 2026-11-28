@@ -3705,9 +3705,33 @@
    "chk": "2026-11-28",
    "s": "Game Studio لوکال از تیم OpenDesign: ۲۵ بازی قابل‌بازی (۳D/voxel/anime/pixel/9:16) با سورس کامل index.html + logic.js قطعی + Three.js و اسناد طراحی (plan/style/assets/verification). Remix و Re-style بدون شکستن فیزیک و قوانین، Model Gateway برای آرت، تکسچر، موسیقی، صدا و SFX، تست headless، شبیه‌سازی بالانس، کاور و تریلر، خروجی لینک وب و playable ad تک‌فایلی. Skill اصلی opengame + openmotion-game با ۱۲ ابزار MCP. آخرین commit ۲۸ نوامبر ۲۰۲۶.",
    "v": "برای ما: الگوی «منطق تأییدشده جدا از تم و آرت» برای بازی‌های تعاملی کوتاه، playable ad و تجربه‌های تعاملی برنامه‌های تلویزیونی (مثلاً مینی‌گیم مرتبط با برنامه روی موبایل مخاطب). ادعای README درباره‌ی «Unreal/Unity و AAA» اغراق است؛ خروجی واقعی HTML5/Three.js است. README هم تبلیغ اشتراک OpenDesign Go را دارد. در ریل githubsignals لینک مستقیم ریپو بود (comment-gated نبود)."
+  },
+  {
+   "id": "ai-music-toolkit",
+   "t": "جعبه‌ابزار موسیقی AI لوکال: ACE-Step 1.5، YuE2، UVR، Basic Pitch، Ableton MCP",
+   "cats": [
+    "agent",
+    "motion"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "n": 151,
+   "repo": "ace-step/ACE-Step-1.5",
+   "reel": "https://www.instagram.com/reel/DgOBKiQyV18/",
+   "img": "img/lib/ai-music-toolkit.webp",
+   "lic": "ACE-Step 1.5: MIT · YuE2: کد Apache-2.0 ولی وزن‌ها CC BY-NC 4.0 (غیرتجاری) · UVR GUI: MIT (مدل‌ها با credit) · Basic Pitch: Apache-2.0 (Spotify) · Ableton MCP: MIT",
+   "req": "GPU برای ACE-Step/YuE2 (LoRA ACE-Step روی 12GB)؛ UVR حداقل GTX 1060 6GB؛ Ableton MCP نیازمند Ableton Live + Claude Desktop",
+   "added": "2026-11-28T12:05",
+   "chk": "2026-11-28",
+   "s": "پنج ریپو از ریل bernardrb_: ۱) ahujasid/ableton-mcp: Claude ترک و نت را در Ableton Live می‌سازد (آخرین commit سپتامبر ۲۰۲۶). ۲) ACE-Step 1.5: آهنگ کامل لوکال ۱۰ ثانیه تا ۱۰ دقیقه، اشعار ۵۰+ زبان، cover، repaint، vocal→BGM، نسخه‌ی XL 4B، نود ComfyUI. ۳) YuE2 (multimodal-art-projection/YuE): از شعر و سبک، ملودی و آکورد و آهنگ کامل (ریلیز yue2-v0.1.6، آخرین commit ۱ نوامبر ۲۰۲۶). ۴) Ultimate Vocal Remover GUI: جدا کردن وکال و stem. ۵) Spotify Basic Pitch: صدا/ساز → MIDI با pitch bend.",
+   "v": "برای GEM TV و پروژه‌ها: موزیک زمینه و jingle لوکال با ACE-Step (MIT، قابل استفاده‌ی تجاری با بررسی)، جدا کردن صدا از آرشیو با UVR، و تبدیل ملودی زمزمه‌شده به MIDI با Basic Pitch برای آهنگساز. YuE2 به‌خاطر وزن‌های CC BY-NC فقط برای تست/پیش‌نمایش. ریسک: حقوق داده‌ی آموزشی مدل‌های موسیقی هنوز محل بحث است؛ برای پخش، قبلش با واحد حقوقی شبکه هماهنگ کن. فارسی در لیست زبان‌های ACE-Step را باید تست کنیم."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-28 12:05",
+   "t": "جعبه‌ابزار موسیقی AI لوکال (ACE-Step 1.5، YuE2، UVR، Basic Pitch، Ableton MCP) اضافه شد."
+  },
   {
    "d": "2026-11-28 12:00",
    "t": "OpenGame (ایجنت کدنویسی ← استودیوی بازی Three.js با ۲۵ تمپلیت) اضافه شد."
