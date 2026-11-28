@@ -3684,9 +3684,34 @@
    "chk": "2026-11-28",
    "s": "ویدیو از URL (yt-dlp، از جمله YouTube و Reels) یا فایل لوکال → فریم‌های هر تغییر صحنه با حداقل چگالی، حذف تکراری‌ها با پنجره‌ی لغزان (A-B-A)، ترنسکریپت Whisper با timestamp، contact sheet نُه‌تایی، viewer.html و MANIFEST. Skill برای Claude Code/Cursor/Codex، پلاگین marketplace، و سرور MCP (crv-mcp) با کش. نسخه‌ی 0.10.7، آخرین commit ۲۰ نوامبر ۲۰۲۶.",
    "v": "مستقیماً به کار تریاژ ریل‌ها و تحلیل ویدیوی خودمان می‌آید: الان این کار را دستی با grid فریم در مرورگر انجام می‌دهم؛ crv همین را با تشخیص صحنه، ترنسکریپت و حالت creator (ریتم کات، زبان دوربین) انجام می‌دهد. برای GEM TV: بازبینی آرشیو، استخراج کی‌فریم برای storyboard یا رفرنس. ریسک: دانلود ریل‌های لاگین‌دار کوکی می‌خواهد (فقط برای استفاده‌ی مجاز)؛ README بخش تبلیغ نسخه‌ی Pro دارد. ریل gitfinds.si comment-gated بود؛ نسخه‌ی 0.10.7 در ریل با ریپو تطبیق داده شد."
+  },
+  {
+   "id": "opengame",
+   "t": "OpenGame (nexu-io؛ ایجنت کدنویسی ← استودیوی بازی با ۲۵ تمپلیت Three.js)",
+   "cats": [
+    "threejs",
+    "interactive",
+    "agent"
+   ],
+   "st": "watch",
+   "kind": "tool",
+   "n": 150,
+   "repo": "nexu-io/opengame",
+   "reel": "https://www.instagram.com/reel/DgPE94gJpWc/",
+   "img": "img/lib/opengame.webp",
+   "lic": "Apache-2.0؛ مدل‌های تولید asset با کلید خودت (BYOK) یا اشتراک پولی OpenDesign Go",
+   "req": "Node.js 22.18+، Git LFS، npm؛ یک ایجنت لوکال (Claude Code، Codex، DeepSeek، Gemini CLI و…)؛ Skill با npx skills add",
+   "added": "2026-11-28T12:00",
+   "chk": "2026-11-28",
+   "s": "Game Studio لوکال از تیم OpenDesign: ۲۵ بازی قابل‌بازی (۳D/voxel/anime/pixel/9:16) با سورس کامل index.html + logic.js قطعی + Three.js و اسناد طراحی (plan/style/assets/verification). Remix و Re-style بدون شکستن فیزیک و قوانین، Model Gateway برای آرت، تکسچر، موسیقی، صدا و SFX، تست headless، شبیه‌سازی بالانس، کاور و تریلر، خروجی لینک وب و playable ad تک‌فایلی. Skill اصلی opengame + openmotion-game با ۱۲ ابزار MCP. آخرین commit ۲۸ نوامبر ۲۰۲۶.",
+   "v": "برای ما: الگوی «منطق تأییدشده جدا از تم و آرت» برای بازی‌های تعاملی کوتاه، playable ad و تجربه‌های تعاملی برنامه‌های تلویزیونی (مثلاً مینی‌گیم مرتبط با برنامه روی موبایل مخاطب). ادعای README درباره‌ی «Unreal/Unity و AAA» اغراق است؛ خروجی واقعی HTML5/Three.js است. README هم تبلیغ اشتراک OpenDesign Go را دارد. در ریل githubsignals لینک مستقیم ریپو بود (comment-gated نبود)."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-28 12:00",
+   "t": "OpenGame (ایجنت کدنویسی ← استودیوی بازی Three.js با ۲۵ تمپلیت) اضافه شد."
+  },
   {
    "d": "2026-11-28 11:55",
    "t": "claude-real-video (فریم scene-aware + ترنسکریپت لوکال برای اینکه Claude ویدیو ببیند؛ Skill و MCP) اضافه شد."
