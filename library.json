@@ -3643,9 +3643,33 @@
    "chk": "2026-11-27",
    "s": "اپ دسکتاپ Tauri: میان‌بر را نگه دار یا toggle کن، حرف بزن، متن در هر فیلد متنی paste می‌شود؛ کاملاً محلی و بدون ابر. VAD با Silero؛ مدل‌ها: Whisper (Small تا Large، با GPU)، Parakeet V3 (روی CPU، تشخیص خودکار زبان)، و در نسخه‌ی ۰٫۱۰ انتخابگر مدل با Qwen3-ASR، Fun-ASR و Cohere Transcribe، پیش‌نمایش زنده، ترجمه و Transcribe file. نسخه‌ی 0.10.2، آخرین commit ۲۷ نوامبر ۲۰۲۶.",
    "v": "برای تو: دیکته‌ی سریع پرامپت به Claude/ComfyUI و یادداشت حین کار در استودیو، بدون ارسال صدا به سرور. فارسی و ترکی در لیست زبان‌ها هست (از طریق Whisper/Qwen3-ASR)؛ کیفیت فارسی را باید خودمان تست کنیم. Transcribe file هم برای زیرنویس سریع کلیپ‌های GEM TV به‌درد می‌خورد. ریل اصلی (itstundeanthony) comment-gated است ولی ابزار واقعی و MIT است."
+  },
+  {
+   "id": "personalive",
+   "t": "PersonaLive + EditaLive (انیمیشن پرتره‌ی real-time و بی‌پایان از یک عکس، برای لایو)",
+   "cats": [
+    "avatar"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "n": 148,
+   "repo": "GVCLab/PersonaLive",
+   "site": "https://huggingface.co/huaichang/PersonaLive",
+   "reel": "https://www.instagram.com/reel/Df_DlJCjAyJ/",
+   "img": "img/lib/personalive.webp",
+   "lic": "کد Apache-2.0 ولی README صریحاً «فقط پژوهش آکادمیک»؛ وزن‌ها بر پایه‌ی SD image-variations",
+   "req": "GPU با ~12GB VRAM (streaming)؛ conda + Python 3.10؛ TensorRT اختیاری (~2× سریع‌تر، ساخت engine ~۲۰ دقیقه)؛ RTX 50 بدون xformers؛ WebUI وبکم",
+   "added": "2026-11-28T11:45",
+   "chk": "2026-11-28",
+   "s": "فریم‌ورک diffusion استریمی (CVPR 2026، دانشگاه ماکائو + Dzine.ai + GVC Lab): یک عکس پرتره + ویدیو/وبکم راننده → انیمیشن صورت real-time با طول نامحدود. inference آفلاین و آنلاین (WebUI وبکم با تنظیم Driving FPS)، کد آموزش منتشر شده، نود ComfyUI-PersonaLive هم دارد. نسخه‌ی بعدی EditaLive (سپتامبر ۲۰۲۶): ویرایش کاراکتر تمام‌بدن به‌صورت real-time با ۱۴٫۴۷ FPS. ۴٬۲۴۶ ستاره.",
+   "v": "برای GEM TV: مجری/آواتار مجازی زنده از یک عکس، با وبکم اپراتور به‌عنوان راننده؛ خروجی را می‌شود با NDI/OBS به Aximmetry داد. روی 4080 SUPER (16GB) باید جا شود. ریسک: لایسنس «فقط پژوهش» یعنی برای پخش تجاری مجاز نیست؛ رضایت صاحب چهره لازم است؛ latency را خودمان باید بسنجیم. ریل gitfinds.si comment-gated بود؛ ادعای «full body» مربوط به EditaLive است نه PersonaLive."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-28 11:45",
+   "t": "PersonaLive + EditaLive (انیمیشن پرتره/کاراکتر real-time از یک عکس، فقط پژوهشی) اضافه شد."
+  },
   {
    "d": "2026-11-27 10:05",
    "t": "Handy (دیکته‌ی صوتی آفلاین متن‌باز با Whisper/Parakeet/Qwen3-ASR) اضافه شد."
