@@ -3663,9 +3663,34 @@
    "chk": "2026-11-28",
    "s": "فریم‌ورک diffusion استریمی (CVPR 2026، دانشگاه ماکائو + Dzine.ai + GVC Lab): یک عکس پرتره + ویدیو/وبکم راننده → انیمیشن صورت real-time با طول نامحدود. inference آفلاین و آنلاین (WebUI وبکم با تنظیم Driving FPS)، کد آموزش منتشر شده، نود ComfyUI-PersonaLive هم دارد. نسخه‌ی بعدی EditaLive (سپتامبر ۲۰۲۶): ویرایش کاراکتر تمام‌بدن به‌صورت real-time با ۱۴٫۴۷ FPS. ۴٬۲۴۶ ستاره.",
    "v": "برای GEM TV: مجری/آواتار مجازی زنده از یک عکس، با وبکم اپراتور به‌عنوان راننده؛ خروجی را می‌شود با NDI/OBS به Aximmetry داد. روی 4080 SUPER (16GB) باید جا شود. ریسک: لایسنس «فقط پژوهش» یعنی برای پخش تجاری مجاز نیست؛ رضایت صاحب چهره لازم است؛ latency را خودمان باید بسنجیم. ریل gitfinds.si comment-gated بود؛ ادعای «full body» مربوط به EditaLive است نه PersonaLive."
+  },
+  {
+   "id": "claude-real-video",
+   "t": "claude-real-video / crv (Claude ویدیو را «ببیند»: فریم‌های scene-aware + ترنسکریپت، لوکال)",
+   "cats": [
+    "agent",
+    "motion"
+   ],
+   "st": "bench",
+   "kind": "tool",
+   "n": 149,
+   "repo": "HUANGCHIHHUNGLeo/claude-real-video",
+   "site": "https://pypi.org/project/claude-real-video/",
+   "reel": "https://www.instagram.com/reel/DgRFKRuOqfp/",
+   "img": "img/lib/claude-real-video.webp",
+   "lic": "MIT (نسخه‌ی رایگان)؛ افزونه‌ی پولی crv Pro جداست",
+   "req": "Python 3.10+، ffmpeg؛ pip install \"claude-real-video[whisper]\"؛ اختیاری: [fast] برای faster-whisper، [speakers] برای diarization، [mcp] برای سرور MCP",
+   "added": "2026-11-28T11:55",
+   "chk": "2026-11-28",
+   "s": "ویدیو از URL (yt-dlp، از جمله YouTube و Reels) یا فایل لوکال → فریم‌های هر تغییر صحنه با حداقل چگالی، حذف تکراری‌ها با پنجره‌ی لغزان (A-B-A)، ترنسکریپت Whisper با timestamp، contact sheet نُه‌تایی، viewer.html و MANIFEST. Skill برای Claude Code/Cursor/Codex، پلاگین marketplace، و سرور MCP (crv-mcp) با کش. نسخه‌ی 0.10.7، آخرین commit ۲۰ نوامبر ۲۰۲۶.",
+   "v": "مستقیماً به کار تریاژ ریل‌ها و تحلیل ویدیوی خودمان می‌آید: الان این کار را دستی با grid فریم در مرورگر انجام می‌دهم؛ crv همین را با تشخیص صحنه، ترنسکریپت و حالت creator (ریتم کات، زبان دوربین) انجام می‌دهد. برای GEM TV: بازبینی آرشیو، استخراج کی‌فریم برای storyboard یا رفرنس. ریسک: دانلود ریل‌های لاگین‌دار کوکی می‌خواهد (فقط برای استفاده‌ی مجاز)؛ README بخش تبلیغ نسخه‌ی Pro دارد. ریل gitfinds.si comment-gated بود؛ نسخه‌ی 0.10.7 در ریل با ریپو تطبیق داده شد."
   }
  ],
  "changelog": [
+  {
+   "d": "2026-11-28 11:55",
+   "t": "claude-real-video (فریم scene-aware + ترنسکریپت لوکال برای اینکه Claude ویدیو ببیند؛ Skill و MCP) اضافه شد."
+  },
   {
    "d": "2026-11-28 11:45",
    "t": "PersonaLive + EditaLive (انیمیشن پرتره/کاراکتر real-time از یک عکس، فقط پژوهشی) اضافه شد."
